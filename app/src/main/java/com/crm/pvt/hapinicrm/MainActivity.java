@@ -21,8 +21,10 @@ sgnpg=findViewById(R.id.btnSignUp);
 lgnpg.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-Intent intent=new Intent(MainActivity.this, MainActivity2.class);
+Intent intent=new Intent(MainActivity.this, forgetpassword.class);
+//forgetpassword class is referred for example, edit it..
 startActivity(intent);
+//add the activity after login
         Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_LONG).show();
     }
 });
