@@ -35,5 +35,9 @@ public class UserLoginFragment extends Fragment {
         binding.tvSignUp.setOnClickListener( v -> {
             Navigation.findNavController(v).navigate(R.id.action_userLoginFragment_to_userSignupFragment);
         });
+
+        binding.tvForgotPassword.setOnClickListener( v -> {
+            Navigation.findNavController(v).navigate(R.id.action_userLoginFragment_to_forgotPasswordFragment);
+        });
     }
 }
