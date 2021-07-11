@@ -1,4 +1,4 @@
-package com.crm.pvt.hapinicrm;
+package com.crm.pvt.hapinicrm.ui.welcome;
 
 import android.os.Bundle;
 
@@ -10,34 +10,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.crm.pvt.hapinicrm.databinding.FragmentHomeBinding;
+import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.databinding.FragmentStartBinding;
 
 import org.jetbrains.annotations.NotNull;
 
-public class HomeFragment extends Fragment {
+public class StartFragment extends Fragment {
 
-    public HomeFragment() { }
+    public StartFragment() { }
 
-    private static FragmentHomeBinding binding;
+    private static FragmentStartBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(inflater,container,false);
+        binding = FragmentStartBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        binding.btnLogin.setOnClickListener( v -> {
-            Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_loginFragment);
+        binding.btnUser.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_startFragment_to_userFragment);
         });
-
-        binding.btnSignUp.setOnClickListener( v -> {
-            Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_signUpFragment);
-        });
-
     }
 }

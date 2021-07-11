@@ -4,29 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".ui.welcome.StartFragment">
 
     <ImageView
         android:id="@+id/ivHapiniLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
         android:contentDescription="Hapini Logo"
+        android:src="@mipmap/ic_logo_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintHorizontal_bias="0.300"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.398"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.397" />
 
     <TextView
-        android:id="@+id/tvTagLine"
+        android:id="@+id/tvLabel"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:textSize="30sp"
         android:text="Smart Fast Handy"
+        android:textSize="25sp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo"/>
@@ -39,29 +39,29 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTagLine"/>
+        app:layout_constraintTop_toBottomOf="@id/tvLabel"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSignUp"
+        android:id="@+id/btnAdmin"
         android:layout_width="300dp"
         android:background="@drawable/bg_button"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Sign Up"
+        android:text="Admin"
         app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnUser"
         android:layout_width="300dp"
         android:background="@drawable/bg_button"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Log in"
+        android:text="User"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSignUp"/>
+        app:layout_constraintTop_toBottomOf="@id/btnAdmin"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
