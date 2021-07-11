@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 public class splashscreen extends AppCompatActivity {
-    private final int SPLASH_TIME_OUT=6000;
+    private final int SPLASH_TIME_OUT=6500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -20,12 +20,13 @@ Button confirmotpfromforgotpassword;
         confirmotpfromforgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s=getotptext.getText().toString();
+              //  String s=getotptext.getText().toString();
                 //s contains otp
+
                 //add the activity after verifying otp
                 Intent intent=new Intent(confirmotp.this, newpassword.class);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_LONG).show();
+
             }
         });
     }
