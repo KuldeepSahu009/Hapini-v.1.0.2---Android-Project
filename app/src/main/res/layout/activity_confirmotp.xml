@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0091EA"
-    tools:context=".confirmotp">
+    tools:context=".resetpassword.confirmotp">
 
     <EditText
         android:id="@+id/recievedotp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@drawable/bg_edit_text"
         android:ems="10"
         android:hint="Otp"
         android:inputType="number"
@@ -37,8 +37,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ImageButton11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_weight="1"
         android:src="@drawable/error2"
         app:civ_border_color="#6200EA"
