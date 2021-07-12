@@ -9,12 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
-        <activity android:name=".newpassword"></activity>
-        <activity android:name=".confirmotp"
-            android:noHistory="true"/>
-        <activity android:name=".forgetpassword"
-            android:noHistory="true"/>
-        <activity android:name=".MainActivity2" />
+        <activity android:name=".user.usersignup"
+            />
+        <activity android:name=".user.userlogin"
+           />
+        <activity android:name=".user.workselect"
+            />
+        <activity android:name=".MainActivity"
+            />
+        <activity android:name=".resetpassword.forgetpassword"/>
+        <activity android:name=".resetpassword.newpassword"/>
+        <activity android:name=".resetpassword.confirmotp"/>
         <activity android:name=".splashscreen"
             android:noHistory="true">
             <intent-filter>
@@ -22,10 +27,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".MainActivity"
-           />
     </application>
 
 </manifest>

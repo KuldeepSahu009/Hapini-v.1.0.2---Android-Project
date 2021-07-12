@@ -1,4 +1,4 @@
-package com.crm.pvt.hapinicrm;
+package com.crm.pvt.hapinicrm.resetpassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.crm.pvt.hapinicrm.R;
 
 public class confirmotp extends AppCompatActivity {
 Button confirmotpfromforgotpassword;
@@ -20,12 +21,13 @@ Button confirmotpfromforgotpassword;
         confirmotpfromforgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s=getotptext.getText().toString();
+              //  String s=getotptext.getText().toString();
                 //s contains otp
+
                 //add the activity after verifying otp
                 Intent intent=new Intent(confirmotp.this, newpassword.class);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_LONG).show();
+
             }
         });
     }

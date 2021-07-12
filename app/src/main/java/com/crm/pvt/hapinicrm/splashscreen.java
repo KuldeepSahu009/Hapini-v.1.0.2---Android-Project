@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.crm.pvt.hapinicrm.user.userlogin;
+import com.crm.pvt.hapinicrm.user.workselect;
+
 public class splashscreen extends AppCompatActivity {
-    private final int SPLASH_TIME_OUT=6000;
+    private final int SPLASH_TIME_OUT=6500;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,7 +18,7 @@ public class splashscreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(splashscreen.this,MainActivity.class);
+                Intent intent=new Intent(splashscreen.this, MainActivity.class);
                 startActivity(intent);
             }
         },SPLASH_TIME_OUT);
