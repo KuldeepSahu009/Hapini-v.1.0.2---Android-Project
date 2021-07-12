@@ -1,4 +1,4 @@
-package com.crm.pvt.hapinicrm.user;
+package com.crm.pvt.hapinicrm.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,25 +10,17 @@ import android.widget.TextView;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.resetpassword.forgetpassword;
 
-public class userlogin extends AppCompatActivity {
-TextView usersignup,forgotpassword;
+public class Admingenerallogin extends AppCompatActivity {
+    TextView Adminsignupet,forgotpassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userlogin);
-        usersignup=findViewById(R.id.tvSignUp);
+        setContentView(R.layout.activity_admingenerallogin);
         forgotpassword=findViewById(R.id.tvForgotPassword);
-        usersignup.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(userlogin.this, com.crm.pvt.hapinicrm.user.usersignup.class);
-                startActivity(intent);
-            }
-        });
         forgotpassword.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(userlogin.this, forgetpassword.class);
+                Intent intent=new Intent(Admingenerallogin.this, forgetpassword.class);
                 startActivity(intent);
             }
         });
@@ -36,7 +28,7 @@ TextView usersignup,forgotpassword;
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(userlogin.this,workselect.class);
+        Intent intent=new Intent(Admingenerallogin.this,workselectadmin.class);
         startActivity(intent);
     }
 }

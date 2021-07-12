@@ -1,4 +1,4 @@
-package com.crm.pvt.hapinicrm.user;
+package com.crm.pvt.hapinicrm.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,25 +9,24 @@ import android.widget.TextView;
 
 import com.crm.pvt.hapinicrm.R;
 
-public class usersignup extends AppCompatActivity {
-TextView userloginto;
+public class Onlyformasterlogin extends AppCompatActivity {
+TextView formastersignup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_user_signup);
-        userloginto=findViewById(R.id.tvLogin);
-        userloginto.setOnClickListener(new View.OnClickListener(){
+        setContentView(R.layout.activity_onlyformasterlogin);
+        formastersignup=findViewById(R.id.TOWARDSMASTERSIGNUP);
+        formastersignup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(usersignup.this,userlogin.class);
+                Intent intent=new Intent(Onlyformasterlogin.this,MasterAdminsignup.class);
                 startActivity(intent);
             }
         });
     }
-
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(usersignup.this,workselect.class);
+        Intent intent=new Intent(Onlyformasterlogin.this,workselectadmin.class);
         startActivity(intent);
     }
 }
