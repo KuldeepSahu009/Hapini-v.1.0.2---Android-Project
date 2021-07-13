@@ -7,7 +7,7 @@
     tools:context=".ui.welcome.StartFragment">
 
     <ImageView
-        android:id="@+id/ivHapiniLogo"
+        android:id="@+id/tvAdminDetails"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:contentDescription="Hapini Logo"
@@ -29,7 +29,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo"/>
+        app:layout_constraintTop_toBottomOf="@id/tvAdminDetails"/>
 
     <TextView
         android:layout_width="300dp"
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Admin"
-        app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo"
+        app:layout_constraintTop_toBottomOf="@id/tvAdminDetails"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton

@@ -1,15 +1,15 @@
 package com.crm.pvt.hapinicrm.ui.util;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.crm.pvt.hapinicrm.R;
+import androidx.fragment.app.Fragment;
+
 import com.crm.pvt.hapinicrm.databinding.FragmentResetPasswordBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 public class ResetPasswordFragment extends Fragment {
 
@@ -18,7 +18,7 @@ public class ResetPasswordFragment extends Fragment {
     private static FragmentResetPasswordBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentResetPasswordBinding.inflate(inflater,container,false);
         return binding.getRoot();
