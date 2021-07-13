@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Admin.MasterAdmin">
 
+    <Spinner
+        android:id="@+id/Adminselectdropdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/spinner_background"
+        android:popupBackground="@android:color/holo_blue_bright"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
