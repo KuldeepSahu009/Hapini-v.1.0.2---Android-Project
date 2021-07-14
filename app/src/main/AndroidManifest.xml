@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
-        <activity android:name=".Admin.Onlyformasterlogin"></activity>
+        <activity android:name=".Adapters.AdminListAdapter"></activity>
+        <activity android:name=".Admin.Onlyformasterlogin" />
         <activity android:name=".Admin.Admingenerallogin" />
         <activity android:name=".Admin.MasterAdminsignup" />
         <activity android:name=".Admin.Crmadmin" />
