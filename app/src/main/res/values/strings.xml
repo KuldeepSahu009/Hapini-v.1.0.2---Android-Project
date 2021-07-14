@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Hapini - All in One</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="admins_choice">
+        <item>Select admin to add</item>
+        <item>CRM Admin</item>
+        <item>Data Entry Admin</item>
+        <item>Video Editor Admin</item>
+    </string-array>
 </resources>

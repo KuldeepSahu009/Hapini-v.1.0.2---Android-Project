@@ -17,7 +17,7 @@ import java.util.List;
 
 public class AdminListAdapter extends RecyclerView.Adapter<AdminListAdapter.ViewHolder> {
 
-    private final List<Admin> adminList;
+    private List<Admin> adminList;
 
     public AdminListAdapter(List<Admin> adminList) {
         this.adminList = adminList;
@@ -42,6 +42,11 @@ public class AdminListAdapter extends RecyclerView.Adapter<AdminListAdapter.View
     @Override
     public int getItemCount() {
         return adminList.size();
+    }
+
+    public void addAdmin(Admin admin) {
+        adminList.add(admin);
+        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

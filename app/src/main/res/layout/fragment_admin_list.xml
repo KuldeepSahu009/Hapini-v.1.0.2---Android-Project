@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
     tools:context=".ui.admin.master.AdminListFragment">
 
+    <Spinner
+        android:layout_margin="8dp"
+        android:id="@+id/spinnerAddAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:popupBackground="@color/light_blue"
+        android:background="@color/light_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:padding="8dp"
         android:id="@+id/rvAdmins"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -15,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerAddAdmin"
         tools:listitem="@layout/admin_preview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

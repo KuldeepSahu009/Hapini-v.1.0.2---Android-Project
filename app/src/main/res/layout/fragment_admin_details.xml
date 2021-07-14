@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvLabelType" />
 
     <TextView
-        android:id="@+id/tvEmail"
+        android:id="@+id/etEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -110,7 +110,7 @@
         android:layout_marginTop="16dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail"
         tools:text="9012345678" />
 
 

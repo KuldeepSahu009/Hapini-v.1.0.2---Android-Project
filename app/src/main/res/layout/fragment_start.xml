@@ -49,6 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Admin"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tvAdminDetails"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -59,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="User"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnAdmin"/>

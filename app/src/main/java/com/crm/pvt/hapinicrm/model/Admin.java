@@ -5,16 +5,20 @@ import java.io.Serializable;
 public class Admin implements Serializable {
 
     String name;
-    String type;
     String email;
-    String contact;
+    String mobileNumber;
+    String whatsappNumber;
+    String password;
+    String type;
     String doj;
 
-    public Admin(String name, String type, String email, String contact, String doj) {
+    public Admin(String name, String email, String mobileNumber, String whatsappNumber, String password, String type,String doj) {
         this.name = name;
-        this.type = type;
         this.email = email;
-        this.contact = contact;
+        this.mobileNumber = mobileNumber;
+        this.whatsappNumber = whatsappNumber;
+        this.password = password;
+        this.type = type;
         this.doj = doj;
     }
 
@@ -26,14 +30,6 @@ public class Admin implements Serializable {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -42,12 +38,12 @@ public class Admin implements Serializable {
         this.email = email;
     }
 
-    public String getContact() {
-        return contact;
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public String getDoj() {
@@ -58,4 +54,27 @@ public class Admin implements Serializable {
         this.doj = doj;
     }
 
+    public String getWhatsappNumber() {
+        return whatsappNumber;
+    }
+
+    public void setWhatsappNumber(String whatsappNumber) {
+        this.whatsappNumber = whatsappNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
