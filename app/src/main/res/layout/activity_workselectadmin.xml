@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
->
+    >
 
 
     <ImageView
@@ -20,15 +20,15 @@
         app:layout_constraintVertical_bias="0.397" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvUserCrm"
+        android:id="@+id/cvAdminCrm"
         android:layout_width="120dp"
         android:layout_height="150dp"
         android:padding="8dp"
         android:elevation="8dp"
         app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@color/light_blue"
-        app:layout_constraintBottom_toTopOf="@+id/cvUserVideEditor"
-        app:layout_constraintEnd_toStartOf="@+id/cvUserDataEntry"
+        app:layout_constraintBottom_toTopOf="@+id/cvAdminVideEditor"
+        app:layout_constraintEnd_toStartOf="@+id/cvAdminDataEntry"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo" >
@@ -51,7 +51,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvUserDataEntry"
+        android:id="@+id/cvAdminDataEntry"
         android:layout_width="120dp"
         android:layout_height="150dp"
         android:elevation="8dp"
@@ -59,8 +59,8 @@
         app:cardBackgroundColor="@color/light_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintBottom_toTopOf="@id/cvUserMaster"
-        app:layout_constraintStart_toEndOf="@+id/cvUserCrm"
+        app:layout_constraintBottom_toTopOf="@id/cvAdminMaster"
+        app:layout_constraintStart_toEndOf="@+id/cvAdminCrm"
         app:layout_constraintTop_toBottomOf="@+id/ivHapiniLogo" >
 
         <ImageView
@@ -82,17 +82,17 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvUserVideEditor"
+        android:id="@+id/cvAdminVideEditor"
         android:layout_width="120dp"
         android:layout_height="150dp"
         android:elevation="8dp"
         app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@color/light_blue"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
-        app:layout_constraintEnd_toStartOf="@+id/cvUserMaster"
+        app:layout_constraintEnd_toStartOf="@+id/cvAdminMaster"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvUserCrm" >
+        app:layout_constraintTop_toBottomOf="@+id/cvAdminCrm" >
 
         <ImageView
             android:layout_gravity="center_horizontal"
@@ -113,7 +113,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvUserMaster"
+        android:id="@+id/cvAdminMaster"
         android:layout_width="120dp"
         android:layout_height="150dp"
         android:elevation="8dp"
@@ -121,9 +121,9 @@
         app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvUserDataEntry"
+        app:layout_constraintTop_toBottomOf="@id/cvAdminDataEntry"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cvUserVideEditor" >
+        app:layout_constraintStart_toEndOf="@+id/cvAdminVideEditor" >
 
         <ImageView
             android:layout_gravity="center_horizontal"
@@ -147,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="625dp" />
+        app:layout_constraintGuide_end="106dp" />
 
 
 

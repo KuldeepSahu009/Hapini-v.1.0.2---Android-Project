@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.crm.pvt.hapinicrm.user.userlogin;
-import com.crm.pvt.hapinicrm.user.workselect;
-
 public class splashscreen extends AppCompatActivity {
     private final int SPLASH_TIME_OUT=6500;
     @Override

@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.crm.pvt.hapinicrm.user.userlogin;
-import com.crm.pvt.hapinicrm.user.usersignup;
-import com.crm.pvt.hapinicrm.user.workselect;
+import com.crm.pvt.hapinicrm.Admin.workselectadmin;
 
 public class MainActivity extends AppCompatActivity {
 Button toadmin,touser;
@@ -22,14 +20,14 @@ Button toadmin,touser;
         toadmin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//for admin
+                Intent intent=new Intent(MainActivity.this, workselectadmin.class);
+                startActivity(intent);
             }
         });
         touser.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-Intent intent=new Intent(MainActivity.this, workselect.class);
-startActivity(intent);
+
             }
         });
     }
