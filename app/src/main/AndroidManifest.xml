@@ -10,27 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
         <activity android:name=".Adapters.AdminListAdapter"></activity>
-        <activity android:name=".Admin.Onlyformasterlogin" />
-        <activity android:name=".Admin.Admingenerallogin" />
-        <activity android:name=".Admin.MasterAdminsignup" />
-        <activity android:name=".Admin.Crmadmin" />
-        <activity android:name=".Admin.Videoeditoradmin" />
-        <activity android:name=".Admin.Dataentryadmin" />
-        <activity android:name=".Admin.MasterAdmin" />
-        <activity android:name=".Admin.workselectadmin" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".resetpassword.forgetpassword" />
-        <activity android:name=".resetpassword.newpassword" />
-        <activity android:name=".resetpassword.confirmotp" />
-        <activity
-            android:name=".splashscreen"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
