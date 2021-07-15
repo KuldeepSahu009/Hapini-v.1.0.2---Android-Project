@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
+    android:background="@drawable/login_bk"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/ivHapiniLogo"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="150dp"
+        android:layout_marginTop="60dp"
         android:contentDescription="Hapini Logo"
         android:src="@mipmap/ic_logo_foreground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.300"
+        app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.397" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAdminCrm"
