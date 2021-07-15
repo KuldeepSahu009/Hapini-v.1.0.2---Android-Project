@@ -12,6 +12,7 @@
         <activity android:name=".Homescreen"/>
         <activity android:name=".Admin.Videoeditoradmin"/>
         <activity android:name=".Admin.Onlyformasterlogin" />
+        <activity android:name=".Admin.Admingenerallogin" />
         <activity android:name=".resetpassword.forgetpassword" />
         <activity android:name=".resetpassword.newpassword" />
         <activity android:name=".resetpassword.confirmotp" />
