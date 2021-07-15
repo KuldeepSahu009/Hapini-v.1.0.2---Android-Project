@@ -1,5 +1,6 @@
 package com.crm.pvt.hapinicrm.Admin;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,7 +16,7 @@ public class Admingenerallogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admingenerallogin);
+        setContentView(R.layout.admingenerallogin);
         forgotpassword=findViewById(R.id.tvForgotPassword);
         forgotpassword.setOnClickListener(new View.OnClickListener(){
             @Override

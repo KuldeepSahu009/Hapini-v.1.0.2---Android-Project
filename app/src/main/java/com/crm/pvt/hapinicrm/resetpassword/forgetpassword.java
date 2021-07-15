@@ -1,5 +1,4 @@
 package com.crm.pvt.hapinicrm.resetpassword;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,11 +9,11 @@ import android.widget.Button;
 import com.crm.pvt.hapinicrm.R;
 
 public class forgetpassword extends AppCompatActivity {
-Button  otppusher;
+    Button  otppusher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgetpassword);
+        setContentView(R.layout.forgotpassword);
         otppusher=findViewById(R.id.btnSendOtp);
         otppusher.setOnClickListener(new View.OnClickListener(){
             @Override

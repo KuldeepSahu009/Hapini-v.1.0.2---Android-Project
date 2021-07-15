@@ -11,11 +11,11 @@ public class splashscreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splashscreen);
+        setContentView(R.layout.splashscreen);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(splashscreen.this, MainActivity.class);
+                Intent intent=new Intent(splashscreen.this, Homescreen.class);
                 startActivity(intent);
             }
         },SPLASH_TIME_OUT);

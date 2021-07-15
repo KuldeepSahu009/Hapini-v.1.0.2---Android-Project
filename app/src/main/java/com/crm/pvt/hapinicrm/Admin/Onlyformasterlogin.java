@@ -1,5 +1,4 @@
 package com.crm.pvt.hapinicrm.Admin;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,16 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 public class Onlyformasterlogin extends AppCompatActivity {
-TextView formastersignup;
-Button mstrlogin;
+    TextView formastersignup;
+    Button mstrlogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onlyformasterlogin);
+        setContentView(R.layout.onlyformasterlogin);
         formastersignup=findViewById(R.id.TOWARDSMASTERSIGNUP);
         mstrlogin=findViewById(R.id.btnMasterLogin);
         mstrlogin.setOnClickListener(new View.OnClickListener(){
@@ -29,8 +31,7 @@ Button mstrlogin;
         formastersignup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Onlyformasterlogin.this,MasterAdminsignup.class);
-                startActivity(intent);
+ Toast.makeText(getApplicationContext(), "Get passcode from company",LENGTH_LONG).show();
             }
         });
     }

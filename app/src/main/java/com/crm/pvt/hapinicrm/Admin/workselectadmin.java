@@ -7,7 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.crm.pvt.hapinicrm.MainActivity;
+
+import com.crm.pvt.hapinicrm.Homescreen;
 import com.crm.pvt.hapinicrm.R;
 
 public class workselectadmin extends AppCompatActivity {
@@ -15,7 +16,7 @@ public class workselectadmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workselectadmin);
+        setContentView(R.layout.workselectadmin);
         crmAdminbtn=findViewById(R.id.cvAdminCrm);
         dataentryAdminbtn=findViewById(R.id.cvAdminDataEntry);
         videoeditorAdminbtn=findViewById(R.id.cvAdminVideEditor);
@@ -55,7 +56,7 @@ public class workselectadmin extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(workselectadmin.this, MainActivity.class);
+        Intent intent=new Intent(workselectadmin.this, Homescreen.class);
         startActivity(intent);
     }
 }

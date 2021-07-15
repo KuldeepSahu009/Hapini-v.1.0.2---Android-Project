@@ -9,18 +9,19 @@ import android.widget.Button;
 
 import com.crm.pvt.hapinicrm.Admin.workselectadmin;
 
-public class MainActivity extends AppCompatActivity {
-Button toadmin,touser;
+public class Homescreen extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homescreen);
-        toadmin=findViewById(R.id.btnAdmin);
-        touser=findViewById(R.id.btnUser);
+        Button touser=findViewById(R.id.btnUser);
+
+       Button toadmin=findViewById(R.id.btnAdmin);
         toadmin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, workselectadmin.class);
+                Intent intent=new Intent(Homescreen.this, workselectadmin.class);
                 startActivity(intent);
             }
         });
@@ -40,4 +41,4 @@ Button toadmin,touser;
         startActivity(intent);
 
     }
-}
+    }
