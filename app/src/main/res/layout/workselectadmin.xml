@@ -84,20 +84,21 @@
         android:id="@+id/cvAdminVideEditor"
         android:layout_width="120dp"
         android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:elevation="8dp"
-        app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@color/light_blue"
+        app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
         app:layout_constraintEnd_toStartOf="@+id/cvAdminMaster"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvAdminCrm" >
+        app:layout_constraintTop_toBottomOf="@+id/cvAdminCrm">
 
         <ImageView
-            android:layout_gravity="center_horizontal"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/ic_video_editor"/>
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_video_editor" />
 
         <TextView
             android:layout_width="match_parent"
@@ -115,20 +116,21 @@
         android:id="@+id/cvAdminMaster"
         android:layout_width="120dp"
         android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:elevation="8dp"
         app:cardBackgroundColor="@color/light_blue"
         app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvAdminDataEntry"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cvAdminVideEditor" >
+        app:layout_constraintStart_toEndOf="@+id/cvAdminVideEditor"
+        app:layout_constraintTop_toBottomOf="@id/cvAdminDataEntry">
 
         <ImageView
-            android:layout_gravity="center_horizontal"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/ic_master"/>
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_master" />
 
         <TextView
             android:layout_width="match_parent"

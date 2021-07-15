@@ -20,15 +20,15 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
-        android:hint="Email"
-        android:textSize="16sp"
+        android:background="@drawable/bg_edit_text"
+        android:hint="Passcode"
+        android:inputType="textEmailAddress"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/bg_edit_text"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo" />
 
     <EditText
         android:id="@+id/etMasterPassword"
