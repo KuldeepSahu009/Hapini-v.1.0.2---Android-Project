@@ -1,5 +1,6 @@
 package com.crm.pvt.hapinicrm.Admin;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,11 +18,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.crm.pvt.hapinicrm.Adapters.MasterviewAdapter;
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.model.MasterviewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MasterAdmin extends AppCompatActivity {
     Spinner Adminfilling;
     Dialog add,add2,add3;
+    private MasterviewAdapter masterviewAdapter;
+   ArrayList<MasterviewModel> masterviewModelArrayList;
     RecyclerView recyclerViewmaster;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,19 @@ public class MasterAdmin extends AppCompatActivity {
         setContentView(R.layout.master_admin);
         Adminfilling=findViewById(R.id.Adminselectdropdown);
         recyclerViewmaster=findViewById(R.id.masterrecyclerview);
+
+LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+recyclerViewmaster.setLayoutManager(layoutManager);
+recyclerViewmaster.setHasFixedSize(true);
+masterviewModelArrayList=new ArrayList<>();
+masterviewModelArrayList.add(new MasterviewModel("Suyash shukla","mail@gmail.com","12345","lucknow"));
+        masterviewModelArrayList.add(new MasterviewModel("Aditya singh","mail@gmail.com","12345","Delhi"));
+        masterviewModelArrayList.add(new MasterviewModel("Challa Rashmita","mail@gmail.com","12345","xyz"));
+        masterviewModelArrayList.add(new MasterviewModel("Param","mail@gmail.com","12345","xyz"));
+        masterviewModelArrayList.add(new MasterviewModel("Satyam","mail@gmail.com","12345","xyz"));
+        recyclerViewmaster.setAdapter(new MasterviewAdapter(masterviewModelArrayList));
+    {
+}
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.dropdownfilesname, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
