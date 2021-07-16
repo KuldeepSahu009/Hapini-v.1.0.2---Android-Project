@@ -53,6 +53,12 @@ public class workselectadmin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        crmAdminbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(workselectadmin.this,Crmadmin.class));
+            }
+        });
     }
     @Override
     public void onBackPressed() {

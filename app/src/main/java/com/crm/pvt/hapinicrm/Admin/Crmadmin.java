@@ -43,7 +43,7 @@ public class Crmadmin extends AppCompatActivity {
             }
         });
     }
-    private void autheticatedata(){
+    private void autheticatedata(){ 
         boolean cancel=false;
         View view=null;
         String passcode=passcodes.getText().toString();
