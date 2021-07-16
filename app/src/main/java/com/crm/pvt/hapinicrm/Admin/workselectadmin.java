@@ -25,23 +25,21 @@ public class workselectadmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(workselectadmin.this, Admingenerallogin.class);
-                startActivity(intent);
+
             }
         });
         dataentryAdminbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(workselectadmin.this, Admingenerallogin.class);
+                Intent intent=new Intent(workselectadmin.this, DataEntryAdminLogin.class);
                 startActivity(intent);
             }
         });
         videoeditorAdminbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent=new Intent(workselectadmin.this, Admingenerallogin.class);
+                Intent intent=new Intent(workselectadmin.this, VideoEditorAdminLogin.class);
                 startActivity(intent);
             }
         });
@@ -53,10 +51,5 @@ public class workselectadmin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-    @Override
-    public void onBackPressed() {
-        Intent intent=new Intent(workselectadmin.this, Homescreen.class);
-        startActivity(intent);
     }
 }
