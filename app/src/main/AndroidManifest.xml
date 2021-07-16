@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
-        <activity android:name=".Homescreen"/>
+        <activity android:name=".Homescreen" />
         <activity android:name=".Admin.Onlyformasterlogin" />
         <activity android:name=".Admin.Admingenerallogin" />
         <activity android:name=".resetpassword.forgetpassword" />
@@ -20,7 +20,8 @@
         <activity android:name=".Admin.Dataentryadmin" />
         <activity android:name=".Admin.MasterAdmin" />
         <activity android:name=".Admin.workselectadmin" />
-        <activity android:name=".splashscreen"
+        <activity
+            android:name=".splashscreen"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
