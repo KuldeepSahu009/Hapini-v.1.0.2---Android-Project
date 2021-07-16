@@ -58,4 +58,10 @@ public class workselectadmin extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(workselectadmin.this,Homescreen.class);
+        startActivity(intent);
+    }
 }

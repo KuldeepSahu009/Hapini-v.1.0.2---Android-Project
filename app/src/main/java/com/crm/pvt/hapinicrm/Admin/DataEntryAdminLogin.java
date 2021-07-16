@@ -35,4 +35,10 @@ public class DataEntryAdminLogin extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(DataEntryAdminLogin.this,workselectadmin.class);
+        startActivity(intent);
+    }
 }

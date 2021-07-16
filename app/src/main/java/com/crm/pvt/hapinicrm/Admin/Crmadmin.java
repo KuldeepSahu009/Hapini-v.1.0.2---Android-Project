@@ -76,4 +76,10 @@ public class Crmadmin extends AppCompatActivity {
     private void checkdata(String passcode,String password){
         Toast.makeText(Crmadmin.this,"Sign in completed",Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(Crmadmin.this,workselectadmin.class);
+        startActivity(intent);
+    }
 }

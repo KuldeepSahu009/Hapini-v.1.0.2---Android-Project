@@ -36,4 +36,10 @@ public class VideoEditorAdminLogin extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(VideoEditorAdminLogin.this,workselectadmin.class);
+        startActivity(intent);
+    }
 }
