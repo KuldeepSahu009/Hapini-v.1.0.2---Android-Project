@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/etMasterPassword" />
 
     <TextView
-        android:id="@+id/tvVideoEditorAdminForgotPassword"
+        android:id="@+id/tvForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
