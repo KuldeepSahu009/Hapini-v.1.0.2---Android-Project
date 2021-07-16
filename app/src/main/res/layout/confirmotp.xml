@@ -4,26 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0091EA"
-    tools:context=".resetpassword.confirmotp">
+    android:background="#0091EA">
 
-    <EditText
-        android:id="@+id/recievedotp"
+    <in.aabhasjindal.otptextview.OtpTextView
+        android:id="@+id/recievedOTP"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:background="@drawable/bg_edit_text"
-        android:ems="10"
-        android:hint="Otp"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="24dp"
-        android:textStyle="bold"
+        android:textColor="#fff"
+        app:bar_enabled="true"
+        app:bar_height="6dp"
+        app:height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:length="6"
+        app:otp_text_size="24dp"
+        app:width="42dp"
+        app:bar_active_color="@color/black"
+        app:bar_inactive_color="@color/white"
+        app:bar_error_color="@color/red"
+        app:bar_success_color="#0f0"
+        />
     <Button
         android:id="@+id/confirmotpbtn"
         android:layout_width="wrap_content"
@@ -33,8 +35,7 @@
         android:text="confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recievedotp" />
-
+        app:layout_constraintTop_toBottomOf="@+id/recievedOTP" />
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ImageButton11"
         android:layout_width="100dp"
@@ -45,7 +46,7 @@
         app:civ_border_overlay="true"
         app:civ_border_width="3dp"
         app:civ_circle_background_color="#6200EA"
-        app:layout_constraintBottom_toTopOf="@+id/recievedotp"
+        app:layout_constraintBottom_toTopOf="@+id/recievedOTP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
