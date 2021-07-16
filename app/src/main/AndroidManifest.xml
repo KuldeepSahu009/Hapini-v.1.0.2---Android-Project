@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
 
-        <activity android:name=".Admin.VideoEditorAdminLogin"></activity>
+        <activity android:name=".Admin.VideoEditorAdminLogin" />
         <activity android:name=".Admin.DataEntryAdminLogin" />
         <activity android:name=".Homescreen" />
         <activity android:name=".Admin.Videoeditoradmin" />
