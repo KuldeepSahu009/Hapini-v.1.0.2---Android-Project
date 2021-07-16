@@ -9,14 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
-        <activity android:name=".Homescreen" />
+
+        <activity android:name=".Homescreen"/>
+        <activity android:name=".Admin.Videoeditoradmin"/>
+
         <activity android:name=".Admin.Onlyformasterlogin" />
         <activity android:name=".Admin.Admingenerallogin" />
         <activity android:name=".resetpassword.forgetpassword" />
         <activity android:name=".resetpassword.newpassword" />
         <activity android:name=".resetpassword.confirmotp" />
         <activity android:name=".Admin.Crmadmin" />
-        <activity android:name=".Admin.Videoeditoradmin" />
+
         <activity android:name=".Admin.Dataentryadmin" />
         <activity android:name=".Admin.MasterAdmin" />
         <activity android:name=".Admin.workselectadmin" />

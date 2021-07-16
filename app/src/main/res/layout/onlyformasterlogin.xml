@@ -16,19 +16,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etMasterEmail"
+        android:id="@+id/etMasterPasscode"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
-        android:hint="Pass-code"
-        android:textSize="16sp"
+
+        android:background="@drawable/bg_edit_text"
+        android:hint="Passcode"
+        android:maxLength="6"
+        android:inputType="number"
+
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/bg_edit_text"
-        app:layout_constraintStart_toStartOf="parent"
+        android:singleLine="true"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo" />
 
     <EditText
         android:id="@+id/etMasterPassword"
@@ -43,7 +47,7 @@
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etMasterEmail"/>
+        app:layout_constraintTop_toBottomOf="@id/etMasterPasscode"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -69,38 +73,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnMasterLogin"/>
-
-
-    <TextView
-        android:id="@+id/TOWARDSMASTERSIGNUP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="20dp"
-        android:fontFamily="serif"
-        android:text="Don't have an account?"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.317"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.889" />
-
-    <TextView
-        android:id="@+id/signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:text=" Sign Up "
-        android:textColor="#2962FF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/TOWARDSMASTERSIGNUP"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

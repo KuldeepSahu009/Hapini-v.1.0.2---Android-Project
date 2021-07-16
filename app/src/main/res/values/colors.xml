@@ -10,4 +10,7 @@
     <color name="light_blue">#CFDCEA</color>
     <color name="dark_blue">#094B77</color>
     <color name="red">#F10A0A</color>
+    <color name="yellow">#FFC107</color>
+    <color name="blue">#0091EA</color>
+
 </resources>

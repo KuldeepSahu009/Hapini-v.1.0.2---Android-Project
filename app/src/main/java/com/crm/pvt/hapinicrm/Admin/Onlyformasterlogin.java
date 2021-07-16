@@ -1,40 +1,62 @@
 package com.crm.pvt.hapinicrm.Admin;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.resetpassword.forgetpassword;
 
-import static android.widget.Toast.LENGTH_LONG;
 
 public class Onlyformasterlogin extends AppCompatActivity {
-    TextView formastersignup;
     Button mstrlogin;
+    EditText mstrPasscode,mstrPassword;
+    TextView mstrForgotPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onlyformasterlogin);
-        formastersignup=findViewById(R.id.TOWARDSMASTERSIGNUP);
         mstrlogin=findViewById(R.id.btnMasterLogin);
-        mstrlogin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+        mstrPasscode = findViewById(R.id.etMasterPasscode);
+        mstrPassword = findViewById(R.id.etMasterPassword);
+        mstrForgotPassword = findViewById(R.id.tvForgotPassword);
+
+        mstrlogin.setOnClickListener(v -> {
+
+            String passcode = mstrPasscode.getText().toString();
+            String password = mstrPassword.getText().toString();
+
+            if(isCredentialsValid(passcode,password)) {
                 Intent intent=new Intent(Onlyformasterlogin.this,MasterAdmin.class);
                 startActivity(intent);
             }
+
+
         });
-        formastersignup.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
- Toast.makeText(getApplicationContext(), "Get passcode from company",LENGTH_LONG).show();
-            }
+
+        mstrForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(this, forgetpassword.class);
+            startActivity(intent);
         });
+
     }
+
+    private boolean isCredentialsValid(String passcode, String password) {
+        if(passcode.length() == 6 && password.length() != 0 ) {
+            return true;
+        } else {
+            if(passcode.length() != 6) {
+                mstrPasscode.setError("Passcode must be of 6 characters long");
+            }
+            if(mstrPassword.getText().toString().length() == 0) {
+                mstrPassword.setError("Enter password");
+            }
+            return false;
+        }
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent=new Intent(Onlyformasterlogin.this,workselectadmin.class);
