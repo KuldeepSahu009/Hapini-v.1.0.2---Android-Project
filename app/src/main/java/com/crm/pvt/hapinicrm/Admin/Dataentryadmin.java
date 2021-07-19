@@ -12,9 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.fragment.Aboutfragment;
 import com.crm.pvt.hapinicrm.fragment.Aboutfragment_dataentryadmin;
-import com.crm.pvt.hapinicrm.fragment.Homefragment;
 import com.crm.pvt.hapinicrm.fragment.Homefragmentdataentryadmin;
 import com.google.android.material.navigation.NavigationView;
 

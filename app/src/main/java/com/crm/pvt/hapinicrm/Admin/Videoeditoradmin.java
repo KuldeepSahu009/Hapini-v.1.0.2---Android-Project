@@ -1,37 +1,64 @@
 package com.crm.pvt.hapinicrm.Admin;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import com.crm.pvt.hapinicrm.Adapters.MasterviewAdapter;
-import com.crm.pvt.hapinicrm.Adapters.videoeditoradminAdapter;
+import android.view.MenuItem;
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.model.MasterviewModel;
-import com.crm.pvt.hapinicrm.model.videoeditorviewmodel;
+import com.crm.pvt.hapinicrm.fragment.AboutVideoEditorFragment;
+import com.crm.pvt.hapinicrm.fragment.HomeVideoEditorFragment;
+import com.crm.pvt.hapinicrm.fragment.Homefragmentdataentryadmin;
+import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 
 public class Videoeditoradmin extends AppCompatActivity {
-    private videoeditoradminAdapter videoeditoradminAdapter;
-    ArrayList<videoeditorviewmodel> videoeditorviewmodelArrayList;
-    RecyclerView recyclerViewvideoeditor;
+    NavigationView navigationView;
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.videoeditoradmin);
-        recyclerViewvideoeditor=findViewById(R.id.videoeditoruserrecycler);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
-        recyclerViewvideoeditor.setLayoutManager(layoutManager);
-        recyclerViewvideoeditor.setHasFixedSize(true);
-        videoeditorviewmodelArrayList=new ArrayList<>();
-        videoeditorviewmodelArrayList.add(new videoeditorviewmodel("Suyash shukla","mail@gmail.com","12345","lucknow"));
-        videoeditorviewmodelArrayList.add(new videoeditorviewmodel("Aditya singh","mail@gmail.com","12345","Delhi"));
-        videoeditorviewmodelArrayList.add(new videoeditorviewmodel("Challa Rashmita","mail@gmail.com","12345","xyz"));
-        videoeditorviewmodelArrayList.add(new videoeditorviewmodel("Param","mail@gmail.com","12345","xyz"));
-        videoeditorviewmodelArrayList.add(new videoeditorviewmodel("Satyam","mail@gmail.com","12345","xyz"));
-        recyclerViewvideoeditor.setAdapter(new videoeditoradminAdapter(videoeditorviewmodelArrayList));
+        setContentView(R.layout.activity_videoeditoradmin);
+
+        navigationView=(NavigationView)findViewById(R.id.videoeditoradminnavigationview);
+        toolbar=(Toolbar)findViewById(R.id.videoeditoradmintoolbar);
+        setSupportActionBar(toolbar);
+        drawerLayout=(DrawerLayout)findViewById(R.id.drawerlayout_videoeditor);
+
+        toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutvideoeditoradmin,new Homefragmentdataentryadmin()).commit();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                Fragment fragment=null;
+                switch (item.getItemId()){
+                    case R.id.home_videoeditoradmin:
+                        item.setChecked(true);
+                        fragment=new HomeVideoEditorFragment();
+                        break;
+                    case R.id.About_videoeditoradmin:
+                        fragment=new AboutVideoEditorFragment();
+
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutvideoeditoradmin,fragment ).addToBackStack(null).commit();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+
     }
 }
