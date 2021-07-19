@@ -21,7 +21,7 @@
         android:id="@+id/fillcrmadminname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
         android:hint="Name"
@@ -34,7 +34,7 @@
         android:id="@+id/fillcrmadminemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
         android:hint="Email"
@@ -47,7 +47,7 @@
         android:id="@+id/fillcrmadminmobileno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
         android:hint="Mobile Number"
@@ -60,7 +60,7 @@
         android:id="@+id/fillcrmadminwhatsapp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
         android:hint="Whatsapp number"
@@ -73,7 +73,7 @@
         android:id="@+id/fillcrmadminpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
         android:hint="Password"
@@ -83,13 +83,13 @@
         app:layout_constraintTop_toBottomOf="@+id/fillcrmadminwhatsapp" />
 
     <EditText
-        android:id="@+id/fillcrmadminconfirmpassword"
+        android:id="@+id/fillcrmadminpasscodedetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_edit_text"
         android:ems="10"
-        android:hint="Confirm Password"
+        android:hint=" Passcode"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,15 +99,15 @@
         android:id="@+id/savecrmadmindetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/bg_button"
         android:text="Submit"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fillcrmadminconfirmpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxcrmadmin" />
 
     <TextView
         android:id="@+id/Adminselectiontype"
@@ -122,4 +122,41 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/fillcrmadmindetailcity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_edit_text"
+        android:ems="10"
+        android:hint=" City"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmadminpasscodedetail" />
+
+    <EditText
+        android:id="@+id/fillcrmadmindetaillocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_edit_text"
+        android:ems="10"
+        android:hint=" Location"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmadmindetailcity" />
+
+    <CheckBox
+        android:id="@+id/checkBoxcrmadmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Accept all terms and condition"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmadmindetaillocation" />
 </androidx.constraintlayout.widget.ConstraintLayout>

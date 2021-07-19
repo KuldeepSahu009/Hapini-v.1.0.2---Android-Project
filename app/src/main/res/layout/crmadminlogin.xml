@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.Crmadmin"
-    >
+    tools:context=".Admin.CrmadminLogin">
 
     <ImageView
         android:id="@+id/HapiniLogo"
@@ -48,21 +47,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/crmadminpasscode"/>
 
-    <TextView
-        android:id="@+id/crmerrormessae"
-        android:layout_width="288dp"
-        android:layout_height="21dp"
-        android:layout_marginTop="14dp"
-        android:fontFamily="@font/belleza"
-        android:text="Demo"
-        android:textColor="@color/red"
-        android:textSize="16dp"
-        android:textStyle="italic"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HapiniLogo" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/crmadminlogin"
         android:layout_width="300dp"
@@ -84,8 +68,9 @@
         android:layout_marginTop="16dp"
         android:fontFamily="serif"
         android:text="Forgot Password?"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/crmadminlogin"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/crmadminlogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
