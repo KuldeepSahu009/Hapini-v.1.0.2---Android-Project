@@ -20,9 +20,9 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilepicofadmin"
+                android:id="@+id/profilepicofdataentryadmin"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:src="@drawable/profiletestimage"
                 app:civ_border_color="#000000"

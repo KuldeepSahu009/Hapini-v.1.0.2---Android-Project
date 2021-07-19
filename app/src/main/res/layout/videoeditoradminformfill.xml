@@ -8,7 +8,7 @@
     android:background="#FFFFFF">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewU1"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="5dp"
@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/error2" />
 
     <EditText
-        android:id="@+id/fillvideoeditoradminname"
+        android:id="@+id/fillcrmusername"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Adminselectiontype1" />
 
     <EditText
-        android:id="@+id/fillvideoeditoradminemail"
+        android:id="@+id/fillcrmuseremail"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_marginTop="16dp"
@@ -41,10 +41,10 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fillvideoeditoradminname" />
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmusername" />
 
     <EditText
-        android:id="@+id/fillvideoeditoradminmobileno"
+        android:id="@+id/fillcrmusermobileno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -54,10 +54,10 @@
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fillvideoeditoradminemail" />
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmuseremail" />
 
     <EditText
-        android:id="@+id/fillvideoeditoradminwhatsapp"
+        android:id="@+id/fillcrmuserwhatsapp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -67,10 +67,10 @@
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fillvideoeditoradminmobileno" />
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmusermobileno" />
 
     <EditText
-        android:id="@+id/fillvideoeditoradminpassword"
+        android:id="@+id/fillcrmuserpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -80,10 +80,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fillvideoeditoradminwhatsapp" />
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmuserwhatsapp" />
 
     <EditText
-        android:id="@+id/fillvideoeditoradminpasscode"
+        android:id="@+id/fillcrmuserpasscode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -93,10 +93,10 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fillvideoeditoradminpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmuserpassword" />
 
     <EditText
-        android:id="@+id/videoeditoradmincity"
+        android:id="@+id/crmusercity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -107,10 +107,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fillvideoeditoradminpasscode" />
+        app:layout_constraintTop_toBottomOf="@+id/fillcrmuserpasscode" />
 
     <Button
-        android:id="@+id/savevideoeditoradmindetails"
+        android:id="@+id/savecrmuserdetails"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -121,7 +121,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxvideoeditoradmin" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxcrmuser" />
 
     <TextView
         android:id="@+id/Adminselectiontype1"
@@ -134,10 +134,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewU1" />
 
     <EditText
-        android:id="@+id/videoeditoradminarea"
+        android:id="@+id/crmuserarea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -147,10 +147,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoeditoradmincity" />
+        app:layout_constraintTop_toBottomOf="@+id/crmusercity" />
 
     <CheckBox
-        android:id="@+id/checkBoxvideoeditoradmin"
+        android:id="@+id/checkBoxcrmuser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -158,5 +158,5 @@
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoeditoradminarea" />
+        app:layout_constraintTop_toBottomOf="@+id/crmuserarea" />
 </androidx.constraintlayout.widget.ConstraintLayout>

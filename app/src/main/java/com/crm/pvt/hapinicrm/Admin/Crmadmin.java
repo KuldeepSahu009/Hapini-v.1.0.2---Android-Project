@@ -10,7 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -34,7 +38,7 @@ public class Crmadmin extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
-
+    Dialog add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +63,14 @@ public class Crmadmin extends AppCompatActivity {
                     case R.id.home:
                         item.setChecked(true);
                         fragmet=new Homefragment();
-                       break;
+                        break;
                        case R.id.About:
                            fragmet=new Aboutfragment();
+                       break;
+     
 
                 }
+
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutcrmadmin,fragmet ).addToBackStack(null).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
@@ -71,5 +78,13 @@ public class Crmadmin extends AppCompatActivity {
         });
 
 
+    }
+
+    private void openform() {
+        add=new Dialog(this);
+        add.setContentView(R.layout.crmadmindetailsformfill);
+        add.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        add.getWindow().setLayout(android.widget.Toolbar.LayoutParams.MATCH_PARENT, android.widget.Toolbar.LayoutParams.MATCH_PARENT);
+        add.getWindow().getAttributes().gravity= Gravity.TOP;
     }
 }

@@ -7,17 +7,18 @@
     tools:context=".Admin.Crmadmin"
     tools:openDrawer="start"
     android:id="@+id/drawerlayout">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/blue"
-                app:title="CRM ADMIN"
-                android:id="@+id/crmadmintoolbar">
-            </androidx.appcompat.widget.Toolbar>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/crmadmintoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue"
+            app:title="CRM ADMIN"></androidx.appcompat.widget.Toolbar>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
