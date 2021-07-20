@@ -7,16 +7,6 @@
     android:layout_gravity="center"
     android:background="#FFFFFF">
 
-    <ImageView
-        android:id="@+id/imageViewU1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/error2" />
-
     <EditText
         android:id="@+id/fillcrmusername"
         android:layout_width="wrap_content"
@@ -114,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/bg_button"
         android:text="Submit"
         android:textStyle="bold"
@@ -127,14 +117,17 @@
         android:id="@+id/Adminselectiontype1"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="16dp"
         android:text="VIDEO EDITOR ADMIN"
         android:textColor="#000000"
         android:textSize="18dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fillcrmusername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewU1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/crmuserarea"

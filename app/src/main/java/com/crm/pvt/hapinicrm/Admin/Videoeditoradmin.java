@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.fragment.AboutVideoEditorFragment;
+import com.crm.pvt.hapinicrm.fragment.AdduserVideoeditoradminfragment;
 import com.crm.pvt.hapinicrm.fragment.HomeVideoEditorFragment;
 import com.crm.pvt.hapinicrm.fragment.Homefragmentdataentryadmin;
 import com.google.android.material.navigation.NavigationView;
@@ -50,8 +50,8 @@ public class Videoeditoradmin extends AppCompatActivity {
                         item.setChecked(true);
                         fragment=new HomeVideoEditorFragment();
                         break;
-                    case R.id.About_videoeditoradmin:
-                        fragment=new AboutVideoEditorFragment();
+                    case R.id.Addvideoeditoruser:
+                        fragment=new AdduserVideoeditoradminfragment();
 
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutvideoeditoradmin,fragment ).addToBackStack(null).commit();

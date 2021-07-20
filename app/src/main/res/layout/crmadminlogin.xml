@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.CrmadminLogin">
+    android:background="@drawable/login_bk">
 
     <ImageView
-        android:id="@+id/HapiniLogo"
+        android:id="@+id/ivHapiniLogo"
         android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="108dp"
         android:src="@mipmap/ic_logo_foreground"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,28 +31,29 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/HapiniLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/ivHapiniLogo" />
 
     <EditText
         android:id="@+id/crmadminpassword"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/bg_edit_text"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:hint="Password"
         android:textSize="16sp"
-        android:background="@drawable/bg_edit_text"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/crmadminpasscode"/>
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crmadminpasscode" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/crmadminlogin"
         android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_button"
         android:fontFamily="serif"
         android:text="Log in"
@@ -59,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/crmadminpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/crmadminpassword" />
 
     <TextView
         android:id="@+id/crmadminforgotpassword"

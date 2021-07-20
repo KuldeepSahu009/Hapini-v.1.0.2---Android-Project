@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".fragment.Homefragmentdataentryadmin"
     android:orientation="vertical">
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/dataentryadminrecycler"
-        android:layout_marginTop="2dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 

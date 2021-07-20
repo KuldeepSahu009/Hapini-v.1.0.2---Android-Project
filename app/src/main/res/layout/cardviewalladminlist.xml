@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilepicofdataentryadmin"
+                android:id="@+id/profilepicofvideoeditoradmin"
                 android:layout_width="50dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"

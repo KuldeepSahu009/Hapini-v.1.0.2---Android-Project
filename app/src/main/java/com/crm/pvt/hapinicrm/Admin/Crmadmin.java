@@ -7,8 +7,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.graphics.Color;
@@ -16,21 +14,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.crm.pvt.hapinicrm.Adapters.crmadminAdapter;
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.fragment.Aboutfragment;
-import com.crm.pvt.hapinicrm.fragment.Aboutfragment;
-import com.crm.pvt.hapinicrm.fragment.Homefragment;
-import com.crm.pvt.hapinicrm.model.MasterviewModel;
-import com.crm.pvt.hapinicrm.model.crmviewmodel;
+import com.crm.pvt.hapinicrm.fragment.AdduserCrmadminfragment;
+import com.crm.pvt.hapinicrm.fragment.Homefragmentcrmadmin;
 import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Crmadmin extends AppCompatActivity {
 
@@ -53,7 +43,7 @@ public class Crmadmin extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutcrmadmin,new Homefragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutcrmadmin,new Homefragmentcrmadmin()).commit();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,10 +52,10 @@ public class Crmadmin extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.home:
                         item.setChecked(true);
-                        fragmet=new Homefragment();
+                        fragmet=new Homefragmentcrmadmin();
                         break;
-                       case R.id.About:
-                           fragmet=new Aboutfragment();
+                       case R.id.Addcrmuser:
+                           fragmet=new AdduserCrmadminfragment();
                        break;
      
 

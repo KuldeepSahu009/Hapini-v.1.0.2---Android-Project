@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.fragment.Aboutfragment_dataentryadmin;
+import com.crm.pvt.hapinicrm.fragment.AdduserDataentryadminfragment;
 import com.crm.pvt.hapinicrm.fragment.Homefragmentdataentryadmin;
 import com.google.android.material.navigation.NavigationView;
 
@@ -50,8 +50,8 @@ public class Dataentryadmin extends AppCompatActivity {
                         item.setChecked(true);
                         fragment=new Homefragmentdataentryadmin();
                         break;
-                    case R.id.About_dataentryadmin:
-                        fragment=new Aboutfragment_dataentryadmin();
+                    case R.id.Adddataentryuser:
+                        fragment=new AdduserDataentryadminfragment();
 
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutdataentryadmin,fragment ).addToBackStack(null).commit();
