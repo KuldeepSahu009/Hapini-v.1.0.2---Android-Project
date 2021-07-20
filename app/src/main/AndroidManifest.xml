@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.crm.pvt.hapinicrm">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
-        <activity android:name=".Admin.CRMProfile"></activity>
+        <activity android:name=".Admin.DataEntryProfile"></activity>
+        <activity android:name=".Admin.CRMProfile" />
         <activity android:name=".Admin.Crmadmin" />
         <activity android:name=".Admin.VideoEditorAdminLogin" />
         <activity android:name=".Admin.DataEntryAdminLogin" />

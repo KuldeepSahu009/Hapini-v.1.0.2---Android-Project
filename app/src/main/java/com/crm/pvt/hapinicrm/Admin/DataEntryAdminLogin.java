@@ -22,7 +22,7 @@ public class DataEntryAdminLogin extends AppCompatActivity {
         btnDataEntryLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(DataEntryAdminLogin.this, Dataentryadmin.class);
+                Intent intent=new Intent(DataEntryAdminLogin.this, DataEntryProfile.class);
                 startActivity(intent);
             }
         });
