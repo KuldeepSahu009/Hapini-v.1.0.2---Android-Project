@@ -36,7 +36,7 @@ public class CrmadminLogin extends AppCompatActivity {
                 String passcode = passcodes.getText().toString();
                 String password = passwords.getText().toString();
                 if(autheticatedata(passcode, password)){
-                    Intent intent=new Intent(CrmadminLogin.this,Crmadmin.class);
+                    Intent intent=new Intent(CrmadminLogin.this,CRMProfile.class);
                     startActivity(intent);
                 }
             }

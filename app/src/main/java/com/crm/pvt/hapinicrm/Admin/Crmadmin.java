@@ -11,10 +11,15 @@ import androidx.fragment.app.Fragment;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.fragment.AdduserCrmadminfragment;
 import com.crm.pvt.hapinicrm.fragment.Homefragmentcrmadmin;
@@ -29,6 +34,9 @@ public class Crmadmin extends AppCompatActivity {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
     Dialog add;
+    String filepath;
+    ImageView profilepic;
+    View myview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,20 @@ public class Crmadmin extends AppCompatActivity {
         toggle=new ActionBarDrawerToggle(Crmadmin.this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        filepath=getIntent().getStringExtra("filepath");
+
+
+        myview=navigationView.getHeaderView(0);
+        profilepic=(ImageView)myview.findViewById(R.id.profilepiccrmadmin);
+
+
+
+        if (filepath!=null){
+            Glide.with(Crmadmin.this).load(filepath).into(profilepic);
+        }
+
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutcrmadmin,new Homefragmentcrmadmin()).commit();
 
@@ -66,6 +88,8 @@ public class Crmadmin extends AppCompatActivity {
                 return true;
             }
         });
+
+
 
 
     }
