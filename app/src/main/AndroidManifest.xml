@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
-        <activity android:name=".Admin.DataEntryProfile"></activity>
+        <activity android:name=".Admin.VideoEditorProfile"></activity>
+        <activity android:name=".Admin.DataEntryProfile" />
         <activity android:name=".Admin.CRMProfile" />
         <activity android:name=".Admin.Crmadmin" />
         <activity android:name=".Admin.VideoEditorAdminLogin" />
