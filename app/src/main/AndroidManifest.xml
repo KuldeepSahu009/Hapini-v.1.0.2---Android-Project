@@ -24,17 +24,19 @@
         <activity android:name=".resetpassword.newpassword" />
         <activity android:name=".resetpassword.confirmotp" />
         <activity android:name=".Admin.CrmadminLogin" />
-        <activity android:name=".Admin.Dataentryadmin" />
-        <activity android:name=".Admin.MasterAdmin" />
-        <activity android:name=".Admin.workselectadmin" />
-        <activity
-            android:name=".splashscreen"
-            android:noHistory="true">
+        <activity android:name=".Admin.Dataentryadmin" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Admin.MasterAdmin" />
+        <activity android:name=".Admin.workselectadmin" />
+        <activity
+            android:name=".splashscreen"
+            android:noHistory="true">
+
         </activity>
 
         <meta-data

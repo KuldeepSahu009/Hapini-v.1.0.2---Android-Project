@@ -29,7 +29,7 @@ public class Dataentryadmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dataentryadmin);
+        setContentView(R.layout.activity_dataentryadmin_v2);
         navigationView=(NavigationView)findViewById(R.id.dataentryadminnavigationview);
         toolbar=(Toolbar)findViewById(R.id.dataentryadmintoolbar);
         setSupportActionBar(toolbar);
