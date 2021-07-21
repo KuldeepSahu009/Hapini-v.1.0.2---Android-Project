@@ -89,5 +89,18 @@
         app:layout_constraintStart_toStartOf="@+id/setcrmprofileimg"
         app:layout_constraintTop_toTopOf="@+id/setcrmprofileimg" />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Choose Profile Picture"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crmadminprofileimg" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

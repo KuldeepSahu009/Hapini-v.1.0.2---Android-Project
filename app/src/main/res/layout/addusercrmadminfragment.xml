@@ -13,7 +13,7 @@
         android:background="#FFFFFF">
 
         <EditText
-            android:id="@+id/fillcrmadminname"
+            android:id="@+id/filldataentryusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -26,7 +26,7 @@
             app:layout_constraintTop_toBottomOf="@+id/Userselectiontype" />
 
         <EditText
-            android:id="@+id/fillcrmadminemail"
+            android:id="@+id/filldataentryuseremail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -36,10 +36,10 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fillcrmadminname" />
+            app:layout_constraintTop_toBottomOf="@+id/filldataentryusername" />
 
         <EditText
-            android:id="@+id/fillcrmadminmobileno"
+            android:id="@+id/filldataentryusermobileno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -49,10 +49,10 @@
             android:inputType="phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fillcrmadminemail" />
+            app:layout_constraintTop_toBottomOf="@+id/filldataentryuseremail" />
 
         <EditText
-            android:id="@+id/fillcrmadminwhatsapp"
+            android:id="@+id/filldataentryuserwhatsapp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -62,10 +62,10 @@
             android:inputType="phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fillcrmadminmobileno" />
+            app:layout_constraintTop_toBottomOf="@+id/filldataentryusermobileno" />
 
         <EditText
-            android:id="@+id/fillcrmadminpassword"
+            android:id="@+id/filldataentryuserpassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -75,10 +75,10 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fillcrmadminwhatsapp" />
+            app:layout_constraintTop_toBottomOf="@+id/filldataentryuserwhatsapp" />
 
         <EditText
-            android:id="@+id/fillcrmadminpasscodedetail"
+            android:id="@+id/filldataentryuserpasscodedetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -88,10 +88,10 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fillcrmadminpassword" />
+            app:layout_constraintTop_toBottomOf="@+id/filldataentryuserpassword" />
 
         <Button
-            android:id="@+id/savecrmadmindetails"
+            android:id="@+id/savedataentryuserdetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -102,7 +102,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBoxcrmadmin" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxdataentryuser" />
 
         <TextView
             android:id="@+id/Userselectiontype"
@@ -119,7 +119,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/fillcrmadmindetailcity"
+            android:id="@+id/filldataentryuserdetailcity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -129,10 +129,10 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fillcrmadminpasscodedetail" />
+            app:layout_constraintTop_toBottomOf="@+id/filldataentryuserpasscodedetail" />
 
         <EditText
-            android:id="@+id/fillcrmadmindetaillocation"
+            android:id="@+id/filldataentryuserdetaillocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -142,10 +142,10 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fillcrmadmindetailcity" />
+            app:layout_constraintTop_toBottomOf="@+id/filldataentryuserdetailcity" />
 
         <CheckBox
-            android:id="@+id/checkBoxcrmadmin"
+            android:id="@+id/checkBoxdataentryuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -153,6 +153,6 @@
             android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fillcrmadmindetaillocation" />
+            app:layout_constraintTop_toBottomOf="@+id/filldataentryuserdetaillocation" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
