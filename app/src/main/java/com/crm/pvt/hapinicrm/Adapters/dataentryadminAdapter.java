@@ -30,7 +30,7 @@ public class dataentryadminAdapter extends RecyclerView.Adapter<dataentryadminAd
     @NotNull
     @Override
     public dataentryadminAdapter.Viewholders onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewalladminlist,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewalladminlist_v2,parent,false);
         return new Viewholders(view);
     }
 
