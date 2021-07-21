@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilepicofvideoeditoradmin"
+                android:id="@+id/profilepicofanyadmin"
                 android:layout_width="50dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
@@ -35,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/adminnamefromstorage"
+                android:id="@+id/anyadminnamefromstorage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="cursive"
@@ -46,7 +46,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/adminemailfromstorage"
+                android:id="@+id/anyadminemailfromstorage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -54,7 +54,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/adminnumberfromstorage"
+                android:id="@+id/anyadminnumberfromstorage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
@@ -62,7 +62,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/adminlocationfromstorage"
+                android:id="@+id/anyadminlocationfromstorage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"

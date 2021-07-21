@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.model.crmviewmodel;
 import com.crm.pvt.hapinicrm.model.dataentryviewmodel;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,10 +53,10 @@ public class dataentryadminAdapter extends RecyclerView.Adapter<dataentryadminAd
 
         public Viewholders(@NonNull @NotNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.adminnamefromstorage);
-            email=itemView.findViewById(R.id.adminemailfromstorage);
-            contactnumber=itemView.findViewById(R.id.adminnumberfromstorage);
-            address=itemView.findViewById(R.id.adminlocationfromstorage);
+            name=itemView.findViewById(R.id.anyadminnamefromstorage);
+            email=itemView.findViewById(R.id.anyadminemailfromstorage);
+            contactnumber=itemView.findViewById(R.id.anyadminnumberfromstorage);
+            address=itemView.findViewById(R.id.anyadminlocationfromstorage);
         }
     }
 }

@@ -49,9 +49,9 @@ public class Homefragmentcrmadmin extends Fragment {
     private void setdata(){
         crmviewmodelList.add(new crmviewmodel("Suyash shukla","mail@gmail.com","12345","lucknow"));
         crmviewmodelList.add(new crmviewmodel("Aditya singh","mail@gmail.com","12345","Delhi"));
-        crmviewmodelList.add(new crmviewmodel("Challa Rashmita","mail@gmail.com","12345","xyz"));
-        crmviewmodelList.add(new crmviewmodel("Param","mail@gmail.com","12345","xyz"));
-        crmviewmodelList.add(new crmviewmodel("Satyam","mail@gmail.com","12345","xyz"));
+        crmviewmodelList.add(new crmviewmodel("Shruti sahu","mail@gmail.com","12345","xyz"));
+        crmviewmodelList.add(new crmviewmodel("Paramjeet Saini","mail@gmail.com","12345","xyz"));
+        crmviewmodelList.add(new crmviewmodel("Satyam Kumar","mail@gmail.com","12345","xyz"));
 
         crmadminAdapter.notifyDataSetChanged();
 

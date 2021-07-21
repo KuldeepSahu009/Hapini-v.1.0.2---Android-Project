@@ -14,8 +14,6 @@ import com.crm.pvt.hapinicrm.model.MasterviewModel;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.BreakIterator;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MasterviewAdapter extends RecyclerView.Adapter<MasterviewAdapter.ViewHolder> {
@@ -34,7 +32,7 @@ private Context context;
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewalladminlist,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewalladminlist_v2,parent,false);
         return new ViewHolder(view);
     }
 
@@ -56,10 +54,10 @@ private Context context;
 TextView name,email,contactnumber,address;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.adminnamefromstorage);
-            email=itemView.findViewById(R.id.adminemailfromstorage);
-            contactnumber=itemView.findViewById(R.id.adminnumberfromstorage);
-            address=itemView.findViewById(R.id.adminlocationfromstorage);
+            name=itemView.findViewById(R.id.anyadminnamefromstorage);
+            email=itemView.findViewById(R.id.anyadminemailfromstorage);
+            contactnumber=itemView.findViewById(R.id.anyadminnumberfromstorage);
+            address=itemView.findViewById(R.id.anyadminlocationfromstorage);
         }
     }
 }

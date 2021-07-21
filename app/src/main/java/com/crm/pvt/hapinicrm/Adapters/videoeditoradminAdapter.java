@@ -27,7 +27,7 @@ public class videoeditoradminAdapter extends RecyclerView.Adapter<videoeditoradm
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewallvideoeditoruserlist,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewalladminlist_v2,parent,false);
         return new ViewHolder(view);
     }
 
@@ -49,10 +49,10 @@ public class videoeditoradminAdapter extends RecyclerView.Adapter<videoeditoradm
         TextView name,email,contactnumber,address;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.usernamevideoeditorfromstorage);
-            email=itemView.findViewById(R.id.useremailvideoeditorfromstorage);
-            contactnumber=itemView.findViewById(R.id.usernumbervideoeditorfromstorage);
-            address=itemView.findViewById(R.id.userlocationvideoeditorfromstorage);
+            name=itemView.findViewById(R.id.anyadminnamefromstorage);
+            email=itemView.findViewById(R.id.anyadminemailfromstorage);
+            contactnumber=itemView.findViewById(R.id.anyadminnumberfromstorage);
+            address=itemView.findViewById(R.id.anyadminlocationfromstorage);
         }
     }
 }

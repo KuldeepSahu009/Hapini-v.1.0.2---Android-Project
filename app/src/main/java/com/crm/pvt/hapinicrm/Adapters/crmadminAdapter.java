@@ -29,7 +29,7 @@ public class crmadminAdapter extends RecyclerView.Adapter<crmadminAdapter.Viewho
     @NotNull
     @Override
     public Viewholders onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewalladminlist,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardviewalladminlist_v2,parent,false);
         return new Viewholders(view);
     }
 
@@ -53,10 +53,10 @@ public class crmadminAdapter extends RecyclerView.Adapter<crmadminAdapter.Viewho
 
         public Viewholders(@NonNull @NotNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.adminnamefromstorage);
-            email=itemView.findViewById(R.id.adminemailfromstorage);
-            contactnumber=itemView.findViewById(R.id.adminnumberfromstorage);
-            address=itemView.findViewById(R.id.adminlocationfromstorage);
+            name=itemView.findViewById(R.id.anyadminnamefromstorage);
+            email=itemView.findViewById(R.id.anyadminemailfromstorage);
+            contactnumber=itemView.findViewById(R.id.anyadminnumberfromstorage);
+            address=itemView.findViewById(R.id.anyadminlocationfromstorage);
         }
     }
 }
