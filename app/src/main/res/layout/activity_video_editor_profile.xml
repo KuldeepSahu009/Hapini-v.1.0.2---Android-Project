@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.VideoEditorProfile">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/videoeditorprofilegoback"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/savevideoeditorprofile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_baseline_done_all_24"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="Profile"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/videoeditoradminprofileimg"
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:src="@drawable/userpic"
+        app:civ_border_color="#FFD600"
+        app:civ_border_overlay="true"
+        app:civ_border_width="3dp"
+        app:civ_circle_background_color="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.253" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/setvideoeditorprofileimg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:elevation="4dp"
+        android:src="@color/blue"
+        app:civ_circle_background_color="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/videoeditoradminprofileimg"
+        app:layout_constraintEnd_toEndOf="@+id/videoeditoradminprofileimg"
+        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintStart_toStartOf="@+id/videoeditoradminprofileimg"
+        app:layout_constraintTop_toTopOf="@+id/videoeditoradminprofileimg"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/videoeditoradminback1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:elevation="8dp"
+        android:src="@drawable/ic_baseline_camera_alt_24"
+        app:layout_constraintBottom_toBottomOf="@+id/setvideoeditorprofileimg"
+        app:layout_constraintEnd_toEndOf="@+id/setvideoeditorprofileimg"
+        app:layout_constraintStart_toStartOf="@+id/setvideoeditorprofileimg"
+        app:layout_constraintTop_toTopOf="@+id/setvideoeditorprofileimg" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

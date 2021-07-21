@@ -23,7 +23,7 @@ public class VideoEditorAdminLogin extends AppCompatActivity {
         btnVideoEditorAdminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(VideoEditorAdminLogin.this, Videoeditoradmin.class);
+                Intent intent=new Intent(VideoEditorAdminLogin.this, VideoEditorProfile.class);
                 startActivity(intent);
             }
         });

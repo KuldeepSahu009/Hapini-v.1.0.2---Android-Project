@@ -20,7 +20,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-public class DataEntryProfile extends AppCompatActivity {
+public class VideoEditorProfile extends AppCompatActivity {
 
     private static final String TAG ="TAG" ;
     private ImageView save,goback,showimg,setimg,back;
@@ -29,22 +29,22 @@ public class DataEntryProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_entry_profile);
-        goback=(ImageView)findViewById(R.id.dataentryrofilegoback);
-        save=(ImageView)findViewById(R.id.savedataentryprofile);
-        setimg=(ImageView)findViewById(R.id.setdataentryprofileimg);
-        showimg=(ImageView)findViewById(R.id.setdataentryprofileimg);
-        back=(ImageView)findViewById(R.id.dataentryadminback1) ;
+        setContentView(R.layout.activity_video_editor_profile);
+        goback=(ImageView)findViewById(R.id.videoeditorprofilegoback);
+        save=(ImageView)findViewById(R.id.savevideoeditorprofile);
+        setimg=(ImageView)findViewById(R.id.setvideoeditorprofileimg);
+        showimg=(ImageView)findViewById(R.id.setvideoeditorprofileimg);
+        back=(ImageView)findViewById(R.id.videoeditoradminback1) ;
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DataEntryProfile.this,DataEntryAdminLogin.class));
+                startActivity(new Intent(VideoEditorProfile.this,VideoEditorAdminLogin.class));
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(DataEntryProfile.this,Dataentryadmin.class);
+                Intent i=new Intent(VideoEditorProfile.this,Videoeditoradmin.class);
                 if (getfileuri!=null){
                     i.putExtra("filepath",getfileuri.toString());
                 }
@@ -58,10 +58,10 @@ public class DataEntryProfile extends AppCompatActivity {
                 checkpermission();
             }
         });
-
     }
+
     private void checkpermission(){
-        Dexter.withContext(DataEntryProfile.this).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new PermissionListener() {
+        Dexter.withContext(VideoEditorProfile.this).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new PermissionListener() {
             @Override
             public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
                 Intent intent=new Intent(Intent.ACTION_PICK);
@@ -71,7 +71,7 @@ public class DataEntryProfile extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
-                Toast.makeText(DataEntryProfile.this,"Need permission",Toast.LENGTH_LONG).show();
+                Toast.makeText(VideoEditorProfile.this,"Need permission",Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -85,7 +85,7 @@ public class DataEntryProfile extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         if (requestCode==1&&resultCode==RESULT_OK){
             getfileuri=data.getData();
-            Glide.with(DataEntryProfile.this).load(getfileuri).into(showimg);
+            Glide.with(VideoEditorProfile.this).load(getfileuri).into(showimg);
             setimg.setVisibility(View.GONE);
             back.setVisibility(View.GONE);
         }
