@@ -33,7 +33,6 @@ public class Crmadmin extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
-    Dialog add;
     String filepath;
     ImageView profilepic;
     View myview;
@@ -88,17 +87,5 @@ public class Crmadmin extends AppCompatActivity {
                 return true;
             }
         });
-
-
-
-
-    }
-
-    private void openform() {
-        add=new Dialog(this);
-        add.setContentView(R.layout.crmadmindetailsformfill);
-        add.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        add.getWindow().setLayout(android.widget.Toolbar.LayoutParams.MATCH_PARENT, android.widget.Toolbar.LayoutParams.MATCH_PARENT);
-        add.getWindow().getAttributes().gravity= Gravity.TOP;
     }
 }

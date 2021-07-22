@@ -3,79 +3,118 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/login_bk">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/ivHapiniLogo"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="108dp"
-        android:src="@mipmap/ic_logo_foreground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etMasterPasscode"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-
-        android:background="@drawable/bg_edit_text"
-        android:hint="Passcode"
-        android:maxLength="6"
-        android:inputType="number"
-
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:singleLine="true"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivHapiniLogo" />
-
-    <EditText
-        android:id="@+id/etMasterPassword"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:hint="Password"
-        android:textSize="16sp"
-        android:background="@drawable/bg_edit_text"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etMasterPasscode"/>
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnMasterLogin"
-        android:layout_width="300dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_button"
-        android:text="Log in"
-        android:fontFamily="serif"
-        android:textColor="#FFFFFF"
+        app:cardBackgroundColor="#CFCECE"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:contentPadding="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etMasterPassword" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilepicofanyadmin3"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/userpic"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_overlay="true"
+                app:civ_border_width="3dp"
+                app:civ_circle_background_color="#000000" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etMasterPasscode"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+
+                android:background="@drawable/bg_edit_text"
+                android:gravity="center"
+                android:hint="Passcode"
+                android:inputType="number"
+
+                android:maxLength="6"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:singleLine="true"
+                android:textColorHint="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/etMasterPassword"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_edit_text"
+                android:gravity="center"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColorHint="#000000"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnMasterLogin"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_button"
+                android:fontFamily="serif"
+                android:text="Log in"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="serif"
+                android:text="Forgot Password?"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tvForgotPassword"
+        android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="serif"
-        android:text="Forgot Password?"
+        android:fontFamily="monospace"
+        android:text="MASTER ADMIN"
         android:textColor="#000000"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnMasterLogin" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

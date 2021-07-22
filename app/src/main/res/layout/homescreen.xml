@@ -19,10 +19,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:fontFamily="monospace"
         android:text="Welcome"
         android:textColor="#000000"
-        android:textSize="18dp"
+        android:textSize="20dp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,9 +31,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/background1"
         android:orientation="horizontal"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +49,11 @@
             android:elevation="20dp"
             android:text="Admin"
             android:textColor="#FFFFFF" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="10dp"
+            android:layout_height="20dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUser"

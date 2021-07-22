@@ -67,7 +67,7 @@
                 android:background="@drawable/bg_edit_text"
                 android:elevation="1000dp"
                 android:gravity="center"
-                android:hint="  Passcode"
+                android:hint="Passcode"
                 android:inputType="number"
                 android:maxLength="6"
                 android:textColorHint="#000000"
@@ -85,7 +85,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_edit_text"
                 android:gravity="center"
-                android:hint="  Password"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:textColorHint="#000000"
                 android:textSize="16sp" />

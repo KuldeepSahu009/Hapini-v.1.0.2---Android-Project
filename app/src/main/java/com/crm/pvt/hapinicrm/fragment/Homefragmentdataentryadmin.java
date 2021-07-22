@@ -48,7 +48,7 @@ public class Homefragmentdataentryadmin extends Fragment {
         dataentryadminviewmodelList.add(new dataentryviewmodel("Aditya singh","mail@gmail.com","12345","Delhi"));
         dataentryadminviewmodelList.add(new dataentryviewmodel("Challa Rashmita","mail@gmail.com","12345","xyz"));
         dataentryadminviewmodelList.add(new dataentryviewmodel("Param","mail@gmail.com","12345","xyz"));
-        dataentryadminviewmodelList.add(new dataentryviewmodel("Satyam","mail@gmail.com","12345","xyz"));
+        dataentryadminviewmodelList.add(new dataentryviewmodel("DSatyam","mail@gmail.com","12345","xyz"));
 
         dataentryadminAdapter.notifyDataSetChanged();
 
