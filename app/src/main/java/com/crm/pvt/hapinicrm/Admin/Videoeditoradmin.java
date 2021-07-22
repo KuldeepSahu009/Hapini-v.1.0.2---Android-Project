@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.fragment.AdduserVideoeditoradminfragment;
 import com.crm.pvt.hapinicrm.fragment.HomeVideoEditorFragment;
-import com.crm.pvt.hapinicrm.fragment.Homefragmentdataentryadmin;
 import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +53,7 @@ public class Videoeditoradmin extends AppCompatActivity {
             Glide.with(Videoeditoradmin.this).load(filepath).into(profilepic);
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutvideoeditoradmin,new Homefragmentdataentryadmin()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutvideoeditoradmin,new HomeVideoEditorFragment()).commit();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
