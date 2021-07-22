@@ -21,43 +21,51 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
 
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilepicofanyadmin"
-                android:layout_width="50dp"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:src="@drawable/profiletestimage"
-                app:civ_border_color="#000000"
-                app:civ_border_overlay="true"
-                app:civ_border_width="3dp"
-                app:civ_circle_background_color="#000000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/anyadminnamefromstorage"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="cursive"
-                android:gravity="center"
-                android:paddingStart="5dp"
-                android:text="TextView"
-                android:textColor="#000000"
-                android:textSize="24dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/anyadminnamefromstorage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_weight="2"
+                    android:fontFamily="@font/abril_fatface"
+                    android:gravity="center|start"
+                    android:paddingStart="5dp"
+                    android:text="TextView"
+                    android:textColor="#000000"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profilepicofanyadmin"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/profiletestimage"
+                    app:civ_border_color="#304FFE"
+                    app:civ_border_overlay="true"
+                    app:civ_border_width="3dp"
+                    app:civ_circle_background_color="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/anyadminemailfromstorage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
                 android:paddingStart="5dp"
+                android:textColor="#000000"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -65,8 +73,8 @@
                 android:id="@+id/anyadminnumberfromstorage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
                 android:paddingStart="5dp"
+                android:textColor="#000000"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
