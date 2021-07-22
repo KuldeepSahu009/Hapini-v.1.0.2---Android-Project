@@ -33,7 +33,7 @@ public class VideoEditorProfile extends AppCompatActivity {
         goback=(ImageView)findViewById(R.id.videoeditorprofilegoback);
         save=(ImageView)findViewById(R.id.savevideoeditorprofile);
         setimg=(ImageView)findViewById(R.id.setvideoeditorprofileimg);
-        showimg=(ImageView)findViewById(R.id.setvideoeditorprofileimg);
+        showimg=(ImageView)findViewById(R.id.videoeditoradminprofileimg);
         back=(ImageView)findViewById(R.id.videoeditoradminback1) ;
         goback.setOnClickListener(new View.OnClickListener() {
             @Override

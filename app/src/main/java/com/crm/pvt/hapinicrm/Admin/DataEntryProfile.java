@@ -33,7 +33,7 @@ public class DataEntryProfile extends AppCompatActivity {
         goback=(ImageView)findViewById(R.id.dataentryrofilegoback);
         save=(ImageView)findViewById(R.id.savedataentryprofile);
         setimg=(ImageView)findViewById(R.id.setdataentryprofileimg);
-        showimg=(ImageView)findViewById(R.id.setdataentryprofileimg);
+        showimg=(ImageView)findViewById(R.id.dataentryadminprofileimg);
         back=(ImageView)findViewById(R.id.dataentryadminback1) ;
         goback.setOnClickListener(new View.OnClickListener() {
             @Override

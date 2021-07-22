@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.fragment.AdduserVideoeditoradminfragment;
 import com.crm.pvt.hapinicrm.fragment.HomeVideoEditorFragment;
@@ -24,7 +28,9 @@ public class Videoeditoradmin extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
-
+    View myview;
+    ImageView profilepic;
+    String filepath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +44,15 @@ public class Videoeditoradmin extends AppCompatActivity {
         toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        filepath=getIntent().getStringExtra("filepath");
+
+        myview=(navigationView).getHeaderView(0);
+        profilepic=(ImageView)myview.findViewById(R.id.profilepicofvideoeditoradmin);
+
+        if (filepath!=null){
+            Glide.with(Videoeditoradmin.this).load(filepath).into(profilepic);
+        }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutvideoeditoradmin,new Homefragmentdataentryadmin()).commit();
 

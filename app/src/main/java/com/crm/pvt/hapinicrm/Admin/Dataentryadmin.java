@@ -10,7 +10,11 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.fragment.AdduserDataentryadminfragment;
 import com.crm.pvt.hapinicrm.fragment.Homefragmentdataentryadmin;
@@ -24,6 +28,9 @@ public class Dataentryadmin extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
+    String filepath;
+    View myview;
+    ImageView profilepic;
 
 
     @Override
@@ -39,7 +46,18 @@ public class Dataentryadmin extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        myview=(navigationView).getHeaderView(0);
+        profilepic=(ImageView)myview.findViewById(R.id.profilepicofdataadmin);
+
+
+
+        filepath=getIntent().getStringExtra("filepath");
+        if (filepath!=null){
+            Glide.with(Dataentryadmin.this).load(filepath).into(profilepic);
+        }
+
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayoutdataentryadmin,new Homefragmentdataentryadmin()).commit();
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
