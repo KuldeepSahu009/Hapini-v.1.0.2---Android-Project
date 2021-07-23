@@ -62,6 +62,8 @@ public class MasterDashboardFragment extends Fragment {
 
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
+
+                //hello
             }
         });
 
