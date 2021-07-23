@@ -65,10 +65,6 @@ public class MasterDashboardFragment extends Fragment {
             }
         });
 
-
-
-
-
         return view;
 
 
