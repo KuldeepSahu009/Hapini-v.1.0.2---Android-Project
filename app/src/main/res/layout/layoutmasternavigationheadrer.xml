@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profileimagemaster"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:src="@drawable/account"
+        android:padding="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/layout1"
+        android:layout_below="@+id/profileimagemaster">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Satyam Kumar"
+        android:id="@+id/profilenamemaster"
+        android:textColor="@color/black"
+        android:fontFamily="serif"
+        android:textSize="20dp"
+        android:layout_marginLeft="16dp"
+        android:padding="2dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profileemailmaster"
+            android:textSize="15dp"
+            android:text="123@gmail.com"
+            android:textColor="@color/black"
+            android:layout_marginLeft="16dp"
+            android:padding="2dp"
+            android:layout_marginBottom="12dp"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@color/black"
+        android:layout_below="@+id/layout1"/>
+
+</RelativeLayout>
