@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import com.crm.pvt.hapinicrm.R;
 import com.google.android.material.navigation.NavigationView;
 
-import org.jetbrains.annotations.NotNull;
+
 
 public class MasterDashboardFragment extends Fragment {
     NavigationView navigationView;
@@ -42,7 +42,7 @@ public class MasterDashboardFragment extends Fragment {
         getFragmentManager().beginTransaction().replace(R.id.framelayout,new Masterhomefragment()).commit();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull  MenuItem item) {
 
                 switch (item.getItemId()){
                     case R.id.homemaster:
