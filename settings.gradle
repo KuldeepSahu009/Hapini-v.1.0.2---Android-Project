@@ -1,0 +1,2 @@
+rootProject.name = "Hapini - All in One"
+include ':app'

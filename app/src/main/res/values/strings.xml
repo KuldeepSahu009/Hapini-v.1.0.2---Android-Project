@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Hapini - All in One</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in">Log in</string>
+    <string name="password">Password</string>
+    <string name="passcode">Passcode</string>
+    <string name="user">User</string>
+    <string name="admin">Admin</string>
+    <string name="welcome">Welcome</string>
+
+    <string-array name="select_admin_type">
+        <item>Select Admin Type</item>
+        <item>CRM Admin</item>
+        <item>Data Entry Admin</item>
+        <item>Video Editor Admin</item>
+        <item>Master Admin</item>
+    </string-array>
+</resources>
