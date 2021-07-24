@@ -6,17 +6,182 @@
     android:layout_height="match_parent"
     tools:context=".ui.TrackUserFragment">
 
-    <!--Todo Shows list of all user with filtering functionality at top-->
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Satyam make threecardview and connect them with a activity which contains recycler view"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <View
+        android:id="@+id/trackuerview"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:background="@drawable/custom_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/trackuserBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/trackusertext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="serif"
+        android:gravity="center_horizontal"
+        android:letterSpacing="0.025"
+        android:text="Track User"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/trackuserBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/trackuserlogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintCircleRadius="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview1"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:elevation="24dp"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trackuerview"
+        app:layout_constraintVertical_bias="0.206">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                android:id="@+id/crmback"
+                android:src="@drawable/ic_baseline_supervisor_account_24"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/crm"
+                android:text="CRM User"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_below="@+id/crmback"
+                android:fontFamily="serif"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview2"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:elevation="24dp"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.404"
+        app:layout_constraintStart_toEndOf="@+id/cardview1"
+        app:layout_constraintTop_toBottomOf="@+id/trackuerview"
+        app:layout_constraintVertical_bias="0.206">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                android:id="@+id/dataentryback"
+                android:src="@drawable/ic_baseline_computer_24"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataentry"
+                android:text="Data Entry User"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_below="@+id/dataentryback"
+                android:fontFamily="serif"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview3"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:elevation="24dp"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview1"
+        app:layout_constraintVertical_bias="0.102">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="90dp"
+                android:id="@+id/videoback"
+                android:src="@drawable/ic_baseline_video_settings_24"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Videoeditor"
+                android:text="Video Editor User"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_below="@+id/videoback"
+                android:fontFamily="serif"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
