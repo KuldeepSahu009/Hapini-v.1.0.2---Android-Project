@@ -9,6 +9,7 @@
     <string name="user">User</string>
     <string name="admin">Admin</string>
     <string name="welcome">Welcome</string>
+    <string name="master_dashboard">MASTER DASHBOARD</string>
 
     <string-array name="select_admin_type">
         <item>Select Admin Type</item>
