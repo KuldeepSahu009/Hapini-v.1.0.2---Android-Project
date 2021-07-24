@@ -108,7 +108,8 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="14dp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            tools:ignore="RtlCompat" />
 
 
     </androidx.cardview.widget.CardView>
