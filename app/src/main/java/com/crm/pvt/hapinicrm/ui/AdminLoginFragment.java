@@ -23,7 +23,7 @@ public class AdminLoginFragment extends Fragment {
         binding = FragmentAdminLoginBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
-
+//hello
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
