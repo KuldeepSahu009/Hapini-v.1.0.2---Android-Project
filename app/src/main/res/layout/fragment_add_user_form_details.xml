@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddUserFormDetailsFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/viewAddUserFormDetails"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:background="@drawable/custom_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/llAddUserFormDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp">
+        <ImageButton
+            android:id="@+id/ivBackFromAddUserFormFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvAddUserFormDashboardTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="3"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.025"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="Name From Prev Frag"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/svAddUserForm"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewAddUserFormDetails">
+
+        <LinearLayout
+            android:id="@+id/llAddUserForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="8">
+
+            <EditText
+                android:layout_marginTop="26dp"
+                android:id="@+id/etNameOfUser"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:padding="5dp"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:layout_marginTop="6dp"
+                android:id="@+id/etEmailOfUser"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="5dp"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:layout_marginTop="6dp"
+                android:id="@+id/etMobileNumberOfUser"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:hint="Mobile Number"
+                android:inputType="number"
+                android:maxLength="10"
+                android:padding="5dp"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:layout_marginTop="6dp"
+                android:id="@+id/etWPNumberOfUser"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:hint="Whatsapp Number"
+                android:inputType="number"
+                android:maxLength="10"
+                android:padding="5dp"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:layout_marginTop="6dp"
+                android:id="@+id/etPasscodeOfUser"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:hint="Passcode"
+                android:inputType="number"
+                android:maxLength="6"
+                android:padding="5dp"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:layout_marginTop="6dp"
+                android:id="@+id/etPasswordOfUser"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="5dp"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:layout_marginTop="6dp"
+                android:id="@+id/etAddressOfUser"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:hint="Address"
+                android:inputType="textPostalAddress"
+                android:padding="5dp"
+                android:textColorHint="@color/white" />
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:id="@+id/llAddUserFormTermsAndCondiotion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:weightSum="10">
+                <CheckBox
+                    android:layout_marginStart="20dp"
+                    android:id="@+id/cvAddUserFormTermsAndCondiotion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/tvAddUserFormTermsAndCondiotion"
+                    android:layout_width="0dp"
+                    android:paddingStart="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:text="@string/textviewtermsandconditon"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="35dp"
+                android:id="@+id/btnAddUserSubmit"
+                android:layout_width="150dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_button"
+                android:textColorHighlight="@color/yellow"
+                android:text="Submit"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
