@@ -117,11 +117,20 @@
             android:id="@+id/addUserFragment"
             android:name="com.crm.pvt.hapinicrm.ui.AddUserFragment"
             android:label="fragment_add_user"
-            tools:layout="@layout/fragment_add_user" />
+            tools:layout="@layout/fragment_add_user" >
+            <action
+                android:id="@+id/action_addUserFragment_to_addUserFormDetailsFragment"
+                app:destination="@id/addUserFormDetailsFragment" />
+        </fragment>
         <fragment
             android:id="@+id/trackUserFragment"
             android:name="com.crm.pvt.hapinicrm.ui.TrackUserFragment"
             android:label="fragment_track_user"
             tools:layout="@layout/fragment_track_user" />
+        <fragment
+            android:id="@+id/addUserFormDetailsFragment"
+            android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
+            android:label="fragment_add_user_form_details"
+            tools:layout="@layout/fragment_add_user_form_details" />
     </navigation>
 </navigation>
