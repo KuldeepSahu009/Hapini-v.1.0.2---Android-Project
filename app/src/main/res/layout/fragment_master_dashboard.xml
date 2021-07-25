@@ -31,8 +31,9 @@
         android:id="@+id/tvMasterDashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="monospace"
         android:gravity="center_horizontal"
         android:letterSpacing="0.025"
         android:text="@string/master_dashboard"
@@ -77,7 +78,9 @@
             android:elevation="24dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:contentPadding="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -124,7 +127,9 @@
             android:elevation="12dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:contentPadding="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -184,7 +189,9 @@
             android:elevation="12dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:contentPadding="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -231,7 +238,9 @@
             android:elevation="12dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:contentPadding="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -290,7 +299,9 @@
             android:elevation="12dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:contentPadding="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -337,7 +348,9 @@
             android:elevation="12dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:contentPadding="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
