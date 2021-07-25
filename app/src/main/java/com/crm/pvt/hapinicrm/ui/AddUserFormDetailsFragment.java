@@ -5,26 +5,25 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavAction;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.databinding.FragmentAddUserFormDetailsBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 public class AddUserFormDetailsFragment extends Fragment {
 
-
+    private FragmentAddUserFormDetailsBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_add_user_form_details, container, false);
+        binding = FragmentAddUserFormDetailsBinding.inflate(inflater,container,false);
+        return binding.getRoot();
     }
 
     @Override
@@ -46,25 +45,17 @@ public class AddUserFormDetailsFragment extends Fragment {
                 title = " ADD VIDEO EDITOR USER";
             }
         }
-        TextView tvAddUserFormTitle = view.findViewById(R.id.tvAddUserFormDashboardTitle);
-        tvAddUserFormTitle.setText(title);
+        binding.tvAddUserFormDashboardTitle.setText(title);
 
-        view.findViewById(R.id.btnAddUserSubmit).setOnClickListener(v->
-        {
-            CheckBox cvAddUserFormTermsAndCondiotion = view.findViewById(R.id.cvAddUserFormTermsAndCondiotion);
-            if(cvAddUserFormTermsAndCondiotion.isChecked())
-            {
+        binding.btnAddUserSubmit.setOnClickListener( v-> {
+            if(binding.cvAddUserFormTermsAndCondition.isChecked()) {
                 // Add User to Model
-            }
-            else
-            {
-                Toast.makeText(getContext(),"Please Accept all Terms and Conditions!.",Toast.LENGTH_LONG).show();
+            } else {
+                Snackbar.make(v,"Please Accept all Terms and Conditions!.",Snackbar.LENGTH_LONG).show();
             }
         });
 
         view.findViewById(R.id.ivBackFromAddUserFormFragment).setOnClickListener(v ->
-        {
-            Navigation.findNavController(v).navigateUp();
-        });
+                Navigation.findNavController(v).navigateUp());
     }
 }

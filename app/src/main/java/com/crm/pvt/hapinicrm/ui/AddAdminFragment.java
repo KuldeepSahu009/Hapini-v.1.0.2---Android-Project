@@ -13,7 +13,6 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAddAdminBinding;
@@ -29,24 +28,19 @@ Dialog add;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-         binding.addcrmadmincardview.setOnClickListener(new View.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(View v) {
-                                                                add.show();
-                                                            }
-                                                        }
-                 );
-         crmadmin();
+    //    crmadmin();
+        binding.addcrmadmincardview.setOnClickListener(v -> {}//add.show()
+                );
     }
 
-    private void crmadmin() {
-        add=new Dialog(getContext());
-        add.setContentView(R.layout.crmadminform);
-        add.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        add.getWindow().setLayout(Toolbar.LayoutParams.MATCH_PARENT,Toolbar.LayoutParams.MATCH_PARENT);
-        add.getWindow().getAttributes().gravity= Gravity.TOP;
-    }
+//    private void crmadmin() {
+//        add=new Dialog(getContext());
+//        add.setContentView(R.layout.crmadminform);
+//        add.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+//        add.getWindow().setLayout(Toolbar.LayoutParams.MATCH_PARENT,Toolbar.LayoutParams.MATCH_PARENT);
+//        add.getWindow().getAttributes().gravity= Gravity.TOP;
+//    }
 
 }
