@@ -137,11 +137,28 @@
             android:id="@+id/trackUserFragment"
             android:name="com.crm.pvt.hapinicrm.ui.TrackUserFragment"
             android:label="fragment_track_user"
-            tools:layout="@layout/fragment_track_user" />
+            tools:layout="@layout/fragment_track_user" >
+            <action
+                android:id="@+id/gotospecifictrackuser"
+                app:destination="@+id/trackuserscardviewfragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+
+        </fragment>
         <fragment
             android:id="@+id/addUserFormDetailsFragment"
             android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
             android:label="fragment_add_user_form_details"
             tools:layout="@layout/fragment_add_user_form_details" />
+        <fragment
+            android:id="@+id/trackuserscardviewfragment"
+            android:name="com.crm.pvt.hapinicrm.ui.Trackusers"
+            android:label="trackusercardview"
+            tools:layout="@layout/fragment_trackusers"
+            />
+
+
     </navigation>
 </navigation>
