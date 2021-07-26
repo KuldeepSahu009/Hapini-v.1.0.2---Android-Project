@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F6F2F2"
     tools:context=".ui.AdminLoginFragment">
 
     <View
+        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@color/yellow"
+        android:background="@drawable/loginimage1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,11 +20,11 @@
         android:id="@+id/spSelectAdmin"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:spinnerMode="dialog"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputPasscode"
@@ -82,7 +84,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="serif"
         android:text="@string/forgot_password"
-        android:textColor="@color/teal_700"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

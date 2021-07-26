@@ -78,7 +78,9 @@
             android:elevation="24dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -125,7 +127,9 @@
             android:elevation="24dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -168,11 +172,12 @@
         android:id="@+id/llAddUserVU"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp"
         android:weightSum="1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llAddUserCUDU">
 
@@ -187,7 +192,9 @@
             android:elevation="24dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

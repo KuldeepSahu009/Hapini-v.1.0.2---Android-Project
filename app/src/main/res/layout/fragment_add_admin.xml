@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.AddAdminFragment">
 
+    <View
+        android:id="@+id/viewAddadmin"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/custom_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/addcrmadmincardview"
         android:layout_width="250dp"
@@ -15,8 +24,9 @@
         app:contentPadding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/adddataentryadmincardview"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/viewAddadmin">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,9 +37,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/crm"
-
-                app:srcCompat="@drawable/crm" />
+                android:src="@drawable/ic_add_crm" />
 
             <TextView
                 android:id="@+id/textView"
@@ -66,9 +74,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/dataentry"
-
-                app:srcCompat="@drawable/dataentry" />
+                android:src="@drawable/ic_add_dataentry"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -105,9 +111,7 @@
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/videographer"
-
-                app:srcCompat="@drawable/videographer" />
+                android:src="@drawable/ic_add_videoeditor" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -121,4 +125,28 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="monospace"
+        android:text="Add Admin"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/fromaddadminback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewAddadmin" />
 </androidx.constraintlayout.widget.ConstraintLayout>
