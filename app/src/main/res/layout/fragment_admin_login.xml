@@ -9,7 +9,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@drawable/custom_rectangle"
+        android:background="@drawable/admin_login_bk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

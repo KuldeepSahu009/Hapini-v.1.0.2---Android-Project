@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddUserFormDetailsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.AddAdminFormDetailsFragment">
 
     <View
-        android:id="@+id/viewAddUserFormDetails"
+        android:id="@+id/viewAddAdminFormDetails"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/custom_rectangle"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/llAddUserFormDashboard"
+        android:id="@+id/llAddAdminFormDashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/ivBackFromAddUserFormFragment"
+            android:id="@+id/ivBackFromAddAdminFormFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -38,7 +38,7 @@
             android:src="@drawable/ic_back" />
 
         <TextView
-            android:id="@+id/tvAddUserFormDashboardTitle"
+            android:id="@+id/tvAddAdminFormDashboardTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -56,7 +56,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/svAddUserForm"
+        android:id="@+id/svAddAdminForm"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -66,10 +66,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewAddUserFormDetails">
+        app:layout_constraintTop_toBottomOf="@+id/viewAddAdminFormDetails">
 
         <LinearLayout
-            android:id="@+id/llAddUserForm"
+            android:id="@+id/llAddAdminForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -214,7 +214,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
-                android:id="@+id/llAddUserFormTermsAndCondition"
+                android:id="@+id/llAddAdminFormTermsAndCondition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -223,14 +223,14 @@
                 android:weightSum="10">
 
                 <CheckBox
-                    android:id="@+id/cvAddUserFormTermsAndCondition"
+                    android:id="@+id/cvAddAdminFormTermsAndCondition"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/tvAddUserFormTermsAndCondition"
+                    android:id="@+id/tvAddAdminFormTermsAndCondition"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"

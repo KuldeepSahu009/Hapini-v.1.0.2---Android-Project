@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 public class AdminLoginFragment extends Fragment {
 
@@ -30,9 +31,26 @@ public class AdminLoginFragment extends Fragment {
         initializeSpinner();
 
         binding.btnLogin.setOnClickListener(v -> {
-            int pos = binding.spSelectAdmin.getSelectedItemPosition();
-            navigateTo(v,pos);
+            boolean isValid = validateCredentials();
+            if(isValid) {
+                int pos = binding.spSelectAdmin.getSelectedItemPosition();
+                navigateTo(v, pos);
+            } else {
+                Snackbar.make(v,"Authentication Failed",Snackbar.LENGTH_SHORT).show();
+            }
         });
+    }
+
+    private boolean validateCredentials() {
+        if(binding.etPasscode.getText().toString().length() != 6 ) {
+            binding.etPasscode.setError("Passcode should be 6 characters long");
+            return false;
+        } else if(binding.etPassword.getText().toString().isEmpty()) {
+            binding.etPassword.setError("Enter Password");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private void initializeSpinner() {
