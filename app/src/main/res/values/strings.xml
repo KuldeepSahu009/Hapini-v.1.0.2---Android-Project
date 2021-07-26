@@ -11,9 +11,9 @@
     <string name="welcome">Welcome</string>
     <string name="master_dashboard">MASTER DASHBOARD</string>
     <string name="adduser_dashboard">Add Users</string>
-    <string name="addcrmuser">ADD CRM USER</string>
-    <string name="adddataentryuser">ADD DATA ENTRY USER</string>
-    <string name="addvideoeditoruser">ADD VIDEO EDITOR USER</string>
+    <string name="add_crm_user">ADD CRM USER</string>
+    <string name="add_data_entry_user">ADD DATA ENTRY USER</string>
+    <string name="add_video_editor_user">ADD VIDEO EDITOR USER</string>
     <string name="textviewtermsandconditon">Accept all terms and conditions</string>
 
     <string-array name="select_admin_type">
@@ -25,4 +25,8 @@
     </string-array>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="add_crm_admin">ADD CRM ADMIN</string>
+    <string name="add_data_entry_admin">ADD DATA ENTRY ADMIN</string>
+    <string name="add_video_editor_admin">ADD VIDEO EDITOR ADMIN</string>
+    <string name="add_admin">ADD ADMIN</string>
 </resources>

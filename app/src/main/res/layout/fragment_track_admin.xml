@@ -1,114 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.TrackAdminFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.TrackAdminFragment">
 
     <androidx.cardview.widget.CardView
-        android:orientation="vertical"
+        android:id="@+id/cvCrmAdmin"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:elevation="16dp"
         android:layout_margin="8dp"
-        android:id="@+id/trackCRMAdminCardView">
+        android:elevation="16dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
-            android:orientation="vertical"
+            android:background="@drawable/bg_card_view"
             android:gravity="center"
-            android:background="@drawable/bg_cardview">
+            android:orientation="vertical">
 
             <ImageView
-                android:src="@drawable/crm"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp"
+                android:src="@drawable/crm" />
 
             <TextView
-                android:gravity="center"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text = "CRM Admin"
-                android:textStyle="bold"
+                android:gravity="center"
+                android:text="CRM Admin"
                 android:textColor="@color/black"
-                style="@style/TextAppearance.AppCompat.Body1"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:orientation="vertical"
+        android:id="@+id/cvVideoEditorAdmin"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:elevation="16dp"
         android:layout_margin="8dp"
-        android:id="@+id/trackVideoEditorAdminCardView">
+        android:elevation="16dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
-            android:orientation="vertical"
+            android:background="@drawable/bg_card_view"
             android:gravity="center"
-            android:background="@drawable/bg_cardview">
+            android:orientation="vertical">
 
             <ImageView
-                android:src="@drawable/videographer"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp"
+                android:src="@drawable/videographer" />
 
             <TextView
-                android:gravity="center"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text = "Video Editor Admin"
-                android:textStyle="bold"
+                android:gravity="center"
+                android:text="Video Editor Admin"
                 android:textColor="@color/black"
-                style="@style/TextAppearance.AppCompat.Body1"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:orientation="vertical"
+        android:id="@+id/cvDataEntryAdmin"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:elevation="16dp"
         android:layout_margin="8dp"
-        android:id="@+id/trackDataEntryAdminCardView">
+        android:elevation="16dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
-            android:orientation="vertical"
+            android:background="@drawable/bg_card_view"
             android:gravity="center"
-            android:background="@drawable/bg_cardview">
+            android:orientation="vertical">
 
             <ImageView
-                android:src="@drawable/dataentry"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp"
+                android:src="@drawable/dataentry" />
 
             <TextView
-                android:gravity="center"
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text = "Data Entry Admin"
-                android:textStyle="bold"
+                android:gravity="center"
+                android:text="Data Entry Admin"
                 android:textColor="@color/black"
-                style="@style/TextAppearance.AppCompat.Body1"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -11,18 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.databinding.FragmentAddUserFormDetailsBinding;
+import com.crm.pvt.hapinicrm.databinding.FragmentAddAdminFormDetailsBinding;
 import com.google.android.material.snackbar.Snackbar;
 
-public class AddUserFormDetailsFragment extends Fragment {
+public class AddAdminFormDetailsFragment extends Fragment {
 
-    private FragmentAddUserFormDetailsBinding binding;
+    private FragmentAddAdminFormDetailsBinding binding;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentAddUserFormDetailsBinding.inflate(inflater, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentAddAdminFormDetailsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -31,31 +29,31 @@ public class AddUserFormDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setFormTitle();
         binding.btnAddUserSubmit.setOnClickListener(v -> {
-            if (binding.cvAddUserFormTermsAndCondition.isChecked()) {
+            if (binding.cvAddAdminFormTermsAndCondition.isChecked()) {
                 // Add User to Model
             } else {
                 Snackbar.make(v, "Please Accept all Terms and Conditions!.", Snackbar.LENGTH_LONG).show();
             }
         });
 
-        view.findViewById(R.id.ivBackFromAddUserFormFragment).setOnClickListener(v ->
+        binding.ivBackFromAddAdminFormFragment.setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp());
     }
 
     private void setFormTitle() {
         String title = "";
-        if (AddUserFragment.addUserType != null) {
-            if (AddUserFragment.addUserType.equals("CRM")) {
+        if (AddAdminFragment.addAdminType != null) {
+            if (AddAdminFragment.addAdminType.equals("CRM")) {
                 //VISIBLE EDITTEXT SPECIALLY RELATED TO CRM IN FUTURE
-                title = " ADD CRM USER";
-            } else if (AddUserFragment.addUserType.equals("DE")) {
+                title = " ADD CRM ADMIN";
+            } else if (AddAdminFragment.addAdminType.equals("DE")) {
                 //VISIBLE EDITTEXT SPECIALLY RELATED TO DATA ENTRY IN FUTURE
-                title = " ADD DATA ENTRY USER";
+                title = " ADD DATA ENTRY ADMIN";
             } else {
                 //VISIBLE EDITTEXT SPECIALLY RELATED TO VIDEO EDITOR IN FUTURE
-                title = " ADD VIDEO EDITOR USER";
+                title = " ADD VIDEO EDITOR ADMIN";
             }
         }
-        binding.tvAddUserFormDashboardTitle.setText(title);
+        binding.tvAddAdminFormDashboardTitle.setText(title);
     }
 }
