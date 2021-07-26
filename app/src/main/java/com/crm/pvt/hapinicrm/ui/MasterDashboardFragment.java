@@ -37,5 +37,9 @@ public class MasterDashboardFragment extends Fragment {
         binding.cvTrackUser.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(MasterDashboardFragmentDirections.actionMasterDashboardFragmentToTrackUserFragment())
         );
+        binding.ivBack.setOnClickListener(v ->
+        {
+            Navigation.findNavController(v).navigateUp();
+        });
     }
 }
