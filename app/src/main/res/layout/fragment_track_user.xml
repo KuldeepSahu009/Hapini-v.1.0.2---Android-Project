@@ -7,172 +7,212 @@
     tools:context=".ui.TrackUserFragment">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/viewTrackUser"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="100dp"
         android:background="@drawable/custom_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/ivBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackground"
-        android:padding="8dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvTrackUser"
+    <LinearLayout
+        android:id="@+id/llTrackUserDashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ivBackFromTrackUserFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvTrackUserDashboardTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="3"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.025"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/track_user"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTrackUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:letterSpacing="0.025"
-        android:text="Track User"
-        android:textColor="@color/white"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/ivBack"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvCrmUser"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_margin="8dp"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.206">
+        app:layout_constraintTop_toBottomOf="@+id/viewTrackUser">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvTrackCRMUser"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:layout_margin="8dp"
+            android:layout_marginEnd="21dp"
+            android:clickable="true"
+            android:elevation="24dp"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
-            <ImageView
-                android:id="@+id/ivCrmUser"
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_baseline_supervisor_account_24" />
-
-            <TextView
-                android:id="@+id/tvCrmUser"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ivCrmUser"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:fontFamily="serif"
-                android:text="CRM User"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </RelativeLayout>
+                android:layout_height="match_parent">
 
-    </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/ivTrackCRMUser"
+                    android:layout_width="79dp"
+                    android:layout_height="79dp"
+                    android:src="@drawable/ic_add_crm"
+                    app:layout_constraintBottom_toTopOf="@+id/tvTrackCRMUser"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvDataEntryUser"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_margin="8dp"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.404"
-        app:layout_constraintStart_toEndOf="@+id/cvCrmUser"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.206">
+                <TextView
+                    android:id="@+id/tvTrackCRMUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/crm_user"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivTrackCRMUser" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/ivDataEntryUser"
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_baseline_computer_24" />
+        </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/tvDataEntryUser"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvTrackDataEntryUser"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:layout_margin="8dp"
+            android:layout_marginEnd="21dp"
+            android:clickable="true"
+            android:elevation="24dp"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ivDataEntryUser"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:fontFamily="serif"
-                android:text="Data Entry User"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </RelativeLayout>
+                android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/ivTrackDataEntryUser"
+                    android:layout_width="79dp"
+                    android:layout_height="79dp"
+                    android:src="@drawable/ic_add_data_entry"
+                    app:layout_constraintBottom_toTopOf="@+id/tvTrackDataEntryUser"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/tvTrackDataEntryUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/data_entry_user"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivTrackDataEntryUser" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvVideoEditorUser"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_margin="8dp"
-        android:clickable="true"
-        android:elevation="24dp"
-        android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvCrmUser"
-        app:layout_constraintVertical_bias="0.102">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/ivVideoEditorUser"
-                android:layout_width="100dp"
-                android:layout_height="90dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_baseline_video_settings_24" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvTrackVideoEditorUser"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:layout_margin="8dp"
+            android:layout_marginEnd="21dp"
+            android:clickable="true"
+            android:elevation="24dp"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
-            <TextView
-                android:id="@+id/tvVideoEditorUser"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ivVideoEditorUser"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:fontFamily="serif"
-                android:text="Video Editor User"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="15dp" />
-        </RelativeLayout>
+                android:layout_height="match_parent">
 
-    </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/ivTrackVideoEditorUser"
+                    android:layout_width="79dp"
+                    android:layout_height="79dp"
+                    android:src="@drawable/ic_add_video_editor"
+                    app:layout_constraintBottom_toTopOf="@+id/tvTrackVideoEditorUser"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTrackVideoEditorUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/video_editor_user"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivTrackVideoEditorUser" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

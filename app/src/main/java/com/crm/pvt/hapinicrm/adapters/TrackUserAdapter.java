@@ -15,11 +15,11 @@ import com.crm.pvt.hapinicrm.viewholder.Trackuserviewholders;
 
 import java.util.List;
 
-public class TrackuserAdapter extends RecyclerView.Adapter<Trackuserviewholders> {
-    private Context context;
-    private List<TrackUserModel> trackUserModelList;
+public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders> {
+    private final Context context;
+    private final List<TrackUserModel> trackUserModelList;
 
-    public TrackuserAdapter(Context context, List<TrackUserModel> trackUserModelList) {
+    public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList) {
         this.context = context;
         this.trackUserModelList = trackUserModelList;
     }
@@ -46,8 +46,6 @@ public class TrackuserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         if(!tempmodel.getImgurl().equals("")){
             Glide.with(context).load(tempmodel.getImgurl()).into(holder.profileimg);
         }
-
-
     }
 
     @Override

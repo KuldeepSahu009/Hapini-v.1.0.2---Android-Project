@@ -175,9 +175,9 @@
             tools:layout="@layout/fragment_add_admin_form_details" />
         <fragment
             android:id="@+id/trackuserscardviewfragment"
-            android:name="com.crm.pvt.hapinicrm.ui.Trackusers"
+            android:name="com.crm.pvt.hapinicrm.ui.TrackUsers"
             android:label="trackusercardview"
-            tools:layout="@layout/fragment_trackusers"
+            tools:layout="@layout/fragment_track_users"
             />
 
 

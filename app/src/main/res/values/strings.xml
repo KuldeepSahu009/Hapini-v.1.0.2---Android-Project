@@ -29,4 +29,8 @@
     <string name="add_data_entry_admin">ADD DATA ENTRY ADMIN</string>
     <string name="add_video_editor_admin">ADD VIDEO EDITOR ADMIN</string>
     <string name="add_admin">ADD ADMIN</string>
+    <string name="track_user">Track User</string>
+    <string name="crm_user">CRM USER</string>
+    <string name="video_editor_user">VIDEO EDITOR USER</string>
+    <string name="data_entry_user">DATA ENTRY USER</string>
 </resources>
