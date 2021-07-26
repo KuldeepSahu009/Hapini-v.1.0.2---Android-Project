@@ -140,6 +140,16 @@
             android:layout_toRightOf="@id/backlocation"
             android:layout_marginBottom="10dp"/>
 
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:id="@+id/delete"
+                android:src="@drawable/ic_baseline_delete_24"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/password"
+                android:background="?attr/selectableItemBackground"
+                />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
     <ImageView
