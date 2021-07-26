@@ -42,8 +42,8 @@ Dialog add;
     }
 
     private void crmadmin() {
-        add=new Dialog(getContext());
-        add.setContentView(R.layout.crmadminform);
+        add = new Dialog(getContext());
+        //add.setContentView(R.layout.crmadminform);
         add.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         add.getWindow().setLayout(Toolbar.LayoutParams.MATCH_PARENT,Toolbar.LayoutParams.MATCH_PARENT);
         add.getWindow().getAttributes().gravity= Gravity.TOP;

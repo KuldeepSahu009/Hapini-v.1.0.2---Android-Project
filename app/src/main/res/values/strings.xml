@@ -25,4 +25,8 @@
     </string-array>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="track_admin">Track Admin</string>
+    <string name="data_entry_admin">Data Entry Admin</string>
+    <string name="video_editing_nadmin">Video Editing\nAdmin</string>
+    <string name="crm_admin">CRM Admin</string>
 </resources>
