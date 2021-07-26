@@ -11,6 +11,7 @@
     <string name="welcome">Welcome</string>
     <string name="master_dashboard">MASTER DASHBOARD</string>
     <string name="adduser_dashboard">Add Users</string>
+    <string name="profile_dashboard">Your Profile</string>
     <string name="add_crm_user">ADD CRM USER</string>
     <string name="add_data_entry_user">ADD DATA ENTRY USER</string>
     <string name="add_video_editor_user">ADD VIDEO EDITOR USER</string>

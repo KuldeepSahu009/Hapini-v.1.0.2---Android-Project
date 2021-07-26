@@ -102,6 +102,9 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
+            <action
+                android:id="@+id/action_masterDashboardFragment_to_profileFragment"
+                app:destination="@id/profileFragment" />
         </fragment>
         <fragment
             android:id="@+id/addAdminFragment"
@@ -165,4 +168,22 @@
             android:label="fragment_add_admin_form_details"
             tools:layout="@layout/fragment_add_admin_form_details" />
     </navigation>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editMasterProfileFragment"
+            app:destination="@id/editMasterProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editMasterProfileFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.EditMasterProfileFragment"
+        android:label="fragment_edit_master_profile"
+        tools:layout="@layout/fragment_edit_master_profile" >
+        <action
+            android:id="@+id/action_editMasterProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>
