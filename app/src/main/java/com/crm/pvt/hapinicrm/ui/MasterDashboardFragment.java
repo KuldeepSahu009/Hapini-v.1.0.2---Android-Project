@@ -38,8 +38,6 @@ public class MasterDashboardFragment extends Fragment {
                 Navigation.findNavController(v).navigate(MasterDashboardFragmentDirections.actionMasterDashboardFragmentToTrackUserFragment())
         );
         binding.ivBack.setOnClickListener(v ->
-        {
-            Navigation.findNavController(v).navigateUp();
-        });
+                Navigation.findNavController(v).navigateUp());
     }
 }

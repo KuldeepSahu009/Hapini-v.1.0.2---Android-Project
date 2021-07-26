@@ -6,16 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentTrackAdminBinding;
 
 public class TrackAdminFragment extends Fragment {
 
     FragmentTrackAdminBinding binding;
-    CardView trackCRMAdminCardView, trackVideoEditorAdminCardView , trackDataEntryAdminCardView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,18 +22,15 @@ public class TrackAdminFragment extends Fragment {
 
     @Override
     public void onViewCreated( @NonNull View view, @Nullable Bundle savedInstanceState) {
-        trackCRMAdminCardView = view.findViewById(R.id.trackCRMAdminCardView);
-        trackDataEntryAdminCardView= view.findViewById(R.id.trackDataEntryAdminCardView);
-        trackVideoEditorAdminCardView = view.findViewById(R.id.trackVideoEditorAdminCardView);
 
-        trackCRMAdminCardView.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(R.id.action_trackAdminFragment_to_adminDataViewFragment));
+        binding.cvCrmAdmin.setOnClickListener(
+                v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
 
-        trackVideoEditorAdminCardView.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(R.id.action_trackAdminFragment_to_adminDataViewFragment));
+        binding.cvVideoEditorAdmin.setOnClickListener(
+                v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
 
-        trackDataEntryAdminCardView.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(R.id.action_trackAdminFragment_to_adminDataViewFragment));
+        binding.cvDataEntryAdmin.setOnClickListener(
+                v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
 
     }
 }
