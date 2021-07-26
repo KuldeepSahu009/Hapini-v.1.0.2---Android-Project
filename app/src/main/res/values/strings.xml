@@ -10,6 +10,11 @@
     <string name="admin">Admin</string>
     <string name="welcome">Welcome</string>
     <string name="master_dashboard">MASTER DASHBOARD</string>
+    <string name="adduser_dashboard">Add Users</string>
+    <string name="addcrmuser">ADD CRM USER</string>
+    <string name="adddataentryuser">ADD DATA ENTRY USER</string>
+    <string name="addvideoeditoruser">ADD VIDEO EDITOR USER</string>
+    <string name="textviewtermsandconditon">Accept all terms and conditions</string>
 
     <string-array name="select_admin_type">
         <item>Select Admin Type</item>
@@ -18,4 +23,6 @@
         <item>Video Editor Admin</item>
         <item>Master Admin</item>
     </string-array>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

@@ -14,6 +14,8 @@ import androidx.navigation.Navigation;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
 
+import java.util.Objects;
+
 public class AdminLoginFragment extends Fragment {
 
     private FragmentAdminLoginBinding binding;
@@ -33,6 +35,8 @@ public class AdminLoginFragment extends Fragment {
             int pos = binding.spSelectAdmin.getSelectedItemPosition();
             navigateTo(v,pos);
         });
+        String passcode= Objects.requireNonNull(binding.etPasscode.getText()).toString();
+        String password= Objects.requireNonNull(binding.etPassword.getText()).toString();
     }
 
     private void initializeSpinner() {
