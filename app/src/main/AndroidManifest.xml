@@ -9,12 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HapiniAllInOne">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".Splashscreen"
+            android:noHistory="true"
+            android:theme="@style/Theme.splash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.MainActivity"
+            android:screenOrientation="portrait">
+
         </activity>
 
         <meta-data
