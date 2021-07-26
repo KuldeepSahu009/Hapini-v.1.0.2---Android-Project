@@ -28,4 +28,5 @@
     <string name="add_crm_admin">ADD CRM ADMIN</string>
     <string name="add_data_entry_admin">ADD DATA ENTRY ADMIN</string>
     <string name="add_video_editor_admin">ADD VIDEO EDITOR ADMIN</string>
+    <string name="add_admin">ADD ADMIN</string>
 </resources>

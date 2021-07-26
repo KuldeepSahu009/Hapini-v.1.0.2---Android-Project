@@ -46,7 +46,7 @@
             android:letterSpacing="0.025"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/adduser_dashboard"
+            android:text="@string/add_admin"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
