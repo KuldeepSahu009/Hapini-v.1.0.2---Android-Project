@@ -15,6 +15,8 @@ import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Objects;
+
 public class AdminLoginFragment extends Fragment {
 
     private FragmentAdminLoginBinding binding;
@@ -39,6 +41,8 @@ public class AdminLoginFragment extends Fragment {
                 Snackbar.make(v,"Authentication Failed",Snackbar.LENGTH_SHORT).show();
             }
         });
+        String passcode= Objects.requireNonNull(binding.etPasscode.getText()).toString();
+        String password= Objects.requireNonNull(binding.etPassword.getText()).toString();
     }
 
     private boolean validateCredentials() {
