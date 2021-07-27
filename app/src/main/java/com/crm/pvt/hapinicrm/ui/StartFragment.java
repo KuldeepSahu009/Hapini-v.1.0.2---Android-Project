@@ -31,5 +31,8 @@ public class StartFragment extends Fragment {
         binding.btnAdmin.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(StartFragmentDirections.actionStartFragmentToAdminLoginFragment())
         );
+        binding.btnUser.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(StartFragmentDirections.actionStartFragmentToUserLoginFragment())
+        );
     }
 }

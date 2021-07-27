@@ -17,6 +17,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_startFragment_to_userLoginFragment"
+            app:destination="@id/userLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminLoginFragment"
@@ -268,4 +271,42 @@
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile" />
     </navigation>
+    <fragment
+        android:id="@+id/userLoginFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.UserLoginFragment"
+        android:label="fragment_user_login"
+        tools:layout="@layout/fragment_user_login" >
+        <action
+            android:id="@+id/action_userLoginFragment_to_dataEntryUserFragment"
+            app:destination="@id/dataEntryUserFragment" />
+        <action
+            android:id="@+id/action_userLoginFragment_to_crmUserFragment"
+            app:destination="@id/crmUserFragment" />
+        <action
+            android:id="@+id/action_userLoginFragment_to_videoEditorUserFragment"
+            app:destination="@id/videoEditorUserFragment" />
+        <action
+            android:id="@+id/action_userLoginFragment_to_forgetpassword_user"
+            app:destination="@id/forgetpassword_user" />
+    </fragment>
+    <fragment
+        android:id="@+id/crmUserFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.CrmUserFragment"
+        android:label="fragment_crm_user"
+        tools:layout="@layout/fragment_crm_user" />
+    <fragment
+        android:id="@+id/dataEntryUserFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.DataEntryUserFragment"
+        android:label="fragment_data_entry_user"
+        tools:layout="@layout/fragment_data_entry_user" />
+    <fragment
+        android:id="@+id/videoEditorUserFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.VideoEditorUserFragment"
+        android:label="fragment_video_editor_user"
+        tools:layout="@layout/fragment_video_editor_user" />
+    <fragment
+        android:id="@+id/forgetpassword_user"
+        android:name="com.crm.pvt.hapinicrm.forgetpassword_user"
+        android:label="fragment_forgetpassword_user"
+        tools:layout="@layout/fragment_forgetpassword_user" />
 </navigation>
