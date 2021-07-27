@@ -51,6 +51,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_adminLoginFragment_to_forgetpassword"
+            app:destination="@id/forgetpassword" />
     </fragment>
     <fragment
         android:id="@+id/crmAdminFragment"
@@ -203,4 +206,9 @@
 
 
     </navigation>
+    <fragment
+        android:id="@+id/forgetpassword"
+        android:name="com.crm.pvt.hapinicrm.forgetpassword"
+        android:label="fragment_forgetpassword"
+        tools:layout="@layout/fragment_forgetpassword" />
 </navigation>
