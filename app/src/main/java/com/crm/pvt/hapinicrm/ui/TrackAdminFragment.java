@@ -23,13 +23,13 @@ public class TrackAdminFragment extends Fragment {
     @Override
     public void onViewCreated( @NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        binding.cvCrmAdmin.setOnClickListener(
+        binding.trackCRMAdminCardView.setOnClickListener(
                 v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
 
-        binding.cvVideoEditorAdmin.setOnClickListener(
+        binding.trackVideoEditorAdminCardView.setOnClickListener(
                 v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
 
-        binding.cvDataEntryAdmin.setOnClickListener(
+        binding.trackDataEntryAdminCardView.setOnClickListener(
                 v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
 
     }

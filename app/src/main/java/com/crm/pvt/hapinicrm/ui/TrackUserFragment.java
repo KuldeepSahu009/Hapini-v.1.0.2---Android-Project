@@ -31,18 +31,18 @@ public class TrackUserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.cvTrackCRMUser.setOnClickListener(v -> {
+        binding.cvCrmUser.setOnClickListener(v -> {
             data.putString("data", "crmUser");
             Navigation.findNavController(v).navigate(R.id.gotospecifictrackuser,data);
 
         });
 
-        binding.cvTrackDataEntryUser.setOnClickListener(v -> {
+        binding.cvDataEntryUser.setOnClickListener(v -> {
             data.putString("data", "dataUser");
             Navigation.findNavController(v).navigate(R.id.gotospecifictrackuser,data);
         });
 
-        binding.cvTrackVideoEditorUser.setOnClickListener(v -> {
+        binding.cvVideoEditorUser.setOnClickListener(v -> {
             data.putString("data", "videoUser");
             Navigation.findNavController(v).navigate(R.id.gotospecifictrackuser,data);
         });
