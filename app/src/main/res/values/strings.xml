@@ -34,4 +34,8 @@
     <string name="crm_user">CRM USER</string>
     <string name="video_editor_user">VIDEO EDITOR USER</string>
     <string name="data_entry_user">DATA ENTRY USER</string>
+    <string name="track_admin">Track Admin</string>
+    <string name="crm_admin">CRM ADMIN</string>
+    <string name="data_entry_admin">DATA ENTRY ADMIN</string>
+    <string name="video_editor_admin">VIDEO EDITOR ADMIN</string>
 </resources>
