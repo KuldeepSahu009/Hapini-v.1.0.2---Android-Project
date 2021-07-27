@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/viewTrackAdmin">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/trackCRMAdminCardView"
+            android:id="@+id/cvCrmAdmin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
@@ -88,13 +88,11 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/ivAddCRMUser"
                     android:layout_width="79dp"
                     android:layout_height="79dp"
                     android:src="@drawable/ic_baseline_admin_track" />
 
                 <TextView
-                    android:id="@+id/tvAddCRMUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -109,7 +107,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/trackDataEntryAdminCardView"
+            android:id="@+id/cvDataEntryAdmin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
@@ -159,7 +157,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/trackVideoEditorAdminCardView"
+            android:id="@+id/cvVideoEditorAdmin"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="2dp"
