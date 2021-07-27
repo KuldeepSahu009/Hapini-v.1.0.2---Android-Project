@@ -1,6 +1,5 @@
 package com.crm.pvt.hapinicrm.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +13,7 @@ import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
-import com.crm.pvt.hapinicrm.forgetpassword;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Objects;
 
 public class AdminLoginFragment extends Fragment {
 
@@ -28,7 +24,7 @@ public class AdminLoginFragment extends Fragment {
         binding = FragmentAdminLoginBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
-//hello
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -43,9 +39,7 @@ public class AdminLoginFragment extends Fragment {
                 Snackbar.make(v,"Authentication Failed",Snackbar.LENGTH_SHORT).show();
             }
         });
-        binding.tvForgotPassword.setOnClickListener(v -> {
-       Navigation.findNavController(v).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToForgetpassword());
-        });
+        binding.tvForgotPassword.setOnClickListener(v -> Navigation.findNavController(v).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToForgetpassword()));
     }
 
     private boolean validateCredentials() {
