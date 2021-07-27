@@ -27,7 +27,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
     @NonNull
     @Override
     public Trackuserviewholders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.trackuserinfocardview,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.track_user_info_card_view,parent,false);
         return new Trackuserviewholders(view);
     }
 

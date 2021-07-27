@@ -182,25 +182,25 @@
             android:label="trackusercardview"
             tools:layout="@layout/fragment_track_users"
             />
+        <fragment
+            android:id="@+id/profileFragment"
+            android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
+            android:label="fragment_profile"
+            tools:layout="@layout/fragment_profile">
+            <action
+                android:id="@+id/action_profileFragment_to_editMasterProfileFragment"
+                app:destination="@id/editMasterProfileFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/editMasterProfileFragment"
+            android:name="com.crm.pvt.hapinicrm.ui.EditMasterProfileFragment"
+            android:label="fragment_edit_master_profile"
+            tools:layout="@layout/fragment_edit_master_profile">
+            <action
+                android:id="@+id/action_editMasterProfileFragment_to_profileFragment"
+                app:destination="@id/profileFragment" />
+        </fragment>
 
 
     </navigation>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_editMasterProfileFragment"
-            app:destination="@id/editMasterProfileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editMasterProfileFragment"
-        android:name="com.crm.pvt.hapinicrm.ui.EditMasterProfileFragment"
-        android:label="fragment_edit_master_profile"
-        tools:layout="@layout/fragment_edit_master_profile" >
-        <action
-            android:id="@+id/action_editMasterProfileFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
 </navigation>
