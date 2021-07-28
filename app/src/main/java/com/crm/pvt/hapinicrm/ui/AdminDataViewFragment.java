@@ -55,6 +55,7 @@ public class AdminDataViewFragment extends Fragment {
     }
 
      void getDataEntryAdminData() {
+        admins.add(new Admin("Person 1" , "data@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
@@ -62,28 +63,27 @@ public class AdminDataViewFragment extends Fragment {
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth","https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
         trackAdminAdapter.notifyDataSetChanged();
     }
 
     void getVideoEditorAdminData() {
+        admins.add(new Admin("Person 1" , "video@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth","https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
         trackAdminAdapter.notifyDataSetChanged();
     }
 
     void getCrmAdminData() {
+        admins.add(new Admin("Person 1" , "crm@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth","https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
         trackAdminAdapter.notifyDataSetChanged();
     }
 }
