@@ -31,6 +31,7 @@ public class TrackAdminFragment extends Fragment {
 
         binding.trackDataEntryAdminCardView.setOnClickListener(
                 v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
-
+        binding.ivbackTrackAdmin.setOnClickListener(v->
+                Navigation.findNavController(v).navigateUp());
     }
 }
