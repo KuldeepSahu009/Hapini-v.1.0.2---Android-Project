@@ -46,6 +46,7 @@ public class TrackUserFragment extends Fragment {
             data.putString("data", "videoUser");
             Navigation.findNavController(v).navigate(R.id.gotospecifictrackuser,data);
         });
-
+       binding.ivTrackUser.setOnClickListener(v->
+               Navigation.findNavController(v).navigateUp());
     }
 }

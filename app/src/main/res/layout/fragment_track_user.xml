@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/tvTrackUserBack"
+        android:id="@+id/ivTrackUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -34,11 +34,13 @@
         android:layout_marginTop="20dp"
         android:fontFamily="serif"
         android:gravity="center_horizontal"
+        android:layout_marginStart="2dp"
         android:letterSpacing="0.025"
         android:text="Track User"
         android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/ivTrackUser"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
