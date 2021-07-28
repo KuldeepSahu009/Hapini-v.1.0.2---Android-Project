@@ -89,7 +89,21 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/showaddtask"
+            app:destination="@id/addtaskfragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+
     </fragment>
+    <fragment
+        android:id="@+id/addtaskfragment"
+        android:name="com.crm.pvt.hapinicrm.ui.Addtask"
+        tools:layout="@layout/fragment_addtask"
+        android:label="addtaskfragment"/>
     <fragment
         android:id="@+id/setrpofile"
         android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
