@@ -48,19 +48,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_adminLoginFragment_to_videoEditorAdminFragment"
-            app:destination="@id/videoEditorAdminFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
             android:id="@+id/action_adminLoginFragment_to_forgetpassword"
             app:destination="@id/forgetpassword"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_adminLoginFragment_to_videoEditorNavigation"
+            app:destination="@id/videoEditorNavigation" />
     </fragment>
     <fragment
         android:id="@+id/crmAdminFragment"
@@ -71,8 +67,50 @@
         android:id="@+id/dataEntryAdminFragment"
         android:name="com.crm.pvt.hapinicrm.ui.DataEntryAdminFragment"
         android:label="fragment_data_entry_admin"
-        tools:layout="@layout/fragment_data_entry_admin" />
-    <navigation android:id="@+id/masterNavigation"
+        tools:layout="@layout/fragment_data_entry_admin">
+        <action
+            android:id="@+id/showdataentryadduserfragment"
+            app:destination="@id/adduserdata"
+             app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/showtrackdataentryusers"
+            app:destination="@id/alltrackusersfragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/setprofileofdataentry"
+            app:destination="@id/setrpofile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/setrpofile"
+        android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
+        tools:layout="@layout/fragment_profile"
+        android:label="profile"/>
+    <fragment
+        android:id="@+id/alltrackusersfragment"
+        android:name="com.crm.pvt.hapinicrm.ui.TrackUsers"
+        tools:layout="@layout/fragment_track_users"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        />
+    <fragment
+        android:id="@+id/adduserdata"
+        android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
+        tools:layout="@layout/fragment_add_user_form_details"
+        android:label="fragmentadddata"/>
+    <navigation
+        android:id="@+id/masterNavigation"
         app:startDestination="@id/masterDashboardFragment">
         <fragment
             android:id="@+id/masterDashboardFragment"
@@ -155,7 +193,7 @@
             tools:layout="@layout/fragment_add_user">
             <action
                 android:id="@+id/action_addUserFragment_to_addUserFormDetailsFragment"
-                app:destination="@id/videoEditorNavigation"
+                app:destination="@id/addUserFormDetailsFragment"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -196,25 +234,24 @@
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile">
             <action
-                android:id="@+id/action_profileFragment_to_editMasterProfileFragment"
-                app:destination="@id/editMasterProfileFragment"
+                android:id="@+id/action_profileFragment_to_editProfileFragment"
+                app:destination="@id/editProfileFragment"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
         </fragment>
         <fragment
-            android:id="@+id/editMasterProfileFragment"
-            android:name="com.crm.pvt.hapinicrm.ui.EditMasterProfileFragment"
-            android:label="fragment_edit_master_profile"
-            tools:layout="@layout/fragment_edit_master_profile">
+            android:id="@+id/editProfileFragment"
+            android:name="com.crm.pvt.hapinicrm.ui.EditProfileFragment"
+            android:label="fragment_edit_master_profile">
             <action
-                android:id="@+id/action_editMasterProfileFragment_to_profileFragment"
+                android:id="@+id/action_editProfileFragment_to_profileFragment"
                 app:destination="@id/profileFragment"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"/>
+                app:popExitAnim="@anim/slide_out_right" />
         </fragment>
 
 
@@ -253,6 +290,9 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
+            <action
+                android:id="@+id/action_videoEditorAdminFragment_to_giveTaskVideoEditorFragment"
+                app:destination="@id/giveTaskVideoEditorFragment" />
         </fragment>
         <fragment
             android:id="@+id/addUserFormDetailsFragment"
@@ -269,6 +309,11 @@
             android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile" />
+        <fragment
+            android:id="@+id/giveTaskVideoEditorFragment"
+            android:name="com.crm.pvt.hapinicrm.ui.GiveTaskVideoEditorFragment"
+            android:label="fragment_give_task_video_editor"
+            tools:layout="@layout/fragment_give_task_video_editor" />
     </navigation>
     <fragment
         android:id="@+id/userLoginFragment"
