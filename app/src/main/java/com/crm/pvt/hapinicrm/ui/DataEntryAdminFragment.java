@@ -40,7 +40,7 @@ public class DataEntryAdminFragment extends Fragment {
             public void onClick(View v) {
 
                 AddUserFragment.addUserType="DE";
-                Navigation.findNavController(v).navigate(DataEntryAdminFragmentDirections.showdataentryadduserfragment());
+
             }
         });
         binding.dataentrytrackuser.setOnClickListener(new View.OnClickListener() {
@@ -48,14 +48,14 @@ public class DataEntryAdminFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
                 bundle.putString("data","dataUser");
-                Navigation.findNavController(v).navigate(R.id.showtrackdataentryusers,bundle);
+
 
             }
         });
         binding.dataentrysetprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(DataEntryAdminFragmentDirections.setprofileofdataentry());
+
             }
         });
         //

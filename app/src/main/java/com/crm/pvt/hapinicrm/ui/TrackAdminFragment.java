@@ -27,7 +27,7 @@ public class TrackAdminFragment extends Fragment {
     @Override
     public void onViewCreated( @NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        binding.cvCrmAdmin.setOnClickListener(new View.OnClickListener(){
+        binding.trackCRMAdminCardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 admin.putString("ADMIN" , "crm");
@@ -36,7 +36,7 @@ public class TrackAdminFragment extends Fragment {
         });
 
 
-        binding.cvVideoEditorAdmin.setOnClickListener(new View.OnClickListener(){
+        binding.trackVideoEditorAdminCardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 admin.putString("ADMIN" , "video_editor");
@@ -44,7 +44,7 @@ public class TrackAdminFragment extends Fragment {
             }
         });
 
-        binding.cvDataEntryAdmin.setOnClickListener(new View.OnClickListener(){
+        binding.trackDataEntryAdminCardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 admin.putString("ADMIN" , "data_entry");
