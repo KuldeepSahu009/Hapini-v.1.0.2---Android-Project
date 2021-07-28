@@ -55,35 +55,35 @@ public class AdminDataViewFragment extends Fragment {
     }
 
      void getDataEntryAdminData() {
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 2" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 3" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 4" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 5" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 6" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 7" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 8" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 9" , "xyz@example.com" , "9000000000" , "Somewhere on earth"));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         trackAdminAdapter.notifyDataSetChanged();
     }
 
     void getVideoEditorAdminData() {
-        admins.add(new Admin("Person 1" , "xyz@protonmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 2" , "xyz@protonmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 3" , "xyz@protonmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 4" , "xyz@protonmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 5" , "xyz@protonmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 6" , "xyz@protonmail.com" , "9000000000" , "Somewhere on earth"));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         trackAdminAdapter.notifyDataSetChanged();
     }
 
     void getCrmAdminData() {
-        admins.add(new Admin("Person 1" , "xyz@gmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 2" , "xyz@gmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 3" , "xyz@gmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 4" , "xyz@gmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 5" , "xyz@gmail.com" , "9000000000" , "Somewhere on earth"));
-        admins.add(new Admin("Person 6" , "xyz@gmail.com" , "9000000000" , "Somewhere on earth"));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
+        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
         trackAdminAdapter.notifyDataSetChanged();
     }
 }

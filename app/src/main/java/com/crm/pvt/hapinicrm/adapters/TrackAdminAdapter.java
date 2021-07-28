@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.Admin;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.TrackAdminViewHolder> {
 
     Context context;
-    List<Admin> admins = new ArrayList<>();
+    List<Admin> admins;
 
     public TrackAdminAdapter( Context context , List<Admin> admins){
         this.context = context;
@@ -34,11 +35,15 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
     @Override
     public void onBindViewHolder(@NonNull TrackAdminViewHolder holder, int position) {
+        Admin admin=admins.get(position);
+        holder.name.setText(admin.getName());
+        holder.email.setText(admin.getEmail());
+        holder.mobile.setText(admin.getPhoneno());
+        holder.whatsappno.setText(admin.getWhatsappno());
+        holder.passcode.setText(admin.getPasscode());
+        holder.password.setText(admin.getPassword());
+        holder.location.setText(admin.getLocation());
 
-        holder.name.setText(admins.get(position).getName());
-        holder.email.setText(admins.get(position).getEmail());
-        holder.mobile.setText(admins.get(position).getContactNumber());
-        holder.location.setText(admins.get(position).getLocation());
     }
 
     @Override
@@ -48,14 +53,18 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
     static class TrackAdminViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name, email, mobile, location;
+        TextView name, email, mobile, location,whatsappno,password,passcode;
 
         public TrackAdminViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.nameAdmin);
-            email = itemView.findViewById(R.id.adminEmail);
-            mobile = itemView.findViewById(R.id.adminMobile);
-            location = itemView.findViewById(R.id.adminLocation);
+            name = itemView.findViewById(R.id.trackadminname);
+            email = itemView.findViewById(R.id.trackadminemailid);
+            mobile = itemView.findViewById(R.id.trackadminphoneno);
+            location = itemView.findViewById(R.id.trackadminlocation);
+            whatsappno = itemView.findViewById(R.id.trackadminwhatsappno);
+            password = itemView.findViewById(R.id.trackadminpassword);
+            passcode = itemView.findViewById(R.id.trackadminpasscode);
+
         }
     }
 }
