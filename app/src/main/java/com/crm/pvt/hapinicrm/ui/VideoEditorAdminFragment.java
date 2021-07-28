@@ -64,9 +64,7 @@ public class VideoEditorAdminFragment extends Fragment {
         builder.setMessage("Mark your attendance");
         builder.setTitle("Welcome Back");
         builder.setCancelable(false);
-        builder.setPositiveButton("Mark Present", (dialog, which) -> {
-            Snackbar.make(getView(),"Attendance Marked",Snackbar.LENGTH_SHORT).show();
-        });
+        builder.setPositiveButton("Mark Present", (dialog, which) -> Snackbar.make(getView(),"Attendance Marked",Snackbar.LENGTH_SHORT).show());
 
         AlertDialog attendanceDialog = builder.create();
         attendanceDialog.show();

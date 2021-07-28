@@ -1,7 +1,5 @@
 package com.crm.pvt.hapinicrm.ui;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,8 +16,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 
-import java.security.PublicKey;
-
 
 public class ProfileFragment extends Fragment {
     @Override
@@ -33,27 +29,29 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
+
     public static ImageView ivProfilePic;
-    public static TextView tvProfileName , tvProfileEmail , tvProfilePasscode , tvProfilePassword;
+    public static TextView tvProfileName, tvProfileEmail, tvProfilePasscode, tvProfilePassword;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeAllUIComponents(view);
-        view.findViewById(R.id.ivBackFromProfile).setOnClickListener(v->
+        view.findViewById(R.id.ivBackFromProfile).setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigateUp();
                 }
         );
 
         view.findViewById(R.id.tvProfileEditText).setOnClickListener(
-                v->
-                Navigation.findNavController(v).navigate(ProfileFragmentDirections.actionProfileFragmentToEditMasterProfileFragment())
+                v ->
+                        Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_editProfileFragment)
         );
     }
-    private void initializeAllUIComponents(View view)
-    {
+
+    private void initializeAllUIComponents(View view) {
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
-tvProfilePassword = view.findViewById(R.id.tvProfilePassword);
+        tvProfilePassword = view.findViewById(R.id.tvProfilePassword);
         tvProfileName = view.findViewById(R.id.tvProfileName);
         tvProfileEmail = view.findViewById(R.id.tvProfileEmail);
         tvProfilePasscode = view.findViewById(R.id.tvProfilePasscode);
@@ -62,17 +60,14 @@ tvProfilePassword = view.findViewById(R.id.tvProfilePassword);
     @Override
     public void onResume() {
         super.onResume();
-        if(EditMasterProfileFragment.ivProfilePicURI != null && EditMasterProfileFragment.profileName != null )
-        {
+        if (EditProfileFragment.ivProfilePicURI != null && EditProfileFragment.profileName != null) {
             try {
-                Glide.with(getView()).load(EditMasterProfileFragment.ivProfilePicURI).into(ivProfilePic);
-                tvProfileName.setText(EditMasterProfileFragment.profileName);
-                tvProfileEmail.setText(EditMasterProfileFragment.profileEmail);
-                tvProfilePasscode.setText(EditMasterProfileFragment.profilePasscode);
-                tvProfilePassword.setText(EditMasterProfileFragment.profilePassword);
-            }
-            catch (Exception e)
-            {
+                Glide.with(getView()).load(EditProfileFragment.ivProfilePicURI).into(ivProfilePic);
+                tvProfileName.setText(EditProfileFragment.profileName);
+                tvProfileEmail.setText(EditProfileFragment.profileEmail);
+                tvProfilePasscode.setText(EditProfileFragment.profilePasscode);
+                tvProfilePassword.setText(EditProfileFragment.profilePassword);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -82,19 +77,16 @@ tvProfilePassword = view.findViewById(R.id.tvProfilePassword);
     @Override
     public void onStart() {
         super.onStart();
-        if(EditMasterProfileFragment.ivProfilePicURI != null && EditMasterProfileFragment.profileName != null)
-        {
+        if (EditProfileFragment.ivProfilePicURI != null && EditProfileFragment.profileName != null) {
             try {
-            Glide.with(getView()).load(EditMasterProfileFragment.ivProfilePicURI).into(ivProfilePic);
-            tvProfileName.setText(EditMasterProfileFragment.profileName);
-            tvProfileEmail.setText(EditMasterProfileFragment.profileEmail);
-            tvProfilePasscode.setText(EditMasterProfileFragment.profilePasscode);
-            tvProfilePassword.setText(EditMasterProfileFragment.profilePassword);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+                Glide.with(getView()).load(EditProfileFragment.ivProfilePicURI).into(ivProfilePic);
+                tvProfileName.setText(EditProfileFragment.profileName);
+                tvProfileEmail.setText(EditProfileFragment.profileEmail);
+                tvProfilePasscode.setText(EditProfileFragment.profilePasscode);
+                tvProfilePassword.setText(EditProfileFragment.profilePassword);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
