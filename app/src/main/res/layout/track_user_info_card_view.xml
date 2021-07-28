@@ -14,136 +14,136 @@
         android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/trackusername"
+                android:id="@+id/trackadminname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
-                android:text="Satyam Kumar"
+                android:text="Shruti Sahu"
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/trackuserprofilepic"
+                android:id="@+id/trackadminprofilepic"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginVertical="4dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/account"
-                app:civ_border_color="#FFAB00"
+                app:civ_border_color="#FF0000"
                 app:civ_border_width="3dp"
                 app:civ_circle_background_color="#FFD600" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/backemail"
+            android:id="@+id/adminbackemail"
             android:text="Email ID: "
             android:textSize="15dp"
             android:textColor="@color/black"
-            android:layout_below="@+id/trackusername"
+            android:layout_below="@+id/trackadminname"
             android:layout_marginLeft="16dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/trackuseremailid"
+            android:id="@+id/trackadminemailid"
             android:text="abc@gamil.com"
             android:textColor="@color/black"
             android:textSize="15dp"
             android:textStyle="bold"
-            android:layout_below="@+id/trackusername"
-            android:layout_toRightOf="@+id/backemail"/>
+            android:layout_below="@+id/trackadminname"
+            android:layout_toRightOf="@+id/adminbackemail"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/backphoneno"
+            android:id="@+id/adminbackphoneno"
             android:text="Phone no: "
             android:textColor="@color/black"
-            android:layout_below="@+id/backemail"
+            android:layout_below="@+id/adminbackemail"
             android:layout_marginLeft="16dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/trackuserphoneno"
+            android:id="@+id/trackadminphoneno"
             android:text="+91 7878787878"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_below="@+id/backemail"
-            android:layout_toRightOf="@+id/backphoneno"/>
+            android:layout_below="@+id/adminbackemail"
+            android:layout_toRightOf="@+id/adminbackphoneno"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/backwhatsapp"
+            android:id="@+id/adminbackwhatsapp"
             android:textColor="@color/black"
             android:text="Whatsapp no: "
-            android:layout_below="@+id/backphoneno"
+            android:layout_below="@+id/adminbackphoneno"
             android:layout_marginLeft="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/trackuserwhatsappno"
+            android:id="@+id/trackadminwhatsappno"
             android:text="+91 67676767676"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_below="@id/backphoneno"
-            android:layout_toRightOf="@+id/backwhatsapp"/>
+            android:layout_below="@id/adminbackphoneno"
+            android:layout_toRightOf="@+id/adminbackwhatsapp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="passcode: "
-            android:id="@+id/backpasscode"
+            android:id="@+id/adminbackpasscode"
             android:textColor="@color/black"
-            android:layout_below="@+id/backwhatsapp"
+            android:layout_below="@+id/adminbackwhatsapp"
             android:layout_marginLeft="16dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="787878"
-            android:id="@+id/trackuserpasscode"
+            android:id="@+id/trackadminpasscode"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_below="@+id/backwhatsapp"
-            android:layout_toRightOf="@+id/backpasscode"/>
+            android:layout_below="@+id/adminbackwhatsapp"
+            android:layout_toRightOf="@+id/adminbackpasscode"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/backpassowrd"
+            android:id="@+id/adminbackpassowrd"
             android:text="Password: "
             android:textColor="@color/black"
-            android:layout_below="@+id/backpasscode"
+            android:layout_below="@+id/adminbackpasscode"
             android:layout_marginLeft="16dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/trackuserpassword"
+            android:id="@+id/trackadminpassword"
             android:text="87jhh78"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_below="@+id/backpasscode"
-            android:layout_toRightOf="@+id/backpassowrd"/>
+            android:layout_below="@+id/adminbackpasscode"
+            android:layout_toRightOf="@+id/adminbackpassowrd"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/backlocation"
+            android:id="@+id/adminbacklocation"
             android:text="Location: "
-            android:layout_below="@+id/backpassowrd"
+            android:layout_below="@+id/adminbackpassowrd"
             android:layout_marginLeft="16dp"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/trackuserdeleteprofile"
+            android:layout_toLeftOf="@+id/trackadmindeleteprofile"
             android:text="random,location"
-            android:id="@+id/trackuserlocation"
+            android:id="@+id/trackadminlocation"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_below="@+id/backpassowrd"
-            android:layout_toRightOf="@id/backlocation"
+            android:layout_below="@+id/adminbackpassowrd"
+            android:layout_toRightOf="@id/adminbacklocation"
             android:layout_marginBottom="10dp"/>
 
             <ImageView
@@ -151,12 +151,12 @@
                 android:layout_height="30dp"
                 android:clickable="true"
                 android:layout_marginRight="4dp"
-                android:id="@+id/trackuserdeleteprofile"
+                android:id="@+id/trackadmindeleteprofile"
                 android:layout_marginLeft="14dp"
                 android:background="?attr/selectableItemBackground"
                 android:src="@drawable/ic_baseline_delete_24"
                 android:layout_alignParentEnd="true"
-                android:layout_below="@+id/backpassowrd"/>
+                android:layout_below="@+id/adminbackpassowrd"/>
 
 
 
