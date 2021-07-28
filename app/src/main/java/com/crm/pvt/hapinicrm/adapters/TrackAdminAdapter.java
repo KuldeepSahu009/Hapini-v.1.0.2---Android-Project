@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,10 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.password.setText(admin.getPassword());
         holder.location.setText(admin.getLocation());
 
+        if (!admin.getImgurl().isEmpty()){
+            Glide.with(context).load(admin.getImgurl()).into(holder.profilepic);
+        }
+
     }
 
     @Override
@@ -52,6 +57,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     }
 
     static class TrackAdminViewHolder extends RecyclerView.ViewHolder{
+        ImageView profilepic;
 
         TextView name, email, mobile, location,whatsappno,password,passcode;
 
@@ -64,6 +70,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             whatsappno = itemView.findViewById(R.id.trackadminwhatsappno);
             password = itemView.findViewById(R.id.trackadminpassword);
             passcode = itemView.findViewById(R.id.trackadminpasscode);
+            profilepic=itemView.findViewById(R.id.trackadminprofilepic);
 
         }
     }

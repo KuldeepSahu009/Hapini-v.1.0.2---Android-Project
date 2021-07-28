@@ -17,25 +17,22 @@ import com.crm.pvt.hapinicrm.databinding.FragmentDataEntryAdminBinding;
 public class DataEntryAdminFragment extends Fragment {
 
     private FragmentDataEntryAdminBinding binding;
-    private Boolean login=true;
-
-
+    private Boolean login = true;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentDataEntryAdminBinding.inflate(inflater,container,false);
+        binding = FragmentDataEntryAdminBinding.inflate(inflater, container, false);
 
         if (login()) {
-            login=false;
+            login = false;
             Attendancedialogue attendancedialogue = new Attendancedialogue();
             attendancedialogue.show(getFragmentManager(), "attendance dialogue");
         }
 
         return binding.getRoot();
     }
-
 
 
     @Override
@@ -45,15 +42,16 @@ public class DataEntryAdminFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                AddUserFragment.addUserType="DE";
-
+                AddUserFragment.addUserType = "DE";
+                Navigation.findNavController(v).navigate(DataEntryAdminFragmentDirections.showdataentryadduserfragment());
             }
         });
         binding.dataentrytrackuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putString("data","dataUser");
+                Bundle bundle = new Bundle();
+                bundle.putString("data", "dataUser");
+                Navigation.findNavController(v).navigate(R.id.showtrackdataentryusers, bundle);
 
 
             }
@@ -61,7 +59,7 @@ public class DataEntryAdminFragment extends Fragment {
         binding.dataentrysetprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Navigation.findNavController(v).navigate(DataEntryAdminFragmentDirections.setprofileofdataentry());
             }
         });
         //
@@ -84,7 +82,8 @@ public class DataEntryAdminFragment extends Fragment {
             }
         });
     }
-    private boolean login(){
+
+    private boolean login() {
 
         return login;
     }
