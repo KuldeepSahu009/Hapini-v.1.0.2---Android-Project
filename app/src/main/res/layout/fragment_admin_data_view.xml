@@ -6,9 +6,9 @@
     tools:context=".ui.AdminDataViewFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/trackAdminRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:padding="10dp" />
+        android:layout_margin="10dp" />
 
 </LinearLayout>
