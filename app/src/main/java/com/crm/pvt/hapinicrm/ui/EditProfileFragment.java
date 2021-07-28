@@ -1,9 +1,7 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -17,18 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 
-import java.util.HashSet;
 
-
-public class EditMasterProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_edit_master_profile, container, false);
+        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
     }
 
     private View thisView;
@@ -52,7 +47,7 @@ public class EditMasterProfileFragment extends Fragment {
                     "Select Picture"), 1000);
         });
         view.findViewById(R.id.ivSaveEditMasterDetailFragment).setOnClickListener( v->
-                Navigation.findNavController(thisView).navigate(EditMasterProfileFragmentDirections.actionEditMasterProfileFragmentToProfileFragment())
+                Navigation.findNavController(thisView).navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
          );
     }
     private void initializeAllUIComponents(View view)
