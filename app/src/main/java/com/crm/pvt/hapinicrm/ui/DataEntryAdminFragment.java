@@ -17,6 +17,7 @@ import com.crm.pvt.hapinicrm.databinding.FragmentDataEntryAdminBinding;
 public class DataEntryAdminFragment extends Fragment {
 
     private FragmentDataEntryAdminBinding binding;
+    private Boolean login=true;
 
 
 
@@ -25,8 +26,13 @@ public class DataEntryAdminFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDataEntryAdminBinding.inflate(inflater,container,false);
-        Attendancedialogue attendancedialogue=new Attendancedialogue();
-        attendancedialogue.show(getFragmentManager(),"attendance dialogue");
+
+        if (login()) {
+            login=false;
+            Attendancedialogue attendancedialogue = new Attendancedialogue();
+            attendancedialogue.show(getFragmentManager(), "attendance dialogue");
+        }
+
         return binding.getRoot();
     }
 
@@ -65,5 +71,21 @@ public class DataEntryAdminFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp();
             }
         });
+        binding.dataentryaddtask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        binding.dataentryaddtask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(DataEntryAdminFragmentDirections.showaddtask());
+            }
+        });
+    }
+    private boolean login(){
+
+        return login;
     }
 }
