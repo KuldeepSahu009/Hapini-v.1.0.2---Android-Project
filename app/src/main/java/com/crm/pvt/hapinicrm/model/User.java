@@ -3,14 +3,14 @@ package com.crm.pvt.hapinicrm.model;
 public class User {
     String name;
     String email;
-    int mobileNo;
-    int whatsAppNo;
+    String mobileNo;
+    String whatsAppNo;
     String city;
     String locality;
-    int passcode;
-    int password;
+    String passcode;
+    String password;
 
-    public User(String name, String email, int mobileNo, int whatsAppNo, String city, String locality, int passcode, int password) {
+    public User(String name, String email, String  mobileNo, String whatsAppNo, String city, String locality, String passcode, String password) {
         this.name = name;
         this.email = email;
         this.mobileNo = mobileNo;
@@ -37,19 +37,19 @@ public class User {
         this.email = email;
     }
 
-    public int getMobileNo() {
+    public String getMobileNo() {
         return mobileNo;
     }
 
-    public void setMobileNo(int mobileNo) {
+    public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
     }
 
-    public int getWhatsAppNo() {
+    public String getWhatsAppNo() {
         return whatsAppNo;
     }
 
-    public void setWhatsAppNo(int whatsAppNo) {
+    public void setWhatsAppNo(String whatsAppNo) {
         this.whatsAppNo = whatsAppNo;
     }
 
@@ -69,19 +69,19 @@ public class User {
         this.locality = locality;
     }
 
-    public int getPasscode() {
+    public String getPasscode() {
         return passcode;
     }
 
-    public void setPasscode(int passcode) {
+    public void setPasscode(String passcode) {
         this.passcode = passcode;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }
