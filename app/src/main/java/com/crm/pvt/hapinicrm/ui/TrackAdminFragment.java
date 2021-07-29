@@ -13,24 +13,41 @@ import com.crm.pvt.hapinicrm.databinding.FragmentTrackAdminBinding;
 public class TrackAdminFragment extends Fragment {
 
     FragmentTrackAdminBinding binding;
+    Bundle admin;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTrackAdminBinding.inflate(inflater,container,false);
+        admin = new Bundle();
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated( @NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        binding.trackCRMAdminCardView.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
+        binding.trackCRMAdminCardView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                admin.putString("ADMIN" , "crm");
+                Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment());
+            }
+        });
 
-        binding.trackVideoEditorAdminCardView.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
+        binding.trackVideoEditorAdminCardView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                admin.putString("ADMIN" , "video_editor");
+                Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment());
+            }
+        });
 
-        binding.trackDataEntryAdminCardView.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment()));
+        binding.trackDataEntryAdminCardView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                admin.putString("ADMIN" , "data_entry");
+                Navigation.findNavController(v).navigate(TrackAdminFragmentDirections.actionTrackAdminFragmentToAdminDataViewFragment());
+            }
+        });
 
     }
 }
