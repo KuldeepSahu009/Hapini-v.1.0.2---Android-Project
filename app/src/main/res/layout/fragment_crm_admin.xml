@@ -9,7 +9,7 @@
     <!--Todo New Crm Admin Dashboard Layout-->
 
     <View
-        android:id="@+id/viewCrmDashboard"
+        android:id="@+id/viewDataEntryUser"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/custom_rectangle"
@@ -28,7 +28,7 @@
         android:layout_marginTop="15dp">
 
         <ImageButton
-            android:id="@+id/ivBackFromCrmDashboardFragment"
+            android:id="@+id/ivBackFromDataEntryUser"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -39,7 +39,7 @@
             android:src="@drawable/ic_back" />
 
         <TextView
-            android:id="@+id/tvCrmDashboardTitle"
+            android:id="@+id/tvDataEntryUserDashboardTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -67,7 +67,7 @@
         android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewCrmDashboard">
+        app:layout_constraintTop_toBottomOf="@+id/viewDataEntryUser">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/crmadminAddUser"
