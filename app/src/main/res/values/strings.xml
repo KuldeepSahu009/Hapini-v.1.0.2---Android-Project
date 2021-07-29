@@ -44,4 +44,6 @@
     <string name="crm_admin">CRM ADMIN</string>
     <string name="data_entry_admin">DATA ENTRY ADMIN</string>
     <string name="video_editor_admin">VIDEO EDITOR ADMIN</string>
+    <string name="assign_task">Assign Task</string>
+    <string name="submit">submit</string>
 </resources>

@@ -339,7 +339,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvSettings"
+            android:id="@+id/cvTaskAssign"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -357,22 +357,22 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/ivSettings"
+                    android:id="@+id/ivTask"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_settings"
-                    app:layout_constraintBottom_toTopOf="@+id/tvSettings"
+                    android:src="@drawable/ic_baseline_task"
+                    app:layout_constraintBottom_toTopOf="@+id/tvTask"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvSettings"
+                    android:id="@+id/tvTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="SETTINGS"
+                    android:text="GIVE TASK "
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="14sp"
