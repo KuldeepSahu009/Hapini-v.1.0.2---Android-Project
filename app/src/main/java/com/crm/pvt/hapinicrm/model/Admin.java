@@ -4,7 +4,14 @@ package com.crm.pvt.hapinicrm.model;
 //TODO Admin Model
 
 public class Admin {
-    private String name,email,phoneno,whatsappno,passcode,password,location,imgurl;
+     String name;
+     String email;
+     String phoneno;
+     String whatsappno;
+     String passcode;
+     String password;
+     String location;
+     String imgurl;
 
     public Admin(String name, String email, String phoneno, String whatsappno, String passcode, String password, String location, String imgurl) {
         this.name = name;
