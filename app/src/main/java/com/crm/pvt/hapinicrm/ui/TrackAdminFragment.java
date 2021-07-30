@@ -50,7 +50,7 @@ public class TrackAdminFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_trackAdminFragment_to_adminDataViewFragment, admin);
             }
         });
-        binding.ivbackTrackAdmin.setOnClickListener(v->
+        binding.ivBackTrackAdmin.setOnClickListener(v->
                 Navigation.findNavController(v).navigateUp());
     }
 }
