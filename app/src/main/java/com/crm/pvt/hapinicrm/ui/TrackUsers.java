@@ -6,15 +6,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentTrackUsersBinding;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
+import com.crm.pvt.hapinicrm.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +36,10 @@ public class TrackUsers extends Fragment {
     private FragmentTrackUsersBinding binding;
     private TrackUserAdapter trackUserAdapter;
     private List<TrackUserModel> trackUserModelList;
+    private ArrayList<User> user;
     private String data;
 
+    private DatabaseReference crm,de,ve;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -51,16 +63,20 @@ public class TrackUsers extends Fragment {
         trackUserModelList = new ArrayList<>();
         binding.rvTrackUser.setLayoutManager(new LinearLayoutManager(getContext()));
         trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList);
+
         binding.rvTrackUser.setAdapter(trackUserAdapter);
 
         switch (data) {
             case "crmUser":
+                Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 getCrmData();
                 break;
             case "videoUser":
+                Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 getVideoEditorData();
                 break;
             case "dataUser":
+                Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 getDataEntryOperatorData();
                 break;
         }
@@ -68,34 +84,80 @@ public class TrackUsers extends Fragment {
     }
 
     private void getCrmData() {
-        trackUserModelList.add(new TrackUserModel("Satyam Kumar", "crm@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name1", "crm@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name2", "crm@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name3", "crm@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name4", "crm@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", "https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
+         crm = FirebaseDatabase.getInstance().getReference("usersv2");
+        Query query=crm.child("crm");
+        ///
+        query.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot : datasnapshot.getChildren()){
+                 trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()),(snapshot.child("email").getValue().toString()),
+                         (snapshot.child("mobileNo").getValue().toString()),(snapshot.child("whatsAppNo").getValue().toString()),(snapshot.child("passcode").getValue().toString()),
+                         (snapshot.child("password").getValue().toString()),(snapshot.child("city").getValue().toString()),(snapshot.child("").getValue().toString())));
 
-        trackUserAdapter.notifyDataSetChanged();
+                }
+                trackUserAdapter=new TrackUserAdapter(getContext(),trackUserModelList);
+                binding.rvTrackUser.setAdapter(trackUserAdapter);
+                trackUserAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void getVideoEditorData() {
-        trackUserModelList.add(new TrackUserModel("Satyam Kumar", "video@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name1", "vidoe@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name2", "video@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name3", "video@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name4", "video@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", "https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
+        de = FirebaseDatabase.getInstance().getReference("usersv2");
+        Query query=de.child("data");
+        ///
+        query.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot : datasnapshot.getChildren()){
+                    trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()),(snapshot.child("email").getValue().toString()),
+                            (snapshot.child("mobileNo").getValue().toString()),(snapshot.child("whatsAppNo").getValue().toString()),(snapshot.child("passcode").getValue().toString()),
+                            (snapshot.child("password").getValue().toString()),(snapshot.child("city").getValue().toString()),(snapshot.child("").getValue().toString())));
 
-        trackUserAdapter.notifyDataSetChanged();
+                }
+                trackUserAdapter=new TrackUserAdapter(getContext(),trackUserModelList);
+                binding.rvTrackUser.setAdapter(trackUserAdapter);
+                trackUserAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
     private void getDataEntryOperatorData() {
-        trackUserModelList.add(new TrackUserModel("Satyam Kumar", "data@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name1", "data@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name2", "data@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name3", "data@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", ""));
-        trackUserModelList.add(new TrackUserModel("Random name4", "data@gmail.com", "47474096", "749402338", "4747444", "57575fbf", "some where,still searching,lets see", "https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
+        ve = FirebaseDatabase.getInstance().getReference("usersv2");
+        Query query=ve.child("video");
+        ///
+        query.addValueEventListener(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot : datasnapshot.getChildren()){
+                    trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()),(snapshot.child("email").getValue().toString()),
+                            (snapshot.child("mobileNo").getValue().toString()),(snapshot.child("whatsAppNo").getValue().toString()),(snapshot.child("passcode").getValue().toString()),
+                            (snapshot.child("password").getValue().toString()),(snapshot.child("city").getValue().toString()),(snapshot.child("").getValue().toString())));
 
-        trackUserAdapter.notifyDataSetChanged();
+                }
+                trackUserAdapter=new TrackUserAdapter(getContext(),trackUserModelList);
+                binding.rvTrackUser.setAdapter(trackUserAdapter);
+                trackUserAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }
