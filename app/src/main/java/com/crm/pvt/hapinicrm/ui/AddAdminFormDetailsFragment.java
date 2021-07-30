@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,19 @@ import com.crm.pvt.hapinicrm.model.Admin;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AddAdminFormDetailsFragment extends Fragment {
 
+    private final String TAG = "Add Admin";
+
     FragmentAddAdminFormDetailsBinding binding;
     String adminType;
     ProgressDialog progressDialog;
+    private FirebaseAuth auth;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +43,8 @@ public class AddAdminFormDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setFormTitle();
+
+        auth = FirebaseAuth.getInstance();
 
         binding.btnAddAdminSubmit.setOnClickListener(v -> {
 
@@ -77,6 +85,13 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         Admin admin = new Admin( name , email , mobileNo , whatsAppNo , passcode , password , location, "");
         if (adminType == "CRM"){
+            auth.createUserWithEmailAndPassword(passcode+"@crmadmin.com",password).addOnCompleteListener(task -> {
+                if(task.isSuccessful()) {
+                    Log.i(TAG, "Admin created");
+                } else {
+                    Log.i(TAG,"Something went wrong");
+                }
+            });
             DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("adminV2").child(adminType);
             databaseReference.push().setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -95,6 +110,14 @@ public class AddAdminFormDetailsFragment extends Fragment {
         }
         if (adminType =="DATA_ENTRY"){
 
+            auth.createUserWithEmailAndPassword(passcode+"@deadmin.com",password).addOnCompleteListener(task -> {
+                if(task.isSuccessful()) {
+                    Log.i(TAG, "Admin created");
+                } else {
+                    Log.i(TAG,"Something went wrong");
+                }
+            });
+
             DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("adminV2").child(adminType);
             databaseReference.push().setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -111,6 +134,14 @@ public class AddAdminFormDetailsFragment extends Fragment {
             });
         }
         if (adminType == "VIDEO_EDITOR"){
+
+            auth.createUserWithEmailAndPassword(passcode+"@veadmin.com",password).addOnCompleteListener(task -> {
+                if(task.isSuccessful()) {
+                    Log.i(TAG, "Admin created");
+                } else {
+                    Log.i(TAG,"Something went wrong");
+                }
+            });
 
             DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("adminV2").child(adminType);
             databaseReference.push().setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -14,10 +14,14 @@ import androidx.navigation.Navigation;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 public class AdminLoginFragment extends Fragment {
 
     private FragmentAdminLoginBinding binding;
+    private FirebaseAuth auth;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,28 +34,60 @@ public class AdminLoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initializeSpinner();
 
+        auth = FirebaseAuth.getInstance();
+
         binding.btnLogin.setOnClickListener(v -> {
-            boolean isValid = validateCredentials();
-            if(isValid) {
-                int pos = binding.spSelectAdmin.getSelectedItemPosition();
-                navigateTo(v, pos);
+
+            binding.btnLogin.setEnabled(false);
+            binding.pbAuth.setVisibility(View.VISIBLE);
+
+            String passcode = Objects.requireNonNull(binding.etPasscode.getText()).toString();
+            String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
+
+            if(passcode.length()!=6) {
+
+                binding.etPasscode.setError("Passcode should be 6 characters long");
+                binding.btnLogin.setEnabled(true);
+                binding.pbAuth.setVisibility(View.INVISIBLE);
+
+            } else if(password.isEmpty()) {
+
+                binding.etPassword.setError("Password cannot be empty");
+                binding.btnLogin.setEnabled(true);
+                binding.pbAuth.setVisibility(View.INVISIBLE);
+
             } else {
-                Snackbar.make(v,"Authentication Failed",Snackbar.LENGTH_SHORT).show();
+
+                int selected = binding.spSelectAdmin.getSelectedItemPosition();
+                String postString = "";
+
+                if(selected == 1 ) {
+                    postString = "@crmadmin.com";
+                } else if(selected == 2) {
+                    postString = "@deadmin.com";
+                } else if(selected == 3) {
+                    postString = "@veadmin.com";
+                } else if(selected == 4) {
+                    binding.pbAuth.setVisibility(View.INVISIBLE);
+                    binding.btnLogin.setEnabled(true);
+                    navigateTo(v,selected);
+                    return;
+                }
+
+                auth.signInWithEmailAndPassword(passcode+postString,password).addOnCompleteListener(task -> {
+                    binding.btnLogin.setEnabled(true);
+                    binding.pbAuth.setVisibility(View.INVISIBLE);
+                    if(task.isSuccessful()) {
+                        navigateTo(v,selected);
+                    } else {
+                        Snackbar.make(v,"Authorisation Failed",Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
-        binding.tvForgotPassword.setOnClickListener(v -> Navigation.findNavController(v).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToForgetpassword()));
-    }
 
-    private boolean validateCredentials() {
-        if(binding.etPasscode.getText().toString().length() != 6 ) {
-            binding.etPasscode.setError("Passcode should be 6 characters long");
-            return false;
-        } else if(binding.etPassword.getText().toString().isEmpty()) {
-            binding.etPassword.setError("Enter Password");
-            return false;
-        } else {
-            return true;
-        }
+        binding.tvForgotPassword.setOnClickListener(v -> Navigation.findNavController(v).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToForgetpassword()));
     }
 
     private void initializeSpinner() {
