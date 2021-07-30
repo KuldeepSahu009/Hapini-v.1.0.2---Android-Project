@@ -62,7 +62,17 @@
         android:id="@+id/crmAdminFragment"
         android:name="com.crm.pvt.hapinicrm.ui.CrmAdminFragment"
         android:label="fragment_crm_admin"
-        tools:layout="@layout/fragment_crm_admin" />
+        tools:layout="@layout/fragment_crm_admin" >
+        <action
+            android:id="@+id/action_crmAdminFragment_to_adduserdata"
+            app:destination="@id/adduserdata" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_alltrackusersfragment"
+            app:destination="@id/alltrackusersfragment" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_setrpofile"
+            app:destination="@id/setrpofile" />
+    </fragment>
     <fragment
         android:id="@+id/dataEntryAdminFragment"
         android:name="com.crm.pvt.hapinicrm.ui.DataEntryAdminFragment"
