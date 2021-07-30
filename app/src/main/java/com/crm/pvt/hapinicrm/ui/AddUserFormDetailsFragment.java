@@ -100,7 +100,7 @@ public class AddUserFormDetailsFragment extends Fragment {
         if (usertypes=="crm"){
 
             DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("usersv2").child(usertypes);
-            databaseReference.push().setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            databaseReference.child(passcode).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
@@ -118,7 +118,7 @@ public class AddUserFormDetailsFragment extends Fragment {
         if (usertypes=="data"){
 
             DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("usersv2").child(usertypes);
-            databaseReference.push().setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            databaseReference.child(passcode).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
@@ -135,7 +135,7 @@ public class AddUserFormDetailsFragment extends Fragment {
         if (usertypes=="video"){
 
             DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("usersv2").child(usertypes);
-            databaseReference.push().setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            databaseReference.child(passcode).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
