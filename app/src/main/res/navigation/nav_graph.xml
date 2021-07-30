@@ -365,7 +365,11 @@
         android:id="@+id/dataEntryUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.DataEntryUserFragment"
         android:label="fragment_data_entry_user"
-        tools:layout="@layout/fragment_data_entry_user" />
+        tools:layout="@layout/fragment_data_entry_user" >
+        <action
+            android:id="@+id/action_dataEntryUserFragment_to_googleSheetFragment"
+            app:destination="@id/googleSheetFragment" />
+    </fragment>
     <fragment
         android:id="@+id/videoEditorUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.VideoEditorUserFragment"
@@ -376,4 +380,9 @@
         android:name="com.crm.pvt.hapinicrm.forgetpassword_user"
         android:label="fragment_forgetpassword_user"
         tools:layout="@layout/fragment_forgetpassword_user" />
+    <fragment
+        android:id="@+id/googleSheetFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.GoogleSheetFragment"
+        android:label="fragment_google_sheet"
+        tools:layout="@layout/fragment_google_sheet" />
 </navigation>

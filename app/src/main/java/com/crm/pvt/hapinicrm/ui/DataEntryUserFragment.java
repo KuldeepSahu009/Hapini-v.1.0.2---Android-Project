@@ -47,35 +47,9 @@ public class DataEntryUserFragment extends Fragment {
 
         binding.ivOpenGS.setOnClickListener(v->
         {
-            Sheets sheetsService = null;
-            try {
-                sheetsService = createSheetsService();
-                Sheets.Spreadsheets.Create request = sheetsService.spreadsheets().create(requestBody);
-                Spreadsheet response = request.execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (GeneralSecurityException e) {
-                e.printStackTrace();
-            }
+            Navigation.findNavController(v).navigate(DataEntryUserFragmentDirections.actionDataEntryUserFragmentToGoogleSheetFragment());
         });
 
 
-    }
-    public static Sheets createSheetsService() throws IOException, GeneralSecurityException {
-        HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-        JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-
-        // TODO: Change placeholder below to generate authentication credentials. See
-        // https://developers.google.com/sheets/quickstart/java#step_3_set_up_the_sample
-        //
-        // Authorize using one of the following scopes:
-        //   "https://www.googleapis.com/auth/drive"
-        //   "https://www.googleapis.com/auth/drive.file"
-        //   "https://www.googleapis.com/auth/spreadsheets"
-        GoogleCredential credential = null;
-
-        return new Sheets.Builder(httpTransport, jsonFactory, credential)
-                .setApplicationName("Google-SheetsSample/0.1")
-                .build();
     }
 }
