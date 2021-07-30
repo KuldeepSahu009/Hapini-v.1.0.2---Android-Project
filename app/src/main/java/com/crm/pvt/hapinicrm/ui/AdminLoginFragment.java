@@ -48,29 +48,42 @@ public class AdminLoginFragment extends Fragment {
 
                 binding.etPasscode.setError("Passcode should be 6 characters long");
                 binding.btnLogin.setEnabled(true);
+                binding.pbAuth.setVisibility(View.INVISIBLE);
 
             } else if(password.isEmpty()) {
 
                 binding.etPassword.setError("Password cannot be empty");
                 binding.btnLogin.setEnabled(true);
+                binding.pbAuth.setVisibility(View.INVISIBLE);
 
             } else {
 
-//                auth.signInWithEmailAndPassword(passcode,password).addOnCompleteListener(task -> {
-//                    binding.btnLogin.setEnabled(true);
-//                    binding.pbAuth.setVisibility(View.INVISIBLE);
-//
-//                    if(task.isSuccessful()) {
-//                        navigateTo(v,binding.spSelectAdmin.getSelectedItemPosition());
-//                    } else {
-//                        Snackbar.make(v,"Authorisation Failed",Snackbar.LENGTH_SHORT).show();
-//                    }
-//                });
+                int selected = binding.spSelectAdmin.getSelectedItemPosition();
+                String postString = "";
 
-                //need to remove these lines.
-                binding.pbAuth.setVisibility(View.INVISIBLE);
-                binding.btnLogin.setEnabled(true);
-                navigateTo(v,binding.spSelectAdmin.getSelectedItemPosition());
+                if(selected == 1 ) {
+                    postString = "@crmadmin.com";
+                } else if(selected == 2) {
+                    postString = "@deadmin.com";
+                } else if(selected == 3) {
+                    postString = "@veadmin.com";
+                } else if(selected == 4) {
+                    binding.pbAuth.setVisibility(View.INVISIBLE);
+                    binding.btnLogin.setEnabled(true);
+                    navigateTo(v,selected);
+                    return;
+                }
+
+                auth.signInWithEmailAndPassword(passcode+postString,password).addOnCompleteListener(task -> {
+                    binding.btnLogin.setEnabled(true);
+                    binding.pbAuth.setVisibility(View.INVISIBLE);
+                    if(task.isSuccessful()) {
+                        navigateTo(v,selected);
+                    } else {
+                        Snackbar.make(v,"Authorisation Failed",Snackbar.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 
