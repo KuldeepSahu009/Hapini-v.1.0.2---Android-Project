@@ -74,8 +74,8 @@ public class Addtask extends Fragment {
             progressDialog.setCancelable(false);
             progressDialog.setTitle("Verifying User....");
             progressDialog.show();
-            dataBaseInstance.getReference().child("usersv2").child("data").equalTo(passcodes).get().addOnSuccessListener(task -> {
-                if (task != null) {
+            dataBaseInstance.getReference().child("usersv2").child("data").child(passcodes).get().addOnSuccessListener(task -> {
+                if (task.exists()) {
                     passcode.setVisibility(View.GONE);
                     taskReceived.setVisibility(View.VISIBLE);
                     sendtask.setText("SEND TASK");
@@ -83,6 +83,7 @@ public class Addtask extends Fragment {
                     sendTaskToUser(task);
                 } else {
                     Toast.makeText(getContext(), "No Such User Exist.", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
             });
         }
@@ -99,12 +100,12 @@ public class Addtask extends Fragment {
             progressDialog.setCancelable(false);
             progressDialog.setTitle("Sending Task To User....");
             progressDialog.show();
-            task.getRef().child(passcode.getText().toString()).child("task").setValue(tasks).addOnCompleteListener(new OnCompleteListener<Void>() {
+            task.getRef().child("task").setValue(tasks).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task1) {
                     if(task1.isSuccessful())
                     {
-                       task.getRef().child(passcode.getText().toString()).child("taskGivenBy").setValue(auth.getCurrentUser().getEmail()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                       task.getRef().child("taskGivenBy").setValue(auth.getCurrentUser().getEmail()).addOnCompleteListener(new OnCompleteListener<Void>() {
                            @Override
                            public void onComplete(@NonNull Task<Void> task) {
                                if(task.isSuccessful())
@@ -116,6 +117,7 @@ public class Addtask extends Fragment {
                                else
                                {
                                    Toast.makeText(getContext(),"Something going Wrong" ,Toast.LENGTH_LONG).show();
+                                   progressDialog.dismiss();
                                }
                            }
                        });
@@ -123,6 +125,7 @@ public class Addtask extends Fragment {
                     else
                     {
                         Toast.makeText(getContext(),"Something Went Wrong" ,Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
                 }
             });
