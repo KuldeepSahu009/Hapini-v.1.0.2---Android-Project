@@ -30,7 +30,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
     FragmentAddAdminFormDetailsBinding binding;
     String adminType;
     ProgressDialog progressDialog;
-    private FirebaseAuth auth;
+    FirebaseAuth auth;
 
 
     @Override
