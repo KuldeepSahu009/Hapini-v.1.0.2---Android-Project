@@ -19,7 +19,8 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_startFragment_to_userLoginFragment"
-            app:destination="@id/userLoginFragment" />
+            app:destination="@id/userLoginFragment"
+             />
     </fragment>
     <fragment
         android:id="@+id/adminLoginFragment"
@@ -348,7 +349,8 @@
             app:destination="@id/dataEntryUserFragment" />
         <action
             android:id="@+id/action_userLoginFragment_to_crmUserFragment"
-            app:destination="@id/crmUserFragment" />
+            app:destination="@id/crmUserFragment"
+            />
         <action
             android:id="@+id/action_userLoginFragment_to_videoEditorUserFragment"
             app:destination="@id/videoEditorUserFragment" />
