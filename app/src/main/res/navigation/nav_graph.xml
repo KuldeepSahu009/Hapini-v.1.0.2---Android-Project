@@ -63,7 +63,17 @@
         android:id="@+id/crmAdminFragment"
         android:name="com.crm.pvt.hapinicrm.ui.CrmAdminFragment"
         android:label="fragment_crm_admin"
-        tools:layout="@layout/fragment_crm_admin" />
+        tools:layout="@layout/fragment_crm_admin" >
+        <action
+            android:id="@+id/action_crmAdminFragment_to_adduserdata"
+            app:destination="@id/adduserdata" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_alltrackusersfragment"
+            app:destination="@id/alltrackusersfragment" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_setrpofile"
+            app:destination="@id/setrpofile" />
+    </fragment>
     <fragment
         android:id="@+id/dataEntryAdminFragment"
         android:name="com.crm.pvt.hapinicrm.ui.DataEntryAdminFragment"
@@ -367,7 +377,11 @@
         android:id="@+id/dataEntryUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.DataEntryUserFragment"
         android:label="fragment_data_entry_user"
-        tools:layout="@layout/fragment_data_entry_user" />
+        tools:layout="@layout/fragment_data_entry_user" >
+        <action
+            android:id="@+id/action_dataEntryUserFragment_to_googleSheetFragment"
+            app:destination="@id/googleSheetFragment" />
+    </fragment>
     <fragment
         android:id="@+id/videoEditorUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.VideoEditorUserFragment"
@@ -378,4 +392,9 @@
         android:name="com.crm.pvt.hapinicrm.forgetpassword_user"
         android:label="fragment_forgetpassword_user"
         tools:layout="@layout/fragment_forgetpassword_user" />
+    <fragment
+        android:id="@+id/googleSheetFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.GoogleSheetFragment"
+        android:label="fragment_google_sheet"
+        tools:layout="@layout/fragment_google_sheet" />
 </navigation>

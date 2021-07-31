@@ -4,18 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.adapters.TrackAdminAdapter;
-import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminDataViewBinding;
 import com.crm.pvt.hapinicrm.model.Admin;
-import com.crm.pvt.hapinicrm.model.TrackUserModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ public class AdminDataViewFragment extends Fragment {
     FragmentAdminDataViewBinding binding;
     List<Admin> admins = new ArrayList<>();
     TrackAdminAdapter trackAdminAdapter;
+    List<Admin> adminList = new ArrayList<>();
     String admin;
 
     @Override
@@ -54,36 +58,93 @@ public class AdminDataViewFragment extends Fragment {
         }
     }
 
-     void getDataEntryAdminData() {
-        admins.add(new Admin("Person 1" , "data@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth","https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
-        trackAdminAdapter.notifyDataSetChanged();
+     void getCrmAdminData() {
+        DatabaseReference crmReference;
+        crmReference = FirebaseDatabase.getInstance().getReference("adminV2");
+        crmReference.child("CRM").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Admin adminObject;
+                    adminObject = new Admin( dataSnapshot.child("name").getValue().toString() ,
+                                             dataSnapshot.child("email").getValue().toString(),
+                                             dataSnapshot.child("phoneno").getValue().toString(),
+                                             dataSnapshot.child("whatsappno").getValue().toString(),
+                                             dataSnapshot.child("passcode").getValue().toString(),
+                                             dataSnapshot.child("password").getValue().toString(),
+                                             dataSnapshot.child("location").getValue().toString(),
+                                             dataSnapshot.child("imgurl").getValue().toString());
+                    adminList.add(adminObject);
+                }
+                trackAdminAdapter = new TrackAdminAdapter(getContext() , adminList);
+                binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
+                trackAdminAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText( getContext() , error.getMessage() , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     void getVideoEditorAdminData() {
-        admins.add(new Admin("Person 1" , "video@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth","https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
-        trackAdminAdapter.notifyDataSetChanged();
+        DatabaseReference videoEditorReference;
+        videoEditorReference = FirebaseDatabase.getInstance().getReference("adminV2");
+        videoEditorReference.child("VIDEO_EDITOR").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Admin adminObject;
+                    adminObject = new Admin( dataSnapshot.child("name").getValue().toString() ,
+                            dataSnapshot.child("email").getValue().toString(),
+                            dataSnapshot.child("phoneno").getValue().toString(),
+                            dataSnapshot.child("whatsappno").getValue().toString(),
+                            dataSnapshot.child("passcode").getValue().toString(),
+                            dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("location").getValue().toString(),
+                            dataSnapshot.child("imgurl").getValue().toString());
+                    adminList.add(adminObject);
+                }
+                trackAdminAdapter = new TrackAdminAdapter(getContext() , adminList);
+                binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
+                trackAdminAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText( getContext() , error.getMessage() , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    void getCrmAdminData() {
-        admins.add(new Admin("Person 1" , "crm@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth",""));
-        admins.add(new Admin("Person 1" , "xyz@example.com" , "9000000000" , "9000000000","141414","1121","Somewhere On Earth","https://static.toiimg.com/photo/68081708/Haunted-2.jpg?width=748&resize=4"));
-        trackAdminAdapter.notifyDataSetChanged();
+    void getDataEntryAdminData() {
+        DatabaseReference dataEntryReference;
+        dataEntryReference = FirebaseDatabase.getInstance().getReference("adminV2");
+        dataEntryReference.child("DATA_ENTRY").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Admin adminObject;
+                    adminObject = new Admin( dataSnapshot.child("name").getValue().toString() ,
+                            dataSnapshot.child("email").getValue().toString(),
+                            dataSnapshot.child("phoneno").getValue().toString(),
+                            dataSnapshot.child("whatsappno").getValue().toString(),
+                            dataSnapshot.child("passcode").getValue().toString(),
+                            dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("location").getValue().toString(),
+                            dataSnapshot.child("imgurl").getValue().toString());
+                    adminList.add(adminObject);
+                }
+                trackAdminAdapter = new TrackAdminAdapter(getContext() , adminList);
+                binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
+                trackAdminAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText( getContext() , error.getMessage() , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
