@@ -28,18 +28,20 @@
         android:layout_marginTop="15dp">
 
         <ImageButton
-            android:id="@+id/ivBackFromDataEntryUser"
+            android:id="@+id/ivBackFromCrmAdmin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
+            android:minHeight="48dp"
             android:padding="8dp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/tvDataEntryUserDashboardTitle"
+            android:id="@+id/tvCrmAdminDashboardTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -53,6 +55,16 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_weight="3" />
+
+        <ImageButton
+            android:id="@+id/ivCrmLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_logout" />
 
     </LinearLayout>
 

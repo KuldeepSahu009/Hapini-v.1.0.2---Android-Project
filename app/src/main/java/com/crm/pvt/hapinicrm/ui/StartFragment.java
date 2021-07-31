@@ -1,8 +1,5 @@
 package com.crm.pvt.hapinicrm.ui;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,33 +7,26 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.crm.pvt.hapinicrm.databinding.FragmentStartBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 
 public class StartFragment extends Fragment {
 
 
     private FragmentStartBinding binding;
+    private FirebaseUser user;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
-
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
         binding = FragmentStartBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
@@ -51,6 +41,18 @@ public class StartFragment extends Fragment {
         binding.btnUser.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(StartFragmentDirections.actionStartFragmentToUserLoginFragment())
         );
+
+        if(user != null) {
+            String email = user.getEmail();
+            if(email != null && email.contains("crmadmin")) {
+                Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToCrmAdminFragment());
+            } else if(email != null && email.contains("veadmin")) {
+                Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToVideoEditorNavigation());
+            } else if(email != null && email.contains("deadmin")) {
+                Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToDataEntryAdminFragment());
+            }
+        }
+
     }
 
 }

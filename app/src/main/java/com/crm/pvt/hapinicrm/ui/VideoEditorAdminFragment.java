@@ -14,12 +14,14 @@ import androidx.navigation.Navigation;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentVideoEditorAdminBinding;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class VideoEditorAdminFragment extends Fragment {
 
     private FragmentVideoEditorAdminBinding binding;
     private Bundle data;
     private boolean firstLogin = true;
+    private FirebaseAuth auth;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -32,7 +34,8 @@ public class VideoEditorAdminFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(firstLogin()) {
+        auth = FirebaseAuth.getInstance();
+        if (firstLogin()) {
             firstLogin = false;
             showAttendanceDialog();
         }
@@ -44,13 +47,29 @@ public class VideoEditorAdminFragment extends Fragment {
         });
 
         binding.cvTrackVideoEditorUser.setOnClickListener(v -> {
-            data.putString("data","videoUser");
-            Navigation.findNavController(v).navigate(R.id.action_videoEditorAdminFragment_to_trackUsers,data);
+            data.putString("data", "videoUser");
+            Navigation.findNavController(v).navigate(R.id.action_videoEditorAdminFragment_to_trackUsers, data);
         });
 
         binding.cvProfileVideoEditor.setOnClickListener(v ->
-            Navigation.findNavController(v).navigate(VideoEditorAdminFragmentDirections.actionVideoEditorAdminFragmentToProfileFragment())
+                Navigation.findNavController(v).navigate(VideoEditorAdminFragmentDirections.actionVideoEditorAdminFragmentToProfileFragment())
         );
+
+        binding.ivVideoEditorLogout.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Logout");
+            builder.setMessage("Are you sure you want to logout?");
+            builder.setCancelable(true);
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+                auth.signOut();
+                Navigation.findNavController(v).navigateUp();
+            });
+            builder.setNegativeButton("No", (dialog, which) -> {
+            });
+
+            AlertDialog attendanceDialog = builder.create();
+            attendanceDialog.show();
+        });
 
     }
 
