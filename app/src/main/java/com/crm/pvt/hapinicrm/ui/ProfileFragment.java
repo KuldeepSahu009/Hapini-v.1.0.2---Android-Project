@@ -30,8 +30,8 @@ public class ProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
-    public static ImageView ivProfilePic;
-    public static TextView tvProfileName, tvProfileEmail, tvProfilePasscode, tvProfilePassword;
+    public ImageView ivProfilePic;
+    public  TextView tvProfileName, tvProfileEmail, tvProfilePasscode, tvProfilePassword;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -57,36 +57,9 @@ public class ProfileFragment extends Fragment {
         tvProfilePasscode = view.findViewById(R.id.tvProfilePasscode);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (EditProfileFragment.ivProfilePicURI != null && EditProfileFragment.profileName != null) {
-            try {
-                Glide.with(getView()).load(EditProfileFragment.ivProfilePicURI).into(ivProfilePic);
-                tvProfileName.setText(EditProfileFragment.profileName);
-                tvProfileEmail.setText(EditProfileFragment.profileEmail);
-                tvProfilePasscode.setText(EditProfileFragment.profilePasscode);
-                tvProfilePassword.setText(EditProfileFragment.profilePassword);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
-        }
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (EditProfileFragment.ivProfilePicURI != null && EditProfileFragment.profileName != null) {
-            try {
-                Glide.with(getView()).load(EditProfileFragment.ivProfilePicURI).into(ivProfilePic);
-                tvProfileName.setText(EditProfileFragment.profileName);
-                tvProfileEmail.setText(EditProfileFragment.profileEmail);
-                tvProfilePasscode.setText(EditProfileFragment.profilePasscode);
-                tvProfilePassword.setText(EditProfileFragment.profilePassword);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    private void getprofileinfo(){
+
     }
 }
