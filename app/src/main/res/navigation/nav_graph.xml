@@ -340,10 +340,6 @@
             <action
                 android:id="@+id/action_videoEditorAdminFragment_to_giveTaskVideoEditorFragment"
                 app:destination="@id/giveTaskVideoEditorFragment" />
-            <action
-                android:id="@+id/action_videoEditorAdminFragment_pop"
-                app:popUpTo="@id/videoEditorAdminFragment"
-                app:popUpToInclusive="true" />
         </fragment>
         <fragment
             android:id="@+id/addUserFormDetailsFragment"
@@ -376,7 +372,8 @@
             app:destination="@id/dataEntryUserFragment" />
         <action
             android:id="@+id/action_userLoginFragment_to_crmUserFragment"
-            app:destination="@id/crmUserFragment" />
+            app:destination="@id/crmUserFragment"
+            />
         <action
             android:id="@+id/action_userLoginFragment_to_videoEditorUserFragment"
             app:destination="@id/videoEditorUserFragment" />
