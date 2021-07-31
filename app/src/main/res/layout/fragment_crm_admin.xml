@@ -28,7 +28,7 @@
         android:layout_marginTop="15dp">
 
         <ImageButton
-            android:id="@+id/ivBackFromDataEntryUser"
+            android:id="@+id/ivBackFromCrmDashboardFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -62,10 +62,11 @@
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:weightSum="2"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewDataEntryUser">
 
@@ -79,8 +80,8 @@
             android:elevation="24dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -126,8 +127,8 @@
             android:elevation="24dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -173,8 +174,8 @@
             android:elevation="24dp"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="10dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
