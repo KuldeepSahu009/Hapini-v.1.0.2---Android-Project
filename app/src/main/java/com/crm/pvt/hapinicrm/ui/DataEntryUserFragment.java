@@ -96,6 +96,7 @@ public class DataEntryUserFragment extends Fragment {
                     }
                 }
             }
+            //
         });
 
         dataUserReference.addChildEventListener(new ChildEventListener() {
