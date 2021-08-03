@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.crm.pvt.hapinicrm.ui.CrmUserFragment;
 import com.crm.pvt.hapinicrm.ui.MainActivity;
+import com.crm.pvt.hapinicrm.ui.UserLoginFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -84,6 +85,7 @@ public class Splashscreen extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.e(TAG, "onSuccess: "+"attendencedonecrm" );
+
 
 
                     }

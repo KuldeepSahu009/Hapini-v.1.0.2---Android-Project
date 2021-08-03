@@ -1,5 +1,6 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,11 +14,13 @@ import android.view.ViewGroup;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentDataEntryAdminBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DataEntryAdminFragment extends Fragment {
 
     private FragmentDataEntryAdminBinding binding;
     private Boolean login = true;
+    private FirebaseAuth auth;
 
 
     @Override
@@ -38,6 +41,9 @@ public class DataEntryAdminFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        auth = FirebaseAuth.getInstance();
+
         binding.dataentryadduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +86,22 @@ public class DataEntryAdminFragment extends Fragment {
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(DataEntryAdminFragmentDirections.showaddtask());
             }
+        });
+
+        binding.dataentrydaminlogout.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Logout");
+            builder.setMessage("Are you sure you want to logout?");
+            builder.setCancelable(true);
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+                auth.signOut();
+                Navigation.findNavController(v).navigateUp();
+            });
+            builder.setNegativeButton("No", (dialog, which) -> {
+            });
+
+            AlertDialog attendanceDialog = builder.create();
+            attendanceDialog.show();
         });
     }
 

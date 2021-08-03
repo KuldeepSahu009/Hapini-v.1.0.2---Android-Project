@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -15,16 +16,18 @@ import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.Admin;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.TrackAdminViewHolder> {
 
     Context context;
     List<Admin> admins;
 
-    public TrackAdminAdapter( Context context , List<Admin> admins){
+    public TrackAdminAdapter( Context context){
         this.context = context;
-        this.admins = admins;
     }
 
     @NonNull
@@ -53,7 +56,15 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
     @Override
     public int getItemCount() {
+        if(admins == null) {
+            return 0;
+        }
         return admins.size();
+    }
+
+    public void setAdmins(List<Admin> admins) {
+        this.admins = admins;
+        notifyDataSetChanged();
     }
 
     static class TrackAdminViewHolder extends RecyclerView.ViewHolder{
