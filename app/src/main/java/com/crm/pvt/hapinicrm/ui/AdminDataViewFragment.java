@@ -30,8 +30,9 @@ public class AdminDataViewFragment extends Fragment {
 
     FragmentAdminDataViewBinding binding;
     TrackAdminAdapter trackAdminAdapter;
-    List<Admin> adminList = new ArrayList<>();
+    ArrayList<Admin> adminList = new ArrayList<>();
     String admin;
+    public static String type = "";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class AdminDataViewFragment extends Fragment {
                     trackAdminAdapter.setAdmins(adminList);
                     return;
                 }
-                List<Admin> admins = new ArrayList<>();
+                ArrayList<Admin> admins = new ArrayList<>();
                 for(Admin admin : adminList) {
                     String name = admin.getName();
                     if(name.toLowerCase().contains(s.toString().toLowerCase())) {
@@ -83,9 +84,12 @@ public class AdminDataViewFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) { }
         });
+
     }
 
+
      void getCrmAdminData() {
+        type = "CRM";
         DatabaseReference crmReference;
         crmReference = FirebaseDatabase.getInstance().getReference("adminV2");
         crmReference.child("CRM").addValueEventListener(new ValueEventListener() {
@@ -114,6 +118,7 @@ public class AdminDataViewFragment extends Fragment {
     }
 
     void getVideoEditorAdminData() {
+        type = "VIDEO_EDITOR";
         DatabaseReference videoEditorReference;
         videoEditorReference = FirebaseDatabase.getInstance().getReference("adminV2");
         videoEditorReference.child("VIDEO_EDITOR").addValueEventListener(new ValueEventListener() {
@@ -142,6 +147,7 @@ public class AdminDataViewFragment extends Fragment {
     }
 
     void getDataEntryAdminData() {
+        type = "DATA_ENTRY";
         DatabaseReference dataEntryReference;
         dataEntryReference = FirebaseDatabase.getInstance().getReference("adminV2");
         dataEntryReference.child("DATA_ENTRY").addValueEventListener(new ValueEventListener() {
