@@ -148,7 +148,7 @@ public class TrackUsers extends Fragment {
 
     }
 
-    private void getVideoEditorData() {
+    private void getDataEntryOperatorData() {
         de = FirebaseDatabase.getInstance().getReference("usersv2");
         Query query=de.child("video");
         ///
@@ -174,7 +174,7 @@ public class TrackUsers extends Fragment {
 
     }
 
-    private void getDataEntryOperatorData() {
+    private void getVideoEditorData() {
         ve = FirebaseDatabase.getInstance().getReference("usersv2");
         Query query=ve.child("data");
         ///

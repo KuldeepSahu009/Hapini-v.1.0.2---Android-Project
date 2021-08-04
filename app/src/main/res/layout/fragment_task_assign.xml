@@ -22,7 +22,7 @@
         android:layout_marginTop="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPass_code"
+            android:id="@+id/passCode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="number"
