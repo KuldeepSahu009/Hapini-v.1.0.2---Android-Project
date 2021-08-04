@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.Admin;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,7 +70,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     }
 
     static class TrackAdminViewHolder extends RecyclerView.ViewHolder{
-        ImageView profilepic;
+        ImageView profilepic,deleteAdmin;
 
         TextView name, email, mobile, location,whatsappno,password,passcode;
 
@@ -82,7 +84,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             password = itemView.findViewById(R.id.trackadminpassword);
             passcode = itemView.findViewById(R.id.trackadminpasscode);
             profilepic=itemView.findViewById(R.id.trackadminprofilepic);
-
+            deleteAdmin = itemView.findViewById(R.id.trackadmindeleteprofile);
         }
     }
 }

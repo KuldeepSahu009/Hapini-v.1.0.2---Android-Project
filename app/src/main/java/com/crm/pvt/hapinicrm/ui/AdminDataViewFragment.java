@@ -83,7 +83,9 @@ public class AdminDataViewFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) { }
         });
+
     }
+
 
      void getCrmAdminData() {
         DatabaseReference crmReference;
