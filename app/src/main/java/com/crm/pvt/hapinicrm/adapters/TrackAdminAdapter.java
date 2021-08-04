@@ -6,25 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.Admin;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.TrackAdminViewHolder> {
 
     Context context;
     List<Admin> admins;
 
-    public TrackAdminAdapter( Context context , List<Admin> admins){
+    public TrackAdminAdapter( Context context){
         this.context = context;
-        this.admins = admins;
     }
 
     @NonNull
@@ -53,11 +58,19 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
     @Override
     public int getItemCount() {
+        if(admins == null) {
+            return 0;
+        }
         return admins.size();
     }
 
+    public void setAdmins(List<Admin> admins) {
+        this.admins = admins;
+        notifyDataSetChanged();
+    }
+
     static class TrackAdminViewHolder extends RecyclerView.ViewHolder{
-        ImageView profilepic;
+        ImageView profilepic,deleteAdmin;
 
         TextView name, email, mobile, location,whatsappno,password,passcode;
 
@@ -71,7 +84,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             password = itemView.findViewById(R.id.trackadminpassword);
             passcode = itemView.findViewById(R.id.trackadminpasscode);
             profilepic=itemView.findViewById(R.id.trackadminprofilepic);
-
+            deleteAdmin = itemView.findViewById(R.id.trackadmindeleteprofile);
         }
     }
 }
