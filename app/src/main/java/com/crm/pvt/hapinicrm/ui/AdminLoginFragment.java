@@ -1,6 +1,9 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,7 @@ public class AdminLoginFragment extends Fragment {
 
     private FragmentAdminLoginBinding binding;
     private FirebaseAuth auth;
+    private static final String TAG = "TAG";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,7 +110,12 @@ public class AdminLoginFragment extends Fragment {
                 break;
             case 3: Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToVideoEditorNavigation());
                 break;
-            case 4: Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToMasterDashboardFragment());
+            case 4:
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
+                Log.e(TAG, "navigateTo: "+"master" );
+                editor.putString("type", "master");
+                editor.apply();
+                Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToMasterDashboardFragment());
                 break;
         }
     }

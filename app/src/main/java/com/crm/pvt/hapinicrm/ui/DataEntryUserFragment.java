@@ -3,6 +3,7 @@ package com.crm.pvt.hapinicrm.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -62,6 +63,13 @@ public class DataEntryUserFragment extends Fragment {
         binding.ivOpenGS.setOnClickListener(v->
         {
             Navigation.findNavController(v).navigate(DataEntryUserFragmentDirections.actionDataEntryUserFragmentToGoogleSheetFragment());
+        });
+        binding.dataentryuserlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),MainActivity.class));
+                getActivity().finish();
+            }
         });
 
         binding.btnViewTaskDataEntryUser.setOnClickListener(new View.OnClickListener() {

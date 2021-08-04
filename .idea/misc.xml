@@ -14,6 +14,20 @@
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_user.xml" value="0.1" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_users.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_user_info_card_view.xml" value="0.15364583333333334" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/activity_main.xml" value="0.16530797101449277" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_admin.xml" value="0.16530797101449277" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_user.xml" value="0.16530797101449277" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_user_form_details.xml" value="0.16530797101449277" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_admin_data_view.xml" value="0.22282608695652173" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_data_entry_admin.xml" value="0.15489130434782608" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_data_entry_user.xml" value="0.22282608695652173" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_edit_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_master_dashboard.xml" value="0.15489130434782608" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_admin.xml" value="0.15489130434782608" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_users.xml" value="0.23233695652173914" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_admin_details.xml" value="0.15489130434782608" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_user_info_card_view.xml" value="0.22282608695652173" />
       </map>
     </option>
   </component>
