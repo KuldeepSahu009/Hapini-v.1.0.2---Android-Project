@@ -1,5 +1,6 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,9 @@ import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentTrackUsersBinding;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,8 +42,9 @@ public class TrackUsers extends Fragment {
     private List<TrackUserModel> trackUserModelList;
     private ArrayList<User> user;
     private String data;
-
+    public static String userType;
     private DatabaseReference crm,de,ve;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -47,6 +52,17 @@ public class TrackUsers extends Fragment {
         binding = FragmentTrackUsersBinding.inflate(inflater, container, false);
 
         data = getArguments().getString("data");
+        switch (data) {
+            case "crmUser":
+                userType = "crm";
+                break;
+            case "videoUser":
+                userType = "video";
+                break;
+            case "dataUser":
+                userType = "data";
+                break;
+        }
         Log.e(TAG, "onCreateView: " + data);
 
         return binding.getRoot();
@@ -63,7 +79,6 @@ public class TrackUsers extends Fragment {
         trackUserModelList = new ArrayList<>();
         binding.rvTrackUser.setLayoutManager(new LinearLayoutManager(getContext()));
         trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList);
-
         binding.rvTrackUser.setAdapter(trackUserAdapter);
 
         switch (data) {
@@ -111,7 +126,7 @@ public class TrackUsers extends Fragment {
 
     private void getVideoEditorData() {
         de = FirebaseDatabase.getInstance().getReference("usersv2");
-        Query query=de.child("data");
+        Query query=de.child("video");
         ///
         query.addValueEventListener(new ValueEventListener(){
             @Override
@@ -137,7 +152,7 @@ public class TrackUsers extends Fragment {
 
     private void getDataEntryOperatorData() {
         ve = FirebaseDatabase.getInstance().getReference("usersv2");
-        Query query=ve.child("video");
+        Query query=ve.child("data");
         ///
         query.addValueEventListener(new ValueEventListener(){
             @Override
@@ -160,4 +175,8 @@ public class TrackUsers extends Fragment {
         });
 
     }
+
+
+
+
 }
