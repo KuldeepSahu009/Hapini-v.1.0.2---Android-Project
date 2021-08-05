@@ -18,23 +18,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
-        android:weightSum="6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:weightSum="5"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp">
-
-        <ImageButton
-            android:id="@+id/ivBackFromDataEntryUser"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp"
-            android:src="@drawable/ic_back" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvDataEntryUserDashboardTitle"
@@ -59,10 +48,9 @@
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
-            android:paddingTop="8dp"
             android:padding="8dp"
-            android:src="@drawable/ic_logout"
-            />
+            android:paddingTop="8dp"
+            android:src="@drawable/ic_logout" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

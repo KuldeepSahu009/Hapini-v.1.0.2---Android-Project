@@ -57,19 +57,13 @@ public class DataEntryUserFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.ivBackFromDataEntryUser.setOnClickListener(v->
-                Navigation.findNavController(v).navigateUp());
+
+        binding.dataentryuserlogout.setOnClickListener(v->
+              dataUserLogout(v));
 
         binding.ivOpenGS.setOnClickListener(v->
         {
             Navigation.findNavController(v).navigate(DataEntryUserFragmentDirections.actionDataEntryUserFragmentToGoogleSheetFragment());
-        });
-        binding.dataentryuserlogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(),MainActivity.class));
-                getActivity().finish();
-            }
         });
 
         binding.btnViewTaskDataEntryUser.setOnClickListener(new View.OnClickListener() {
@@ -149,5 +143,23 @@ public class DataEntryUserFragment extends Fragment {
 
 
 
+    }
+
+    private void dataUserLogout(View v) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Logout");
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            SharedPreferences getshared = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE);
+            getshared.edit().clear().commit();
+            Navigation.findNavController(v).navigateUp();
+        });
+        builder.setNegativeButton("No", (dialog, which) -> {
+        });
+
+        AlertDialog logoutDialog = builder.create();
+        logoutDialog.show();
     }
 }

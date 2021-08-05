@@ -58,7 +58,7 @@ public class UserLoginFragment extends Fragment {
             boolean isValid = validateCredentials();
             if (isValid) {
                 int pos = binding.spSelectUser.getSelectedItemPosition();
-                navigateTo(v, pos);
+                getdata(pos, v);
             } else {
                 Snackbar.make(v, "Authentication Failed", Snackbar.LENGTH_SHORT).show();
             }
@@ -83,25 +83,6 @@ public class UserLoginFragment extends Fragment {
                 R.array.select_user_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spSelectUser.setAdapter(adapter);
-    }
-
-    private void navigateTo(View view, int pos) {
-
-        switch (pos) {
-            case 1:
-                getdata(pos, view);
-
-                break;
-            case 2:
-                getdata(pos, view);
-
-                break;
-            case 3:
-                getdata(pos, view);
-
-                break;
-        }
-
     }
 
     private void getdata(int pos, View view) {

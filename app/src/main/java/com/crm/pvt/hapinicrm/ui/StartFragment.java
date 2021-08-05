@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentStartBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,6 +43,7 @@ public class StartFragment extends Fragment {
                 Navigation.findNavController(v).navigate(StartFragmentDirections.actionStartFragmentToUserLoginFragment())
         );
 
+        // for admin
         if(user != null) {
             String email = user.getEmail();
             if(email != null && email.contains("crmadmin")) {
@@ -53,6 +55,21 @@ public class StartFragment extends Fragment {
             }
         }
 
+        // for user
+
+        if(Splashscreen.userLoginType != null) {
+            switch (Splashscreen.userLoginType) {
+                case "crmuser":
+                    Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToCrmUserFragment());
+                    break;
+                case "datauser":
+                    Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToDataEntryUserFragment());
+                    break;
+                case "videouser":
+                    Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToVideoEditorUserFragment());
+                    break;
+            }
+        }
     }
 
 }
