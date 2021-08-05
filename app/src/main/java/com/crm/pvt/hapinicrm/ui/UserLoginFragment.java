@@ -77,7 +77,6 @@ public class UserLoginFragment extends Fragment {
             return true;
         }
     }
-
     private void initializeSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.select_user_type, android.R.layout.simple_spinner_item);
