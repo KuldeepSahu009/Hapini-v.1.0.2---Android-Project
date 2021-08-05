@@ -1,7 +1,8 @@
 package com.crm.pvt.hapinicrm.model;
 
 // Sample Admin Model
-//TODO Admin Model
+
+import java.io.Serializable;
 
 public class Admin {
      String name;
@@ -12,6 +13,8 @@ public class Admin {
      String password;
      String location;
      String imgurl;
+
+     public Admin() { }
 
     public Admin(String name, String email, String phoneno, String whatsappno, String passcode, String password, String location, String imgurl) {
         this.name = name;

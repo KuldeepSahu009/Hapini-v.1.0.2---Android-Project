@@ -1,8 +1,9 @@
 package com.crm.pvt.hapinicrm.ui;
 
-import android.content.Intent;
-
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,8 @@ public class AdminLoginFragment extends Fragment {
 
     private FragmentAdminLoginBinding binding;
     private FirebaseAuth auth;
-String forattendance;
+    private static final String TAG = "TAG";
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAdminLoginBinding.inflate(inflater,container,false);
@@ -45,7 +47,7 @@ String forattendance;
 
             String passcode = Objects.requireNonNull(binding.etPasscode.getText()).toString();
             String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
-            forattendance=passcode;
+
             if(passcode.length()!=6) {
 
                 binding.etPasscode.setError("Passcode should be 6 characters long");
@@ -101,11 +103,7 @@ String forattendance;
 
     private void navigateTo(View view, int pos) {
         switch (pos) {
-            case 1:
-                Bundle bundle = new Bundle();
-                bundle.putString("crmadminpasscode", forattendance);
-                Navigation.findNavController(view).navigate(R.id.action_adminLoginFragment_to_crmAdminFragment,bundle);
-
+            case 1: Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToCrmAdminFragment());
                 break;
             case 2:
                 Navigation.findNavController(view).navigate(R.id.action_adminLoginFragment_to_dataEntryAdminFragment);
@@ -113,8 +111,10 @@ String forattendance;
             case 3: Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToVideoEditorNavigation());
                 break;
             case 4:
-                Intent intentmaster = new Intent(getContext(), Attendancedialogue.class);
-                intentmaster.putExtra("masteradminpasscode",forattendance);
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
+                Log.e(TAG, "navigateTo: "+"master" );
+                editor.putString("type", "master");
+                editor.apply();
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToMasterDashboardFragment());
                 break;
         }
