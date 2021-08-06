@@ -68,10 +68,7 @@ public class AdminLoginFragment extends Fragment {
                 } else if(selected == 3) {
                     postString = "@veadmin.com";
                 } else if(selected == 4) {
-                    binding.pbAuth.setVisibility(View.INVISIBLE);
-                    binding.btnLogin.setEnabled(true);
-                    navigateTo(v,selected);
-                    return;
+                    postString = "@masteradmin.com";
                 }
 
                 auth.signInWithEmailAndPassword(passcode+postString,password).addOnCompleteListener(task -> {
