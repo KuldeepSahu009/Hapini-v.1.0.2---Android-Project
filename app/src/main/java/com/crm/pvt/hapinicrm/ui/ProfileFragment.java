@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.model.Admin;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
     private static final String TAG = "TAG";
+    String usertype;
+
     
     
     @Override
@@ -42,7 +45,7 @@ public class ProfileFragment extends Fragment {
     }
 
     public ImageView ivProfilePic;
-    public  TextView tvProfileName, tvProfileEmail, tvProfilePasscode, tvProfilePassword;
+    public  TextView tvProfileName, tvProfileEmail, tvProfilePasscode, tvProfilePassword,edittext;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -54,10 +57,21 @@ public class ProfileFragment extends Fragment {
                 }
         );
 
-        view.findViewById(R.id.tvProfileEditText).setOnClickListener(
-                v ->
-                        Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment)
-        );
+        edittext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (usertype!="master"){
+                Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment);
+                EditProfileFragment.usertype=usertype;
+                }else{
+                    Log.e(TAG, "onClick: "+"master" );
+                    Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_editProfileFragment);
+                }
+
+            }
+        });
+
+
     }
 
     private void initializeAllUIComponents(View view) {
@@ -66,6 +80,7 @@ public class ProfileFragment extends Fragment {
         tvProfileName = view.findViewById(R.id.tvProfileName);
         tvProfileEmail = view.findViewById(R.id.tvProfileEmail);
         tvProfilePasscode = view.findViewById(R.id.tvProfilePasscode);
+        edittext=view.findViewById(R.id.tvProfileEditText);
         getprofileinfo();
     }
 
@@ -73,7 +88,7 @@ public class ProfileFragment extends Fragment {
 
     private void getprofileinfo(){
         SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
-       String usertype = getshared.getString("type", "no data");
+        usertype = getshared.getString("type", "no data");
        String passcode=getshared.getString("passcode","no data");
         Log.e(TAG, "getprofileinfo: "+usertype );
         switch (usertype){
@@ -92,6 +107,7 @@ public class ProfileFragment extends Fragment {
                 break;
 
             case "master":
+                usertype="master";
                // Log.e(TAG, "getprofileinfo: "+"getmaster" );
                 getmasterdata();
                 break;
@@ -118,6 +134,7 @@ public class ProfileFragment extends Fragment {
                            tvProfileName.setText(name);
                            tvProfileEmail.setText(email);
                            tvProfilePasscode.setText(passcode);
+
                            tvProfilePassword.setText(password);
                        }
                    }
@@ -153,6 +170,9 @@ public class ProfileFragment extends Fragment {
                         tvProfileName.setText(name);
                         tvProfileEmail.setText(email);
                         tvProfilePasscode.setText(passcode);
+                        EditProfileFragment.previouspasscode=passcode;
+                        EditProfileFragment.previouspassword=password;
+
                         tvProfilePassword.setText(password);
                     }
                 }
@@ -180,6 +200,17 @@ public class ProfileFragment extends Fragment {
                         String name=dataSnapshot.child("name").getValue().toString();
                         String imgurl=dataSnapshot.child("imgurl").getValue().toString();
                         Log.e(TAG, "onDataChange: "+password+email );
+                        if (!   imgurl.equals("")){
+                            Glide.with(getContext()).load(imgurl).into(ivProfilePic);
+                        }
+
+                        tvProfileName.setText(name);
+                        tvProfileEmail.setText(email);
+                        tvProfilePasscode.setText(passcode);
+                        EditProfileFragment.previouspasscode=passcode;
+                        EditProfileFragment.previouspassword=password;
+
+                        tvProfilePassword.setText(password);
 
 
                     }
@@ -212,6 +243,19 @@ public class ProfileFragment extends Fragment {
                         String name=dataSnapshot.child("name").getValue().toString();
                         String imgurl=dataSnapshot.child("imgurl").getValue().toString();
                         Log.e(TAG, "onDataChange: "+password+email );
+
+                        if (!   imgurl.equals("")){
+                            Glide.with(getContext()).load(imgurl).into(ivProfilePic);
+                        }
+
+                        tvProfileName.setText(name);
+                        tvProfileEmail.setText(email);
+                        tvProfilePasscode.setText(passcode);
+                        EditProfileFragment.previouspasscode=passcode;
+                        EditProfileFragment.previouspassword=password;
+
+                        tvProfilePassword.setText(password);
+
 
 
                     }

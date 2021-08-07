@@ -22,14 +22,22 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.model.Admin;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -45,6 +53,11 @@ public class EditProfileFragment extends Fragment {
     private CheckBox checkBox;
     public Uri ivProfilePicURI;
     private String TAG = "TAG";
+    public static String usertype,previouspasscode,previouspassword;
+    ProgressDialog progressDialog;
+    String name, password, passcode, email;
+    FirebaseUser firebaseUser;
+    private Boolean updateauth=false;
 
 
     @Override
@@ -60,6 +73,9 @@ public class EditProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         thisView = view;
         initializeAllUIComponents(view);
+        Log.e(TAG, "onViewCreated: "+previouspasscode );
+        Log.e(TAG, "updprevioudpassword "+previouspassword);
+        //Log.e(TAG, "onViewCreatedusertype: " + usertype);
         view.findViewById(R.id.ivBackFromEditMasterDetailFragment).setOnClickListener(v ->
 
                 Navigation.findNavController(v).navigateUp()
@@ -107,16 +123,18 @@ public class EditProfileFragment extends Fragment {
     }
 
     private void getdata(View view) {
-        String name = etProfileName.getText().toString();
-        String email = etProfileEmail.getText().toString();
-        String passcode = etProfilePasscode.getText().toString();
-        String password = etProfilePassword.getText().toString();
-        Log.e(TAG, "getdata: " + name + email + passcode + password);
+        name = etProfileName.getText().toString();
+        email = etProfileEmail.getText().toString();
+        passcode = etProfilePasscode.getText().toString();
+        password = etProfilePassword.getText().toString();
+        // Log.e(TAG, "getdata: " + name + email + passcode + password);
         if (checkBox.isChecked()) {
             if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email) || TextUtils.isEmpty(passcode) || TextUtils.isEmpty(password) || ivProfilePicURI == null) {
                 Snackbar.make(view, "Please provide all the info", Snackbar.LENGTH_LONG).show();
+            } else if (passcode.length() < 6) {
+                Snackbar.make(view, "Please enter a valid passcode", Snackbar.LENGTH_LONG).show();
             } else {
-                setdata(name, email, passcode, password, ivProfilePicURI);
+                setdata(ivProfilePicURI);
             }
         } else {
             Snackbar.make(view, "Please accept the terms and conditions", Snackbar.LENGTH_LONG).show();
@@ -125,8 +143,8 @@ public class EditProfileFragment extends Fragment {
 
     }
 
-    private void setdata(String name, String email, String passcode, String password, Uri imgurl) {
-        ProgressDialog progressDialog=new ProgressDialog(getContext());
+    private void setdata(Uri imgurl) {
+        progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Please wait");
         progressDialog.setMessage("Creating");
         progressDialog.show();
@@ -135,7 +153,7 @@ public class EditProfileFragment extends Fragment {
         //setpasscode will be updated in future
 
         if (imgurl != null) {
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference("masterprofilepicv2");
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference("profilepicv2");
             StorageReference filerefernece = storageReference.child(System.currentTimeMillis() + "");
             StorageTask uploadtask = filerefernece.putFile(imgurl);
             Task<Uri> urlTask = uploadtask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -153,45 +171,132 @@ public class EditProfileFragment extends Fragment {
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
-                        Log.e(TAG, "onComplete: "+downloadUri.toString() );
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Masterv2");
-                        HashMap<String, String> hashMap = new HashMap<>();
-                        hashMap.put("name", name);
-                        hashMap.put("email", email);
-                        hashMap.put("password", password);
-                        hashMap.put("imgurl", downloadUri.toString());
-
-                        reference.child(passcode).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Snackbar.make(thisView, "profile setup done", Snackbar.LENGTH_LONG).show();
-                                progressDialog.dismiss();
-                                Navigation.findNavController(thisView).navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment());
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Snackbar.make(thisView, "unableto setup profile", Snackbar.LENGTH_LONG).show();
-                            }
-                        });
-
-
+                        Log.e(TAG, "photo: "+downloadUri );
+                        updateprofile(downloadUri.toString());
 
 
                     } else {
                         // Handle failures
                         // ...
-                        Snackbar.make(thisView,"unable to upload img",Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(thisView, "unable to upload img", Snackbar.LENGTH_LONG).show();
                     }
                 }
             });
+        }
+    }
+
+    private void updateprofile(String downloaduri) {
+        Log.e(TAG, "updateprofile: "+"updateprofile" );
+        String postids;
+        String prepostid;
+        switch (usertype) {
+            case "master":
+                 postids=passcode+"@masteradmin.com";
+                updatemasterprofile(downloaduri);
+                break;
+            case "crm":
+                prepostid=previouspasscode=previouspasscode+"@crmadmin.com";
+                 postids=passcode+"@crmadmin.com";
+               if(updateadminprofile(downloaduri,postids,prepostid)){
+                   getpreviousinfodatabase(downloaduri,"CRM");
+               }
+                break;
+            case "data":
+                 postids=passcode+"@deadmin.com";
+                 prepostid=previouspasscode=previouspasscode+"@deadmin.com";
+                Log.e(TAG, "updateprofile: "+"data" );
+//                if(updateadminprofile(downloaduri,postids)){
+//                    getpreviousinfodatabase(downloaduri,"DATA_ENTRY");
+//                }
+                if (
+                updateadminprofile(downloaduri,postids,prepostid)){
+                    getpreviousinfodatabase(downloaduri,"DATA_ENTRY");
+                };
+                break;
+
+            case "video":
+                 postids=passcode+"@veadmin.com";
+                prepostid=previouspasscode=previouspasscode+"@veadmin.com";
+                if(updateadminprofile(downloaduri,postids,prepostid)){
+                    getpreviousinfodatabase(downloaduri,"VIDEO_EDITOR");
+                }
+                break;
+
 
         }
+    }
+
+    private void updatemasterprofile(String downloaduri) {
+
+
+
+        Log.e(TAG, "updatemasterprofile:" + "master");
+
+    }
+
+    private Boolean updateadminprofile(String downloaduri,String postids,String previouspostid) {
+        ;
+        Log.e(TAG, "updateadminprofile: "+postids );
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = firebaseUser.getUid();
+        Log.e(TAG, "updateadminprofile: "+uid );
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        AuthCredential credential = EmailAuthProvider
+                .getCredential(previouspostid, previouspassword);
+        user.reauthenticate(credential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d(TAG, "User re-authenticated.");
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        user.updateEmail(postids)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User email address updated.");
+                                            user.updatePassword(password)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Log.d(TAG, "User password updated.");
+                                                            }
+                                                        }
+                                                    });
+                                        }
+                                    }
+                                });
+                        //----------------------------------------------------------\\
+                    }
+                });
+        return updateauth;
+
+
+    }
+    private void getpreviousinfodatabase(String downloaduri,String usertypes){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child(usertypes);
+        reference.child(previouspasscode).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                progressDialog.dismiss();
+                Admin admin=snapshot.getValue(Admin.class);
+                Log.e(TAG, "onDataChange: "+admin.getPasscode()+admin.getName() );
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
 
     }
+
 
 }
 
