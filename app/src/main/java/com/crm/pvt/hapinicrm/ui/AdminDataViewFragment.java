@@ -222,6 +222,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                         if(task.isSuccessful()) {
                             auth.getCurrentUser().delete();
                         }
+                        auth.signInWithEmailAndPassword(AdminLoginFragment.passcode + "@masteradmin.com",AdminLoginFragment.password);
                     });
 
                     if (passcode.equals(admin.getPasscode())) {
