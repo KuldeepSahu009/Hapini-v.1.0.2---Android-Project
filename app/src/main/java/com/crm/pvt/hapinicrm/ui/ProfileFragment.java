@@ -56,7 +56,7 @@ public class ProfileFragment extends Fragment {
 
         view.findViewById(R.id.tvProfileEditText).setOnClickListener(
                 v ->
-                        Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_editProfileFragment)
+                        Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment)
         );
     }
 
@@ -74,12 +74,27 @@ public class ProfileFragment extends Fragment {
     private void getprofileinfo(){
         SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
        String usertype = getshared.getString("type", "no data");
+       String passcode=getshared.getString("passcode","no data");
         Log.e(TAG, "getprofileinfo: "+usertype );
         switch (usertype){
+            case "crm":
+                //Log.e(TAG, "getprofileinfo: "+passcode);
+
+                getcrmdata(passcode);
+                break;
+            case  "data":
+                getdataentrydata(passcode);
+                break;
+            case "video":
+                getvideodata(passcode);
+
+
+                break;
 
             case "master":
-                Log.e(TAG, "getprofileinfo: "+"getmaster" );
+               // Log.e(TAG, "getprofileinfo: "+"getmaster" );
                 getmasterdata();
+                break;
         }
 
 
@@ -114,5 +129,103 @@ public class ProfileFragment extends Fragment {
 
                 }
             });
+    }
+    private void getcrmdata(String passcodes){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child("CRM");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    String key=dataSnapshot.getKey();
+                    Log.e(TAG, "onDataChange: "+key );
+                   String passcode=dataSnapshot.child("passcode").getValue().toString();
+                    dataSnapshot.child("passcode").getValue().toString();
+                    if (passcode.equals(passcodes)){
+                        String password=dataSnapshot.child("password").getValue().toString();
+                        String email=dataSnapshot.child("email").getValue().toString();
+                        String name=dataSnapshot.child("name").getValue().toString();
+                        String imgurl=dataSnapshot.child("imgurl").getValue().toString();
+
+                        if (!   imgurl.equals("")){
+                            Glide.with(getContext()).load(imgurl).into(ivProfilePic);
+                        }
+
+                        tvProfileName.setText(name);
+                        tvProfileEmail.setText(email);
+                        tvProfilePasscode.setText(passcode);
+                        tvProfilePassword.setText(password);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void getdataentrydata(String passcodes){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child("DATA_ENTRY");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    String key=dataSnapshot.getKey();
+                    Log.e(TAG, "onDataChange: "+key );
+                    String passcode=dataSnapshot.child("passcode").getValue().toString();
+                    dataSnapshot.child("passcode").getValue().toString();
+                    if (passcode.equals(passcodes)){
+                        String password=dataSnapshot.child("password").getValue().toString();
+                        String email=dataSnapshot.child("email").getValue().toString();
+                        String name=dataSnapshot.child("name").getValue().toString();
+                        String imgurl=dataSnapshot.child("imgurl").getValue().toString();
+                        Log.e(TAG, "onDataChange: "+password+email );
+
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+    private void getvideodata(String passcodes){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child("VIDEO_EDITOR");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    String key=dataSnapshot.getKey();
+                    Log.e(TAG, "onDataChange: "+key );
+                    String passcode=dataSnapshot.child("passcode").getValue().toString();
+                    dataSnapshot.child("passcode").getValue().toString();
+                    if (passcode.equals(passcodes)){
+                        String password=dataSnapshot.child("password").getValue().toString();
+                        String email=dataSnapshot.child("email").getValue().toString();
+                        String name=dataSnapshot.child("name").getValue().toString();
+                        String imgurl=dataSnapshot.child("imgurl").getValue().toString();
+                        Log.e(TAG, "onDataChange: "+password+email );
+
+
+                    }
+                }
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

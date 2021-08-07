@@ -92,13 +92,13 @@ public class AddAdminFormDetailsFragment extends Fragment {
                     Log.i(TAG,"Something went wrong");
                 }
             });
-            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("adminV2").child(adminType);
-            databaseReference.push().setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
+            databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
                     Toast.makeText(getContext(),"CRM Admin Successfully Entered",Toast.LENGTH_LONG).show();
-
+                     Navigation.findNavController(getView()).navigateUp();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -118,12 +118,13 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 }
             });
 
-            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("adminV2").child(adminType);
-            databaseReference.push().setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
+            databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
                     Toast.makeText(getContext(),"Data Entry Admin Successfully Entered",Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(getView()).navigateUp();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -143,12 +144,13 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 }
             });
 
-            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("adminV2").child(adminType);
-            databaseReference.push().setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
+            databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
                     Toast.makeText(getContext(),"Video Editor Admin Successfully Entered",Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(getView()).navigateUp();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

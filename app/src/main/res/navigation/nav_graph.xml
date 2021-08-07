@@ -161,7 +161,22 @@
         android:id="@+id/setrpofile"
         android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
         tools:layout="@layout/fragment_profile"
-        android:label="profile"/>
+        android:label="profile"
+        >
+        <action
+            android:id="@+id/movetoeditprofilefragment"
+            app:destination="@id/editprofileadmins"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/editprofileadmins"
+        android:name="com.crm.pvt.hapinicrm.ui.EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"
+        android:label="editprofileadmin"/>
+
     <fragment
         android:id="@+id/alltrackusersfragment"
         android:name="com.crm.pvt.hapinicrm.ui.TrackUsers"

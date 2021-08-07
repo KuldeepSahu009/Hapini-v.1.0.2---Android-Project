@@ -52,6 +52,8 @@ public class StartFragment extends Fragment {
                 Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToVideoEditorNavigation());
             } else if(email != null && email.contains("deadmin")) {
                 Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToDataEntryAdminFragment());
+            } else if(email != null && email.contains("masteradmin")) {
+                Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToMasterNavigation());
             }
         }
 

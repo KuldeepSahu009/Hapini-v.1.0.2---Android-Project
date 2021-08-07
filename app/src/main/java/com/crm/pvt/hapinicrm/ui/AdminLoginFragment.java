@@ -26,6 +26,8 @@ public class AdminLoginFragment extends Fragment {
     private FragmentAdminLoginBinding binding;
     private FirebaseAuth auth;
     private static final String TAG = "TAG";
+    static String passcode;
+    static String password;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,8 +47,8 @@ public class AdminLoginFragment extends Fragment {
             binding.btnLogin.setEnabled(false);
             binding.pbAuth.setVisibility(View.VISIBLE);
 
-            String passcode = Objects.requireNonNull(binding.etPasscode.getText()).toString();
-            String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
+            passcode = Objects.requireNonNull(binding.etPasscode.getText()).toString();
+            password = Objects.requireNonNull(binding.etPassword.getText()).toString();
 
             if(passcode.length()!=6) {
 
@@ -99,21 +101,38 @@ public class AdminLoginFragment extends Fragment {
     }
 
     private void navigateTo(View view, int pos) {
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
         switch (pos) {
-            case 1: Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToCrmAdminFragment());
+
+            case 1:
+                editor.putString("type", "crm");
+                editor.putString("passcode",passcode);
+               // Log.e(TAG, "navigateTo: "+passcode );
+                editor.apply();
+                Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToCrmAdminFragment());
                 break;
             case 2:
+                editor.putString("type", "data");
+                editor.putString("passcode",passcode);
+                // Log.e(TAG, "navigateTo: "+passcode );
+                editor.apply();
                 Navigation.findNavController(view).navigate(R.id.action_adminLoginFragment_to_dataEntryAdminFragment);
                 break;
-            case 3: Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToVideoEditorNavigation());
+            case 3:
+                editor.putString("type", "video");
+                editor.putString("passcode",passcode);
+                // Log.e(TAG, "navigateTo: "+passcode );
+                editor.apply();
+                Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToVideoEditorNavigation());
                 break;
             case 4:
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
                 Log.e(TAG, "navigateTo: "+"master" );
                 editor.putString("type", "master");
+                editor.putString("passcode",passcode);
                 editor.apply();
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToMasterDashboardFragment());
                 break;
         }
     }
+
 }
