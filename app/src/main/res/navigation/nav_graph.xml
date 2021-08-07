@@ -40,6 +40,21 @@
             app:destination="@id/crmAdminFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_dataEntryUserFragment"
+            app:destination="@id/dataEntryUserFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_crmUserFragment"
+            app:destination="@id/crmUserFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_videoEditorUserFragment"
+            app:destination="@id/videoEditorUserFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/adminLoginFragment"

@@ -1,6 +1,7 @@
 package com.crm.pvt.hapinicrm;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,10 +28,11 @@ public class Splashscreen extends AppCompatActivity {
     private int totalCount;
     private final int SPLASH_TIME_OUT=6500;
 
-    String password;
-    String passcode;
-    String usertype;
+    private String password;
+    private String passcode;
+    private String usertype;
     private String TAG = "TAG";
+    public static String userLoginType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +62,10 @@ public class Splashscreen extends AppCompatActivity {
     private void checkforuser() {
 
 
-        if (usertype != "no data") {
+        if (!usertype.equals("no data") && !passcode.equals("no passcode") ){
 
             markattendance();
-        }else if (usertype=="no data"){
+        }else if (usertype.equals("no data")){
             Log.e(TAG, "checkforuser: "+"no user");
         }
     }
@@ -85,9 +87,7 @@ public class Splashscreen extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.e(TAG, "onSuccess: "+"attendencedonecrm" );
-
-
-
+                        userLoginType = usertype;
                     }
                 });
 
@@ -101,7 +101,7 @@ public class Splashscreen extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.e(TAG, "onSuccess: "+"attendencedonevideo" );
-
+                        userLoginType = usertype;
 
                     }
                 });
@@ -115,7 +115,7 @@ public class Splashscreen extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         Log.e(TAG, "onSuccess: "+"attendencedonedata" );
 
-
+                        userLoginType = usertype;
 
                     }
                 });
