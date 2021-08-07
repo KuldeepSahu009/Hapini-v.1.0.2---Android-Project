@@ -26,7 +26,8 @@ public class AdminLoginFragment extends Fragment {
     private FragmentAdminLoginBinding binding;
     private FirebaseAuth auth;
     private static final String TAG = "TAG";
-    String passcode;
+    static String passcode;
+    static String password;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,8 +47,8 @@ public class AdminLoginFragment extends Fragment {
             binding.btnLogin.setEnabled(false);
             binding.pbAuth.setVisibility(View.VISIBLE);
 
-          passcode = Objects.requireNonNull(binding.etPasscode.getText()).toString();
-            String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
+            passcode = Objects.requireNonNull(binding.etPasscode.getText()).toString();
+            password = Objects.requireNonNull(binding.etPassword.getText()).toString();
 
             if(passcode.length()!=6) {
 
@@ -133,4 +134,5 @@ public class AdminLoginFragment extends Fragment {
                 break;
         }
     }
+
 }

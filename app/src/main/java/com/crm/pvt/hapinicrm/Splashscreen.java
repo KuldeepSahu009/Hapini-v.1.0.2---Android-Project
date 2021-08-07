@@ -35,6 +35,7 @@ public class Splashscreen extends AppCompatActivity {
     public static String userLoginType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
         new Handler().postDelayed(new Runnable() {
@@ -47,8 +48,6 @@ public class Splashscreen extends AppCompatActivity {
 
         getdatafromsharedpreference();
         checkforuser();
-
-
 
     }
     private void getdatafromsharedpreference() {
