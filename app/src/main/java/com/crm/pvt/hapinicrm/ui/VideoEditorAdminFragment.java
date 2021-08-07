@@ -67,8 +67,8 @@ public class VideoEditorAdminFragment extends Fragment {
             builder.setNegativeButton("No", (dialog, which) -> {
             });
 
-            AlertDialog attendanceDialog = builder.create();
-            attendanceDialog.show();
+            AlertDialog logoutDialog = builder.create();
+            logoutDialog.show();
         });
 
     }
