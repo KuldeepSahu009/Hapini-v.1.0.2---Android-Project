@@ -24,9 +24,16 @@ public class CrmAdminFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding=FragmentCrmAdminBinding.inflate(inflater, container, false);
+        Bundle bundle = getArguments();
+        String attendancepasscode = bundle.getString("crmadminpasscode","");
+
+        Bundle bundle1=new Bundle();
+        bundle.putString("todialog",attendancepasscode);
+
         if (login()) {
             login = false;
             Attendancedialogue attendancedialogue = new Attendancedialogue();
+            attendancedialogue.setArguments(bundle1);
             attendancedialogue.show(getFragmentManager(), "attendance dialogue");
         }
 

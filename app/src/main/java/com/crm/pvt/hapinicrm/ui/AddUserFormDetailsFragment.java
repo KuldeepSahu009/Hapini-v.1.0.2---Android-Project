@@ -145,7 +145,7 @@ public class AddUserFormDetailsFragment extends Fragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"video usernot entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"video user not entered",Toast.LENGTH_LONG).show();
                 }
             });
         }

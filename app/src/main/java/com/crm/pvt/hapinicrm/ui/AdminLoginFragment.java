@@ -116,7 +116,7 @@ public class AdminLoginFragment extends Fragment {
                 editor.putString("passcode",passcode);
                 // Log.e(TAG, "navigateTo: "+passcode );
                 editor.apply();
-                Navigation.findNavController(view).navigate(R.id.action_adminLoginFragment_to_dataEntryAdminFragment);
+                Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToDataEntryAdminFragment());
                 break;
             case 3:
                 editor.putString("type", "video");
