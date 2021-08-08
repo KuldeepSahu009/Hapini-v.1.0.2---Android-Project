@@ -21,12 +21,15 @@ public class DataEntryAdminFragment extends Fragment {
     private FragmentDataEntryAdminBinding binding;
     private Boolean login = true;
     private FirebaseAuth auth;
+    Bundle bundle;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDataEntryAdminBinding.inflate(inflater, container, false);
+         bundle = new Bundle();
+        bundle.putString("data", "dataUser");
 
         if (login()) {
             login = false;
@@ -55,8 +58,7 @@ public class DataEntryAdminFragment extends Fragment {
         binding.dataentrytrackuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("data", "dataUser");
+
                 Navigation.findNavController(v).navigate(R.id.showtrackdataentryusers, bundle);
 
 

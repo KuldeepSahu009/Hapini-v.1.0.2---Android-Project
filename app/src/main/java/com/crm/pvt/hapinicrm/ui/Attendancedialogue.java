@@ -2,7 +2,9 @@ package com.crm.pvt.hapinicrm.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +25,10 @@ public class Attendancedialogue extends AppCompatDialogFragment {
         AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
         LayoutInflater inflater=getActivity().getLayoutInflater();
         View view=inflater.inflate(R.layout.dialogueforattendence,null);
-        Bundle bundle = getArguments();
-        String attendance = bundle.getString("todialog","");
         textViewpasscode=view.findViewById(R.id.showpasscodeinattendance);
-        textViewpasscode.setText(attendance);
+        SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
+        String passcode=getshared.getString("passcode","no data");
+        textViewpasscode.setText(passcode);
         builder.setView(view)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
@@ -29,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment {
     private static final String TAG = "TAG";
     String usertype;
+    Admin admin;
 
     
     
@@ -60,12 +62,17 @@ public class ProfileFragment extends Fragment {
         edittext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (usertype!="master"){
-                Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment);
                 EditProfileFragment.usertype=usertype;
-                }else{
-                    Log.e(TAG, "onClick: "+"master" );
+                Log.e(TAG, "ousertype: "+usertype );
+                if (usertype.equals("master")){
                     Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_editProfileFragment);
+                EditProfileFragment.usertype=usertype;
+                }else if(usertype.equals("video")){
+                    Navigation.findNavController(v).navigate(R.id.videoeditortoeditprofile);
+                }else{
+                    Log.e(TAG, "ousertype: "+usertype );
+                    Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment);
+
                 }
 
             }
@@ -134,6 +141,9 @@ public class ProfileFragment extends Fragment {
                            tvProfileName.setText(name);
                            tvProfileEmail.setText(email);
                            tvProfilePasscode.setText(passcode);
+                           EditProfileFragment.previouspasscode=passcode;
+                           EditProfileFragment.previouspassword=password;
+
 
                            tvProfilePassword.setText(password);
                        }
@@ -172,6 +182,7 @@ public class ProfileFragment extends Fragment {
                         tvProfilePasscode.setText(passcode);
                         EditProfileFragment.previouspasscode=passcode;
                         EditProfileFragment.previouspassword=password;
+
 
                         tvProfilePassword.setText(password);
                     }
@@ -272,4 +283,7 @@ public class ProfileFragment extends Fragment {
         });
 
     }
+
+
+
 }

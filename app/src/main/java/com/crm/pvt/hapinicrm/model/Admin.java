@@ -14,7 +14,11 @@ public class Admin {
      String location;
      String imgurl;
 
-     public Admin() { }
+    public Admin() {
+
+    }
+
+
 
     public Admin(String name, String email, String phoneno, String whatsappno, String passcode, String password, String location, String imgurl) {
         this.name = name;

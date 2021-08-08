@@ -101,7 +101,7 @@ public class AdminLoginFragment extends Fragment {
     }
 
     private void navigateTo(View view, int pos) {
-        SharedPreferences.Editor editor = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
         switch (pos) {
 
             case 1:

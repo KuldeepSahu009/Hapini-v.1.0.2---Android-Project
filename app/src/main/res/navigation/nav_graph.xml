@@ -381,10 +381,16 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
+
             <action
                 android:id="@+id/action_videoEditorAdminFragment_to_giveTaskVideoEditorFragment"
                 app:destination="@id/giveTaskVideoEditorFragment" />
         </fragment>
+        <fragment
+            android:id="@+id/editprofileforvideo"
+            android:name="com.crm.pvt.hapinicrm.ui.EditProfileFragment"
+            tools:layout="@layout/fragment_edit_profile"
+            android:label="editprofile"/>
         <fragment
             android:id="@+id/addUserFormDetailsFragment"
             android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
@@ -399,7 +405,11 @@
             android:id="@+id/profileFragmentVideoEditor"
             android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
             android:label="fragment_profile"
-            tools:layout="@layout/fragment_profile" />
+            tools:layout="@layout/fragment_profile" >
+            <action
+                android:id="@+id/videoeditortoeditprofile"
+                app:destination="@id/editprofileforvideo"/>
+        </fragment>
         <fragment
             android:id="@+id/giveTaskVideoEditorFragment"
             android:name="com.crm.pvt.hapinicrm.ui.GiveTaskVideoEditorFragment"
