@@ -15,6 +15,8 @@ import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentVideoEditorAdminBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class VideoEditorAdminFragment extends Fragment {
 
@@ -55,6 +57,11 @@ public class VideoEditorAdminFragment extends Fragment {
                 Navigation.findNavController(v).navigate(VideoEditorAdminFragmentDirections.actionVideoEditorAdminFragmentToProfileFragment())
         );
 
+        binding.videoEditorAddTaskImg.setOnClickListener(v->
+
+            Navigation.findNavController(v).navigate(VideoEditorAdminFragmentDirections.actionGlobalAddtaskfragment())
+
+        );
         binding.ivVideoEditorLogout.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Logout");
