@@ -15,7 +15,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/trackusername"
+                android:id="@+id/tvCustomerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -42,7 +42,7 @@
                 android:id="@+id/backemail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/trackusername"
+                android:layout_below="@+id/tvCustomerName"
                 android:layout_marginLeft="16dp"
                 android:text="Email ID: "
                 android:textColor="@color/black"
@@ -52,7 +52,7 @@
                 android:id="@+id/trackuseremailid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/trackusername"
+                android:layout_below="@+id/tvCustomerName"
                 android:layout_toRightOf="@+id/backemail"
                 android:text="abc@gamil.com"
                 android:textColor="@color/black"

@@ -442,7 +442,11 @@
         android:id="@+id/crmUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.CrmUserFragment"
         android:label="fragment_crm_user"
-        tools:layout="@layout/fragment_crm_user" />
+        tools:layout="@layout/fragment_crm_user" >
+        <action
+            android:id="@+id/action_crmUserFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dataEntryUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.DataEntryUserFragment"
@@ -467,4 +471,9 @@
         android:name="com.crm.pvt.hapinicrm.ui.GoogleSheetFragment"
         android:label="fragment_google_sheet"
         tools:layout="@layout/fragment_google_sheet" />
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.TaskListFragment"
+        android:label="fragment_task_list"
+        tools:layout="@layout/fragment_task_list" />
 </navigation>
