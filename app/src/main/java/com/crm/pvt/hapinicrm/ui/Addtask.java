@@ -1,6 +1,8 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.icu.text.StringSearch;
 import android.os.Bundle;
 
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +24,15 @@ import android.widget.Toast;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAddtaskBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 
@@ -36,6 +43,9 @@ public class Addtask extends Fragment {
     private static String state;
     private FragmentAddtaskBinding binding;
     private FirebaseDatabase dataBaseInstance;
+    String adminpasscode;
+    String passcodes;
+    private static final String TAG = "TAG";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,6 +55,9 @@ public class Addtask extends Fragment {
        passcode=binding.enterpasscodeforaddtask;
        sendtask=binding.sendtask;
        taskReceived=binding.addtasksettask;
+        SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
+        adminpasscode=getshared.getString("passcode","no data");
+        Log.e(TAG, "onCreateView: "+adminpasscode );
         binding.dataentryaddtaskbackimg.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
         state = sendtask.getText().toString();
 
@@ -65,7 +78,7 @@ public class Addtask extends Fragment {
     }
 
     private void verifyUser() {
-        String passcodes=passcode.getText().toString();
+         passcodes=passcode.getText().toString();
         if(passcodes.length()<6){
             passcode.setError("Check passcode");
         }
@@ -100,33 +113,24 @@ public class Addtask extends Fragment {
             progressDialog.setCancelable(false);
             progressDialog.setTitle("Sending Task To User....");
             progressDialog.show();
-            task.getRef().child("task").setValue(tasks).addOnCompleteListener(new OnCompleteListener<Void>() {
+           DatabaseReference reference=FirebaseDatabase.getInstance().getReference("dataentrytaskv2").child(adminpasscode);
+            HashMap<String,String> hashMap=new HashMap<>();
+            hashMap.put("userpasscode",passcodes);
+            hashMap.put("task",tasks);
+            reference.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
-                public void onComplete(@NonNull Task<Void> task1) {
-                    if(task1.isSuccessful())
-                    {
-                       task.getRef().child("taskGivenBy").setValue(auth.getCurrentUser().getEmail()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                           @Override
-                           public void onComplete(@NonNull Task<Void> task) {
-                               if(task.isSuccessful())
-                               {
-                                   progressDialog.dismiss();
-                                   Toast.makeText(getContext(),"Task given to that user" ,Toast.LENGTH_SHORT).show();
-                                   Navigation.findNavController(getView()).navigateUp();
-                               }
-                               else
-                               {
-                                   Toast.makeText(getContext(),"Something going Wrong" ,Toast.LENGTH_LONG).show();
-                                   progressDialog.dismiss();
-                               }
-                           }
-                       });
-                    }
-                    else
-                    {
-                        Toast.makeText(getContext(),"Something Went Wrong" ,Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
-                    }
+                public void onSuccess(Void unused) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getContext(), "Task sent", Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(getView()).navigateUp();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(getContext(), "unable to send task", Toast.LENGTH_LONG).show();
+
                 }
             });
         }
