@@ -3,23 +3,20 @@ package com.crm.pvt.hapinicrm.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.model.Admin;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,52 +27,45 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment {
     private static final String TAG = "TAG";
     String usertype;
-    Admin admin;
 
-    
-    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
 
+    private View view = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.fragment_profile, container, false);
+        return view;
     }
 
     public ImageView ivProfilePic;
-    public  TextView tvProfileName, tvProfileEmail, tvProfilePasscode, tvProfilePassword,edittext;
+    public TextView tvProfileName, tvProfileEmail, tvProfilePasscode, tvProfilePassword, edittext;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeAllUIComponents(view);
         view.findViewById(R.id.ivBackFromProfile).setOnClickListener(v ->
-                {
-                    Navigation.findNavController(v).navigateUp();
-                }
+                Navigation.findNavController(v).navigateUp()
         );
 
-        edittext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditProfileFragment.usertype=usertype;
-                Log.e(TAG, "ousertype: "+usertype );
-                if (usertype.equals("master")){
-                    Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_editProfileFragment);
-                EditProfileFragment.usertype=usertype;
-                }else if(usertype.equals("video")){
-                    Navigation.findNavController(v).navigate(R.id.videoeditortoeditprofile);
-                }else{
-                    Log.e(TAG, "ousertype: "+usertype );
-                    Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment);
-
-                }
-
+        edittext.setOnClickListener(v -> {
+            EditProfileFragment.usertype = usertype;
+            Log.e(TAG, "usertype: " + usertype);
+            if (usertype.equals("master")) {
+                Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_editProfileFragment);
+                EditProfileFragment.usertype = usertype;
+            } else if (usertype.equals("video")) {
+                Navigation.findNavController(v).navigate(R.id.videoeditortoeditprofile);
+            } else {
+                Log.e(TAG, "usertype: " + usertype);
+                Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment);
             }
+
         });
 
 
@@ -87,101 +77,98 @@ public class ProfileFragment extends Fragment {
         tvProfileName = view.findViewById(R.id.tvProfileName);
         tvProfileEmail = view.findViewById(R.id.tvProfileEmail);
         tvProfilePasscode = view.findViewById(R.id.tvProfilePasscode);
-        edittext=view.findViewById(R.id.tvProfileEditText);
+        edittext = view.findViewById(R.id.tvProfileEditText);
         getprofileinfo();
     }
 
 
-
-    private void getprofileinfo(){
+    private void getprofileinfo() {
         SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
         usertype = getshared.getString("type", "no data");
-       String passcode=getshared.getString("passcode","no data");
-        Log.e(TAG, "getprofileinfo: "+usertype );
-        switch (usertype){
+        String passcode = getshared.getString("passcode", "no data");
+        Log.e(TAG, "getprofileinfo: " + usertype);
+        switch (usertype) {
             case "crm":
                 //Log.e(TAG, "getprofileinfo: "+passcode);
-
                 getcrmdata(passcode);
                 break;
-            case  "data":
+            case "data":
                 getdataentrydata(passcode);
                 break;
             case "video":
                 getvideodata(passcode);
-
-
                 break;
-
             case "master":
-                usertype="master";
-               // Log.e(TAG, "getprofileinfo: "+"getmaster" );
+                usertype = "master";
+                // Log.e(TAG, "getprofileinfo: "+"getmaster" );
                 getmasterdata();
                 break;
         }
 
 
     }
-    private void getmasterdata(){
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Masterv2");
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                   for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                       String passcode=dataSnapshot.getKey();
-                       if (passcode.equals("123456")) {
-                           String name = dataSnapshot.child("name").getValue().toString();
-                           String email=dataSnapshot.child("email").getValue().toString();
-                           String password=dataSnapshot.child("password").getValue().toString();
-                           String imgurl=dataSnapshot.child("imgurl").getValue().toString();
 
-                           Log.e(TAG, "onDataChange: "+imgurl );
-
-                           Glide.with(getContext()).load(imgurl).into(ivProfilePic);
-                           tvProfileName.setText(name);
-                           tvProfileEmail.setText(email);
-                           tvProfilePasscode.setText(passcode);
-                           EditProfileFragment.previouspasscode=passcode;
-                           EditProfileFragment.previouspassword=password;
-
-
-                           tvProfilePassword.setText(password);
-                       }
-                   }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-    }
-    private void getcrmdata(String passcodes){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child("CRM");
+    private void getmasterdata() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Masterv2");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    String key=dataSnapshot.getKey();
-                    Log.e(TAG, "onDataChange: "+key );
-                   String passcode=dataSnapshot.child("passcode").getValue().toString();
-                    dataSnapshot.child("passcode").getValue().toString();
-                    if (passcode.equals(passcodes)){
-                        String password=dataSnapshot.child("password").getValue().toString();
-                        String email=dataSnapshot.child("email").getValue().toString();
-                        String name=dataSnapshot.child("name").getValue().toString();
-                        String imgurl=dataSnapshot.child("imgurl").getValue().toString();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String passcode = dataSnapshot.getKey();
+                    if (passcode.equals("123456")) {
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        String password = dataSnapshot.child("password").getValue().toString();
+                        String imgurl = dataSnapshot.child("imgurl").getValue().toString();
 
-                        if (!   imgurl.equals("")){
-                            Glide.with(getContext()).load(imgurl).into(ivProfilePic);
+                        Log.e(TAG, "onDataChange: " + imgurl);
+
+                        Glide.with(view).load(imgurl).into(ivProfilePic);
+                        tvProfileName.setText(name);
+                        tvProfileEmail.setText(email);
+                        tvProfilePasscode.setText(passcode);
+                        EditProfileFragment.previouspasscode = passcode;
+                        EditProfileFragment.previouspassword = password;
+
+
+                        tvProfilePassword.setText(password);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void getcrmdata(String passcodes) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("adminV2").child("CRM");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+                    Log.e(TAG, "onDataChange: " + key);
+                    String passcode = dataSnapshot.child("passcode").getValue().toString();
+                    dataSnapshot.child("passcode").getValue().toString();
+                    if (passcode.equals(passcodes)) {
+                        String password = dataSnapshot.child("password").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String imgurl = dataSnapshot.child("imgurl").getValue().toString();
+
+                        if (!imgurl.equals("")) {
+                            Glide.with(view).load(imgurl).into(ivProfilePic);
                         }
 
                         tvProfileName.setText(name);
                         tvProfileEmail.setText(email);
                         tvProfilePasscode.setText(passcode);
-                        EditProfileFragment.previouspasscode=passcode;
-                        EditProfileFragment.previouspassword=password;
+                        EditProfileFragment.previouspasscode = passcode;
+                        EditProfileFragment.previouspassword = password;
 
 
                         tvProfilePassword.setText(password);
@@ -195,31 +182,73 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-    private void getdataentrydata(String passcodes){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child("DATA_ENTRY");
+
+    private void getdataentrydata(String passcodes) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("adminV2").child("DATA_ENTRY");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    String key=dataSnapshot.getKey();
-                    Log.e(TAG, "onDataChange: "+key );
-                    String passcode=dataSnapshot.child("passcode").getValue().toString();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+                    Log.e(TAG, "onDataChange: " + key);
+                    String passcode = dataSnapshot.child("passcode").getValue().toString();
                     dataSnapshot.child("passcode").getValue().toString();
-                    if (passcode.equals(passcodes)){
-                        String password=dataSnapshot.child("password").getValue().toString();
-                        String email=dataSnapshot.child("email").getValue().toString();
-                        String name=dataSnapshot.child("name").getValue().toString();
-                        String imgurl=dataSnapshot.child("imgurl").getValue().toString();
-                        Log.e(TAG, "onDataChange: "+password+email );
-                        if (!   imgurl.equals("")){
-                            Glide.with(getContext()).load(imgurl).into(ivProfilePic);
+                    if (passcode.equals(passcodes)) {
+                        String password = dataSnapshot.child("password").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String imgurl = dataSnapshot.child("imgurl").getValue().toString();
+                        Log.e(TAG, "onDataChange: " + password + email);
+                        if (!imgurl.equals("")) {
+                            Glide.with(view).load(imgurl).into(ivProfilePic);
                         }
 
                         tvProfileName.setText(name);
                         tvProfileEmail.setText(email);
                         tvProfilePasscode.setText(passcode);
-                        EditProfileFragment.previouspasscode=passcode;
-                        EditProfileFragment.previouspassword=password;
+                        EditProfileFragment.previouspasscode = passcode;
+                        EditProfileFragment.previouspassword = password;
+
+                        tvProfilePassword.setText(password);
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    private void getvideodata(String passcodes) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("adminV2").child("VIDEO_EDITOR");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+                    Log.e(TAG, "onDataChange: " + key);
+                    String passcode = dataSnapshot.child("passcode").getValue().toString();
+                    dataSnapshot.child("passcode").getValue().toString();
+                    if (passcode.equals(passcodes)) {
+                        String password = dataSnapshot.child("password").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String imgurl = dataSnapshot.child("imgurl").getValue().toString();
+                        Log.e(TAG,"Image Url : " + imgurl);
+                        Log.e(TAG, "onDataChange: " + password + email);
+
+                        if (!imgurl.equals("")) {
+                            Glide.with(view).load(imgurl).into(ivProfilePic);
+                        }
+
+                        tvProfileName.setText(name);
+                        tvProfileEmail.setText(email);
+                        tvProfilePasscode.setText(passcode);
+                        EditProfileFragment.previouspasscode = passcode;
+                        EditProfileFragment.previouspassword = password;
 
                         tvProfilePassword.setText(password);
 
@@ -236,54 +265,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
     }
-    private void getvideodata(String passcodes){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child("VIDEO_EDITOR");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    String key=dataSnapshot.getKey();
-                    Log.e(TAG, "onDataChange: "+key );
-                    String passcode=dataSnapshot.child("passcode").getValue().toString();
-                    dataSnapshot.child("passcode").getValue().toString();
-                    if (passcode.equals(passcodes)){
-                        String password=dataSnapshot.child("password").getValue().toString();
-                        String email=dataSnapshot.child("email").getValue().toString();
-                        String name=dataSnapshot.child("name").getValue().toString();
-                        String imgurl=dataSnapshot.child("imgurl").getValue().toString();
-                        Log.e(TAG, "onDataChange: "+password+email );
-
-                        if (!   imgurl.equals("")){
-                            Glide.with(getContext()).load(imgurl).into(ivProfilePic);
-                        }
-
-                        tvProfileName.setText(name);
-                        tvProfileEmail.setText(email);
-                        tvProfilePasscode.setText(passcode);
-                        EditProfileFragment.previouspasscode=passcode;
-                        EditProfileFragment.previouspassword=password;
-
-                        tvProfilePassword.setText(password);
-
-
-
-                    }
-                }
-
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
 
 
 }

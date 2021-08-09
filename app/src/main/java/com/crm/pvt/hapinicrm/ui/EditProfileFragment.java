@@ -49,6 +49,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class EditProfileFragment extends Fragment {
@@ -58,15 +59,12 @@ public class EditProfileFragment extends Fragment {
     private CheckBox checkBox;
     public Uri ivProfilePicURI;
     private String TAG = "TAG";
-    public   Admin admin;
+    public Admin admin;
     Masteradmin masteradminmodel;
-    public static String usertype,previouspasscode,previouspassword;
+    public static String usertype, previouspasscode, previouspassword;
     ProgressDialog progressDialog;
     FirebaseAuth firebaseAuth;
     String name, password, passcode, email;
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,12 +78,12 @@ public class EditProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         thisView = view;
-        getinfo(usertype,previouspasscode);
-        Log.e(TAG, "onViewCreated: "+usertype );
+        getinfo(usertype, previouspasscode);
+        Log.e(TAG, "onViewCreated: " + usertype);
 
         initializeAllUIComponents(view);
-        Log.e(TAG, "onViewCreated: "+previouspasscode );
-        Log.e(TAG, "updprevioudpassword "+previouspassword);
+        Log.e(TAG, "onViewCreated: " + previouspasscode);
+        Log.e(TAG, "updprevioudpassword " + previouspassword);
         //Log.e(TAG, "onViewCreatedusertype: " + usertype);
 
         view.findViewById(R.id.ivBackFromEditMasterDetailFragment).setOnClickListener(v ->
@@ -128,7 +126,7 @@ public class EditProfileFragment extends Fragment {
         if (requestCode == 1000 && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 ivProfilePicURI = data.getData();
-                Glide.with(getContext()).load(ivProfilePicURI).into(profileimg);
+                Glide.with(requireContext()).load(ivProfilePicURI).into(profileimg);
 
             }
         }
@@ -168,68 +166,62 @@ public class EditProfileFragment extends Fragment {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference("profilepicv2");
             StorageReference filerefernece = storageReference.child(System.currentTimeMillis() + "");
             StorageTask uploadtask = filerefernece.putFile(imgurl);
-            Task<Uri> urlTask = uploadtask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-
-                    // Continue with the task to get the download URL
-                    return filerefernece.getDownloadUrl();
+            Task<Uri> urlTask = uploadtask.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
                 }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
-                        Log.e(TAG, "photo: "+downloadUri );
-                        updateprofile(downloadUri.toString());
+
+                // Continue with the task to get the download URL
+                return filerefernece.getDownloadUrl();
+            }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    Log.e(TAG, "photo: " + downloadUri);
+                    updateprofile(downloadUri.toString());
 
 
-                    } else {
-                        // Handle failures
-                        // ...
-                        Snackbar.make(thisView, "unable to upload img", Snackbar.LENGTH_LONG).show();
-                    }
+                } else {
+                    // Handle failures
+                    // ...
+                    Snackbar.make(thisView, "unable to upload img", Snackbar.LENGTH_LONG).show();
                 }
             });
         }
     }
 
     private void updateprofile(String downloaduri) {
-        Log.e(TAG, "updateprofile: "+usertype);
+        Log.e(TAG, "updateprofile: " + usertype);
         String postids;
         String prepostid;
         switch (usertype) {
             case "master":
-                 postids=passcode+"@masteradmin.com";
-                prepostid=previouspasscode+"@masteradmin.com";
-                updateadminprofile(downloaduri,postids,prepostid,"master");
+                postids = passcode + "@masteradmin.com";
+                prepostid = previouspasscode + "@masteradmin.com";
+                updateadminprofile(downloaduri, postids, prepostid, "master");
 
                 break;
             case "crm":
-                prepostid=previouspasscode+"@crmadmin.com";
-                 postids=passcode+"@crmadmin.com";
-               updateadminprofile(downloaduri,postids,prepostid,"CRM");
+                prepostid = previouspasscode + "@crmadmin.com";
+                postids = passcode + "@crmadmin.com";
+                updateadminprofile(downloaduri, postids, prepostid, "CRM");
 
 
                 break;
             case "data":
-                 postids=passcode+"@deadmin.com";
-                 prepostid=previouspasscode+"@deadmin.com";
-                Log.e(TAG, "updateprofile: "+"data" );
+                postids = passcode + "@deadmin.com";
+                prepostid = previouspasscode + "@deadmin.com";
+                Log.e(TAG, "updateprofile: " + "data");
 //
 
-                updateadminprofile(downloaduri,postids,prepostid,"DATA_ENTRY");
+                updateadminprofile(downloaduri, postids, prepostid, "DATA_ENTRY");
 
 
                 break;
 
             case "video":
-                 postids=passcode+"@veadmin.com";
-                prepostid=previouspasscode+"@veadmin.com";
-                updateadminprofile(downloaduri,postids,prepostid,"VIDEO_EDITOR");
+                postids = passcode + "@veadmin.com";
+                prepostid = previouspasscode + "@veadmin.com";
+                updateadminprofile(downloaduri, postids, prepostid, "VIDEO_EDITOR");
 
                 break;
 
@@ -240,39 +232,34 @@ public class EditProfileFragment extends Fragment {
     private void updatemasterprofile(String downloaduri) {
 
 
-
         Log.e(TAG, "updatemasterprofile:" + "master");
 
     }
 
-    private void updateadminprofile(String downloaduri,String postids,String previouspostid,String usertype) {
-        firebaseAuth=FirebaseAuth.getInstance();
-        firebaseAuth.signInWithEmailAndPassword(previouspostid,previouspassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+    private void updateadminprofile(String downloaduri, String postids, String previouspostid, String usertype) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithEmailAndPassword(previouspostid, previouspassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Toast.makeText(getContext(),"success",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "success", Toast.LENGTH_LONG).show();
                 firebaseAuth.getCurrentUser().updateEmail(postids).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         firebaseAuth.getCurrentUser().updatePassword(password).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                if (usertype.equals("master")){
+                                if (usertype.equals("master")) {
                                     setnewmasternode(downloaduri);
                                 }
-                                setnewnode(downloaduri,admin,usertype);
-
-
-
-
-                                Toast.makeText(getContext(),"success password",Toast.LENGTH_LONG).show();
+                                setnewnode(downloaduri, admin, usertype);
+                                Toast.makeText(getContext(), "success password", Toast.LENGTH_LONG).show();
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 progressDialog.dismiss();
-                                Toast.makeText(getContext(),"failed password",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "failed password", Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -280,7 +267,7 @@ public class EditProfileFragment extends Fragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(getContext(),"failed to change",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "failed to change", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -289,74 +276,71 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressDialog.dismiss();
-                Toast.makeText(getContext(),"failed",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "failed", Toast.LENGTH_LONG).show();
             }
         });
-
-
-
 
 
     }
 
 
+    private void setnewnode(String downloaduri, Admin admin, String usertype) {
 
-    private void setnewnode(String downloaduri,Admin admin,String usertype){
 
-
-                DatabaseReference databaseReference1=FirebaseDatabase.getInstance().getReference("adminV2").child(usertype)
-                        .child(passcode);
-                Admin admin1=new Admin(name,email,admin.getPhoneno(),admin.getWhatsappno(),passcode,password,admin.getLocation(),downloaduri);
-                databaseReference1.setValue(admin1).addOnSuccessListener(new OnSuccessListener<Void>() {
+        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype)
+                .child(passcode);
+        Admin admin1 = new Admin(name, email, admin.getPhoneno(), admin.getWhatsappno(), passcode, password, admin.getLocation(), downloaduri);
+        databaseReference1.setValue(admin1).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.e(TAG, "onSuccess: " + "success to set");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype)
+                        .child(previouspasscode);
+                reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Log.e(TAG, "onSuccess: "+"success to set" );
-                       DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child(usertype)
-                               .child(previouspasscode);
-                       reference.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                           @Override
-                           public void onSuccess(Void unused) {
-                               progressDialog.dismiss();
-                               Toast.makeText(getContext(),"success to remove",Toast.LENGTH_LONG).show();
-                               SharedPreferences.Editor editor = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
-                               editor.putString("passcode",passcode);
-                               editor.apply();
-                               Navigation.findNavController(thisView).navigateUp();
-
-                           }
-                       }).addOnFailureListener(new OnFailureListener() {
-                           @Override
-                           public void onFailure(@NonNull Exception e) {
-                               progressDialog.dismiss();
-                               Toast.makeText(getContext(),"failed to remove",Toast.LENGTH_LONG).show();
-                           }
-                       });
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), "success to remove", Toast.LENGTH_LONG).show();
+                        SharedPreferences.Editor editor = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
+                        editor.putString("passcode", passcode);
+                        editor.apply();
+                        Navigation.findNavController(thisView).navigateUp();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(getContext(),"unable to set",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "failed to remove", Toast.LENGTH_LONG).show();
                     }
                 });
 
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), "unable to set", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
     }
-    private void getinfo(String usertype,String passcode){
-        Log.e(TAG, "getinfo: "+usertype+passcode );
-        switch (usertype){
+
+    private void getinfo(String usertype, String passcode) {
+        Log.e(TAG, "getinfo: " + usertype + passcode);
+        switch (usertype) {
             case "crm":
-                DatabaseReference reference=FirebaseDatabase.getInstance().getReference("adminV2").child("CRM")
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("adminV2").child("CRM")
                         .child(passcode);
-                Log.e(TAG, "getinfo: "+passcode );
+                Log.e(TAG, "getinfo: " + passcode);
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        admin=snapshot.getValue(Admin.class);
-                        if (admin!=null){
-                        admin=admin;
-                            Log.e(TAG, "getinfoadmin: "+admin.getPasscode()+admin.getName() );
+                        admin = snapshot.getValue(Admin.class);
+                        if (admin != null) {
+                            admin = admin;
+                            Log.e(TAG, "getinfoadmin: " + admin.getPasscode() + admin.getName());
 
                         }
 
@@ -364,21 +348,21 @@ public class EditProfileFragment extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getContext(),"unable toobtained",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "unable toobtained", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
             case "video":
-                DatabaseReference reference1=FirebaseDatabase.getInstance().getReference("adminV2").child("VIDEO_EDITOR")
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("adminV2").child("VIDEO_EDITOR")
                         .child(passcode);
-                Log.e(TAG, "getinfo: "+passcode );
+                Log.e(TAG, "getinfo: " + passcode);
                 reference1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        admin=snapshot.getValue(Admin.class);
-                        if (admin!=null){
-                            admin=admin;
-                            Log.e(TAG, "getinfoadmin: "+admin.getPasscode()+admin.getName() );
+                        admin = snapshot.getValue(Admin.class);
+                        if (admin != null) {
+                            admin = admin;
+                            Log.e(TAG, "getinfoadmin: " + admin.getPasscode() + admin.getName());
 
                         }
 
@@ -386,21 +370,21 @@ public class EditProfileFragment extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getContext(),"unable toobtained",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "unable toobtained", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
             case "data":
-                DatabaseReference reference2=FirebaseDatabase.getInstance().getReference("adminV2").child("DATA_ENTRY")
+                DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("adminV2").child("DATA_ENTRY")
                         .child(passcode);
-                Log.e(TAG, "getinfo: "+passcode );
+                Log.e(TAG, "getinfo: " + passcode);
                 reference2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        admin=snapshot.getValue(Admin.class);
-                        if (admin!=null){
-                            admin=admin;
-                            Log.e(TAG, "getinfoadmin: "+admin.getPasscode()+admin.getName() );
+                        admin = snapshot.getValue(Admin.class);
+                        if (admin != null) {
+                            admin = admin;
+                            Log.e(TAG, "getinfoadmin: " + admin.getPasscode() + admin.getName());
 
                         }
 
@@ -408,34 +392,34 @@ public class EditProfileFragment extends Fragment {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(getContext(),"unable toobtained",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "unable toobtained", Toast.LENGTH_LONG).show();
                     }
                 });
                 break;
-
 
 
         }
 
     }
-    private void setnewmasternode(String downloaduri){
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Masterv2");
-        Masteradmin masteradmin=new Masteradmin(email,downloaduri,name,password,passcode);
+
+    private void setnewmasternode(String downloaduri) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Masterv2");
+        Masteradmin masteradmin = new Masteradmin(email, downloaduri, name, password, passcode);
 
         reference.child(passcode).setValue(masteradmin).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Log.e(TAG, "onSuccess: "+"successfullywritten" );
-                DatabaseReference reference1=FirebaseDatabase.getInstance().getReference("Masterv2").child(previouspasscode);
+                Log.e(TAG, "onSuccess: " + "successfullywritten");
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("Masterv2").child(previouspasscode);
                 reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         progressDialog.dismiss();
                         SharedPreferences.Editor editor = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
-                        editor.putString("passcode",passcode);
+                        editor.putString("passcode", passcode);
                         editor.apply();
                         Navigation.findNavController(thisView).navigateUp();
-                        Toast.makeText(getContext(),"successfully removed master",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "successfully removed master", Toast.LENGTH_LONG).show();
 
 
                     }
@@ -443,7 +427,7 @@ public class EditProfileFragment extends Fragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(getContext(),"unable to delete",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "unable to delete", Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -453,13 +437,12 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressDialog.dismiss();
-                Toast.makeText(getContext(),"unable to write",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "unable to write", Toast.LENGTH_LONG).show();
             }
         });
 
 
     }
-
 
 
 }
