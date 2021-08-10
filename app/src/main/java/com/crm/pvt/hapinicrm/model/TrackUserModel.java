@@ -1,7 +1,9 @@
 package com.crm.pvt.hapinicrm.model;
 
 public class TrackUserModel {
-   private String name,email,phoneno,whatsappno,passcode,password,location,imgurl;
+    private String name, email, phoneno, whatsappno, passcode, password, location, imgurl;
+
+    public TrackUserModel() { }
 
     public TrackUserModel(String name, String email, String phoneno, String whatsappno, String passcode, String password, String location, String imgurl) {
         this.name = name;

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:paddingStart="20dp"
+        android:paddingEnd="16dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,9 +25,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
-                android:text="Satyam Kumar"
+                tools:text="Random Person"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -35,9 +38,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
-                android:text="9876543210"
+                tools:text="9876543210"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -48,9 +51,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
-                android:text="New Delhi"
+                tools:text="New Delhi"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -61,20 +64,22 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
-                android:text="Call this person"
+                tools:text="Call this person"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/ivCall"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_add_video_editor"
             android:layout_width="50dp"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:src="@drawable/ic_call"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 

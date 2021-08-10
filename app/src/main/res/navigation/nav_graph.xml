@@ -115,6 +115,9 @@
         <action
             android:id="@+id/action_crmAdminFragment_to_setrpofile"
             app:destination="@id/setrpofile" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_crmAdminGiveTaskFragment"
+            app:destination="@id/crmAdminGiveTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/dataEntryAdminFragment"
@@ -476,4 +479,9 @@
         android:name="com.crm.pvt.hapinicrm.ui.TaskListFragment"
         android:label="fragment_task_list"
         tools:layout="@layout/fragment_task_list" />
+    <fragment
+        android:id="@+id/crmAdminGiveTaskFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.CrmAdminGiveTaskFragment"
+        android:label="fragment_crm_admin_give_task"
+        tools:layout="@layout/fragment_crm_admin_give_task" />
 </navigation>

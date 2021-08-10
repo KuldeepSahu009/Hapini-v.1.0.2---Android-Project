@@ -42,6 +42,7 @@ public class UserLoginFragment extends Fragment {
     private String TAG = "TAG";
     public static boolean isUserLoggedIn = false;
     ProgressDialog progressDialog;
+    public static String currentUserPasscode = "";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -126,6 +127,7 @@ public class UserLoginFragment extends Fragment {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             isUserLoggedIn = true;
+                                            currentUserPasscode = passcodes;
                                             Navigation.findNavController(view).navigate(UserLoginFragmentDirections.actionUserLoginFragmentToCrmUserFragment());
                                         }
                                     });

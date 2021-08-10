@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmAdminGiveTaskBinding;
 import com.crm.pvt.hapinicrm.model.TaskModel;
-import com.crm.pvt.hapinicrm.model.User;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,7 +39,6 @@ public class CrmAdminGiveTaskFragment extends Fragment {
 
         taskDatabaseReference = FirebaseDatabase.getInstance().getReference("Task_Assignment_V2").child("CRM_User");
         userReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
-
         binding.btnAssignTask.setOnClickListener(v -> {
             binding.pbTask.setVisibility(View.VISIBLE);
             giveTaskToUser();
@@ -80,21 +79,21 @@ public class CrmAdminGiveTaskFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     String key;
-                    User user = null;
+                    TrackUserModel user = null;
 
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                         key = dataSnapshot.getKey();
                         assert key != null;
                         if (key.equals(userPasscode)) {
-                            user = dataSnapshot.getValue(User.class);
+                            user = dataSnapshot.getValue(TrackUserModel.class);
                             break;
                         }
 
                     }
                     if(user != null) {
-                        User finalUser = user;
-                        taskDatabaseReference.child(userPasscode).setValue(taskModel).addOnCompleteListener(setTask -> {
+                        TrackUserModel finalUser = user;
+                        taskDatabaseReference.child(userPasscode).push().setValue(taskModel).addOnCompleteListener(setTask -> {
                             if(setTask.isSuccessful()) {
                                 Snackbar.make(binding.getRoot(),"Task Assigned to " + finalUser.getName() + " ",Snackbar.LENGTH_SHORT).show();
                             } else {
