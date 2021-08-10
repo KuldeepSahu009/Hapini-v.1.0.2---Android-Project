@@ -23,6 +23,7 @@
         <item>Data Entry Admin</item>
         <item>Video Editor Admin</item>
         <item>Master Admin</item>
+        <item>Franchise Admin</item>
     </string-array>
     <string-array name="select_user_type">
         <item>Select User Type</item>

@@ -55,6 +55,11 @@
             app:destination="@id/videoEditorUserFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_franchiseDashboardFragment"
+            app:destination="@id/franchiseDashboardFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/adminLoginFragment"
@@ -98,6 +103,11 @@
         <action
             android:id="@+id/action_adminLoginFragment_to_videoEditorNavigation"
             app:destination="@id/videoEditorNavigation"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_adminLoginFragment_to_franchiseDashboardFragment"
+            app:destination="@id/franchiseDashboardFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
@@ -347,6 +357,16 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" />
         </fragment>
+        <action
+            android:id="@+id/action_global_addFranchiseFormDetailsFragment"
+            app:destination="@id/addFranchiseFormDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_global_franchiseDataViewFragment"
+            app:destination="@id/franchiseDataViewFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
 
 
     </navigation>
@@ -497,4 +517,19 @@
             android:name="taskModel"
             app:argType="com.crm.pvt.hapinicrm.model.TaskModel" />
     </fragment>
+    <fragment
+        android:id="@+id/addFranchiseFormDetailsFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.AddFranchiseFormDetailsFragment"
+        android:label="fragment_add_franchise_form_details"
+        tools:layout="@layout/fragment_add_franchise_form_details" />
+    <fragment
+        android:id="@+id/franchiseDataViewFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.FranchiseDataViewFragment"
+        android:label="fragment_franchise_data_view"
+        tools:layout="@layout/fragment_franchise_data_view" />
+    <fragment
+        android:id="@+id/franchiseDashboardFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.FranchiseDashboardFragment"
+        android:label="fragment_franchise_dashboard"
+        tools:layout="@layout/fragment_franchise_dashboard" />
 </navigation>

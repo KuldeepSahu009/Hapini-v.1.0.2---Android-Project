@@ -72,6 +72,12 @@ public class StartFragment extends Fragment {
                     break;
             }
         }
+
+        if(Splashscreen.isFranchise)
+        {
+            //After Designed Logged out button in Layput
+        //  Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToFranchiseDashboardFragment());
+        }
     }
 
 }
