@@ -95,6 +95,9 @@ public class CrmAdminFragment extends Fragment {
             attendanceDialog.show();
         });
 
+        binding.cvGiveTask.setOnClickListener(v -> Navigation.findNavController(v).
+                navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmAdminGiveTaskFragment()));
+
     }
 
     private boolean login() {

@@ -23,7 +23,6 @@ public class DataEntryAdminFragment extends Fragment {
     private FirebaseAuth auth;
     Bundle bundle;
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,12 +76,7 @@ public class DataEntryAdminFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp();
             }
         });
-        binding.dataentryaddtask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
         binding.dataentryaddtask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
