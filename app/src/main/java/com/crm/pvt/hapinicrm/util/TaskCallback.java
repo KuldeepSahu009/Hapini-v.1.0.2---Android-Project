@@ -1,5 +1,7 @@
 package com.crm.pvt.hapinicrm.util;
 
+import com.crm.pvt.hapinicrm.model.TaskModel;
+
 public interface TaskCallback {
-    void callToCustomer(String contactNumber);
+    void callToCustomer(TaskModel taskModel);
 }

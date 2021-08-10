@@ -17,6 +17,10 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     ArrayList<TaskModel> taskModels;
     TaskCallback taskCallback;
 
+    public TaskListAdapter(TaskCallback taskCallback) {
+        this.taskCallback = taskCallback;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,7 +39,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         holder.binding.tvCustomerNumber.setText(taskModel.getCustomerNumber());
         holder.binding.tvCustomerCity.setText(taskModel.getCustomerCity());
         holder.binding.tvTask.setText(taskModel.getTask());
-//        holder.binding.ivCall.setOnClickListener(v -> taskCallback.callToCustomer(taskModel.getCustomerNumber()));
+        holder.binding.ivCall.setOnClickListener(v -> taskCallback.callToCustomer(taskModel));
 
     }
 
