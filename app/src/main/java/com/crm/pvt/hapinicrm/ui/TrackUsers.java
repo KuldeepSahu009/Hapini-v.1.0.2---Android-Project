@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
@@ -45,7 +47,7 @@ public class TrackUsers extends Fragment {
     private ArrayList<User> user;
     private String data;
     public static String userType;
-    EditText searchuser;
+    TextView searchuser;
 
     private DatabaseReference crm,de,ve;
 
@@ -70,23 +72,14 @@ public class TrackUsers extends Fragment {
         Log.e(TAG, "onCreateView: " + data);
         searchuser=binding.searchuser;
 
-        searchuser.addTextChangedListener(new TextWatcher() {
+        searchuser.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String userenter=s.toString();
-                showsearchdata(userenter,data);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.showshorteduserdatafragment);
+                Shorteddataadmin.type=userType;
             }
         });
+
 
         return binding.getRoot();
     }
@@ -188,55 +181,6 @@ public class TrackUsers extends Fragment {
                 }
                 trackUserAdapter=new TrackUserAdapter(getContext(),trackUserModelList);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
-                trackUserAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-    private void showsearchdata(String searchout,String usertype){
-
-        switch (usertype){
-            case "crmUser":
-                getcrmusershorteddata(searchout,"crm");
-                break;
-            case "videoUser":
-                getcrmusershorteddata(searchout,"video");
-                break;
-            case "dataUser":
-                getcrmusershorteddata(searchout,"data");
-
-
-        }
-    }
-    private void getcrmusershorteddata(String searchout,String usertype){
-        Log.e(TAG, "getcrmusershorteddata: "+searchout );
-        Query query=FirebaseDatabase.getInstance().getReference("usersv2").child(usertype).orderByChild("name")
-                .startAt(searchout).endAt(searchout+"\uf8ff");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                trackUserModelList.clear();
-                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-
-
-                        String name=dataSnapshot.child("name").getValue().toString();
-                        String email=dataSnapshot.child("email").getValue().toString();
-                        String mobileno=dataSnapshot.child("mobileNo").getValue().toString();
-                        String whatsappno=dataSnapshot.child("whatsAppNo").getValue().toString();
-                        String passcode=dataSnapshot.child("passcode").getValue().toString();
-                        String password=dataSnapshot.child("password").getValue().toString();
-                        String location=dataSnapshot.child("city").getValue().toString();
-                        trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,location,""));
-
-
-                    Log.e(TAG, "onDataChange: "+name+email );
-
-                }
                 trackUserAdapter.notifyDataSetChanged();
             }
 

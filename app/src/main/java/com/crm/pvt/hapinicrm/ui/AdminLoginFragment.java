@@ -129,6 +129,7 @@ public class AdminLoginFragment extends Fragment {
                 Log.e(TAG, "navigateTo: "+"master" );
                 editor.putString("type", "master");
                 editor.putString("passcode",passcode);
+                editor.putString("password",password);
                 editor.apply();
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToMasterDashboardFragment());
                 break;

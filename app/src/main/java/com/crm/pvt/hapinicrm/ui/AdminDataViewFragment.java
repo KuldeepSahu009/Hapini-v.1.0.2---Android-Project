@@ -3,8 +3,11 @@ package com.crm.pvt.hapinicrm.ui;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.adapters.TrackAdminAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminDataViewBinding;
 import com.crm.pvt.hapinicrm.model.Admin;
@@ -42,12 +46,17 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
     ArrayList<Admin> adminList = new ArrayList<>();
     String admin;
     public static String type = "";
+    String adminpasscode;
+    String adminpassword;
     private static final String TAG = "TAG";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentAdminDataViewBinding.inflate(inflater, container, false);
         admin = getArguments().getString("ADMIN");
+        SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
+        adminpasscode=getshared.getString("passcode","no data");
+        adminpassword=getshared.getString("password","no data");
         return binding.getRoot();
     }
 
@@ -73,21 +82,14 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                 break;
         }
 
-        binding.etSearchAdmin.addTextChangedListener(new TextWatcher() {
+        binding.etSearchAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                getsearchdata(s.toString(), type);
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public void onClick(View v) {
+                Shorteddataadmin.type=type;
+                Navigation.findNavController(v).navigate(R.id.movetoshorteddataadminfragment);
             }
         });
+
 
     }
 
@@ -214,7 +216,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                     String passcode = dataSnapshot.child("passcode").getValue().toString();
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
-
+                    if (admin!=null){
                     auth.signInWithEmailAndPassword(
                             admin.getPasscode() + finalPostString,
                             admin.getPassword()
@@ -222,8 +224,8 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                         if(task.isSuccessful()) {
                             auth.getCurrentUser().delete();
                         }
-                        auth.signInWithEmailAndPassword(AdminLoginFragment.passcode + "@masteradmin.com",AdminLoginFragment.password);
-                    });
+                        auth.signInWithEmailAndPassword(adminpasscode + "@masteradmin.com",adminpassword);
+                    });}
 
                     if (passcode.equals(admin.getPasscode())) {
                         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype)
@@ -263,115 +265,9 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
 
     }
 
-    private void getsearchdata(String s, String usertypes) {
-        switch (usertypes) {
-            case "CRM":
-                getcrmshortedata(s, usertypes);
-                break;
-            case "DATA_ENTRY":
-                getdataentryshorteddata(s, usertypes);
-            case "VIDEO_EDITOR":
-                getvideoeditorshorteddata(s, usertypes);
-        }
-
-    }
-
-    private void getcrmshortedata(String s, String usertype) {
-        Log.e(TAG, "getshortedata: " + s + usertype);
-        Query query = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype).orderByChild("name")
-                .startAt(s).endAt(s + "\uf8ff");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                adminList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    Admin adminObject;
-                    adminObject = new Admin(dataSnapshot.child("name").getValue().toString(),
-                            dataSnapshot.child("email").getValue().toString(),
-                            dataSnapshot.child("phoneno").getValue().toString(),
-                            dataSnapshot.child("whatsappno").getValue().toString(),
-                            dataSnapshot.child("passcode").getValue().toString(),
-                            dataSnapshot.child("password").getValue().toString(),
-                            dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
-                    adminList.add(adminObject);
-                }
-                trackAdminAdapter.notifyDataSetChanged();
 
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void getdataentryshorteddata(String s, String usertype) {
-        Log.e(TAG, "getdataentryshorteddata: " + s + usertype);
-        Query query = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype).orderByChild("name")
-                .startAt(s).endAt(s + "\uf8ff");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                adminList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    Admin adminObject;
-                    adminObject = new Admin(dataSnapshot.child("name").getValue().toString(),
-                            dataSnapshot.child("email").getValue().toString(),
-                            dataSnapshot.child("phoneno").getValue().toString(),
-                            dataSnapshot.child("whatsappno").getValue().toString(),
-                            dataSnapshot.child("passcode").getValue().toString(),
-                            dataSnapshot.child("password").getValue().toString(),
-                            dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
-                    adminList.add(adminObject);
-                }
-                trackAdminAdapter.notifyDataSetChanged();
 
 
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void getvideoeditorshorteddata(String s, String usertype) {
-        Log.e(TAG, "getvideoeditorshorteddata: " + s + usertype);
-        Query query = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype).orderByChild("name")
-                .startAt(s).endAt(s + "\uf8ff");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                adminList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    Admin adminObject;
-                    adminObject = new Admin(dataSnapshot.child("name").getValue().toString(),
-                            dataSnapshot.child("email").getValue().toString(),
-                            dataSnapshot.child("phoneno").getValue().toString(),
-                            dataSnapshot.child("whatsappno").getValue().toString(),
-                            dataSnapshot.child("passcode").getValue().toString(),
-                            dataSnapshot.child("password").getValue().toString(),
-                            dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
-                    adminList.add(adminObject);
-                }
-                trackAdminAdapter.notifyDataSetChanged();
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 }
