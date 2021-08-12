@@ -32,6 +32,7 @@ public class Splashscreen extends AppCompatActivity {
     private String passcode;
     private String usertype;
     private String TAG = "TAG";
+    public static boolean isFranchise = false;
     public static String userLoginType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,21 @@ public class Splashscreen extends AppCompatActivity {
 
         getdatafromsharedpreference();
         checkforuser();
-
+        checkforFranchise();
     }
+
+    private void checkforFranchise() {
+        SharedPreferences shared = getSharedPreferences("infos", Context.MODE_PRIVATE);
+        String usertype = shared.getString("type", "no data");
+        String passcode = shared.getString("passcode", "no passcode");
+        String password = shared.getString("password", "no password");
+        if (!usertype.equals("no data") && !passcode.equals("no passcode") ){
+            isFranchise = true;
+        }else if (usertype.equals("no data")){
+            Log.e(TAG, "checkforuser: "+"no user");
+        }
+    }
+
     private void getdatafromsharedpreference() {
         SharedPreferences getshared = getSharedPreferences("info", Context.MODE_PRIVATE);
         usertype = getshared.getString("type", "no data");
