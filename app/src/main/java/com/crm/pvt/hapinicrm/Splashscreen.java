@@ -21,10 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-
 public class Splashscreen extends AppCompatActivity {
-    private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
+    public static SharedPreferences spAdminsData;
+    public static SharedPreferences spUsersData;
     private int totalCount;
     private final int SPLASH_TIME_OUT=6500;
 
@@ -47,6 +46,8 @@ public class Splashscreen extends AppCompatActivity {
             }
         },SPLASH_TIME_OUT);
 
+        spAdminsData = this.getSharedPreferences("infos", Context.MODE_PRIVATE);
+        spUsersData = this.getSharedPreferences("info", Context.MODE_PRIVATE);
         getdatafromsharedpreference();
         checkforuser();
         checkforFranchise();

@@ -44,7 +44,7 @@
             android:id="@+id/action_startFragment_to_dataEntryUserFragment"
             app:destination="@id/dataEntryUserFragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_startFragment_to_crmUserFragment"
             app:destination="@id/crmUserFragment"

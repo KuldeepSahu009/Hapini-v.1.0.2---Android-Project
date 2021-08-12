@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 
 public class GiveTaskVideoEditorFragment extends Fragment {
 
@@ -16,4 +17,5 @@ public class GiveTaskVideoEditorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_give_task_video_editor, container, false);
     }
+
 }

@@ -25,6 +25,7 @@ import com.crm.pvt.hapinicrm.model.Franchise;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FranchiseDataViewFragment extends Fragment implements DataCallBackTackFranchise {
@@ -40,6 +42,7 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
     FragmentFranchiseDataViewBinding binding;
     TrackFranchiseAdapter trackFranchiseAdapter;
     ArrayList<Franchise> franchiseList = new ArrayList<>();
+    private List<String> activeUserList;
     private static final String TAG = "TAG";
 
     @Override
@@ -53,13 +56,108 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
         super.onViewCreated(view, savedInstanceState);
         binding.trackFranchiseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         franchiseList = new ArrayList<>();
-        trackFranchiseAdapter = new TrackFranchiseAdapter(getContext(), franchiseList, this);
+        activeUserList = new ArrayList<>();
+        trackFranchiseAdapter = new TrackFranchiseAdapter(getContext(), franchiseList,activeUserList, this);
         binding.trackFranchiseRecyclerView.setAdapter(trackFranchiseAdapter);
 
         Snackbar.make(view, "Loading data please wait ", Snackbar.LENGTH_SHORT).show();
 
         getFranchiseData();
 
+        CrmAdminFragment.activeStatusReference.child("franchises").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                    activeUserList.add(snapshot.getKey());
+
+                }
+                trackFranchiseAdapter = new TrackFranchiseAdapter(getContext(), franchiseList, activeUserList , FranchiseDataViewFragment.this);
+                binding.trackFranchiseRecyclerView.setAdapter(trackFranchiseAdapter);
+                trackFranchiseAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        FirebaseDatabase.getInstance().getReference().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
+                activeUserList.clear();
+                if(datasnapshot.child("activeV2/franchises").exists())
+                {
+                    for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                        activeUserList.add(snapshot.getKey());
+
+                    }
+
+                }
+                trackFranchiseAdapter = new TrackFranchiseAdapter(getContext(), franchiseList, activeUserList , FranchiseDataViewFragment.this);
+                binding.trackFranchiseRecyclerView.setAdapter(trackFranchiseAdapter);
+                trackFranchiseAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        CrmAdminFragment.activeStatusReference.child("franchises").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
+                activeUserList.clear();
+                if(datasnapshot.child("activeV2/franchises").exists())
+                {
+                    for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                        activeUserList.add(snapshot.getKey());
+
+                    }
+
+                }
+                trackFranchiseAdapter = new TrackFranchiseAdapter(getContext(), franchiseList, activeUserList , FranchiseDataViewFragment.this);
+                binding.trackFranchiseRecyclerView.setAdapter(trackFranchiseAdapter);
+                trackFranchiseAdapter.notifyDataSetChanged();
+                Log.i("LOGGGG","hhhh");
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         binding.etSearchFranchise.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

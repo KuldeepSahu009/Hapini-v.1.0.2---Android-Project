@@ -11,7 +11,7 @@ import com.crm.pvt.hapinicrm.R;
 
 public class Trackuserviewholders extends RecyclerView.ViewHolder {
     public TextView name, email, phone, whatsappno, passcode, password, location;
-    public ImageView profileimg, delete;
+    public ImageView profileimg, delete , activeStatusUser;
 
     public Trackuserviewholders(@NonNull View itemView) {
         super(itemView);
@@ -24,6 +24,7 @@ public class Trackuserviewholders extends RecyclerView.ViewHolder {
         location = itemView.findViewById(R.id.trackuserlocation);
         profileimg = itemView.findViewById(R.id.trackuserprofilepic);
         delete = itemView.findViewById(R.id.trackuserdeleteprofile);
+         activeStatusUser = itemView.findViewById(R.id.trackUserStatus);
     }
 }
 
