@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmAdminGiveTaskBinding;
 import com.crm.pvt.hapinicrm.model.TaskModel;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
@@ -111,5 +112,26 @@ public class CrmAdminGiveTaskFragment extends Fragment {
                 public void onCancelled(@NonNull DatabaseError error) { }
             });
         }
+    }
+
+    @Override
+    public void onStart() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+        super.onPause();
+
     }
 }

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.adapters.TrackAdminAdapter;
+import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminDataViewBinding;
 import com.crm.pvt.hapinicrm.model.Admin;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,6 +24,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.OAuthCredential;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +42,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
     FragmentAdminDataViewBinding binding;
     TrackAdminAdapter trackAdminAdapter;
     ArrayList<Admin> adminList = new ArrayList<>();
+    private List<String> activeUserList;
     String admin;
     public static String type = "";
     private static final String TAG = "TAG";
@@ -56,22 +59,122 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
         super.onViewCreated(view, savedInstanceState);
         binding.trackAdminRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adminList = new ArrayList<>();
-        trackAdminAdapter = new TrackAdminAdapter(getContext(), adminList, this);
+        activeUserList = new ArrayList<>();
+        trackAdminAdapter = new TrackAdminAdapter(getContext(), adminList, activeUserList,this);
         binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
 
         Snackbar.make(view, "Loading data please wait ", Snackbar.LENGTH_SHORT).show();
 
         switch (admin) {
             case "crm":
+                type = "CRM";
                 getCrmAdminData();
                 break;
             case "video_editor":
+                type = "VIDEO_EDITOR";
                 getVideoEditorAdminData();
                 break;
             case "data_entry":
+                type = "DATA_ENTRY";
                 getDataEntryAdminData();
                 break;
         }
+        CrmAdminFragment.activeStatusReference.child("admins").child(type).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                    activeUserList.add(snapshot.getKey());
+
+                }
+                trackAdminAdapter = new TrackAdminAdapter(getContext(), adminList, activeUserList , AdminDataViewFragment.this);
+                binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
+                trackAdminAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+            FirebaseDatabase.getInstance().getReference().addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
+                    activeUserList.clear();
+                    if(datasnapshot.child("activeV2/admins").child(type).exists())
+                    {
+                        for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                            activeUserList.add(snapshot.getKey());
+
+                        }
+
+                    }
+                    trackAdminAdapter = new TrackAdminAdapter(getContext(),adminList,activeUserList,AdminDataViewFragment.this);
+                    binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
+                    trackAdminAdapter.notifyDataSetChanged();
+                    Log.i("LOGGGG","hhhh");
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+            CrmAdminFragment.activeStatusReference.child("admins").child(type).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
+                    activeUserList.clear();
+                    if(datasnapshot.child("activeV2/admins").child(type).exists())
+                    {
+                        for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                            activeUserList.add(snapshot.getKey());
+
+                        }
+
+                    }
+                    trackAdminAdapter = new TrackAdminAdapter(getContext(),adminList,activeUserList,AdminDataViewFragment.this);
+                    binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
+                    trackAdminAdapter.notifyDataSetChanged();
+                    Log.i("LOGGGG","hhhh");
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
 
         binding.etSearchAdmin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,7 +196,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
 
 
     void getCrmAdminData() {
-        type = "CRM";
+
         TrackAdminAdapter.usertyepes = type;
         DatabaseReference crmReference;
         crmReference = FirebaseDatabase.getInstance().getReference("adminV2");
@@ -122,10 +225,11 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     void getVideoEditorAdminData() {
-        type = "VIDEO_EDITOR";
+
         TrackAdminAdapter.usertyepes = type;
         DatabaseReference videoEditorReference;
         videoEditorReference = FirebaseDatabase.getInstance().getReference("adminV2");
@@ -157,7 +261,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
     }
 
     void getDataEntryAdminData() {
-        type = "DATA_ENTRY";
+
         Log.e(TAG, "getDataEntryAdminData: " + "dataenrty");
         TrackAdminAdapter.usertyepes = type;
         DatabaseReference dataEntryReference;

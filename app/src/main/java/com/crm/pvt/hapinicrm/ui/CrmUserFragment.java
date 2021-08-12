@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmUserBinding;
 import com.crm.pvt.hapinicrm.util.TaskCallback;
 
@@ -37,5 +38,32 @@ public class CrmUserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.cvSeeTaskAssigned.setOnClickListener(v -> Navigation.findNavController(v).navigate(CrmUserFragmentDirections.actionCrmUserFragmentToTaskListFragment()));
+    }
+//for status pupose don't delete it
+    @Override
+    public void onStart() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
+        super.onPause();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Splashscreen.spUsersData.edit().clear().commit();
     }
 }

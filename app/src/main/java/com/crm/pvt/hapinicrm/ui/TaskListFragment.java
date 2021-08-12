@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.TaskListAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentTaskListBinding;
 import com.crm.pvt.hapinicrm.model.TaskModel;
@@ -114,6 +115,28 @@ public class TaskListFragment extends Fragment implements TaskCallback {
             return true;
         }
     }
+
+    @Override
+    public void onStart() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
+        super.onPause();
+
+    }
+
 
 
 }

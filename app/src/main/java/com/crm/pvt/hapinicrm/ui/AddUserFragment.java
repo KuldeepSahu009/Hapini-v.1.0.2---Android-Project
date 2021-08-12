@@ -41,4 +41,6 @@ public class AddUserFragment extends Fragment {
         binding.ivBackFromAddUserFragment.setOnClickListener(v->
                 Navigation.findNavController(v).navigateUp());
     }
+
+
 }
