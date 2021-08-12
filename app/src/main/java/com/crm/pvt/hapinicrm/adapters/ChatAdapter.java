@@ -1,5 +1,9 @@
 package com.crm.pvt.hapinicrm.adapters;
 
+import static com.crm.pvt.hapinicrm.ui.UserLoginFragment.currentUser;
+import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
+
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +35,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Chat chat = chats.get(position);
+        String passcode = "";
+
+        if(currentUser != null) {
+            passcode = currentUser.getPasscode();
+        } else if(currentFranchise != null) {
+            passcode = currentFranchise.getPasscode();
+        }
+
+        if(passcode.equals(chat.getSenderPasscode())) {
+            //TODO chat gravity
+        }
+
         holder.binding.tvSendersName.setText(chat.getSendersName());
         holder.binding.tvMessage.setText(chat.getMessage());
     }

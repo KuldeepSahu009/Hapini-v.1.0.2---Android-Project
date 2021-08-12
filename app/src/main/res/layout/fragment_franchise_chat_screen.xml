@@ -48,7 +48,7 @@
             android:paddingEnd="50dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            tools:text="Franchise Admin Name"
+            tools:text="User Name"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -57,11 +57,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChats"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         tools:listitem="@layout/chats_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:stackFromEnd="true"
         app:layout_constraintTop_toBottomOf="@id/viewChatScreen"
         app:layout_constraintBottom_toTopOf="@id/llSendMessage"/>
 

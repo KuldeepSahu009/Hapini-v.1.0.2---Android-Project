@@ -32,7 +32,7 @@ public class CrmUserFragment extends Fragment {
                                 .navigate(CrmUserFragmentDirections.actionCrmUserFragmentToTaskListFragment()));
 
         binding.cvChatWithAdmin.setOnClickListener(v -> {
-
+            Navigation.findNavController(v).navigate(CrmUserFragmentDirections.actionCrmUserFragmentToCrmUserChatFragment());
         });
     }
 }

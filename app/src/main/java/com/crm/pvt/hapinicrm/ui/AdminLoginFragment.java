@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
+import com.crm.pvt.hapinicrm.model.Franchise;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +37,7 @@ public class AdminLoginFragment extends Fragment {
     private FragmentAdminLoginBinding binding;
     private FirebaseAuth auth;
     private static final String TAG = "TAG";
+    public static Franchise currentFranchise = null;
     static String passcode;
     static String password;
 
@@ -87,6 +89,8 @@ public class AdminLoginFragment extends Fragment {
                                 if (key.equals(passcode)) {
                                     String password = dataSnapshot.child("password").getValue().toString();
                                     if (password.equals(password)) {
+
+                                        currentFranchise = dataSnapshot.getValue(Franchise.class);
 
                                         SharedPreferences.Editor editor = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
                                         editor.putString("passcode", passcode);

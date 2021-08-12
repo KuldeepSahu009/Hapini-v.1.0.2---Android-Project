@@ -1,5 +1,7 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import java.util.ArrayList;
 
 public class FranchiseChatScreenFragment extends Fragment {
@@ -26,8 +29,6 @@ public class FranchiseChatScreenFragment extends Fragment {
     private FragmentFranchiseChatScreenBinding binding;
     private ChatAdapter chatAdapter;
     private DatabaseReference chatReference;
-    private String franchisePasscode = "123456";
-    private String franchiseName = "Random Name";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -44,15 +45,18 @@ public class FranchiseChatScreenFragment extends Fragment {
                 .getInstance()
                 .getReference("Requests")
                 .child("Chat_Module")
-                .child(franchisePasscode)
+                .child(currentFranchise.getPasscode())
                 .child(user.getPasscode());
         initializeRecyclerViewChat();
+
+        binding.tvUserName.setText(user.getName());
 
         binding.btnSendMessage.setOnClickListener(v -> {
             String message = binding.etMessage.getText().toString();
             if(message.isEmpty()) return;
-            Chat chat = new Chat(franchiseName,message);
+            Chat chat = new Chat(currentFranchise.getPasscode(),currentFranchise.getName(),message);
             chatReference.push().setValue(chat);
+            binding.etMessage.setText("");
         });
     }
 
@@ -67,6 +71,7 @@ public class FranchiseChatScreenFragment extends Fragment {
         chatReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chats.clear();
                 for(DataSnapshot chatSnapshot: snapshot.getChildren()) {
                     Chat chat = chatSnapshot.getValue(Chat.class);
                     chats.add(chat);

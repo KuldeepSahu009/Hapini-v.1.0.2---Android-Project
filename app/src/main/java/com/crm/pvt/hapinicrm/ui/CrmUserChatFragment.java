@@ -1,6 +1,7 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
     private FragmentCrmUserChatBinding binding;
     private ChatPreviewAdapter adapter;
     private DatabaseReference databaseReference;
+    private static final String TAG = "CrmUserChatFragment";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,8 +63,11 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i(TAG,snapshot.getChildren().toString());
                 for (DataSnapshot franchiseSnapshot : snapshot.getChildren()) {
                     Franchise franchise = franchiseSnapshot.getValue(Franchise.class);
+                    assert franchise != null;
+                    Log.i(TAG,franchise.getName());
                     franchises.add(franchise);
                 }
                 binding.pbCrmUserChat.setVisibility(View.INVISIBLE);

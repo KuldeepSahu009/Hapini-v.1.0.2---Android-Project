@@ -48,12 +48,14 @@ public class ChatScreenFragment extends Fragment {
                 .child(currentUserPasscode);
 
         initializeRecyclerViewChats();
+        binding.tvFranchiseAdminName.setText(franchise.getName());
 
         binding.btnSendMessage.setOnClickListener(v -> {
             String message = binding.etMessage.getText().toString();
             if(message.isEmpty()) return;
-            Chat chat = new Chat(currentUser.getName(),message);
+            Chat chat = new Chat(currentUser.getPasscode(),currentUser.getName(),message);
             chatReference.push().setValue(chat);
+            binding.etMessage.setText("");
         });
     }
 
@@ -68,6 +70,7 @@ public class ChatScreenFragment extends Fragment {
         chatReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chats.clear();
                 for(DataSnapshot chatSnapshot: snapshot.getChildren()) {
                     Chat chat = chatSnapshot.getValue(Chat.class);
                     chats.add(chat);
