@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <TextView
                     android:id="@+id/etSearchAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -31,8 +31,9 @@
                     android:background="@drawable/track_user_et_bk"
                     android:hint="Search Admin"
                     android:inputType="text"
+                    android:drawableLeft="@drawable/ic_baseline_search_24"
                     android:paddingHorizontal="14dp"
-                    android:paddingVertical="6dp" />
+                    android:paddingVertical="8dp" />
             </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
