@@ -1,6 +1,8 @@
 package com.crm.pvt.hapinicrm.model;
 
-public class TrackUserModel {
+import java.io.Serializable;
+
+public class TrackUserModel implements Serializable {
     private String name, email, phoneno, whatsappno, passcode, password, location, imgurl;
 
     public TrackUserModel() { }
