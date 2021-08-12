@@ -38,6 +38,7 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.pbCrmUserChat.setVisibility(View.VISIBLE);
         databaseReference = FirebaseDatabase.getInstance().getReference("franchiseV2");
         initializeRecyclerView();
     }
@@ -64,6 +65,7 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
                     Franchise franchise = franchiseSnapshot.getValue(Franchise.class);
                     franchises.add(franchise);
                 }
+                binding.pbCrmUserChat.setVisibility(View.INVISIBLE);
                 adapter.setFranchises(franchises);
             }
 

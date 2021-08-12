@@ -1,22 +1,18 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.adapters.ChatPreviewAdapter;
 import com.crm.pvt.hapinicrm.adapters.FranchiseChatPreviewAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentFranchiseUserChatBinding;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
-import com.crm.pvt.hapinicrm.model.User;
 import com.crm.pvt.hapinicrm.util.FranchiseChatPreviewClickCallback;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +29,7 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
     private DatabaseReference databaseReference;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentFranchiseUserChatBinding.inflate(inflater,container,false);
         return binding.getRoot();
@@ -42,6 +38,7 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.pbFranchiseUserChat.setVisibility(View.VISIBLE);
         databaseReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
         initializeRecyclerView();
     }
@@ -69,6 +66,7 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
                     TrackUserModel user = usersSnapshot.getValue(TrackUserModel.class);
                     users.add(user);
                 }
+                binding.pbFranchiseUserChat.setVisibility(View.INVISIBLE);
                 chatPreviewAdapter.setUsers(users);
             }
 
