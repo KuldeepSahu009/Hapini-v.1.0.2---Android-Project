@@ -41,6 +41,11 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
 
     }
 
+    public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList) {
+        this.context = context;
+        this.trackUserModelList = trackUserModelList;
+    }
+
 
 
     @NonNull
@@ -64,12 +69,12 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.password.setText(tempmodel.getPassword());
         holder.location.setText(tempmodel.getLocation());
 
-        for(String passcode : activeUserList)
-        {
-            if(passcode.equals(tempmodel.getPasscode()))
-            {
-                holder.activeStatusUser.setImageResource(R.drawable.green_dot);
-                break;
+        if(activeUserList != null) {
+            for (String passcode : activeUserList) {
+                if (passcode.equals(tempmodel.getPasscode())) {
+                    holder.activeStatusUser.setImageResource(R.drawable.green_dot);
+                    break;
+                }
             }
         }
         //For Deletion of User

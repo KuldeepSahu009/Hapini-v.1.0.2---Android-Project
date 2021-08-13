@@ -46,7 +46,11 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         this.datacallbacktrackuser=datacallbacktrackuser;
         this.activeUserList = activeUserList;
     }
-
+    public TrackAdminAdapter( Context context,ArrayList<Admin> admins ,  Datacallbacktrackuser datacallbacktrackuser){
+        this.context = context;
+        this.admins=admins;
+        this.datacallbacktrackuser=datacallbacktrackuser;
+    }
 
     @NonNull
     @Override
@@ -68,12 +72,12 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.password.setText(admin.getPassword());
         holder.location.setText(admin.getLocation());
 
-        for(String passcode : activeUserList)
-        {
-            if(passcode.equals(admin.getPasscode()))
-            {
-                holder.activeStatusAdmin.setImageResource(R.drawable.green_dot);
-                break;
+        if(activeUserList != null) {
+            for (String passcode : activeUserList) {
+                if (passcode.equals(admin.getPasscode())) {
+                    holder.activeStatusAdmin.setImageResource(R.drawable.green_dot);
+                    break;
+                }
             }
         }
 
