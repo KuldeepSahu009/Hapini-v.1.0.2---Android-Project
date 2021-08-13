@@ -551,6 +551,12 @@
         <action
             android:id="@+id/action_franchiseDashboardFragment_to_franchiseUserChatFragment"
             app:destination="@id/franchiseUserChatFragment" />
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_addAdminFormDetailsFragment2"
+            app:destination="@id/addAdminFormDetailsFragment2" />
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_adminDataViewFragment2"
+            app:destination="@id/adminDataViewFragment2" />
     </fragment>
     <fragment
         android:id="@+id/crmUserChatFragment"
@@ -588,4 +594,14 @@
             android:name="user"
             app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
     </fragment>
+    <fragment
+        android:id="@+id/addAdminFormDetailsFragment2"
+        android:name="com.crm.pvt.hapinicrm.ui.AddAdminFormDetailsFragment"
+        android:label="fragment_add_admin_form_details"
+        tools:layout="@layout/fragment_add_admin_form_details" />
+    <fragment
+        android:id="@+id/adminDataViewFragment2"
+        android:name="com.crm.pvt.hapinicrm.ui.AdminDataViewFragment"
+        android:label="fragment_admin_data_view"
+        tools:layout="@layout/fragment_admin_data_view" />
 </navigation>
