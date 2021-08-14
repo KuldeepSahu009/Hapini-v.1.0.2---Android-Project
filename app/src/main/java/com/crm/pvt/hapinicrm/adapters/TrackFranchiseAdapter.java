@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.model.Admin;
 import com.crm.pvt.hapinicrm.model.Franchise;
 import com.crm.pvt.hapinicrm.ui.DataCallBackTackFranchise;
-import com.crm.pvt.hapinicrm.ui.Datacallbacktrackuser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
     ArrayList<Franchise> franchises;
     DataCallBackTackFranchise dataCallBackTackFranchise;
     private static final String TAG = "TAG";
-    private List<String> activeUserList;
+    private final List<String> activeUserList;
     public TrackFranchiseAdapter( Context context,ArrayList<Franchise> franchises,List<String> activeUserList ,DataCallBackTackFranchise dataCallBackTackFranchise){
         this.context = context;
         this.franchises=franchises;
@@ -86,7 +84,10 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
         });
 
         if (!franchise.getImgurl().isEmpty()){
-            Glide.with(context).load(franchise.getImgurl()).into(holder.profilepic);
+            Glide.with(context)
+                    .load(franchise.getImgurl())
+                    .placeholder(R.drawable.ic_profile_placeholder)
+                    .into(holder.profilepic);
         }
 
     }

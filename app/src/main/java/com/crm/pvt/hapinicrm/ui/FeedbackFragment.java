@@ -3,6 +3,7 @@ package com.crm.pvt.hapinicrm.ui;
 import static com.crm.pvt.hapinicrm.ui.UserLoginFragment.currentUserPasscode;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,20 @@ import com.crm.pvt.hapinicrm.databinding.FragmentFeedbackBinding;
 import com.crm.pvt.hapinicrm.model.FeedbackModel;
 import com.crm.pvt.hapinicrm.model.TaskModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
 public class FeedbackFragment extends Fragment {
 
     private FragmentFeedbackBinding binding;
-    private DatabaseReference feedbackDatabaseReference;
+    private DatabaseReference feedbackDatabaseReference,taskDatabase;
     String name,number,city,task;
+    private TaskModel taskModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -44,7 +49,11 @@ public class FeedbackFragment extends Fragment {
                 .child("CRM_User")
                 .child(currentUserPasscode);
 
-        TaskModel taskModel = FeedbackFragmentArgs.fromBundle(getArguments()).getTaskModel();
+        taskDatabase = FirebaseDatabase.getInstance().
+                getReference("Task_Assignment_V2").
+                child("CRM_User").child(currentUserPasscode);
+
+        taskModel = FeedbackFragmentArgs.fromBundle(getArguments()).getTaskModel();
 
         name = taskModel.getCustomerName();
         number = taskModel.getCustomerNumber();
@@ -76,10 +85,35 @@ public class FeedbackFragment extends Fragment {
             if(task.isSuccessful()) {
                 binding.pbSubmitFeedback.setVisibility(View.INVISIBLE);
                 Snackbar.make(requireView(),"Feedback submission completed",Snackbar.LENGTH_SHORT).show();
-                Navigation.findNavController(requireView()).navigateUp();
+                removeTaskFromTheList();
+                Navigation.findNavController(binding.getRoot()).navigateUp();
             } else {
                 binding.pbSubmitFeedback.setVisibility(View.INVISIBLE);
                 Snackbar.make(requireView(),"Something went wrong. Please try again.",Snackbar.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void removeTaskFromTheList() {
+        taskDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("FeedbackFragment","Searching task for removal...");
+                for(DataSnapshot taskSnapshot : snapshot.getChildren()) {
+                    TaskModel temp = Objects.requireNonNull(taskSnapshot.getValue(TaskModel.class));
+                    if(temp.getCustomerNumber().equals(taskModel.getCustomerNumber())
+                        && temp.getCustomerName().equals(taskModel.getCustomerName())) {
+                        Log.i("FeedbackFragment","taskModel found");
+                        taskSnapshot.getRef().removeValue();
+                        break;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

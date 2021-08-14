@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.crm.pvt.hapinicrm.model.TaskModel;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.ui.CrmUserFragment;
 import com.crm.pvt.hapinicrm.ui.MainActivity;
 import com.crm.pvt.hapinicrm.ui.UserLoginFragment;
@@ -30,6 +32,7 @@ public class Splashscreen extends AppCompatActivity {
     private String password;
     private String passcode;
     private String usertype;
+
     private String TAG = "TAG";
     public static boolean isFranchise = false;
     public static String userLoginType;
@@ -96,6 +99,8 @@ public class Splashscreen extends AppCompatActivity {
                 Log.e(TAG, "getuserinfo: "+"crm" );
                 DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
                         .child("crm").child(passcode);
+
+                DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
 
                 reference3.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

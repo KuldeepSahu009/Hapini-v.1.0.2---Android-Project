@@ -40,29 +40,30 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     public static String usertyepes;
     private List<String> activeUserList;
 
-    public TrackAdminAdapter( Context context,ArrayList<Admin> admins , List<String> activeUserList , Datacallbacktrackuser datacallbacktrackuser){
+    public TrackAdminAdapter(Context context, ArrayList<Admin> admins, List<String> activeUserList, Datacallbacktrackuser datacallbacktrackuser) {
         this.context = context;
-        this.admins=admins;
-        this.datacallbacktrackuser=datacallbacktrackuser;
+        this.admins = admins;
+        this.datacallbacktrackuser = datacallbacktrackuser;
         this.activeUserList = activeUserList;
     }
-    public TrackAdminAdapter( Context context,ArrayList<Admin> admins ,  Datacallbacktrackuser datacallbacktrackuser){
+
+    public TrackAdminAdapter(Context context, ArrayList<Admin> admins, Datacallbacktrackuser datacallbacktrackuser) {
         this.context = context;
-        this.admins=admins;
-        this.datacallbacktrackuser=datacallbacktrackuser;
+        this.admins = admins;
+        this.datacallbacktrackuser = datacallbacktrackuser;
     }
 
     @NonNull
     @Override
     public TrackAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.track_admin_details,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.track_admin_details, parent, false);
         return new TrackAdminViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TrackAdminViewHolder holder, int position) {
-        Admin admin=admins.get(position);
+        Admin admin = admins.get(position);
         holder.activeStatusAdmin.setImageResource(R.drawable.red_dot);
         holder.name.setText(admin.getName());
         holder.email.setText(admin.getEmail());
@@ -72,7 +73,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.password.setText(admin.getPassword());
         holder.location.setText(admin.getLocation());
 
-        if(activeUserList != null) {
+        if (activeUserList != null) {
             for (String passcode : activeUserList) {
                 if (passcode.equals(admin.getPasscode())) {
                     holder.activeStatusAdmin.setImageResource(R.drawable.green_dot);
@@ -89,13 +90,14 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             builder.setCancelable(true);
 
             builder.setPositiveButton("ok", (dialog, which) -> {
-                if (admins.size()>0){
-                datacallbacktrackuser.remove(admins.get(position),usertyepes);}
+                if (admins.size() > 0) {
+                    datacallbacktrackuser.remove(admins.get(position), usertyepes);
+                }
                 dialog.dismiss();
             });
 
             builder.setNegativeButton("cancel", (dialog, which) -> {
-                Log.e(TAG, "onClick: "+"cancel" );
+                Log.e(TAG, "onClick: " + "cancel");
                 dialog.dismiss();
             });
 
@@ -103,12 +105,14 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             deleteAdminDialog.show();
         });
 
-        if (!admin.getImgurl().isEmpty()){
-            Glide.with(context).load(admin.getImgurl()).into(holder.profilepic);
+        if (!admin.getImgurl().isEmpty()) {
+            Glide.with(context)
+                    .load(admin.getImgurl())
+                    .placeholder(R.drawable.ic_profile_placeholder)
+                    .into(holder.profilepic);
         }
 
     }
-
 
 
     @Override
@@ -118,11 +122,10 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     }
 
 
+    static class TrackAdminViewHolder extends RecyclerView.ViewHolder {
+        ImageView profilepic, deleteAdmin, activeStatusAdmin;
 
-    static class TrackAdminViewHolder extends RecyclerView.ViewHolder{
-        ImageView profilepic,deleteAdmin , activeStatusAdmin;
-
-        TextView name, email, mobile, location,whatsappno,password,passcode;
+        TextView name, email, mobile, location, whatsappno, password, passcode;
 
         public TrackAdminViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -134,7 +137,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             whatsappno = itemView.findViewById(R.id.trackadminwhatsappno);
             password = itemView.findViewById(R.id.trackadminpassword);
             passcode = itemView.findViewById(R.id.trackadminpasscode);
-            profilepic=itemView.findViewById(R.id.trackadminprofilepic);
+            profilepic = itemView.findViewById(R.id.trackadminprofilepic);
             deleteAdmin = itemView.findViewById(R.id.trackadmindeleteprofile);
         }
     }
