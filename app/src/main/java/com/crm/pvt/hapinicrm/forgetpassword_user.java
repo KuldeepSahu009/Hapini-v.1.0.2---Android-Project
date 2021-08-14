@@ -91,6 +91,7 @@ Button submituser;
         myRef.child("UserType").setValue(usertype);
         myRef.child("reason").setValue("Request for password");
      getdatafromfirebase(passcode,usertype);
+
     }
 
     private void getdatafromfirebase(String passcodes, String usertype) {
@@ -104,12 +105,11 @@ Button submituser;
 
                     if (key.equals(passcodes)) {
                         String getpassword = dataSnapshot.child("password").getValue().toString();
-                        Toast toast= Toast.makeText(getContext(),"Password is"+getpassword,LENGTH_LONG);
+                        Toast toast= Toast.makeText(getContext(),"Password is: "+getpassword,LENGTH_LONG);
                         View views=toast.getView();
                         views.setBackgroundColor(Color.WHITE);
                         TextView toastmessage=(TextView) toast.getView().findViewById(android.R.id.message);
                         toastmessage.setTextColor(Color.BLACK);
-
                         toast.show();
                     }
                     else{

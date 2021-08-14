@@ -29,6 +29,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
     FragmentAddAdminFormDetailsBinding binding;
     String adminType;
+    String franchiseadmin;
     ProgressDialog progressDialog;
     FirebaseAuth auth;
 
@@ -179,6 +180,10 @@ public class AddAdminFormDetailsFragment extends Fragment {
                     title = " ADD VIDEO EDITOR ADMIN";
                 }
             }
+        else if(FranchiseDashboardFragment.addAdminTypes!=null){
+            adminType="CRM";
+            title = "ADD CRM ADMIN";
+        }
             binding.tvAddAdminFormDashboardTitle.setText(title);
         }
     }

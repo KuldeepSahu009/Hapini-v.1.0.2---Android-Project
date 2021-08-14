@@ -1,6 +1,8 @@
 package com.crm.pvt.hapinicrm.model;
 
-public class Franchise {
+import java.io.Serializable;
+
+public class Franchise implements Serializable {
    private String name;
     private String email;
     private String phoneno;
@@ -11,11 +13,7 @@ public class Franchise {
     private String imgurl;
 
 
-        public Franchise() {
-
-        }
-
-
+        public Franchise() { }
 
         public Franchise(String name, String email, String phoneno, String whatsappno, String passcode, String password, String location, String imgurl) {
             this.name = name;

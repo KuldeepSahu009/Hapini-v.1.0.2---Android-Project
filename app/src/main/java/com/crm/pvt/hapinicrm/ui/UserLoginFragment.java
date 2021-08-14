@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
 import com.crm.pvt.hapinicrm.databinding.FragmentUserLoginBinding;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +44,7 @@ public class UserLoginFragment extends Fragment {
     public static boolean isUserLoggedIn = false;
     ProgressDialog progressDialog;
     public static String currentUserPasscode = "";
+    public static TrackUserModel currentUser = null;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,7 +112,7 @@ public class UserLoginFragment extends Fragment {
                                 String password = dataSnapshot.child("password").getValue().toString();
                                 if (password.equals(passwords)) {
 
-
+                                    currentUser = dataSnapshot.getValue(TrackUserModel.class);
                                     SharedPreferences.Editor editor = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE).edit();
                                     editor.putString("passcode", passcodes);
                                     editor.putString("password", passwords);
