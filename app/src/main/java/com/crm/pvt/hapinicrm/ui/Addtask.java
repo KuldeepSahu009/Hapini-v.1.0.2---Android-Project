@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentAddtaskBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -180,4 +181,72 @@ public class Addtask extends Fragment {
          }
      }
 
+    @Override
+    public void onStart() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null")) {
+                String type;
+                switch (Splashscreen.spAdminsData.getString("type","null"))
+                {
+                    case "crm":
+                        type = "CRM";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .setValue("active");
+                        break;
+                    case "data":
+                        type = "DATA_ENTRY";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .setValue("active");
+                        break;
+                    case "video":
+                        type = "VIDEO_EDITOR";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .setValue("active");
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null")) {
+                String type;
+                switch (Splashscreen.spAdminsData.getString("type","null"))
+                {
+                    case "crm":
+                        type = "CRM";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .removeValue();
+                        break;
+                    case "data":
+                        type = "DATA_ENTRY";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .removeValue();
+                        break;
+                    case "video":
+                        type = "VIDEO_EDITOR";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .removeValue();
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        super.onPause();
+
+    }
 }
