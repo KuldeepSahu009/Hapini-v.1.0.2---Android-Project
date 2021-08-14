@@ -20,6 +20,7 @@ import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.Admin;
 import com.crm.pvt.hapinicrm.ui.Datacallbacktrackuser;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.TrackAdminViewHolder> {
@@ -36,8 +38,15 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     Datacallbacktrackuser datacallbacktrackuser;
     private static final String TAG = "TAG";
     public static String usertyepes;
+    private List<String> activeUserList;
 
-    public TrackAdminAdapter( Context context,ArrayList<Admin> admins,Datacallbacktrackuser datacallbacktrackuser){
+    public TrackAdminAdapter( Context context,ArrayList<Admin> admins , List<String> activeUserList , Datacallbacktrackuser datacallbacktrackuser){
+        this.context = context;
+        this.admins=admins;
+        this.datacallbacktrackuser=datacallbacktrackuser;
+        this.activeUserList = activeUserList;
+    }
+    public TrackAdminAdapter( Context context,ArrayList<Admin> admins ,  Datacallbacktrackuser datacallbacktrackuser){
         this.context = context;
         this.admins=admins;
         this.datacallbacktrackuser=datacallbacktrackuser;
@@ -46,6 +55,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     @NonNull
     @Override
     public TrackAdminViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.track_admin_details,parent,false);
         return new TrackAdminViewHolder(view);
     }
@@ -53,6 +63,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     @Override
     public void onBindViewHolder(@NonNull TrackAdminViewHolder holder, int position) {
         Admin admin=admins.get(position);
+        holder.activeStatusAdmin.setImageResource(R.drawable.red_dot);
         holder.name.setText(admin.getName());
         holder.email.setText(admin.getEmail());
         holder.mobile.setText(admin.getPhoneno());
@@ -60,6 +71,15 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.passcode.setText(admin.getPasscode());
         holder.password.setText(admin.getPassword());
         holder.location.setText(admin.getLocation());
+
+        if(activeUserList != null) {
+            for (String passcode : activeUserList) {
+                if (passcode.equals(admin.getPasscode())) {
+                    holder.activeStatusAdmin.setImageResource(R.drawable.green_dot);
+                    break;
+                }
+            }
+        }
 
         holder.deleteAdmin.setOnClickListener(v -> {
 
@@ -100,12 +120,13 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
 
     static class TrackAdminViewHolder extends RecyclerView.ViewHolder{
-        ImageView profilepic,deleteAdmin;
+        ImageView profilepic,deleteAdmin , activeStatusAdmin;
 
         TextView name, email, mobile, location,whatsappno,password,passcode;
 
         public TrackAdminViewHolder(@NonNull View itemView) {
             super(itemView);
+            activeStatusAdmin = itemView.findViewById(R.id.trackAdminStatus);
             name = itemView.findViewById(R.id.trackadminname);
             email = itemView.findViewById(R.id.trackadminemailid);
             mobile = itemView.findViewById(R.id.trackadminphoneno);

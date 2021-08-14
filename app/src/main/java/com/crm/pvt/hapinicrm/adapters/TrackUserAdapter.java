@@ -13,9 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
+import com.crm.pvt.hapinicrm.ui.CrmAdminFragment;
 import com.crm.pvt.hapinicrm.ui.TrackUserFragment;
 import com.crm.pvt.hapinicrm.ui.TrackUsers;
 import com.crm.pvt.hapinicrm.viewholder.Trackuserviewholders;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,15 +30,20 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders> {
-    private final Context context;
-    private final    List<TrackUserModel> trackUserModelList;
+    private  Context context;
+    private  List<TrackUserModel> trackUserModelList;
+    private  List<String> activeUserList;
 
+    public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList , List<String> activeUserList) {
+        this.context = context;
+        this.trackUserModelList = trackUserModelList;
+         this.activeUserList = activeUserList;
+
+    }
 
     public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList) {
         this.context = context;
         this.trackUserModelList = trackUserModelList;
-
-
     }
 
 
@@ -42,6 +51,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
     @NonNull
     @Override
     public Trackuserviewholders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.track_user_info_card_view,parent,false);
         return new Trackuserviewholders(view);
     }
@@ -50,6 +60,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
     public void onBindViewHolder(@NonNull Trackuserviewholders holder, int position) {
         TrackUserModel tempmodel=trackUserModelList.get(position);
 
+        holder.activeStatusUser.setImageResource(R.drawable.red_dot);
         holder.name.setText(tempmodel.getName());
         holder.email.setText(tempmodel.getEmail());
         holder.phone.setText(tempmodel.getPhoneno());
@@ -58,6 +69,14 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.password.setText(tempmodel.getPassword());
         holder.location.setText(tempmodel.getLocation());
 
+        if(activeUserList != null) {
+            for (String passcode : activeUserList) {
+                if (passcode.equals(tempmodel.getPasscode())) {
+                    holder.activeStatusUser.setImageResource(R.drawable.green_dot);
+                    break;
+                }
+            }
+        }
         //For Deletion of User
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +88,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
                 notifyDataSetChanged();
             }
         });
+
 
         if(!tempmodel.getImgurl().equals("")){
             Glide.with(context).load(tempmodel.getImgurl()).into(holder.profileimg);
