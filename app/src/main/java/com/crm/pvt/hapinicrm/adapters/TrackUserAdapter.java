@@ -62,7 +62,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
     private static final String TAG = "TAG";
     private final Context context;
     private final    List<TrackUserModel> trackUserModelList;
-    TrackUserModel tempmodel;
+   int pos;
 
 
     public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList) {
@@ -83,7 +83,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
 
     @Override
     public void onBindViewHolder(@NonNull Trackuserviewholders holder, int position) {
-       tempmodel=trackUserModelList.get(position);
+      TrackUserModel tempmodel=trackUserModelList.get(position);
 
         holder.name.setText(tempmodel.getName());
         holder.email.setText(tempmodel.getEmail());
@@ -111,7 +111,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.downloaduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                pos=position;
                 checkpermission();
             }
         });
@@ -178,6 +178,8 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         ByteArrayOutputStream stream=new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
         byte[] bytes=stream.toByteArray();
+
+       TrackUserModel tempmodel= trackUserModelList.get(pos);
 
         ImageData imageData= ImageDataFactory.create(bytes);
         Image image=new Image(imageData);

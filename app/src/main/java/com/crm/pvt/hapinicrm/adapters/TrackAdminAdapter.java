@@ -63,7 +63,8 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     Datacallbacktrackuser datacallbacktrackuser;
     private static final String TAG = "TAG";
     public static String usertyepes;
-    Admin admin;
+    int pos;
+
 
     public TrackAdminAdapter( Context context,ArrayList<Admin> admins,Datacallbacktrackuser datacallbacktrackuser){
         this.context = context;
@@ -80,7 +81,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
     @Override
     public void onBindViewHolder(@NonNull TrackAdminViewHolder holder, int position) {
-         admin=admins.get(position);
+       Admin  admin=admins.get(position);
         holder.name.setText(admin.getName());
         holder.email.setText(admin.getEmail());
         holder.mobile.setText(admin.getPhoneno());
@@ -118,6 +119,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.downloadamin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pos=position;
                 checkpermission();
             }
         });
@@ -211,6 +213,8 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         ByteArrayOutputStream stream=new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
         byte[] bytes=stream.toByteArray();
+
+        Admin admin=admins.get(pos);
 
         ImageData imageData= ImageDataFactory.create(bytes);
         Image image=new Image(imageData);
