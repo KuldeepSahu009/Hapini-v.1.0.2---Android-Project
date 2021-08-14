@@ -85,7 +85,7 @@ public class VerificationFromAdmin extends Fragment {
 
     private void uploadImage(String s) {
         Intent intent = new Intent();
-        intent.setType("image/jpg");
+        intent.setType("image");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         if (s == "Aadhaar Front") {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), 10);
