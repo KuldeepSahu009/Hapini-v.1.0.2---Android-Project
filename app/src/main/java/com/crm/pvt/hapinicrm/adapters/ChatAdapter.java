@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     ArrayList<Chat> chats;
-
+//
     public ChatAdapter() { }
 
     @NonNull
