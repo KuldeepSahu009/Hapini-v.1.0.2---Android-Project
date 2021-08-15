@@ -1,21 +1,24 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmUserBinding;
 
 public class CrmUserFragment extends Fragment {
 
     private FragmentCrmUserBinding binding;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentCrmUserBinding.inflate(inflater,container,false);
+        binding = FragmentCrmUserBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -23,9 +26,13 @@ public class CrmUserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.cvSeeTaskAssigned.setOnClickListener(
-                v -> Navigation.findNavController(v).navigate(CrmUserFragmentDirections.actionCrmUserFragmentToTaskListFragment()));
+        binding.cvSeeTaskAssigned.
+                setOnClickListener(v ->
+                        Navigation.findNavController(v)
+                                .navigate(CrmUserFragmentDirections.actionCrmUserFragmentToTaskListFragment()));
 
-        binding.cvVerifyYourself.setOnClickListener(v -> Navigation.findNavController(v).navigate(CrmUserFragmentDirections.actionCrmUserFragmentToVerificationByAdmin()));
+        binding.cvChatWithAdmin.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(CrmUserFragmentDirections.actionCrmUserFragmentToCrmUserChatFragment());
+        });
     }
 }

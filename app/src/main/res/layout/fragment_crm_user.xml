@@ -115,7 +115,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvVerifyYourself"
+            android:id="@+id/cvChatWithAdmin"
             android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
@@ -129,26 +129,27 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/ivVerifyYourself"
+                    android:id="@+id/ivChatWithAdmin"
                     android:layout_width="100dp"
                     android:layout_height="90dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_baseline_verified_user" />
+                    android:src="@drawable/ic_chat" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ivVerifyYourself"
+                    android:layout_below="@+id/ivChatWithAdmin"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:fontFamily="serif"
-                    android:text="Verify Yourself"
+                    android:text="Chat with Admin"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </RelativeLayout>
+
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>

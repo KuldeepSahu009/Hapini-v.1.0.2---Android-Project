@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +17,19 @@ import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
+import com.crm.pvt.hapinicrm.model.Franchise;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class AdminLoginFragment extends Fragment {
@@ -26,6 +37,7 @@ public class AdminLoginFragment extends Fragment {
     private FragmentAdminLoginBinding binding;
     private FirebaseAuth auth;
     private static final String TAG = "TAG";
+    public static Franchise currentFranchise = null;
     static String passcode;
     static String password;
 
@@ -65,28 +77,72 @@ public class AdminLoginFragment extends Fragment {
             } else {
 
                 int selected = binding.spSelectAdmin.getSelectedItemPosition();
-                String postString = "";
+                if(selected == 5)
+                {
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("franchiseV2");
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                String key = dataSnapshot.getKey();
 
-                if(selected == 1 ) {
-                    postString = "@crmadmin.com";
-                } else if(selected == 2) {
-                    postString = "@deadmin.com";
-                } else if(selected == 3) {
-                    postString = "@veadmin.com";
-                } else if(selected == 4) {
-                    postString = "@masteradmin.com";
-                }
+                                if (key.equals(passcode)) {
+                                    String password = dataSnapshot.child("password").getValue().toString();
+                                    if (password.equals(password)) {
 
-                auth.signInWithEmailAndPassword(passcode+postString,password).addOnCompleteListener(task -> {
-                    binding.btnLogin.setEnabled(true);
-                    binding.pbAuth.setVisibility(View.INVISIBLE);
-                    if(task.isSuccessful()) {
-                        navigateTo(v,selected);
-                    } else {
-                        Snackbar.make(v,"Authorisation Failed",Snackbar.LENGTH_SHORT).show();
+                                        currentFranchise = dataSnapshot.getValue(Franchise.class);
+
+                                        SharedPreferences.Editor editor = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
+                                        editor.putString("passcode", passcode);
+                                        editor.putString("password", password);
+                                        editor.putString("type", "franchise");
+                                        editor.apply();
+
+
+                                        if(!UserLoginFragment.isUserLoggedIn) {
+                                            UserLoginFragment.isUserLoggedIn = true;
+                                            Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToFranchiseDashboardFragment());
+                                        }
+                                        else {
+                                            Toast.makeText(getContext(), "failed to login", Toast.LENGTH_LONG).show();
+                                        }
+                                }
+
+                            }
+
+
+                        }
                     }
-                });
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+                else {
+                    String postString = "";
+
+                    if (selected == 1) {
+                        postString = "@crmadmin.com";
+                    } else if (selected == 2) {
+                        postString = "@deadmin.com";
+                    } else if (selected == 3) {
+                        postString = "@veadmin.com";
+                    } else if (selected == 4) {
+                        postString = "@masteradmin.com";
+                    }
+
+                    auth.signInWithEmailAndPassword(passcode + postString, password).addOnCompleteListener(task -> {
+                        binding.btnLogin.setEnabled(true);
+                        binding.pbAuth.setVisibility(View.INVISIBLE);
+                        if (task.isSuccessful()) {
+                            navigateTo(v, selected);
+                        } else {
+                            Snackbar.make(v, "Authorisation Failed", Snackbar.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 
@@ -129,6 +185,7 @@ public class AdminLoginFragment extends Fragment {
                 Log.e(TAG, "navigateTo: "+"master" );
                 editor.putString("type", "master");
                 editor.putString("passcode",passcode);
+                editor.putString("password",password);
                 editor.apply();
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToMasterDashboardFragment());
                 break;

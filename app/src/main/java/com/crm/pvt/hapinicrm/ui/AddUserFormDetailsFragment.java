@@ -52,8 +52,8 @@ public class AddUserFormDetailsFragment extends Fragment {
             String password = binding.etPassword.getText().toString();
 
             if (binding.cvAddUserFormTermsAndCondition.isChecked()) {
-                if (email.isEmpty() || name.isEmpty() || mobileno.isEmpty() || whatsappno.isEmpty() || city.isEmpty() || location.isEmpty() ||
-                        passcode.isEmpty() || password.isEmpty()) {
+                if (((email.isEmpty() || name.isEmpty() || mobileno.isEmpty() || whatsappno.isEmpty() || city.isEmpty() || location.isEmpty() ||
+                        passcode.isEmpty() || password.isEmpty()))) {
                     Snackbar.make(v,"All Fields are necessary",Snackbar.LENGTH_LONG).show();
 
                 } else if (passcode.length() != 6) {

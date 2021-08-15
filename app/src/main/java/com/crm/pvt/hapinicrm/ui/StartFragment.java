@@ -15,6 +15,7 @@ import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentStartBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class StartFragment extends Fragment {
@@ -71,6 +72,12 @@ public class StartFragment extends Fragment {
                     Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToVideoEditorUserFragment());
                     break;
             }
+        }
+
+        if(Splashscreen.isFranchise)
+        {
+            //After Designed Logged out button in Layput
+        //  Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToFranchiseDashboardFragment());
         }
     }
 
