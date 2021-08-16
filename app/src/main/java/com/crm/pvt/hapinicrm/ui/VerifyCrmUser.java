@@ -1,7 +1,11 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import static android.content.ContentValues.TAG;
+import static android.widget.Toast.LENGTH_LONG;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,13 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.adapters.VerificationRequestsAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentVerifyCrmUserBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,7 +56,7 @@ public class VerifyCrmUser extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentVerifyCrmUserBinding.inflate(inflater, container, false);
-        name = getArguments().getString("NAME");
+
         return binding.getRoot();
     }
 
@@ -57,107 +64,43 @@ public class VerifyCrmUser extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpImages(view);
-        binding.verifyUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2").child(name).removeValue();
+        binding.verifyUser.setOnClickListener(v -> {
+                FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2").child(name);
                 Toast.makeText(getContext(), name + " is Verified", Toast.LENGTH_SHORT).show();
-                Navigation.findNavController(view).navigateUp();
-            }
+
+
+        });
+        binding.backButton.setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(VerifyCrmUserDirections.actionVerificationOfUserToCrmAdminFragment());
         });
 
     }
 
     private void setUpImages(View v) {
+DatabaseReference myref2=FirebaseDatabase.getInstance().getReference("Verification Of Documents From Master V2");
+        myref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-        try {
-            File localFile1 = File.createTempFile("Aadhaar Card Back", "jpg");
-            File localFile2 = File.createTempFile("Aadhaar Card Front", "jpg");
-            File localFile = File.createTempFile("Pan Card Front", "jpg");
-            storageReference = FirebaseStorage.getInstance().getReference().child("Verification Of Documents From Master V2").child(name);
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2").child(name);
-            final String[] passCode = new String[1];
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        passCode[0] = dataSnapshot.getKey();
-                    }
+                        String getimagelinkfront = dataSnapshot.child("passcodess").child("Aadhaar Card Front").getValue(String.class);
+                        String getimagelinkback=dataSnapshot.child("passcodess").child("Aadhaar Card Back").getValue(String.class);
+                        String getpancardlink=dataSnapshot.child("passcodess").child("Pan Card Front").getValue(String.class);
+                        Glide.with(getContext()).load(getimagelinkfront).into(binding.imgFrontSide);
+                    Glide.with(getContext()).load(getimagelinkback).into(binding.imgBackSide) ;
+                    Glide.with(getContext()).load(getpancardlink).into(binding.imgPanCard) ;
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            if (passCode[0] != null) {
-                storageReference.child(passCode[0]).child("Aadhaar Card Back/jpg").getFile(localFile1).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile1.getAbsolutePath());
-                        binding.imgFrontSide.setImageBitmap(bitmap);
-                    }
-                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull FileDownloadTask.TaskSnapshot snapshot) {
-                        Toast.makeText(getContext(), name + " " + passCode[0], Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(), "Loading data..!!", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Failed to load data!!!", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
 
-            if (passCode[0] != null) {
-                storageReference.child(passCode[0]).child("Aadhaar Card Front/jpg").getFile(localFile2).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile2.getAbsolutePath());
-                        binding.imgBackSide.setImageBitmap(bitmap);
-                    }
-                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull FileDownloadTask.TaskSnapshot snapshot) {
-                        Toast.makeText(getContext(), "Loading data..!!", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Failed to load data!!!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
-
-            if (passCode[0] != null) {
-                storageReference.child(passCode[0]).child("Pan Card Front/jpg").getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        binding.imgPanCard.setImageBitmap(bitmap);
-                    }
-                }).addOnProgressListener(new OnProgressListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull FileDownloadTask.TaskSnapshot snapshot) {
-                        Toast.makeText(getContext(), "Loading data..!!", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Failed to load data!!!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-
-        
+        });
+        onPause();
     }
+
+
 
 }

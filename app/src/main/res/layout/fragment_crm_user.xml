@@ -109,7 +109,7 @@
                     android:text="See Task"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -143,10 +143,10 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:fontFamily="serif"
-                    android:text="Chat with Admin"
+                    android:text="Chat with Franchise Admin"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -183,7 +183,7 @@
                     android:text="Verify Yourself"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

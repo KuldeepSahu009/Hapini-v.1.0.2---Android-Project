@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -52,10 +53,13 @@ public class VerificationFromAdmin extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.backButton.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigateUp();
+        });
         binding.selectFront.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext() , "Upload image of .jpg Format only" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext() , "Upload image" , Toast.LENGTH_SHORT).show();
                 uploadImage("Aadhaar Front");
             }
         });
@@ -63,7 +67,7 @@ public class VerificationFromAdmin extends Fragment {
         binding.selectBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext() , "Upload image of .jpg Format only" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext() , "Upload image" , Toast.LENGTH_SHORT).show();
                 uploadImage("Aadhaar Back");
             }
         });
@@ -71,7 +75,7 @@ public class VerificationFromAdmin extends Fragment {
         binding.selectPanCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext() , "Upload image of .jpg Format only" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext() , "Upload image" , Toast.LENGTH_SHORT).show();
                 uploadImage("Pan Card");
             }
         });
@@ -85,7 +89,7 @@ public class VerificationFromAdmin extends Fragment {
 
     private void uploadImage(String s) {
         Intent intent = new Intent();
-        intent.setType("image");
+        intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         if (s == "Aadhaar Front") {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), 10);
@@ -126,20 +130,21 @@ public class VerificationFromAdmin extends Fragment {
             progressDialog.setTitle("Please wait...");
             progressDialog.show();
 
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Verification Of Documents From Master V2").child(binding.editTextName.getText().toString());
-            storageReference.child(binding.editTextPasscode.getText().toString()).child("Aadhaar Card Front").putFile(imageUri)
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Verification Of Documents From Master V2").child("passcodess");
+            storageReference.child("Aadhaar Card Front").putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2");
-                                    databaseReference.child(binding.editTextName.getText().toString()).child(binding.editTextPasscode.getText().toString()).child("Aadhaar Card Front").setValue(uri.toString());
+                                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2").child("passcodess");
+                                    databaseReference.child("Name").setValue(binding.editTextName.getText().toString());
+                                    databaseReference.child("Aadhaar Card Front").setValue(uri.toString());
                                 }
                             });
                             progressDialog.dismiss();
-                            Toast.makeText(getContext(), "Aadhaar Card Uploaded Successfully!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Aadhaar Card Front Uploaded Successfully!!", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -157,7 +162,7 @@ public class VerificationFromAdmin extends Fragment {
         }
         if (imageUri1!= null) {
 
-            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Verification Of Documents From Master V2").child(binding.editTextName.getText().toString());
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Verification Of Documents From Master V2").child("passcodess");
             storageReference.child(binding.editTextPasscode.getText().toString()).child("Aadhaar Card Back").putFile(imageUri1)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -165,11 +170,12 @@ public class VerificationFromAdmin extends Fragment {
                             taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2");
-                                    databaseReference.child(binding.editTextName.getText().toString()).child(binding.editTextPasscode.getText().toString()).child("Aadhaar Card Back").setValue(uri.toString());
+                                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2").child("passcodess");
+                                    databaseReference.child("Name").setValue(binding.editTextName.getText().toString());
+                                    databaseReference.child("Aadhaar Card Back").setValue(uri.toString());
                                 }
                             });
-                            Toast.makeText(getContext(), "Aadhaar Card Uploaded Successfully!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Aadhaar Card Back Uploaded Successfully!!", Toast.LENGTH_SHORT).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -188,8 +194,9 @@ public class VerificationFromAdmin extends Fragment {
                            taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2");
-                                    databaseReference.child(binding.editTextName.getText().toString()).child(binding.editTextPasscode.getText().toString()).child("Pan Card Front").setValue(uri.toString());
+                                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2").child("passcodess");
+                                    databaseReference.child("Name").setValue(binding.editTextName.getText().toString());
+                                    databaseReference.child("Pan Card Front").setValue(uri.toString());
                                 }
                             });
                             Toast.makeText(getContext(), "Pan Card Uploaded Successfully!!", Toast.LENGTH_SHORT).show();

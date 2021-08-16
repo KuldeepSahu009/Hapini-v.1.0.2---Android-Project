@@ -35,6 +35,9 @@ public class CrmUserFragment extends Fragment {
         binding.cvChatWithAdmin.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(CrmUserFragmentDirections.actionCrmUserFragmentToCrmUserChatFragment());
         });
+        binding.cvVerifyYourself.setOnClickListener(v ->{
+            Navigation.findNavController(v).navigate(CrmUserFragmentDirections.actionCrmUserFragmentToVerificationByAdmin());
+        });
     }
 
     @Override
