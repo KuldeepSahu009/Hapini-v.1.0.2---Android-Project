@@ -338,7 +338,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                             @Override
                             public void onSuccess(Void unused) {
 
-                                Toast.makeText(getContext(), "admin deleted", Toast.LENGTH_LONG).show();
+                                Toast.makeText(requireContext(), "admin deleted", Toast.LENGTH_LONG).show();
                                 type = usertype;
                                 adminList.clear();
                                 switch (usertype) {

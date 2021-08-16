@@ -1,5 +1,7 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
@@ -20,8 +22,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddAdminFormDetailsFragment extends Fragment {
 
@@ -63,101 +69,140 @@ public class AddAdminFormDetailsFragment extends Fragment {
                     Snackbar.make(v, "All Fields are necessary", Snackbar.LENGTH_LONG).show();
                 } else if (passcode.length() != 6) {
                     Snackbar.make(v, "Enter correct passcode", Snackbar.LENGTH_LONG).show();
-                }
-                else {
-                    progressDialog=new ProgressDialog(getContext());
+                } else {
+                    progressDialog = new ProgressDialog(getContext());
                     progressDialog.setTitle("Please wait");
                     progressDialog.setMessage("Creating Admin");
                     progressDialog.show();
-                    enterDataToFirebase(name,email,mobileNo,whatsAppNo,city,location,passcode,password);
+
+                    enterDataToFirebase(name, email, mobileNo, whatsAppNo, city, location, passcode, password);
+
                 }
+            } else {
+                Snackbar.make(v, "Please Accept all Terms and Conditions!.", Snackbar.LENGTH_LONG).show();
             }
-                else {
-                    Snackbar.make(v, "Please Accept all Terms and Conditions!.", Snackbar.LENGTH_LONG).show();
-                }
 
         });
 
-            binding.ivBackFromAddAdminFormFragment.setOnClickListener(v ->
-                    Navigation.findNavController(v).navigateUp());
+        binding.ivBackFromAddAdminFormFragment.setOnClickListener(v ->
+                Navigation.findNavController(v).navigateUp());
     }
 
-    private void enterDataToFirebase (String name, String email, String mobileNo, String whatsAppNo, String city, String location, String passcode, String password) {
+    private void enterDataToFirebase(String name, String email, String mobileNo, String whatsAppNo, String city, String location, String passcode, String password) {
 
-        Admin admin = new Admin( name , email , mobileNo , whatsAppNo , passcode , password , location, "");
-        if (adminType == "CRM"){
-            auth.createUserWithEmailAndPassword(passcode+"@crmadmin.com",password).addOnCompleteListener(task -> {
-                if(task.isSuccessful()) {
-                    Log.i(TAG, "Admin created");
-                } else {
-                    Log.i(TAG,"Something went wrong");
-                }
-            });
-            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
-            databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getContext(),"CRM Admin Successfully Entered",Toast.LENGTH_LONG).show();
-                     Navigation.findNavController(getView()).navigateUp();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getContext(),"CRM Admin is not Entered",Toast.LENGTH_LONG).show();
-                }
-            });
+        Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, location, "");
+
+        DatabaseReference franchiseDbRef = FirebaseDatabase
+                .getInstance()
+                .getReference("crm_by_franchise")
+                .child(currentFranchise.getPasscode());
+
+
+        if (adminType == "CRM") {
+
+            final int[] count = {0};
+            final boolean[] isAllowed = {true};
+
+            if (currentFranchise != null) {
+
+                franchiseDbRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            count[0] = (int) snapshot.getChildrenCount();
+                            if(count[0] <= 2) {
+
+                            }else {
+                                isAllowed[0] = false;
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+
+            if (isAllowed[0]) {
+
+                franchiseDbRef.child(admin.getPasscode()).setValue(admin);
+
+                auth.createUserWithEmailAndPassword(passcode + "@crmadmin.com", password).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.i(TAG, "Admin created");
+                    } else {
+                        Log.i(TAG, "Something went wrong");
+                    }
+                });
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
+                databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), "CRM Admin Successfully Entered", Toast.LENGTH_LONG).show();
+                        Navigation.findNavController(requireView()).navigateUp();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), "CRM Admin is not Entered", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
         }
-        if (adminType =="DATA_ENTRY"){
+        if (adminType == "DATA_ENTRY") {
 
-            auth.createUserWithEmailAndPassword(passcode+"@deadmin.com",password).addOnCompleteListener(task -> {
-                if(task.isSuccessful()) {
+            auth.createUserWithEmailAndPassword(passcode + "@deadmin.com", password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
                     Log.i(TAG, "Admin created");
                 } else {
-                    Log.i(TAG,"Something went wrong");
+                    Log.i(TAG, "Something went wrong");
                 }
             });
 
-            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
             databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"Data Entry Admin Successfully Entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Data Entry Admin Successfully Entered", Toast.LENGTH_LONG).show();
                     Navigation.findNavController(getView()).navigateUp();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"Data Entry Admin is not Entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Data Entry Admin is not Entered", Toast.LENGTH_LONG).show();
                 }
             });
         }
-        if (adminType == "VIDEO_EDITOR"){
+        if (adminType == "VIDEO_EDITOR") {
 
-            auth.createUserWithEmailAndPassword(passcode+"@veadmin.com",password).addOnCompleteListener(task -> {
-                if(task.isSuccessful()) {
+            auth.createUserWithEmailAndPassword(passcode + "@veadmin.com", password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
                     Log.i(TAG, "Admin created");
                 } else {
-                    Log.i(TAG,"Something went wrong");
+                    Log.i(TAG, "Something went wrong");
                 }
             });
 
-            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
             databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"Video Editor Admin Successfully Entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Video Editor Admin Successfully Entered", Toast.LENGTH_LONG).show();
                     Navigation.findNavController(getView()).navigateUp();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"Video Editor Admin is not Entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Video Editor Admin is not Entered", Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -166,24 +211,24 @@ public class AddAdminFormDetailsFragment extends Fragment {
     void setFormTitle() {
         String title = "";
         if (AddAdminFragment.addAdminType != null) {
-                if (AddAdminFragment.addAdminType.equals("CRM")) {
-                    adminType = "CRM";
-                    //VISIBLE EDITTEXT SPECIALLY RELATED TO CRM IN FUTURE
-                    title = " ADD CRM ADMIN";
-                } else if (AddAdminFragment.addAdminType.equals("DE")) {
-                    adminType = "DATA_ENTRY";
-                    //VISIBLE EDITTEXT SPECIALLY RELATED TO DATA ENTRY IN FUTURE
-                    title = " ADD DATA ENTRY ADMIN";
-                } else {
-                    adminType = "VIDEO_EDITOR";
-                    //VISIBLE EDITTEXT SPECIALLY RELATED TO VIDEO EDITOR IN FUTURE
-                    title = " ADD VIDEO EDITOR ADMIN";
-                }
+            if (AddAdminFragment.addAdminType.equals("CRM")) {
+                adminType = "CRM";
+                //VISIBLE EDITTEXT SPECIALLY RELATED TO CRM IN FUTURE
+                title = " ADD CRM ADMIN";
+            } else if (AddAdminFragment.addAdminType.equals("DE")) {
+                adminType = "DATA_ENTRY";
+                //VISIBLE EDITTEXT SPECIALLY RELATED TO DATA ENTRY IN FUTURE
+                title = " ADD DATA ENTRY ADMIN";
+            } else {
+                adminType = "VIDEO_EDITOR";
+                //VISIBLE EDITTEXT SPECIALLY RELATED TO VIDEO EDITOR IN FUTURE
+                title = " ADD VIDEO EDITOR ADMIN";
             }
-        else if(FranchiseDashboardFragment.addAdminTypes!=null){
-            adminType="CRM";
+        } else if (FranchiseDashboardFragment.addAdminTypes != null) {
+            adminType = "CRM";
             title = "ADD CRM ADMIN";
         }
-            binding.tvAddAdminFormDashboardTitle.setText(title);
-        }
+        binding.tvAddAdminFormDashboardTitle.setText(title);
     }
+
+}
