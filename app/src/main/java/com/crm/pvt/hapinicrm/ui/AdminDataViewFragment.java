@@ -1,5 +1,7 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -334,11 +336,19 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                     if (passcode.equals(admin.getPasscode())) {
                         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype)
                                 .child(key);
+                        if(currentFranchise != null) {
+                            DatabaseReference franchiseDbRef = FirebaseDatabase
+                                    .getInstance()
+                                    .getReference("crm_by_franchise")
+                                    .child(currentFranchise.getPasscode());
+
+                            franchiseDbRef.child(admin.getPasscode()).removeValue();
+                        }
                         reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-
-                                Toast.makeText(getContext(), "admin deleted", Toast.LENGTH_LONG).show();
+                              // TODO This toast too keeps crashing
+                             //   Toast.makeText(requireActivity().getParent(), "admin deleted", Toast.LENGTH_LONG).show();
                                 type = usertype;
                                 adminList.clear();
                                 switch (usertype) {
