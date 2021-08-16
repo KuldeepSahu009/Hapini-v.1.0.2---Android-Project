@@ -53,6 +53,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
 
+
         binding.btnAddAdminSubmit.setOnClickListener(v -> {
 
             String email = binding.etEmail.getText().toString();
@@ -101,7 +102,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
         if (adminType == "CRM") {
 
             final int[] count = {0};
-            final boolean[] isAllowed = {true};
+            final Admin []crmAdmin = {admin};
 
             if (currentFranchise != null) {
 
@@ -110,10 +111,14 @@ public class AddAdminFormDetailsFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             count[0] = (int) snapshot.getChildrenCount();
-                            if(count[0] <= 2) {
-
-                            }else {
-                                isAllowed[0] = false;
+                            if(count[0] <= 2 && crmAdmin[0] != null) {
+                                Log.i("AddAdmin",String.valueOf(count[0]));
+                                addCrmAdmin(crmAdmin[0]);
+                                crmAdmin[0] = null;
+                            } else {
+                                progressDialog.dismiss();
+                               // TODO This Toast keeps crashing need to fix this
+                              //  Toast.makeText(requireActivity().getApplicationContext(),"Max 2 crm admins can be added",Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -125,9 +130,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 });
             }
 
-            if (isAllowed[0]) {
-
-                franchiseDbRef.child(admin.getPasscode()).setValue(admin);
+            else {
 
                 auth.createUserWithEmailAndPassword(passcode + "@crmadmin.com", password).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -231,4 +234,43 @@ public class AddAdminFormDetailsFragment extends Fragment {
         binding.tvAddAdminFormDashboardTitle.setText(title);
     }
 
+
+    //Separate function to add crm admin when franchise adds him/her.
+    private void addCrmAdmin(Admin admin) {
+        DatabaseReference franchiseDbRef = FirebaseDatabase
+                .getInstance()
+                .getReference("crm_by_franchise")
+                .child(currentFranchise.getPasscode());
+
+        franchiseDbRef.child(admin.getPasscode()).setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.i("AddAdmin","Admin added in franchise db");
+            }
+        });
+
+        auth.createUserWithEmailAndPassword(admin.getPasscode() + "@crmadmin.com", admin.getPassword()).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.i(TAG, "Admin created");
+            } else {
+                Log.i(TAG, "Something went wrong");
+            }
+        });
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(admin.getPasscode());
+        databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), "CRM Admin Successfully Entered", Toast.LENGTH_LONG).show();
+                Navigation.findNavController(requireView()).navigateUp();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(getContext(), "CRM Admin is not Entered", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }
