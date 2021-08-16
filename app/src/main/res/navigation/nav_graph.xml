@@ -619,10 +619,11 @@
     <fragment
         android:id="@+id/verificationOfUser"
         android:name="com.crm.pvt.hapinicrm.ui.VerifyCrmUser"
-        tools:layout="@layout/fragment_verify_crm_user" >
+        tools:layout="@layout/fragment_verify_crm_user">
         <action
             android:id="@+id/action_verificationOfUser_to_crmAdminFragment"
-            app:destination="@id/crmAdminFragment" />
+            app:destination="@id/crmAdminFragment"
+            app:popUpTo="@id/crmAdminFragment" />
     </fragment>
 
     <fragment

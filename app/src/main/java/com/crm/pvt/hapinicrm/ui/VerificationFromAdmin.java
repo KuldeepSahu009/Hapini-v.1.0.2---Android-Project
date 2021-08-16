@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentVerificationFromAdminBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -87,13 +89,13 @@ public class VerificationFromAdmin extends Fragment {
         Intent intent = new Intent();
         intent.setType("image/jpg");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        if (s == "Aadhaar Front") {
+        if (s.equals("Aadhaar Front")) {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), 10);
         }
-        if (s == "Aadhaar Back") {
+        if (s.equals("Aadhaar Back")) {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), 100);
         }
-        if (s == "Pan Card") {
+        if (s.equals("Pan Card")) {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1000);
         }
 
@@ -150,7 +152,7 @@ public class VerificationFromAdmin extends Fragment {
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                    double progress = (100.0 + snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                    double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
                     progressDialog.setMessage("Uploaded " + (int) progress + "%");
                 }
             });
@@ -190,6 +192,7 @@ public class VerificationFromAdmin extends Fragment {
                                 public void onSuccess(Uri uri) {
                                     databaseReference = FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2");
                                     databaseReference.child(binding.editTextName.getText().toString()).child(binding.editTextPasscode.getText().toString()).child("Pan Card Front").setValue(uri.toString());
+                                    Navigation.findNavController(requireView()).navigateUp();
                                 }
                             });
                             Toast.makeText(getContext(), "Pan Card Uploaded Successfully!!", Toast.LENGTH_SHORT).show();
@@ -198,8 +201,36 @@ public class VerificationFromAdmin extends Fragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getContext(), "Failed to Upload!!", Toast.LENGTH_LONG).show();
+                    Navigation.findNavController(requireView()).navigateUp();
                 }
             });
         }
+    }
+    @Override
+    public void onStart() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
+        super.onPause();
+
+    }
+
+    //Remove it after adding logout functionality
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Splashscreen.spUsersData.edit().clear().commit();
     }
 }
