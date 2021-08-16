@@ -33,8 +33,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
-            android:padding="8dp"
-            android:src="@drawable/ic_back" />
+            android:padding="8dp" />
 
         <TextView
             android:id="@+id/tvCRMUser"

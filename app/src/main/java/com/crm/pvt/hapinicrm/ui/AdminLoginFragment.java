@@ -77,7 +77,7 @@ public class AdminLoginFragment extends Fragment {
             } else {
 
                 int selected = binding.spSelectAdmin.getSelectedItemPosition();
-                if(selected == 5)
+                if(selected == 3)
                 {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("franchiseV2");
                     reference.addValueEventListener(new ValueEventListener() {
@@ -125,11 +125,11 @@ public class AdminLoginFragment extends Fragment {
 
                     if (selected == 1) {
                         postString = "@crmadmin.com";
-                    } else if (selected == 2) {
+                    } else if (selected == 5) {//not
                         postString = "@deadmin.com";
-                    } else if (selected == 3) {
+                    } else if (selected == 4) {//not in use
                         postString = "@veadmin.com";
-                    } else if (selected == 4) {
+                    } else if (selected == 2) {
                         postString = "@masteradmin.com";
                     }
 
@@ -167,21 +167,21 @@ public class AdminLoginFragment extends Fragment {
                 editor.apply();
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToCrmAdminFragment());
                 break;
-            case 2:
+            case 4://not in use
                 editor.putString("type", "data");
                 editor.putString("passcode",passcode);
                 // Log.e(TAG, "navigateTo: "+passcode );
                 editor.apply();
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToDataEntryAdminFragment());
                 break;
-            case 3:
+            case 5://not in use
                 editor.putString("type", "video");
                 editor.putString("passcode",passcode);
                 // Log.e(TAG, "navigateTo: "+passcode );
                 editor.apply();
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToVideoEditorNavigation());
                 break;
-            case 4:
+            case 2:
                 Log.e(TAG, "navigateTo: "+"master" );
                 editor.putString("type", "master");
                 editor.putString("passcode",passcode);
