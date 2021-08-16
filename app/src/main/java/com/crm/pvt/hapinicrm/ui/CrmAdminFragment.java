@@ -83,6 +83,12 @@ public class CrmAdminFragment extends Fragment {
             }
         });
 
+        binding.cvVerifyUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmUserVerification());
+            }
+        });
 
         binding.ivCrmLogout.setOnClickListener(v ->{
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -102,6 +108,7 @@ public class CrmAdminFragment extends Fragment {
 
         binding.cvGiveTask.setOnClickListener(v -> Navigation.findNavController(v).
                 navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmAdminGiveTaskFragment()));
+
 
     }
 

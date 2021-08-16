@@ -128,6 +128,9 @@
         <action
             android:id="@+id/action_crmAdminFragment_to_crmAdminGiveTaskFragment"
             app:destination="@id/crmAdminGiveTaskFragment" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_crmUserVerification"
+            app:destination="@id/crmUserVerification" />
     </fragment>
     <fragment
         android:id="@+id/dataEntryAdminFragment"
@@ -485,6 +488,9 @@
         <action
             android:id="@+id/action_crmUserFragment_to_crmUserChatFragment"
             app:destination="@id/crmUserChatFragment" />
+        <action
+            android:id="@+id/action_crmUserFragment_to_verificationByAdmin"
+            app:destination="@id/verificationByAdmin" />
     </fragment>
     <fragment
         android:id="@+id/dataEntryUserFragment"
@@ -604,4 +610,28 @@
         android:name="com.crm.pvt.hapinicrm.ui.AdminDataViewFragment"
         android:label="fragment_admin_data_view"
         tools:layout="@layout/fragment_admin_data_view" />
+
+    <fragment
+        android:id="@+id/verificationByAdmin"
+        android:name="com.crm.pvt.hapinicrm.ui.VerificationFromAdmin"
+        tools:layout="@layout/fragment_verification_from_admin" />
+
+    <fragment
+        android:id="@+id/verificationOfUser"
+        android:name="com.crm.pvt.hapinicrm.ui.VerifyCrmUser"
+        tools:layout="@layout/fragment_verify_crm_user" >
+        <action
+            android:id="@+id/action_verificationOfUser_to_crmAdminFragment"
+            app:destination="@id/crmAdminFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/crmUserVerification"
+        android:name="com.crm.pvt.hapinicrm.ui.VerificationRequests"
+        tools:layout="@layout/fragment_verification_requests" >
+        <action
+            android:id="@+id/action_crmUserVerification_to_verificationOfUser"
+            app:destination="@id/verificationOfUser" />
+    </fragment>
+
 </navigation>
