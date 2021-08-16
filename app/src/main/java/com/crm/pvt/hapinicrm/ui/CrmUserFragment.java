@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmUserBinding;
 
 public class CrmUserFragment extends Fragment {
@@ -34,5 +35,8 @@ public class CrmUserFragment extends Fragment {
         binding.cvChatWithAdmin.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(CrmUserFragmentDirections.actionCrmUserFragmentToCrmUserChatFragment());
         });
+
+        binding.cvVerifyYourself.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.action_crmUserFragment_to_verificationByAdmin));
     }
 }

@@ -66,8 +66,8 @@ Button submituser;
             String Usertype=usertype.getText().toString();
             if(!email.equals("")&&(passcode.length()==6)&&(Usertype.contains("crm")||
                     Usertype.contains("data")||Usertype.contains("video"))) {
+                Toast.makeText(getContext(),"Loading...",LENGTH_SHORT).show();
                 senddetails(email, passcode, Usertype);
-
 
             }
             else{
@@ -105,15 +105,12 @@ Button submituser;
 
                     if (key.equals(passcodes)) {
                         String getpassword = dataSnapshot.child("password").getValue().toString();
-                        Toast toast= Toast.makeText(getContext(),"Password is: "+getpassword,LENGTH_LONG);
-                        View views=toast.getView();
+                        Toast toast = Toast.makeText(getContext(), "Password is: " + getpassword, LENGTH_LONG);
+                        View views = toast.getView();
                         views.setBackgroundColor(Color.WHITE);
-                        TextView toastmessage=(TextView) toast.getView().findViewById(android.R.id.message);
+                        TextView toastmessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastmessage.setTextColor(Color.BLACK);
                         toast.show();
-                    }
-                    else{
-                        Toast.makeText(getContext(),"No Such Detail Available",LENGTH_LONG).show();
                     }
                 }
             }
@@ -124,5 +121,6 @@ Button submituser;
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
     }
 }
