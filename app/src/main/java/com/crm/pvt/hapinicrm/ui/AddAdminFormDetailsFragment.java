@@ -234,7 +234,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
         binding.tvAddAdminFormDashboardTitle.setText(title);
     }
 
-
     //Separate function to add crm admin when franchise adds him/her.
     private void addCrmAdmin(Admin admin) {
         DatabaseReference franchiseDbRef = FirebaseDatabase

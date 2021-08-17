@@ -31,12 +31,11 @@ public class FranchiseDashboardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.cvFranchiseChats.setOnClickListener(v -> {
-            Navigation
-                    .findNavController(v)
-                    .navigate(FranchiseDashboardFragmentDirections
-                            .actionFranchiseDashboardFragmentToFranchiseUserChatFragment());
-        });
+        binding.cvFranchiseChats.setOnClickListener(v -> Navigation
+                .findNavController(v)
+                .navigate(FranchiseDashboardFragmentDirections
+                        .actionFranchiseDashboardFragmentToFranchiseUserChatFragment()));
+
         binding.addadminfromfranchiseadmin.setOnClickListener(v -> {
             addAdminTypes = "CRM";
             Navigation

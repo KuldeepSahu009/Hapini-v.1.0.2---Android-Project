@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:clickable="true"
-    android:id="@+id/cvFranchiseChats"
     android:layout_height="match_parent"
     tools:context=".ui.FranchiseDashboardFragment"
     android:focusable="true">
@@ -145,7 +144,7 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cvGiveTask"
+                    android:id="@+id/cvFranchiseChats"
                     android:layout_width="300dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
@@ -168,7 +167,6 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:src="@drawable/ic_chat"
-                            app:layout_constraintBottom_toTopOf="@+id/tvGiveTask"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
