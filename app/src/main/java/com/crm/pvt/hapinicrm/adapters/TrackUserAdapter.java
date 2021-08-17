@@ -11,6 +11,8 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,8 +63,9 @@ import java.util.List;
 public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders> {
     private static final String TAG = "TAG";
     private final Context context;
-    private final    List<TrackUserModel> trackUserModelList;
-   int pos;
+    public static String usertypes;
+    private final List<TrackUserModel> trackUserModelList;
+    int pos;
 
 
     public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList) {
@@ -73,17 +76,16 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
     }
 
 
-
     @NonNull
     @Override
     public Trackuserviewholders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.track_user_info_card_view,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.track_user_info_card_view, parent, false);
         return new Trackuserviewholders(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Trackuserviewholders holder, int position) {
-      TrackUserModel tempmodel=trackUserModelList.get(position);
+        TrackUserModel tempmodel = trackUserModelList.get(position);
 
         holder.name.setText(tempmodel.getName());
         holder.email.setText(tempmodel.getEmail());
@@ -98,40 +100,49 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
             @Override
             public void onClick(View v) {
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("usersv2").child(TrackUsers.userType);
-                Toast.makeText(v.getContext(), "Deleting User....",Toast.LENGTH_LONG).show();
+                Toast.makeText(v.getContext(), "Deleting User....", Toast.LENGTH_LONG).show();
                 reference.child(tempmodel.getPasscode()).removeValue();
                 trackUserModelList.clear();
                 notifyDataSetChanged();
             }
         });
 
-        if(!tempmodel.getImgurl().equals("")){
+        if (!tempmodel.getImgurl().equals("")) {
             Glide.with(context).load(tempmodel.getImgurl()).into(holder.profileimg);
         }
         holder.downloaduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pos=position;
+                pos = position;
                 checkpermission();
             }
         });
+        holder.attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showattendance(tempmodel.getPasscode());
+            }
+        });
+
     }
+
     @Override
     public int getItemCount() {
         return trackUserModelList.size();
     }
-    private void checkpermission(){
+
+    private void checkpermission() {
         Dexter.withContext(context).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE).withListener(
                 new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                       if (multiplePermissionsReport.areAllPermissionsGranted()){
+                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
 
-                           createpdf();
-                       }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
-                           Toast.makeText(context,"permission nedded",Toast.LENGTH_LONG).show();
-                       }
+                            createpdf();
+                        } else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
+                            Toast.makeText(context, "permission nedded", Toast.LENGTH_LONG).show();
+                        }
 
                     }
 
@@ -142,91 +153,128 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
                 }
         ).check();
     }
+
     private void createpdf() {
-        String internalstorage = System.getenv("EXTERNAL_STORAGE");
-        File storage = new File(internalstorage+"/Hapini");
+        Log.e(TAG, "createpdf: " + "pdf");
+        File file = context.getFilesDir();
+        Log.e(TAG, "createpdf: " + file.getAbsolutePath());
+        File storage = new File(file, "/Hapini");
+        Log.e(TAG, "createpdf: " + storage.getName());
         storage.mkdir();
-        File file=new File(storage.getAbsolutePath(),System.currentTimeMillis()+".pdf");
+        File files=new File(storage.getAbsolutePath(),System.currentTimeMillis()+".pdf");
         try {
-            file.createNewFile();
-            writeinfile(file);
+            files.createNewFile();
+            writeinfile(files);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-
-
-
     }
+
     private void writeinfile(File file) throws IOException {
-        ProgressDialog progressDialog=new ProgressDialog(context);
+        Toast.makeText(context, file.getName(), Toast.LENGTH_LONG).show();
+        ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setTitle("please wait");
         progressDialog.setMessage("Downloading");
         progressDialog.show();
         progressDialog.setCancelable(false);
-        OutputStream outputStream=new FileOutputStream(file);
+        OutputStream outputStream = new FileOutputStream(file);
 
-        PdfWriter writer=new PdfWriter(file);
-        com.itextpdf.kernel.pdf.PdfDocument pdfDocument=new PdfDocument(writer);
-        Document document=new Document(pdfDocument);
+        PdfWriter writer = new PdfWriter(file);
+        com.itextpdf.kernel.pdf.PdfDocument pdfDocument = new PdfDocument(writer);
+        Document document = new Document(pdfDocument);
 
-        document.setMargins(0,0,0,0);
-        Drawable d=context.getResources().getDrawable(R.drawable.account);
-        Bitmap bitmap=((BitmapDrawable)d).getBitmap();
-        ByteArrayOutputStream stream=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100,stream);
-        byte[] bytes=stream.toByteArray();
+        document.setMargins(0, 0, 0, 0);
+        Drawable d = context.getResources().getDrawable(R.drawable.account);
+        Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] bytes = stream.toByteArray();
 
-       TrackUserModel tempmodel= trackUserModelList.get(pos);
+        TrackUserModel tempmodel = trackUserModelList.get(pos);
 
-        ImageData imageData= ImageDataFactory.create(bytes);
-        Image image=new Image(imageData);
-        Paragraph paragraphname=new Paragraph();
-        paragraphname.add("Name:"+tempmodel.getName());
+        ImageData imageData = ImageDataFactory.create(bytes);
+        Image image = new Image(imageData);
+        Paragraph paragraphname = new Paragraph();
+        paragraphname.add("Name:" + tempmodel.getName());
         paragraphname.setFontSize(20);
-        Paragraph paragraphemail=new Paragraph();
-        paragraphemail.add("Email:"+tempmodel.getEmail());
+        Paragraph paragraphemail = new Paragraph();
+        paragraphemail.add("Email:" + tempmodel.getEmail());
         paragraphemail.setFontSize(20);
-        Paragraph paragraphphoneo=new Paragraph();
-        paragraphphoneo.add("Phone no:"+tempmodel.getPhoneno());
+        Paragraph paragraphphoneo = new Paragraph();
+        paragraphphoneo.add("Phone no:" + tempmodel.getPhoneno());
         paragraphphoneo.setFontSize(20);
-        Paragraph paragraphwhatsappno=new Paragraph();
-        paragraphwhatsappno.add("Whatsapp no:"+tempmodel.getWhatsappno());
+        Paragraph paragraphwhatsappno = new Paragraph();
+        paragraphwhatsappno.add("Whatsapp no:" + tempmodel.getWhatsappno());
         paragraphwhatsappno.setFontSize(20);
-        Paragraph paragraphpasscode=new Paragraph();
-        paragraphpasscode.add("Passcode:"+tempmodel.getPasscode());
+        Paragraph paragraphpasscode = new Paragraph();
+        paragraphpasscode.add("Passcode:" + tempmodel.getPasscode());
         paragraphpasscode.setFontSize(20);
-        Paragraph paragraphpassword=new Paragraph();
-        paragraphpassword.add("Password:"+tempmodel.getPasscode());
+        Paragraph paragraphpassword = new Paragraph();
+        paragraphpassword.add("Password:" + tempmodel.getPasscode());
         paragraphpassword.setFontSize(20);
-        Paragraph paragraphlocation=new Paragraph();
-        paragraphlocation.add("Location:"+tempmodel.getLocation());
+        Paragraph paragraphlocation = new Paragraph();
+        paragraphlocation.add("Location:" + tempmodel.getLocation());
         paragraphlocation.setFontSize(20);
-       // paragraph.setFont(context.getResources().getFont(R.font.alef_bold));
-        document.add(image.setHeight(250).setWidth(250).setFixedPosition(1,330,550));
-        document.add(paragraphname.setRelativePosition(0,10,0,0));
-        document.add(paragraphemail.setRelativePosition(0,0,0,0));
-        document.add(paragraphphoneo.setRelativePosition(0,0,0,0));
-        document.add(paragraphwhatsappno.setRelativePosition(0,0,0,0));
-        document.add(paragraphpasscode.setRelativePosition(0,0,0,0));
-        document.add(paragraphpassword.setRelativePosition(0,0,0,0));
-        document.add(paragraphlocation.setRelativePosition(0,0,0,0));
+        // paragraph.setFont(context.getResources().getFont(R.font.alef_bold));
+        document.add(image.setHeight(250).setWidth(250).setFixedPosition(1, 330, 550));
+        document.add(paragraphname.setRelativePosition(0, 10, 0, 0));
+        document.add(paragraphemail.setRelativePosition(0, 0, 0, 0));
+        document.add(paragraphphoneo.setRelativePosition(0, 0, 0, 0));
+        document.add(paragraphwhatsappno.setRelativePosition(0, 0, 0, 0));
+        document.add(paragraphpasscode.setRelativePosition(0, 0, 0, 0));
+        document.add(paragraphpassword.setRelativePosition(0, 0, 0, 0));
+        document.add(paragraphlocation.setRelativePosition(0, 0, 0, 0));
         document.close();
-        Toast.makeText(context,"sdone",Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "sdone", Toast.LENGTH_LONG).show();
         progressDialog.dismiss();
 
         openfile(file);
 
     }
-    private void openfile(File file){
-        Intent i=new Intent(Intent.ACTION_VIEW);
+
+    private void openfile(File file) {
+        Intent i = new Intent();
         Log.e(TAG, "openfile: "+file.getAbsolutePath() );
-        Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
-        i.setDataAndType(uri,"application/pdf");
-        i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
+        {
+            Uri apkUri = FileProvider.getUriForFile(context.getApplicationContext(),context.getPackageName()+".provider",file);
+            i.setDataAndType(apkUri,"application/pdf");
+            i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }else{
+            i.setDataAndType(Uri.fromFile(file),"application/pdf");
+        }
+        i.setAction(Intent.ACTION_VIEW);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
+    }
+
+    private void showattendance(String passcode) {
+        Log.e(TAG, "showattendance: " + passcode);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
+                .child(usertypes)
+                .child(passcode);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int i = 0;
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String date = dataSnapshot.getValue().toString();
+                    Log.e(TAG, "onDataChange: " + date);
+                    i++;
+                    Log.e(TAG, "onDataChange: i" + i);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context, "unable to get", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 

@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/backpassowrd"
                 android:layout_marginBottom="10dp"
-                android:layout_toLeftOf="@+id/trackuserdownload"
+                android:layout_toLeftOf="@+id/trackuserattendance"
                 android:layout_toRightOf="@id/backlocation"
                 android:text="random,location"
                 android:textColor="@color/black"
@@ -167,6 +167,16 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_delete_24" />
+            <ImageView
+                android:id="@+id/trackuserattendance"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="150dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="90dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_calendar_today_24" />
 
             <ImageView
                 android:id="@+id/trackuserdownload"

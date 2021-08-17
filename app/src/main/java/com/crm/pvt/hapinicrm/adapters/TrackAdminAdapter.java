@@ -90,7 +90,6 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.password.setText(admin.getPassword());
         holder.location.setText(admin.getLocation());
 
-
         holder.deleteAdmin.setOnClickListener(v -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -178,13 +177,13 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         ).check();
     }
     private void createpdf() {
-        String internalstorage = System.getenv("EXTERNAL_STORAGE");
-        File storage = new File(internalstorage+"/Hapini");
+        File file = context.getFilesDir();
+        File storage = new File(file+"/Hapini");
         storage.mkdir();
-        File file=new File(storage.getAbsolutePath(),System.currentTimeMillis()+".pdf");
+        File files=new File(storage.getAbsolutePath(),System.currentTimeMillis()+".pdf");
         try {
             file.createNewFile();
-            writeinfile(file);
+            writeinfile(files);
 
         } catch (IOException e) {
             e.printStackTrace();

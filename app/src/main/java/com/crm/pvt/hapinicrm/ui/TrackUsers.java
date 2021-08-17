@@ -100,14 +100,17 @@ public class TrackUsers extends Fragment {
         switch (data) {
             case "crmUser":
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
+                TrackUserAdapter.usertypes="crm";
                 getCrmData();
                 break;
             case "videoUser":
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
+                TrackUserAdapter.usertypes="video";
                 getVideoEditorData();
                 break;
             case "dataUser":
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
+                TrackUserAdapter.usertypes="data";
                 getDataEntryOperatorData();
                 break;
         }

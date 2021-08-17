@@ -20,6 +20,7 @@ public class CrmUserFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCrmUserBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 

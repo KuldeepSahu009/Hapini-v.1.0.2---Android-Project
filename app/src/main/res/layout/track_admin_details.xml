@@ -155,16 +155,18 @@
                 android:text="random,location"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/trackadmindownload"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@id/adminbackpassowrd"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="50dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_arrow_downward_24" />
+
 
             <ImageView
                 android:id="@+id/trackadmindeleteprofile"
