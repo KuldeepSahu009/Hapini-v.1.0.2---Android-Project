@@ -93,10 +93,13 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, location, "");
 
-        DatabaseReference franchiseDbRef = FirebaseDatabase
-                .getInstance()
-                .getReference("crm_by_franchise")
-                .child(currentFranchise.getPasscode());
+        DatabaseReference franchiseDbRef = null;
+        if(currentFranchise != null) {
+            franchiseDbRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference("crm_by_franchise")
+                    .child(currentFranchise.getPasscode());
+        }
 
 
         if (adminType == "CRM") {
