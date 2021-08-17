@@ -48,8 +48,7 @@ public class TrackAdminFragment extends Fragment {
         binding.trackVideoEditorAdminCardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                admin.putString("ADMIN" , "video_editor");
-                Navigation.findNavController(v).navigate(R.id.action_trackAdminFragment_to_adminDataViewFragment, admin);
+                setUpDialogBox();
             }
         });
 

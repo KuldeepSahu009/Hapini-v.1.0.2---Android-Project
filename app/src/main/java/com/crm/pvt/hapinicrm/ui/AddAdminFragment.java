@@ -44,8 +44,7 @@ public class AddAdminFragment extends Fragment {
             setUpCustomDialogBox();
         });
         binding.cvAddVideoEditorAdmin.setOnClickListener(v -> {
-            addAdminType = "VE";
-            Navigation.findNavController(v).navigate(AddAdminFragmentDirections.actionAddAdminFragmentToAddAdminFormDetailsFragment());
+            setUpCustomDialogBox();
         });
         binding.ivBackFromAddAdminFragment.setOnClickListener(v->
                 Navigation.findNavController(v).navigateUp());
