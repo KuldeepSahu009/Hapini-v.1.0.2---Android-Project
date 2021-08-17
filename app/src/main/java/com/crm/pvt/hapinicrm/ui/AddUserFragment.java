@@ -46,8 +46,7 @@ public class AddUserFragment extends Fragment {
           //  Navigation.findNavController(v).navigate(AddUserFragmentDirections.actionAddUserFragmentToAddUserFormDetailsFragment());
         });
         binding.cvAddVideoEditorUser.setOnClickListener(v -> {
-            addUserType = "VE";
-            Navigation.findNavController(v).navigate(AddUserFragmentDirections.actionAddUserFragmentToAddUserFormDetailsFragment());
+            setUpCustomDialogBox();
         });
         binding.ivBackFromAddUserFragment.setOnClickListener(v->
                 Navigation.findNavController(v).navigateUp());
