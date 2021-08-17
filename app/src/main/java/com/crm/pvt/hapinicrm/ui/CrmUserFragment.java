@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmUserBinding;
 
@@ -38,5 +39,33 @@ public class CrmUserFragment extends Fragment {
 
         binding.cvVerifyYourself.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(R.id.action_crmUserFragment_to_verificationByAdmin));
+    }
+
+    @Override
+    public void onStart() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
+        super.onPause();
+
+    }
+
+    //Remove it after adding logout functionality
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Splashscreen.spUsersData.edit().clear().commit();
     }
 }

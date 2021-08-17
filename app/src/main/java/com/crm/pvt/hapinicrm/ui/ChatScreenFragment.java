@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.ChatAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentChatScreenBinding;
 import com.crm.pvt.hapinicrm.model.Chat;
@@ -83,5 +84,32 @@ public class ChatScreenFragment extends Fragment {
 
             }
         });
+    }
+    @Override
+    public void onStart() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
+        super.onPause();
+
+    }
+
+    //Remove it after adding logout functionality
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Splashscreen.spUsersData.edit().clear().commit();
     }
 }

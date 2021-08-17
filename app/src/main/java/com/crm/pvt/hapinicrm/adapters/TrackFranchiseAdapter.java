@@ -14,23 +14,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
-import com.crm.pvt.hapinicrm.model.Admin;
 import com.crm.pvt.hapinicrm.model.Franchise;
 import com.crm.pvt.hapinicrm.ui.DataCallBackTackFranchise;
-import com.crm.pvt.hapinicrm.ui.Datacallbacktrackuser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAdapter.TrackFranchiseViewHolder>{
     Context context;
     ArrayList<Franchise> franchises;
     DataCallBackTackFranchise dataCallBackTackFranchise;
     private static final String TAG = "TAG";
-
-    public TrackFranchiseAdapter( Context context,ArrayList<Franchise> franchises,DataCallBackTackFranchise dataCallBackTackFranchise){
+    private final List<String> activeUserList;
+    public TrackFranchiseAdapter( Context context,ArrayList<Franchise> franchises,List<String> activeUserList ,DataCallBackTackFranchise dataCallBackTackFranchise){
         this.context = context;
         this.franchises=franchises;
         this.dataCallBackTackFranchise=dataCallBackTackFranchise;
+        this.activeUserList = activeUserList;
     }
 
     @NonNull
@@ -43,6 +43,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
     @Override
     public void onBindViewHolder(@NonNull TrackFranchiseAdapter.TrackFranchiseViewHolder holder, int position) {
         Franchise franchise=franchises.get(position);
+        holder.activeStatusFranchise.setImageResource(R.drawable.red_dot);
         holder.name.setText(franchise.getName());
         holder.email.setText(franchise.getEmail());
         holder.mobile.setText(franchise.getPhoneno());
@@ -50,6 +51,15 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
         holder.passcode.setText(franchise.getPasscode());
         holder.password.setText(franchise.getPassword());
         holder.location.setText(franchise.getLocation());
+
+        for(String passcode : activeUserList)
+        {
+            if(passcode.equals(franchise.getPasscode()))
+            {
+                holder.activeStatusFranchise.setImageResource(R.drawable.green_dot);
+                break;
+            }
+        }
 
         holder.deleteAdmin.setOnClickListener(v -> {
 
@@ -74,7 +84,10 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
         });
 
         if (!franchise.getImgurl().isEmpty()){
-            Glide.with(context).load(franchise.getImgurl()).into(holder.profilepic);
+            Glide.with(context)
+                    .load(franchise.getImgurl())
+                    .placeholder(R.drawable.ic_profile_placeholder)
+                    .into(holder.profilepic);
         }
 
     }
@@ -90,12 +103,13 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
 
 
     static class TrackFranchiseViewHolder extends RecyclerView.ViewHolder{
-        ImageView profilepic,deleteAdmin;
+        ImageView profilepic,deleteAdmin , activeStatusFranchise;
 
         TextView name, email, mobile, location,whatsappno,password,passcode;
 
         public TrackFranchiseViewHolder(@NonNull View itemView) {
             super(itemView);
+            activeStatusFranchise = itemView.findViewById(R.id.trackAdminStatus);
             name = itemView.findViewById(R.id.trackadminname);
             email = itemView.findViewById(R.id.trackadminemailid);
             mobile = itemView.findViewById(R.id.trackadminphoneno);
