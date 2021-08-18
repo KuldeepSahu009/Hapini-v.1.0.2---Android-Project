@@ -95,10 +95,12 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         DatabaseReference franchiseDbRef = null;
         if(currentFranchise != null) {
-            franchiseDbRef = FirebaseDatabase
-                    .getInstance()
-                    .getReference("crm_by_franchise")
+            if(!FranchiseDashboardFragment.addAdminTypes.equals(""))
+                adminType = FranchiseDashboardFragment.addAdminTypes;
+            franchiseDbRef = FirebaseDatabase.getInstance().getReference()
+                    .child("crm_by_franchise")
                     .child(currentFranchise.getPasscode());
+            franchiseDbRef.setValue("1");
         }
 
 
