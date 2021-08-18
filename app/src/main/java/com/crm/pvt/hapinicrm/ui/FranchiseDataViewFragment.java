@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
@@ -60,22 +61,13 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
 
         getFranchiseData();
 
-        binding.etSearchFranchise.addTextChangedListener(new TextWatcher() {
+        binding.etSearchFranchise.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                getsearchdata(s.toString());
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public void onClick(View v) {
+                Shorteddataadmin.type="franchise";
+                Navigation.findNavController(v).navigate(R.id.movetoshortedfranchiseadminfragments);
             }
         });
-
     }
 
 
@@ -144,42 +136,8 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
             }
         });
 
-    }
-
-    private void getsearchdata(String s) {
-       getFranchiseSort(s);
 
     }
 
-    private void getFranchiseSort(String s) {
-        Query query = FirebaseDatabase.getInstance().getReference("franchiseV2").orderByChild("name")
-                .startAt(s).endAt(s + "\uf8ff");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                franchiseList.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                    Franchise franchiseObject;
-                    franchiseObject = new Franchise(dataSnapshot.child("name").getValue().toString(),
-                            dataSnapshot.child("email").getValue().toString(),
-                            dataSnapshot.child("phoneno").getValue().toString(),
-                            dataSnapshot.child("whatsappno").getValue().toString(),
-                            dataSnapshot.child("passcode").getValue().toString(),
-                            dataSnapshot.child("password").getValue().toString(),
-                            dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
-                    franchiseList.add(franchiseObject);
-                }
-                trackFranchiseAdapter.notifyDataSetChanged();
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 }

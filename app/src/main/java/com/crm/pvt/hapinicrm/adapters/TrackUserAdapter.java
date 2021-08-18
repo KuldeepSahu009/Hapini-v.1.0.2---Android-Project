@@ -47,8 +47,11 @@ import com.itextpdf.layout.element.Paragraph;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -115,6 +118,12 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
             public void onClick(View v) {
                 pos = position;
                 checkpermission();
+            }
+        });
+        holder.calluser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkcallpermission(tempmodel.getPhoneno());
             }
         });
         holder.attendance.setOnClickListener(new View.OnClickListener() {
@@ -276,6 +285,30 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
             }
         });
 
+    }
+    private void checkcallpermission(String no){
+        Dexter.withContext(context).withPermission(Manifest.permission.CALL_PHONE).withListener(new PermissionListener() {
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                calluser(no);
+            }
+
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                Toast.makeText(context,"need permission",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                permissionToken.continuePermissionRequest();
+            }
+        }).check();
+
+    }
+    private void calluser(String no){
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:"+no));
+        context.startActivity(callIntent);
     }
 
 }
