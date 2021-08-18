@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.ui.TrackUsers;
+import com.crm.pvt.hapinicrm.util.UserClickCallback;
 import com.crm.pvt.hapinicrm.viewholder.Trackuserviewholders;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,20 +24,24 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
     private  Context context;
     private  List<TrackUserModel> trackUserModelList;
     private  List<String> activeUserList;
+    private UserClickCallback userClickCallback;
     int pos;
-    public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList , List<String> activeUserList) {
+    public TrackUserAdapter(
+            Context context,
+            List<TrackUserModel> trackUserModelList,
+            List<String> activeUserList,
+            UserClickCallback userClickCallback
+    ) {
         this.context = context;
         this.trackUserModelList = trackUserModelList;
-         this.activeUserList = activeUserList;
-
+        this.activeUserList = activeUserList;
+        this.userClickCallback = userClickCallback;
     }
 
     public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList) {
         this.context = context;
         this.trackUserModelList = trackUserModelList;
     }
-
-
 
     @NonNull
     @Override
@@ -58,6 +63,9 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.passcode.setText(tempmodel.getPasscode());
         holder.password.setText(tempmodel.getPassword());
         holder.location.setText(tempmodel.getLocation());
+        holder.cardView.setOnClickListener(v -> {
+            userClickCallback.navigateToTaskList(tempmodel.getPasscode());
+        });
 
         if(activeUserList != null) {
             for (String passcode : activeUserList) {
