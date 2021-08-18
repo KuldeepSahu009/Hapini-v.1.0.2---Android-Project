@@ -54,9 +54,18 @@ public class TaskListFragment extends Fragment implements TaskCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        String passcode;
+
+        String userPasscode = getArguments().getString("userPasscode");
+        if(userPasscode != null && !userPasscode.isEmpty()) {
+            passcode = userPasscode;
+        }else {
+            passcode = currentUserPasscode;
+        }
         taskDatabase = FirebaseDatabase.getInstance().
                 getReference("Task_Assignment_V2").
-                child("CRM_User").child(currentUserPasscode);
+                child("CRM_User").child(passcode);
         initializeRecyclerView();
 
     }

@@ -25,6 +25,7 @@ import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentTrackUsersBinding;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.model.User;
+import com.crm.pvt.hapinicrm.util.UserClickCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TrackUsers extends Fragment {
+public class TrackUsers extends Fragment implements UserClickCallback {
 
     private static final String TAG = "TAG";
     private FragmentTrackUsersBinding binding;
@@ -50,6 +51,7 @@ public class TrackUsers extends Fragment {
     private ArrayList<User> user;
     private String data;
     public static String userType;
+    UserClickCallback userClickCallback;
     TextView searchuser;
 
     private DatabaseReference crm,de,ve;
@@ -61,6 +63,7 @@ public class TrackUsers extends Fragment {
         binding = FragmentTrackUsersBinding.inflate(inflater, container, false);
 
         data = getArguments().getString("data");
+
         switch (data) {
             case "crmUser":
                 userType = "crm";
@@ -91,6 +94,7 @@ public class TrackUsers extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupRecyclerView();
+        userClickCallback = this;
     }
 
     private void setupRecyclerView() {
@@ -98,7 +102,7 @@ public class TrackUsers extends Fragment {
         trackUserModelList = new ArrayList<>();
         activeUserList = new ArrayList<>();
         binding.rvTrackUser.setLayoutManager(new LinearLayoutManager(getContext()));
-        trackUserAdapter = new TrackUserAdapter(getContext() , trackUserModelList , activeUserList);
+        trackUserAdapter = new TrackUserAdapter(getContext() , trackUserModelList , activeUserList,userClickCallback);
         binding.rvTrackUser.setAdapter(trackUserAdapter);
 
         switch (data) {
@@ -137,7 +141,7 @@ public class TrackUsers extends Fragment {
                     }
 
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
                 Log.i("LOGGGG","hhhh");
@@ -177,7 +181,7 @@ public class TrackUsers extends Fragment {
                     }
 
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
                 Log.i("LOGGGG","hhhh");
@@ -208,7 +212,7 @@ public class TrackUsers extends Fragment {
                             (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
 
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
             }
@@ -226,7 +230,7 @@ public class TrackUsers extends Fragment {
                             activeUserList.add(snapshot.getKey());
 
                         }
-                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
+                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
                         binding.rvTrackUser.setAdapter(trackUserAdapter);
                         trackUserAdapter.notifyDataSetChanged();
                     }
@@ -241,8 +245,6 @@ public class TrackUsers extends Fragment {
 
             }
 
-
-
     private void getDataEntryOperatorData() {
         de = FirebaseDatabase.getInstance().getReference("usersv2");
         Query query=de.child("data");
@@ -256,7 +258,7 @@ public class TrackUsers extends Fragment {
                             (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
 
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
             }
@@ -275,7 +277,7 @@ public class TrackUsers extends Fragment {
                             activeUserList.add(snapshot.getKey());
 
                         }
-                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
+                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
                         binding.rvTrackUser.setAdapter(trackUserAdapter);
                         trackUserAdapter.notifyDataSetChanged();
                     }
@@ -306,7 +308,7 @@ public class TrackUsers extends Fragment {
                             (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
 
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
             }
@@ -323,7 +325,7 @@ public class TrackUsers extends Fragment {
                             activeUserList.add(snapshot.getKey());
 
                         }
-                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
+                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
                         binding.rvTrackUser.setAdapter(trackUserAdapter);
                         trackUserAdapter.notifyDataSetChanged();
                     }
@@ -340,7 +342,6 @@ public class TrackUsers extends Fragment {
 
 
     }
-
 
     @Override
     public void onStart() {
@@ -411,4 +412,10 @@ public class TrackUsers extends Fragment {
 
     }
 
+    @Override
+    public void navigateToTaskList(String userPasscode) {
+        Bundle bundle = new Bundle();
+        bundle.putString("userPasscode",userPasscode);
+        Navigation.findNavController(requireView()).navigate(R.id.action_alltrackusersfragment_to_taskListFragment,bundle);
+    }
 }

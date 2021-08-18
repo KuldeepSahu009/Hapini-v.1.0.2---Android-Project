@@ -55,7 +55,15 @@ public class CrmAdminGiveTaskFragment extends Fragment {
         String customerCity = Objects.requireNonNull(binding.etCity.getText()).toString();
         String task = Objects.requireNonNull(binding.etTaskDescription.getText()).toString();
 
-        TaskModel taskModel = new TaskModel(userPasscode, customerName, customerNumber, customerCity, task);
+        TaskModel taskModel = new TaskModel(
+                userPasscode,
+                customerName,
+                customerNumber,
+                customerCity,
+                task,
+                "Not Completed",
+                ""
+        );
 
         if(userPasscode.length() != 6) {
 
@@ -94,7 +102,7 @@ public class CrmAdminGiveTaskFragment extends Fragment {
                     }
                     if(user != null) {
                         TrackUserModel finalUser = user;
-                        taskDatabaseReference.child(userPasscode).push().setValue(taskModel).addOnCompleteListener(setTask -> {
+                        taskDatabaseReference.child(userPasscode).child(customerNumber).setValue(taskModel).addOnCompleteListener(setTask -> {
                             if(setTask.isSuccessful()) {
                                 Snackbar.make(binding.getRoot(),"Task Assigned to " + finalUser.getName() + " ",Snackbar.LENGTH_SHORT).show();
                             } else {
