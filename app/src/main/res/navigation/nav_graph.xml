@@ -131,6 +131,9 @@
         <action
             android:id="@+id/action_crmAdminFragment_to_crmUserVerification"
             app:destination="@id/crmUserVerification" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_crmadmincsvfilesend"
+            app:destination="@id/crmadmincsvfilesend" />
     </fragment>
     <fragment
         android:id="@+id/dataEntryAdminFragment"
@@ -567,6 +570,9 @@
         <action
             android:id="@+id/action_franchiseDashboardFragment_to_adminDataViewFragment2"
             app:destination="@id/adminDataViewFragment2" />
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_csvfilefromfranchise"
+            app:destination="@id/csvfilefromfranchise" />
     </fragment>
     <fragment
         android:id="@+id/crmUserChatFragment"
@@ -638,5 +644,15 @@
             android:id="@+id/action_crmUserVerification_to_verificationOfUser"
             app:destination="@id/verificationOfUser" />
     </fragment>
+    <fragment
+        android:id="@+id/csvfilefromfranchise"
+        android:name="com.crm.pvt.hapinicrm.ui.csvfilefromfranchise"
+        android:label="fragment_csvfilefromfranchise"
+        tools:layout="@layout/fragment_csvfilefromfranchise" />
+    <fragment
+        android:id="@+id/crmadmincsvfilesend"
+        android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
+        android:label="fragment_crmadmincsvfilesend"
+        tools:layout="@layout/fragment_crmadmincsvfilesend" />
 
 </navigation>

@@ -108,7 +108,9 @@ public class CrmAdminFragment extends Fragment {
 
         binding.cvGiveTask.setOnClickListener(v -> Navigation.findNavController(v).
                 navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmAdminGiveTaskFragment()));
-
+binding.sendcsvfiletouser.setOnClickListener(v -> {
+    Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmadmincsvfilesend());
+});
 
     }
 
