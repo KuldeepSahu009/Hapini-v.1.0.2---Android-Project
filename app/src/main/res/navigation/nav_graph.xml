@@ -205,8 +205,8 @@
     <fragment
         android:id="@+id/adduserdata"
         android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
-        tools:layout="@layout/fragment_add_user_form_details"
-        android:label="fragmentadddata"/>
+        android:label="fragmentadddata"
+        tools:layout="@layout/fragment_edit_profile" />
     <navigation
         android:id="@+id/masterNavigation"
         app:startDestination="@id/masterDashboardFragment">

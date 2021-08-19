@@ -76,12 +76,7 @@ public class CrmAdminFragment extends Fragment {
             }
         });
         //
-        binding.ivBackFromCrmAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigateUp();
-            }
-        });
+
 
         binding.cvVerifyUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +92,7 @@ public class CrmAdminFragment extends Fragment {
             builder.setCancelable(true);
             builder.setPositiveButton("Yes", (dialog, which) -> {
                 auth.signOut();
+                Splashscreen.spAdminsData.edit().clear().commit();
                 Navigation.findNavController(v).navigateUp();
             });
             builder.setNegativeButton("No", (dialog, which) -> {
@@ -136,5 +132,24 @@ public class CrmAdminFragment extends Fragment {
                         .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
         super.onPause();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
     }
 }

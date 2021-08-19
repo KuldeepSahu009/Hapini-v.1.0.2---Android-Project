@@ -138,6 +138,21 @@ public class TaskListFragment extends Fragment implements TaskCallback {
 
     }
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
+    }
 }

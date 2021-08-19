@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.TrackAdminAdapter;
 import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminDataViewBinding;
@@ -381,7 +382,44 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
 
 
 
+    @Override
+    public void onStart() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
 
+    }
 
+    @Override
+    public void onPause() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+        super.onPause();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Splashscreen.spAdminsData != null)
+            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                        .setValue("active");
+    }
 
 }
