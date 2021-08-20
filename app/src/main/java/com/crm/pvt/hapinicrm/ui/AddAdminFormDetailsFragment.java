@@ -102,6 +102,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
                     .child("crm_by_franchise")
                     .child(currentFranchise.getPasscode());
             franchiseDbRef.setValue("1");
+
         }
 
 
@@ -121,6 +122,8 @@ public class AddAdminFormDetailsFragment extends Fragment {
                                 Log.i("AddAdmin",String.valueOf(count[0]));
                                 addCrmAdmin(crmAdmin[0]);
                                 crmAdmin[0] = null;
+                                Toast.makeText(getContext(), "CRM Admin Successfully Entered", Toast.LENGTH_LONG).show();
+                                Navigation.findNavController(requireView()).navigateUp();
                             } else {
                                 progressDialog.dismiss();
                                // TODO This Toast keeps crashing need to fix this
@@ -262,6 +265,13 @@ public class AddAdminFormDetailsFragment extends Fragment {
             }
         });
 
+        /**
+         * this code creating admin in adminV2 also after created in crm_by_franchise
+         * use this if strategy 'll change in future
+         */
+
+
+       /*
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(admin.getPasscode());
         databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -277,6 +287,8 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 Toast.makeText(getContext(), "CRM Admin is not Entered", Toast.LENGTH_LONG).show();
             }
         });
+
+        */
     }
 
     @Override
