@@ -78,22 +78,4 @@ public class FranchiseDashboardFragment extends Fragment {
         super.onPause();
 
     }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
-
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (Splashscreen.spAdminsData != null)
-            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                        .setValue("active");
-    }
 }

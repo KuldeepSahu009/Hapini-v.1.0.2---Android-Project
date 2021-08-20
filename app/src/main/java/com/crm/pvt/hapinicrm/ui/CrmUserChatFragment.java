@@ -103,22 +103,10 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
 
     }
 
+    //Remove it after adding logout functionality
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("crm")
-                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("crm")
-                        .child(Splashscreen.spUsersData.getString("passcode","null"))
-                        .setValue("active");
+        Splashscreen.spUsersData.edit().clear().commit();
     }
 }

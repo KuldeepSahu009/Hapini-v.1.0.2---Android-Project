@@ -25,13 +25,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="15dp">
 
-        <TextView
-            android:id="@+id/tvCrmAdminDashboardTitle"
+        <ImageButton
+            android:id="@+id/ivBackFromCrmAdmin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_weight="4"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:minHeight="48dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_back"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvCrmAdminDashboardTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:gravity="center_horizontal"
             android:letterSpacing="0.025"
             android:paddingTop="8dp"
@@ -39,7 +51,8 @@
             android:text="CRM DASHBOARD"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_weight="3" />
 
         <ImageButton
             android:id="@+id/ivCrmLogout"

@@ -207,16 +207,6 @@ public class VerifyCrmUser extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
-                        .setValue("active");
-    }
-
-    @Override
     public void onPause() {
         if(Splashscreen.spAdminsData != null)
             if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
@@ -224,14 +214,6 @@ public class VerifyCrmUser extends Fragment {
                         .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
         super.onPause();
 
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-            CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
-                    .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
     }
 
 }

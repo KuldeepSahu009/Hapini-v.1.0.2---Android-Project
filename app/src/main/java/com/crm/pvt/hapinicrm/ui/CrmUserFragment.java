@@ -53,7 +53,8 @@ public class CrmUserFragment extends Fragment {
         builder.setMessage("Are you sure you want to logout?");
         builder.setCancelable(true);
         builder.setPositiveButton("Yes", (dialog, which) -> {
-            Splashscreen.spUsersData.edit().clear().commit();
+            SharedPreferences getshared = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE);
+            getshared.edit().clear().commit();
             Navigation.findNavController(v).navigateUp();
         });
         builder.setNegativeButton("No", (dialog, which) -> {
@@ -85,24 +86,10 @@ public class CrmUserFragment extends Fragment {
 
     }
 
+    //Remove it after adding logout functionality
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("crm")
-                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
+        Splashscreen.spUsersData.edit().clear().commit();
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("crm")
-                        .child(Splashscreen.spUsersData.getString("passcode","null"))
-                        .setValue("active");
-    }
-
-
 }
