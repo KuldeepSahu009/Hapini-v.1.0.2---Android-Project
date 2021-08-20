@@ -44,6 +44,12 @@ public class FranchiseDashboardFragment extends Fragment {
                             .actionFranchiseDashboardFragmentToAddAdminFormDetailsFragment2());
         });
 
+        binding.sendcsvfile.setOnClickListener(v -> {
+            Navigation.findNavController(v)
+                    .navigate(FranchiseDashboardFragmentDirections
+                    .actionFranchiseDashboardFragmentToCsvfilefromfranchise());
+        });
+
         binding.trackadminfromfranchiseadmin.setOnClickListener(v -> {
             admin.putString("ADMIN","crm");
             Navigation

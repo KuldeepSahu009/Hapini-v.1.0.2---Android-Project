@@ -48,8 +48,7 @@ public class TrackUserFragment extends Fragment {
         });
 
         binding.cvTrackVideoEditorAdmin.setOnClickListener(v -> {
-            data.putString("data", "videoUser");
-            Navigation.findNavController(v).navigate(R.id.gotospecifictrackuser,data);
+            setUpCustomDialogBox();
         });
        binding.ivTrackUser.setOnClickListener(v->
                Navigation.findNavController(v).navigateUp());
