@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -61,6 +62,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders> {
@@ -97,6 +100,11 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.passcode.setText(tempmodel.getPasscode());
         holder.password.setText(tempmodel.getPassword());
         holder.location.setText(tempmodel.getLocation());
+        holder.profileimg.setImageResource(R.drawable.account);
+        holder.profileimg.setVisibility(View.VISIBLE);
+
+
+
 
         //For Deletion of User
         holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -262,28 +270,42 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
 
     private void showattendance(String passcode) {
         Log.e(TAG, "showattendance: " + passcode);
+        ArrayList<Calendar> calendarArrayList=new ArrayList<>();
+        com.crm.pvt.hapinicrm.ui.Calendar calendar=new com.crm.pvt.hapinicrm.ui.Calendar(calendarArrayList);
+        //Log.e(TAG, "showattedance: "+passcode );
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("attendencev2").child("admin")
                 .child(usertypes)
                 .child(passcode);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int i = 0;
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    String date = dataSnapshot.getValue().toString();
-                    Log.e(TAG, "onDataChange: " + date);
+                int i=0;
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    String date=dataSnapshot.getKey().toString();
                     i++;
-                    Log.e(TAG, "onDataChange: i" + i);
+                    //// Log.e(TAG, "onDataChange: "+date );
+                    int year=Integer.parseInt(date.substring(0,4));
+                    //Log.e(TAG, "onDataChange: "+year );
+                    int month=Integer.parseInt(date.substring(5,7));
+                    int days=Integer.parseInt(date.substring(8,10));
+                    // Log.e(TAG, "onDataChange: "+month+""+days );
+                    java.util.Calendar calendar1= java.util.Calendar.getInstance();
+                    calendar1.set(year,month-1,days);
+                    calendarArrayList.add(calendar1);
                 }
-
+                calendar.show(((FragmentActivity)context).getSupportFragmentManager(),"TAG");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(context, "unable to get", Toast.LENGTH_LONG).show();
+
             }
         });
+
+
+
+
 
     }
     private void checkcallpermission(String no){
@@ -310,5 +332,6 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         callIntent.setData(Uri.parse("tel:"+no));
         context.startActivity(callIntent);
     }
+
 
 }

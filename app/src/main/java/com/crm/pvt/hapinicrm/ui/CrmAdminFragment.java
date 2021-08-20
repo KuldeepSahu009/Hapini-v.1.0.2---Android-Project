@@ -32,9 +32,10 @@ public class CrmAdminFragment extends Fragment {
 
         if (login()) {
             login = false;
-            Attendancedialogue attendancedialogue = new Attendancedialogue();
+            Attendancedialogue attendancedialogue = new Attendancedialogue(getContext());
             attendancedialogue.setArguments(bundle1);
             attendancedialogue.show(getFragmentManager(), "attendance dialogue");
+            Attendancedialogue.type="crmadmin";
         }
 
         return binding.getRoot();

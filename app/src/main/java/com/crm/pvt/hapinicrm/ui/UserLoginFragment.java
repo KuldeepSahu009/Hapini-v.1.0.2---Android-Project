@@ -119,7 +119,7 @@ public class UserLoginFragment extends Fragment {
                                     editor.putString("type", "crmuser");
                                     editor.apply();
                                     DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
-                                            .child("crm").child(passcodes);
+                                            .child("data").child(passcodes);
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
                                     Date date = new Date();
                                     String todaydate = dateFormat.format(date);

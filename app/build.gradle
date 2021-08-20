@@ -84,6 +84,8 @@ dependencies {
 
 
     implementation 'com.karumi:dexter:6.2.3'
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
     implementation 'com.itextpdf:itext7-core:7.1.3'
 
 }

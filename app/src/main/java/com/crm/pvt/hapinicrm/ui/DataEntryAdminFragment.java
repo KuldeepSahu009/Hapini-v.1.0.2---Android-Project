@@ -32,7 +32,7 @@ public class DataEntryAdminFragment extends Fragment {
 
         if (login()) {
             login = false;
-            Attendancedialogue attendancedialogue = new Attendancedialogue();
+            Attendancedialogue attendancedialogue = new Attendancedialogue(getContext());
             attendancedialogue.show(getFragmentManager(), "attendance dialogue");
         }
 

@@ -17,12 +17,25 @@ public class FranchiseDashboardFragment extends Fragment {
 
     private FragmentFranchiseDashboardBinding binding;
     public static String addAdminTypes;
+    private boolean attendance=false;
     private Bundle admin;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFranchiseDashboardBinding.inflate(inflater,container,false);
         admin = new Bundle();
+        if (attendance==false){
+            Attendancedialogue attendancedialogue = new Attendancedialogue(getContext());
+            attendancedialogue.show(getFragmentManager(), "attendance dialogue");
+            Attendancedialogue.type="franchiseadmin";
+            attendance=true;
+        }
         return binding.getRoot();
+
+
+
+
+
+
     }
 
     @Override
