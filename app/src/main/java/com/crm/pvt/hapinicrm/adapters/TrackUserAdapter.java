@@ -87,12 +87,13 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
             }
         });
 
-
-        if(!tempmodel.getImgurl().equals("")){
-            Glide.with(context)
-                    .load(tempmodel.getImgurl())
-                    .placeholder(R.drawable.ic_profile_placeholder)
-                    .into(holder.profileimg);
+        if(tempmodel.getImgurl() != null) {
+            if (!tempmodel.getImgurl().equals("")) {
+                Glide.with(context)
+                        .load(tempmodel.getImgurl())
+                        .placeholder(R.drawable.ic_profile_placeholder)
+                        .into(holder.profileimg);
+            }
         }
     }
     @Override

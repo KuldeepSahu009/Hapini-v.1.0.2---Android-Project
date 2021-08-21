@@ -1,5 +1,6 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import static com.crm.pvt.hapinicrm.ui.StartFragment.selectedAdmin;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,7 +39,6 @@ public class AdminLoginFragment extends Fragment {
     private FirebaseAuth auth;
     private static final String TAG = "TAG";
     public static Franchise currentFranchise = null;
-
     static String passcode;
     static String password;
 
@@ -162,6 +162,7 @@ public class AdminLoginFragment extends Fragment {
         switch (pos) {
 
             case 1:
+                selectedAdmin = 1;
                 editor.putString("type", "crm");
                 editor.putString("passcode",passcode);
                // Log.e(TAG, "navigateTo: "+passcode )
@@ -169,6 +170,7 @@ public class AdminLoginFragment extends Fragment {
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToCrmAdminFragment());
                 break;
             case 4://not in use
+                selectedAdmin = 4;
                 editor.putString("type", "data");
                 editor.putString("passcode",passcode);
                 // Log.e(TAG, "navigateTo: "+passcode );
@@ -176,6 +178,7 @@ public class AdminLoginFragment extends Fragment {
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToDataEntryAdminFragment());
                 break;
             case 5://not in use
+                selectedAdmin = 5;
                 editor.putString("type", "video");
                 editor.putString("passcode",passcode);
                 // Log.e(TAG, "navigateTo: "+passcode );
@@ -183,6 +186,7 @@ public class AdminLoginFragment extends Fragment {
                 Navigation.findNavController(view).navigate(AdminLoginFragmentDirections.actionAdminLoginFragmentToVideoEditorNavigation());
                 break;
             case 2:
+                selectedAdmin = 2;
                 Log.e(TAG, "navigateTo: "+"master" );
                 editor.putString("type", "master");
                 editor.putString("passcode",passcode);
