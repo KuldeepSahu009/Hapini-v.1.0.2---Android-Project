@@ -38,6 +38,7 @@ public class AdminLoginFragment extends Fragment {
     private FirebaseAuth auth;
     private static final String TAG = "TAG";
     public static Franchise currentFranchise = null;
+
     static String passcode;
     static String password;
 
