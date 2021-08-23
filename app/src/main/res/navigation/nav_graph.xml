@@ -44,7 +44,7 @@
             android:id="@+id/action_startFragment_to_dataEntryUserFragment"
             app:destination="@id/dataEntryUserFragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_startFragment_to_crmUserFragment"
             app:destination="@id/crmUserFragment"
@@ -131,6 +131,12 @@
         <action
             android:id="@+id/action_crmAdminFragment_to_crmUserVerification"
             app:destination="@id/crmUserVerification" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_crmadmincsvfilesend"
+            app:destination="@id/crmadmincsvfilesend" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_recievecsvfileadmin"
+            app:destination="@id/recievecsvfileadmin" />
     </fragment>
     <fragment
         android:id="@+id/dataEntryAdminFragment"
@@ -201,12 +207,16 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        />
+        >
+        <action
+            android:id="@+id/action_alltrackusersfragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/adduserdata"
         android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
-        tools:layout="@layout/fragment_add_user_form_details"
-        android:label="fragmentadddata"/>
+        android:label="fragmentadddata"
+        tools:layout="@layout/fragment_edit_profile" />
     <navigation
         android:id="@+id/masterNavigation"
         app:startDestination="@id/masterDashboardFragment">
@@ -298,7 +308,14 @@
             android:id="@+id/taskAssignFragment"
             android:name="com.crm.pvt.hapinicrm.ui.TaskAssignFragment"
             android:label="fragment_task_admin"
-            tools:layout="@layout/fragment_task_assign" />
+            tools:layout="@layout/fragment_task_assign" >
+            <action
+                android:id="@+id/action_taskAssignFragment_to_csvfilefromfranchise2"
+                app:destination="@id/csvfilefromfranchise2" />
+            <action
+                android:id="@+id/action_taskAssignFragment_to_crmadmincsvfilesend2"
+                app:destination="@id/crmadmincsvfilesend2" />
+        </fragment>
 
         <fragment
             android:id="@+id/addUserFragment"
@@ -383,6 +400,16 @@
             app:destination="@id/franchiseDataViewFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <fragment
+            android:id="@+id/csvfilefromfranchise2"
+            android:name="com.crm.pvt.hapinicrm.ui.csvfilefromfranchise"
+            android:label="fragment_csvfilefromfranchise"
+            tools:layout="@layout/fragment_csvfilefromfranchise" />
+        <fragment
+            android:id="@+id/crmadmincsvfilesend2"
+            android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
+            android:label="fragment_crmadmincsvfilesend"
+            tools:layout="@layout/fragment_crmadmincsvfilesend" />
 
 
     </navigation>
@@ -573,6 +600,9 @@
         <action
             android:id="@+id/action_franchiseDashboardFragment_to_adminDataViewFragment2"
             app:destination="@id/adminDataViewFragment2" />
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_csvfilefromfranchise"
+            app:destination="@id/csvfilefromfranchise" />
     </fragment>
     <fragment
         android:id="@+id/crmUserChatFragment"
@@ -629,10 +659,11 @@
     <fragment
         android:id="@+id/verificationOfUser"
         android:name="com.crm.pvt.hapinicrm.ui.VerifyCrmUser"
-        tools:layout="@layout/fragment_verify_crm_user" >
+        tools:layout="@layout/fragment_verify_crm_user">
         <action
             android:id="@+id/action_verificationOfUser_to_crmAdminFragment"
-            app:destination="@id/crmAdminFragment" />
+            app:destination="@id/crmAdminFragment"
+            app:popUpTo="@id/crmAdminFragment" />
     </fragment>
 
     <fragment
@@ -643,5 +674,20 @@
             android:id="@+id/action_crmUserVerification_to_verificationOfUser"
             app:destination="@id/verificationOfUser" />
     </fragment>
+    <fragment
+        android:id="@+id/csvfilefromfranchise"
+        android:name="com.crm.pvt.hapinicrm.ui.csvfilefromfranchise"
+        android:label="fragment_csvfilefromfranchise"
+        tools:layout="@layout/fragment_csvfilefromfranchise" />
+    <fragment
+        android:id="@+id/crmadmincsvfilesend"
+        android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
+        android:label="fragment_crmadmincsvfilesend"
+        tools:layout="@layout/fragment_crmadmincsvfilesend" />
+    <fragment
+        android:id="@+id/recievecsvfileadmin"
+        android:name="com.crm.pvt.hapinicrm.ui.recievecsvfileadmin"
+        android:label="fragment_recievecsvfileadmin"
+        tools:layout="@layout/fragment_recievecsvfileadmin" />
 
 </navigation>

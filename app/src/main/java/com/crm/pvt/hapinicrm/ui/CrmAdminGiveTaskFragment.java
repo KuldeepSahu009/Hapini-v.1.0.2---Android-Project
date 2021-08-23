@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmAdminGiveTaskBinding;
 import com.crm.pvt.hapinicrm.model.TaskModel;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
@@ -54,7 +55,15 @@ public class CrmAdminGiveTaskFragment extends Fragment {
         String customerCity = Objects.requireNonNull(binding.etCity.getText()).toString();
         String task = Objects.requireNonNull(binding.etTaskDescription.getText()).toString();
 
-        TaskModel taskModel = new TaskModel(userPasscode, customerName, customerNumber, customerCity, task);
+        TaskModel taskModel = new TaskModel(
+                userPasscode,
+                customerName,
+                customerNumber,
+                customerCity,
+                task,
+                "Not Completed",
+                ""
+        );
 
         if(userPasscode.length() != 6) {
 
@@ -93,7 +102,7 @@ public class CrmAdminGiveTaskFragment extends Fragment {
                     }
                     if(user != null) {
                         TrackUserModel finalUser = user;
-                        taskDatabaseReference.child(userPasscode).push().setValue(taskModel).addOnCompleteListener(setTask -> {
+                        taskDatabaseReference.child(userPasscode).child(customerNumber).setValue(taskModel).addOnCompleteListener(setTask -> {
                             if(setTask.isSuccessful()) {
                                 Snackbar.make(binding.getRoot(),"Task Assigned to " + finalUser.getName() + " ",Snackbar.LENGTH_SHORT).show();
                             } else {
@@ -111,5 +120,26 @@ public class CrmAdminGiveTaskFragment extends Fragment {
                 public void onCancelled(@NonNull DatabaseError error) { }
             });
         }
+    }
+
+    @Override
+    public void onStart() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+        super.onPause();
+
     }
 }

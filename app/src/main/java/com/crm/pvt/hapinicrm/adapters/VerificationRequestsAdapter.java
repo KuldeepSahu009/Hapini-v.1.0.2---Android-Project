@@ -42,10 +42,16 @@ public class VerificationRequestsAdapter extends RecyclerView.Adapter<Verificati
             public void onClick(View v) {
                 Bundle userName = new Bundle();
                 userName.putString("NAME" , name);
+
                 Navigation.findNavController(v).navigate(R.id.action_crmUserVerification_to_verificationOfUser , userName);
+
             }
         });
     }
+
+
+
+
 
     @Override
     public int getItemCount() {

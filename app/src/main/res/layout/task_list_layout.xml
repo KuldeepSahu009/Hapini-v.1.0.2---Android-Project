@@ -13,15 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="20dp"
         android:paddingEnd="16dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingBottom="8dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvCustomerName"
@@ -61,7 +60,6 @@
                 android:textStyle="bold"
                 tools:text="New Delhi" />
 
-
             <TextView
                 android:id="@+id/tvTask"
                 android:layout_width="match_parent"
@@ -74,10 +72,24 @@
                 android:textStyle="bold"
                 tools:text="Call this person" />
 
+            <TextView
+                android:id="@+id/tvTaskProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="serif"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Not Completed" />
+
         </LinearLayout>
 
         <ImageView
+            android:background="@color/grey"
             android:id="@+id/ivCall"
+            android:contextClickable="true"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"

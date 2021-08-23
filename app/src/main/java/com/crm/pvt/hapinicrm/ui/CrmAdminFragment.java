@@ -1,6 +1,8 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,19 +10,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmAdminBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CrmAdminFragment extends Fragment {
     private FragmentCrmAdminBinding binding;
     private Boolean login = true;
     private FirebaseAuth auth;
-
+    public static  DatabaseReference activeStatusReference = FirebaseDatabase.getInstance().getReference("activeV2");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding=FragmentCrmAdminBinding.inflate(inflater, container, false);
@@ -44,7 +50,6 @@ public class CrmAdminFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         auth = FirebaseAuth.getInstance();
 
         binding.crmadminAddUser.setOnClickListener(new View.OnClickListener() {
@@ -72,12 +77,7 @@ public class CrmAdminFragment extends Fragment {
             }
         });
         //
-        binding.ivBackFromCrmAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigateUp();
-            }
-        });
+
 
         binding.cvVerifyUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +93,7 @@ public class CrmAdminFragment extends Fragment {
             builder.setCancelable(true);
             builder.setPositiveButton("Yes", (dialog, which) -> {
                 auth.signOut();
+                Splashscreen.spAdminsData.edit().clear().commit();
                 Navigation.findNavController(v).navigateUp();
             });
             builder.setNegativeButton("No", (dialog, which) -> {
@@ -104,11 +105,57 @@ public class CrmAdminFragment extends Fragment {
 
         binding.cvGiveTask.setOnClickListener(v -> Navigation.findNavController(v).
                 navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmAdminGiveTaskFragment()));
-
+binding.sendcsvfiletouser.setOnClickListener(v -> {
+    Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmadmincsvfilesend());
+});
+      binding.recievecsvfileadminfromfranchise.setOnClickListener(v-> {
+          Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToRecievecsvfileadmin());
+      });
 
     }
 
     private boolean login() {
         return login;
+    }
+
+
+    @Override
+    public void onStart() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+        super.onPause();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
     }
 }
