@@ -308,7 +308,14 @@
             android:id="@+id/taskAssignFragment"
             android:name="com.crm.pvt.hapinicrm.ui.TaskAssignFragment"
             android:label="fragment_task_admin"
-            tools:layout="@layout/fragment_task_assign" />
+            tools:layout="@layout/fragment_task_assign" >
+            <action
+                android:id="@+id/action_taskAssignFragment_to_csvfilefromfranchise2"
+                app:destination="@id/csvfilefromfranchise2" />
+            <action
+                android:id="@+id/action_taskAssignFragment_to_crmadmincsvfilesend2"
+                app:destination="@id/crmadmincsvfilesend2" />
+        </fragment>
 
         <fragment
             android:id="@+id/addUserFragment"
@@ -393,6 +400,16 @@
             app:destination="@id/franchiseDataViewFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <fragment
+            android:id="@+id/csvfilefromfranchise2"
+            android:name="com.crm.pvt.hapinicrm.ui.csvfilefromfranchise"
+            android:label="fragment_csvfilefromfranchise"
+            tools:layout="@layout/fragment_csvfilefromfranchise" />
+        <fragment
+            android:id="@+id/crmadmincsvfilesend2"
+            android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
+            android:label="fragment_crmadmincsvfilesend"
+            tools:layout="@layout/fragment_crmadmincsvfilesend" />
 
 
     </navigation>

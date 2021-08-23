@@ -4,7 +4,9 @@ import static android.app.Activity.RESULT_OK;
 
 import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import androidx.viewbinding.ViewBinding;
 
 import android.provider.OpenableColumns;
 import android.renderscript.ScriptGroup;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,16 +27,23 @@ import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmadmincsvfilesendBinding;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 
 
 public class crmadmincsvfilesend extends Fragment {
@@ -70,6 +80,7 @@ public class crmadmincsvfilesend extends Fragment {
     }
 
     private void uploadtofirebase(String displayName) {
+
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("usersv2").child("crm");
         storageReference.child(binding.crmuserpasscodecsv.getText().toString()).child(displayName).putFile(imageuri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -98,7 +109,10 @@ public class crmadmincsvfilesend extends Fragment {
 
             }
         });
+
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

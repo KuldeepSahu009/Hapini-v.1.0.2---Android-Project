@@ -52,7 +52,7 @@ public class csvfilefromfranchise extends Fragment {
       binding.submitcsvfile.setOnClickListener(v -> {
           String passcode=binding.passcodeforcsvfile.getText().toString();
           String filename=binding.csvfileselect.getText().toString();
-          if(!filename.equals("Select The Csv File")&&(passcode.isEmpty()==false)){
+          if(!filename.equals("Select The Csv File To Crm Admin")&&(passcode.isEmpty()==false)){
               uploadtofirebase(displayName);
           }
           else {
