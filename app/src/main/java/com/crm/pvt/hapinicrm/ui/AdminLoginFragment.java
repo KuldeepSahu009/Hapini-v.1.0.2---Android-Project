@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminLoginBinding;
+import com.crm.pvt.hapinicrm.model.Admin;
 import com.crm.pvt.hapinicrm.model.Franchise;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;

@@ -4,7 +4,9 @@ package com.crm.pvt.hapinicrm.model;
 
 import java.io.Serializable;
 
+
 public class Admin {
+
      String name;
      String email;
      String phoneno;
