@@ -22,11 +22,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.Admin;
+import com.crm.pvt.hapinicrm.ui.Calendar;
 import com.crm.pvt.hapinicrm.ui.Datacallbacktrackuser;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
@@ -44,8 +46,11 @@ import com.itextpdf.layout.element.Paragraph;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -136,8 +141,28 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
                     .placeholder(R.drawable.ic_profile_placeholder)
                     .into(holder.profilepic);
         }
+        holder.calladmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkcallpermission(admin.getPhoneno());
+            }
+        });
 
-    }
+        holder.attendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (usertyepes){
+                    case "CRM":
+                        showattedance("crm",admin.getPasscode());
+                        break;
+
+
+                }
+            }
+        });
+
+
+}
 
 
     @Override
@@ -148,7 +173,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
 
     class TrackAdminViewHolder extends RecyclerView.ViewHolder {
-        ImageView profilepic, deleteAdmin, activeStatusAdmin,downloadamin;
+        ImageView profilepic, deleteAdmin, activeStatusAdmin,downloadamin,calladmin,attendance;
 
         TextView name, email, mobile, location, whatsappno, password, passcode;
 
@@ -165,8 +190,12 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             profilepic = itemView.findViewById(R.id.trackadminprofilepic);
             deleteAdmin = itemView.findViewById(R.id.trackadmindeleteprofile);
             downloadamin=itemView.findViewById(R.id.trackadmindownload);
+            calladmin=itemView.findViewById(R.id.trackadmincall);
+            attendance=itemView.findViewById(R.id.trackadminattendance);
             downloadamin.setOnClickListener(v -> {
+                pos=getAdapterPosition();
                 checkpermission();
+
             });
         }
     }
@@ -277,5 +306,65 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         i.setDataAndType(uri,"application/pdf");
         i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         context.startActivity(i);
+    }
+    private void checkcallpermission(String no){
+        Dexter.withContext(context).withPermission(Manifest.permission.CALL_PHONE).withListener(new PermissionListener() {
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                calladmin(no);
+            }
+
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                Toast.makeText(context,"need permission",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                permissionToken.continuePermissionRequest();
+            }
+        }).check();
+    }
+
+    private void calladmin(String no){
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:"+no));
+        context.startActivity(callIntent);
+
+
+    }
+    private void showattedance(String type,String passcode){
+        ArrayList<java.util.Calendar>calendarArrayList=new ArrayList<>();
+        Calendar calendar=new Calendar(calendarArrayList);
+        //Log.e(TAG, "showattedance: "+passcode );
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("attendencev2").child("admin")
+                .child(type)
+                .child(passcode);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int i=0;
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    String date=dataSnapshot.getKey().toString();
+                    i++;
+                    //// Log.e(TAG, "onDataChange: "+date );
+                    int year=Integer.parseInt(date.substring(0,4));
+                    //Log.e(TAG, "onDataChange: "+year );
+                    int month=Integer.parseInt(date.substring(5,7));
+                    int days=Integer.parseInt(date.substring(8,10));
+                    // Log.e(TAG, "onDataChange: "+month+""+days );
+                    java.util.Calendar calendar1= java.util.Calendar.getInstance();
+                    calendar1.set(year,month-1,days);
+                    calendarArrayList.add(calendar1);
+                }
+               calendar.show(((FragmentActivity)context).getSupportFragmentManager(),"TAG");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

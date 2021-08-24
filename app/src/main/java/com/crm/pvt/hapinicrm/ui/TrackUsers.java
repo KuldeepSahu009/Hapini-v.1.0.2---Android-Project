@@ -48,7 +48,7 @@ public class TrackUsers extends Fragment implements UserClickCallback {
     UserClickCallback userClickCallback;
     TextView searchuser;
 
-    private DatabaseReference crm, de, ve;
+    private DatabaseReference crm,de,ve;
 
 
     @Override
@@ -70,7 +70,7 @@ public class TrackUsers extends Fragment implements UserClickCallback {
                 break;
         }
         Log.e(TAG, "onCreateView: " + data);
-        searchuser = binding.searchuser;
+        searchuser=binding.searchuser;
 
         searchuser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,14 +102,20 @@ public class TrackUsers extends Fragment implements UserClickCallback {
         switch (data) {
             case "crmUser":
                 Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
+                TrackUserAdapter.usertypes="crm";
                 getCrmData();
                 break;
             case "videoUser":
                 Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
+                TrackUserAdapter.usertypes="video";
                 getVideoEditorData();
                 break;
             case "dataUser":
                 Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
+                TrackUserAdapter.usertypes="data";
                 getDataEntryOperatorData();
                 break;
         }

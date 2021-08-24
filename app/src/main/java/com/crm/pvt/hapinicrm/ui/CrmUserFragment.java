@@ -3,6 +3,7 @@ package com.crm.pvt.hapinicrm.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +21,29 @@ import com.crm.pvt.hapinicrm.databinding.FragmentCrmUserBinding;
 public class CrmUserFragment extends Fragment {
 
     private FragmentCrmUserBinding binding;
+    private boolean attendance=false;
+    private static final String TAG = "TAG";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCrmUserBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+            if (attendance==false){
+                SharedPreferences getshared = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE);
+                String passcode=getshared.getString("passcode","no data");
+                Attendancedialogue attendancedialogue = new Attendancedialogue(getContext());
+                attendancedialogue.show(getFragmentManager(), "attendance dialogue");
+                Attendancedialogue.type="crmuser";
+                Log.e(TAG, "onViewCreated: "+passcode );
+                attendance=true;
+            }
 
         binding.cvSeeTaskAssigned.
                 setOnClickListener(v ->

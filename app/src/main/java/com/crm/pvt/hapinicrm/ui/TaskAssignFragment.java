@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,8 +42,8 @@ public class TaskAssignFragment extends Fragment {
         ArrayList<String> admins= new ArrayList<>();
         admins.add("Select Admin");
         admins.add("CRM Admin");
-        admins.add("Data Entry Admin");
-        admins.add("Video Editor Admin");
+        admins.add("CRM User");
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>( this.getContext(), android.R.layout.simple_spinner_item, admins);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -51,72 +52,29 @@ public class TaskAssignFragment extends Fragment {
         binding.taskAssignSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ( binding.etAssignTask.getText().toString().isEmpty() && binding.passCode.getText().toString().isEmpty()){
-                    Snackbar.make(v,"All Fields are necessary",Snackbar.LENGTH_LONG).show();
-                }
-                else if (binding.passCode.getText().toString().length() != 6){
-                    Snackbar.make(v, "Enter a Valid Pass Code" , Snackbar.LENGTH_LONG).show();
-                }
-                else {
+
                     int positionSelected = binding.adminSpinner.getSelectedItemPosition();
-                    String task = binding.etAssignTask.getText().toString();
+
                     switch (positionSelected){
                         case 0 : Snackbar.make(v , "Select the Admin Type" , Snackbar.LENGTH_LONG).show();
                                  break;
-                        case 1 : assignTaskToCrmAdmin(task);
+                        case 1 : assignTaskToCrmAdmin();
                                  break;
-                        case 2 : assignTaskToDataEntryAdmin(task);
+                        case 2 : assignTaskcrmUser();
                                  break;
-                        case 3 : assignTaskToVideoEditorAdmin(task);
-                                 break;
-                    }
+
+
                 }
             }
         });
     }
 
-    void assignTaskToCrmAdmin(String task){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Task_Assignment").child("CRM_Admin");
-        databaseReference.child(binding.passCode.getText().toString()).setValue(task).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(getContext(),"Task is Assigned to CRM Admin",Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),"Failed to Assign Task. Please try again later...",Toast.LENGTH_LONG).show();
-            }
-        });
+    void assignTaskToCrmAdmin(){
+        Navigation.findNavController(getView()).navigate(TaskAssignFragmentDirections.actionTaskAssignFragmentToCsvfilefromfranchise2());
     }
 
-    void assignTaskToDataEntryAdmin (String task){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Task_Assignment").child("Data_Entry_Admin");
-        databaseReference.child(binding.passCode.getText().toString()).setValue(task).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(getContext(),"Task is Assigned to Data Entry Admin",Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),"Failed to Assign Task. Please try again later...",Toast.LENGTH_LONG).show();
-            }
-        });
+    void assignTaskcrmUser (){
+        Navigation.findNavController(getView()).navigate(TaskAssignFragmentDirections.actionTaskAssignFragmentToCrmadmincsvfilesend2());
     }
 
-    void assignTaskToVideoEditorAdmin (String task){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Task_Assignment").child("Video_Editor_Admin");
-        databaseReference.child(binding.passCode.getText().toString()).setValue(task).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(getContext(),"Task is Assigned to Video Editor Admin",Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),"Failed to Assign Task. Please try again later...",Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 }

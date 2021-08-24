@@ -81,7 +81,7 @@ public class Splashscreen extends AppCompatActivity {
 
         if (!usertype.equals("no data") && !passcode.equals("no passcode") ){
 
-            markattendance();
+           // markattendance();
         }else if (usertype.equals("no data")){
             Log.e(TAG, "checkforuser: "+"no user");
         }
@@ -95,22 +95,22 @@ public class Splashscreen extends AppCompatActivity {
         hashMap.put("present", todaydate);
 
         switch (usertype) {
-            case "crmuser":
-                Log.e(TAG, "getuserinfo: "+"crm" );
-                DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
-                        .child("crm").child(passcode);
+//            case "crmuser":
+//                Log.e(TAG, "getuserinfo: "+"crm" );
+//                DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
+//                        .child("crm").child(passcode);
+//
+//                DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
+//
+//                reference3.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Log.e(TAG, "onSuccess: "+"attendencedonecrm" );
+//                        userLoginType = usertype;
+//                    }
+//                });
 
-                DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
-
-                reference3.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.e(TAG, "onSuccess: "+"attendencedonecrm" );
-                        userLoginType = usertype;
-                    }
-                });
-
-                break;
+//                break;
             case "videouser":
                 Log.e(TAG, "getuserinfo: "+"video" );
                 DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
