@@ -132,6 +132,9 @@ public class CrmAdminFragment extends Fragment {
 binding.sendcsvfiletouser.setOnClickListener(v -> {
     Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmadmincsvfilesend());
 });
+      binding.recievecsvfileadminfromfranchise.setOnClickListener(v-> {
+          Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToRecievecsvfileadmin());
+      });
 
     }
 

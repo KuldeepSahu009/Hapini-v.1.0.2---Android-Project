@@ -137,6 +137,9 @@
         <action
             android:id="@+id/action_crmAdminFragment_to_crmAdminChatFragment"
             app:destination="@id/crmAdminChatFragment" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_recievecsvfileadmin"
+            app:destination="@id/recievecsvfileadmin" />
     </fragment>
     <fragment
         android:id="@+id/dataEntryAdminFragment"
@@ -675,5 +678,10 @@
         android:name="user"
         app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
     </fragment>
+    <fragment
+        android:id="@+id/recievecsvfileadmin"
+        android:name="com.crm.pvt.hapinicrm.ui.recievecsvfileadmin"
+        android:label="fragment_recievecsvfileadmin"
+        tools:layout="@layout/fragment_recievecsvfileadmin" />
 
 </navigation>

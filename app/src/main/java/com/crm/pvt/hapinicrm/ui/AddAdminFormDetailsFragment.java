@@ -54,7 +54,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
 
-
         binding.btnAddAdminSubmit.setOnClickListener(v -> {
 
             String email = binding.etEmail.getText().toString();
@@ -101,10 +100,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
             franchiseDbRef = FirebaseDatabase.getInstance().getReference()
                     .child("crm_by_franchise")
                     .child(currentFranchise.getPasscode());
-            franchiseDbRef.setValue("1");
-
         }
-
 
         if (adminType == "CRM") {
 

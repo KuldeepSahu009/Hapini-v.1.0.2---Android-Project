@@ -72,54 +72,6 @@
             android:weightSum="2">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/sendcsvfiletouser"
-                android:layout_width="300dp"
-                android:layout_height="120dp"
-                android:layout_margin="8dp"
-                android:layout_marginEnd="21dp"
-                android:clickable="true"
-                android:elevation="24dp"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="10dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:id="@+id/image111"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/sheets"
-                        app:layout_constraintBottom_toTopOf="@+id/txt"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Send Csv File To User"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
                 android:id="@+id/crmadminAddUser"
                 android:layout_width="300dp"
                 android:layout_height="120dp"
@@ -216,7 +168,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/crmadminprofile"
+                android:id="@+id/cvVerifyUser"
                 android:layout_width="300dp"
                 android:layout_height="120dp"
                 android:layout_margin="8dp"
@@ -234,22 +186,22 @@
                     android:padding="8dp">
 
                     <ImageView
-                        android:id="@+id/pic3"
+                        android:id="@+id/verifyCrmUser"
                         android:layout_width="79dp"
                         android:layout_height="79dp"
-                        android:src="@drawable/ic_person"
-                        app:layout_constraintBottom_toTopOf="@+id/text3"
+                        android:src="@drawable/ic_baseline_verified_user"
+                        app:layout_constraintBottom_toTopOf="@+id/tvGiveTask"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/text3"
+                        android:id="@+id/tvGiveTask"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/profile_dashboard"
+                        android:text="Verification Requests"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="14sp"
@@ -260,44 +212,6 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvChatCrmAdmin"
-                android:layout_width="300dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:padding="2dp"
-                app:cardCornerRadius="4dp"
-                app:cardUseCompatPadding="true">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/ivChatCrmAdmin"
-                        android:layout_width="100dp"
-                        android:layout_height="90dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_chat" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/ivChatCrmAdmin"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="serif"
-                        android:text="Chat"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -350,7 +264,45 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cvVerifyUser"
+                android:id="@+id/cvChatCrmAdmin"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="2dp"
+                app:cardCornerRadius="4dp"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/ivChatCrmAdmin"
+                        android:layout_width="100dp"
+                        android:layout_height="90dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_chat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ivChatCrmAdmin"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="serif"
+                        android:text="Chat"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sendcsvfiletouser"
                 android:layout_width="300dp"
                 android:layout_height="120dp"
                 android:layout_margin="8dp"
@@ -368,22 +320,118 @@
                     android:padding="8dp">
 
                     <ImageView
-                        android:id="@+id/verifyCrmUser"
-                        android:layout_width="79dp"
-                        android:layout_height="79dp"
-                        android:src="@drawable/ic_baseline_verified_user"
-                        app:layout_constraintBottom_toTopOf="@+id/tvGiveTask"
+                        android:id="@+id/image111"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/sheets"
+                        app:layout_constraintBottom_toTopOf="@+id/txt"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvGiveTask"
+                        android:id="@+id/txt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Verification Requests"
+                        android:text="Send Csv File To User"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/recievecsvfileadminfromfranchise"
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:layout_margin="8dp"
+                android:layout_marginEnd="21dp"
+                android:clickable="true"
+                android:elevation="24dp"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/image121"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/sheets"
+                        app:layout_constraintBottom_toTopOf="@+id/txt1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Recieved file from Franchise admin"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/crmadminprofile"
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:layout_margin="8dp"
+                android:layout_marginEnd="21dp"
+                android:clickable="true"
+                android:elevation="24dp"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/pic3"
+                        android:layout_width="79dp"
+                        android:layout_height="79dp"
+                        android:src="@drawable/ic_person"
+                        app:layout_constraintBottom_toTopOf="@+id/text3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/profile_dashboard"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="14sp"

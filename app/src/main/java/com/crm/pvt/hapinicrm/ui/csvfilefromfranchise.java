@@ -71,7 +71,7 @@ public class csvfilefromfranchise extends Fragment {
 
     private void uploadtofirebase(String displayName) {
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("crm_by_franchise").child(currentFranchise.getPasscode());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("CSVFILEFROMFRANCHISE");
         storageReference.child(binding.passcodeforcsvfile.getText().toString()).child(displayName).putFile(imageuri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -79,8 +79,9 @@ public class csvfilefromfranchise extends Fragment {
                         taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                databaseReference = FirebaseDatabase.getInstance().getReference().child("crm_by_franchise");
-                                databaseReference.child(currentFranchise.getPasscode()).child(binding.passcodeforcsvfile.getText().toString()).child("CSV FILE").setValue(uri.toString());
+                                databaseReference = FirebaseDatabase.getInstance().getReference("CSVFILEFROMFRANCHISEv2");
+                                databaseReference.child(binding.passcodeforcsvfile.getText().toString()).child("CSV FILE").setValue(uri.toString());
+                                databaseReference.child(binding.passcodeforcsvfile.getText().toString()).child("Csv File name").setValue(displayName);
                             }
                         });
 
