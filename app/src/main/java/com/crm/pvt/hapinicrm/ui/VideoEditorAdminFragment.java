@@ -12,9 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentVideoEditorAdminBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class VideoEditorAdminFragment extends Fragment {
 
@@ -55,6 +58,11 @@ public class VideoEditorAdminFragment extends Fragment {
                 Navigation.findNavController(v).navigate(VideoEditorAdminFragmentDirections.actionVideoEditorAdminFragmentToProfileFragment())
         );
 
+        binding.videoEditorAddTaskImg.setOnClickListener(v->
+
+            Navigation.findNavController(v).navigate(VideoEditorAdminFragmentDirections.actionGlobalAddtaskfragment())
+
+        );
         binding.ivVideoEditorLogout.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Logout");
@@ -67,8 +75,8 @@ public class VideoEditorAdminFragment extends Fragment {
             builder.setNegativeButton("No", (dialog, which) -> {
             });
 
-            AlertDialog attendanceDialog = builder.create();
-            attendanceDialog.show();
+            AlertDialog logoutDialog = builder.create();
+            logoutDialog.show();
         });
 
     }
@@ -87,5 +95,25 @@ public class VideoEditorAdminFragment extends Fragment {
 
         AlertDialog attendanceDialog = builder.create();
         attendanceDialog.show();
+    }
+    @Override
+    public void onStart() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("VIDEO_EDITOR")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("VIDEO_EDITOR")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+        super.onPause();
+
     }
 }

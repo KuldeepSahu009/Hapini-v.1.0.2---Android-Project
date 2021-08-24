@@ -7,16 +7,19 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RelativeLayout
+        android:id="@+id/cvUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <TextView
-                android:id="@+id/trackusername"
+                android:id="@+id/tvCustomerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/trackuserprofilepic"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
@@ -36,132 +39,184 @@
                 app:civ_border_color="#FFAB00"
                 app:civ_border_width="3dp"
                 app:civ_circle_background_color="#FFD600" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/backemail"
-            android:text="Email ID: "
-            android:textSize="15dp"
-            android:textColor="@color/black"
-            android:layout_below="@+id/trackusername"
-            android:layout_marginLeft="16dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/trackuseremailid"
-            android:text="abc@gamil.com"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_below="@+id/trackusername"
-            android:layout_toRightOf="@+id/backemail"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/backphoneno"
-            android:text="Phone no: "
-            android:textColor="@color/black"
-            android:layout_below="@+id/backemail"
-            android:layout_marginLeft="16dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/trackuserphoneno"
-            android:text="+91 7878787878"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_below="@+id/backemail"
-            android:layout_toRightOf="@+id/backphoneno"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/backwhatsapp"
-            android:textColor="@color/black"
-            android:text="Whatsapp no: "
-            android:layout_below="@+id/backphoneno"
-            android:layout_marginLeft="16dp" />
+            <TextView
+                android:id="@+id/backemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvCustomerName"
+                android:layout_marginLeft="16dp"
+                android:text="Email ID: "
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/trackuserwhatsappno"
-            android:text="+91 67676767676"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_below="@id/backphoneno"
-            android:layout_toRightOf="@+id/backwhatsapp"/>
+            <TextView
+                android:id="@+id/trackuseremailid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/trackuserprofilepic"
+                android:layout_below="@+id/tvCustomerName"
+                android:layout_toRightOf="@+id/backemail"
+                android:text="abc@gamil.com"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="passcode: "
-            android:id="@+id/backpasscode"
-            android:textColor="@color/black"
-            android:layout_below="@+id/backwhatsapp"
-            android:layout_marginLeft="16dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="787878"
-            android:id="@+id/trackuserpasscode"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_below="@+id/backwhatsapp"
-            android:layout_toRightOf="@+id/backpasscode"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/backpassowrd"
-            android:text="Password: "
-            android:textColor="@color/black"
-            android:layout_below="@+id/backpasscode"
-            android:layout_marginLeft="16dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/trackuserpassword"
-            android:text="87jhh78"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_below="@+id/backpasscode"
-            android:layout_toRightOf="@+id/backpassowrd"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/backlocation"
-            android:text="Location: "
-            android:layout_below="@+id/backpassowrd"
-            android:layout_marginLeft="16dp"
-            android:textColor="@color/black"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/trackuserdeleteprofile"
-            android:text="random,location"
-            android:id="@+id/trackuserlocation"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_below="@+id/backpassowrd"
-            android:layout_toRightOf="@id/backlocation"
-            android:layout_marginBottom="10dp"/>
+            <TextView
+                android:id="@+id/backphoneno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/trackuseremailid"
+                android:layout_marginLeft="16dp"
+                android:text="Phone no: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackuserphoneno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/trackuseremailid"
+                android:layout_toRightOf="@+id/backphoneno"
+                android:text="+91 7878787878"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/backwhatsapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backphoneno"
+                android:layout_marginLeft="16dp"
+                android:text="Whatsapp no: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackuserwhatsappno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/backphoneno"
+                android:layout_toRightOf="@+id/backwhatsapp"
+                android:text="+91 67676767676"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/backpasscode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backwhatsapp"
+                android:layout_marginLeft="16dp"
+                android:text="passcode: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackuserpasscode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backwhatsapp"
+                android:layout_toRightOf="@+id/backpasscode"
+                android:text="787878"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/backpassowrd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backpasscode"
+                android:layout_marginLeft="16dp"
+                android:text="Password: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackuserpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backpasscode"
+                android:layout_toRightOf="@+id/backpassowrd"
+                android:text="87jhh78"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/backlocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backpassowrd"
+                android:layout_marginLeft="16dp"
+                android:text="Location: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackuserlocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/backpassowrd"
+                android:layout_marginBottom="10dp"
+                android:layout_toLeftOf="@+id/trackuserattendance"
+                android:layout_toRightOf="@id/backlocation"
+                android:text="random,location"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/trackUserStatus"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="104dp"
+                android:layout_marginEnd="10dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/red_dot" />
 
             <ImageView
                 android:id="@+id/trackuserdeleteprofile"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
-                android:layout_below="@+id/backpassowrd"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="4dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="10dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_delete_24" />
+            <ImageView
+                android:id="@+id/trackusercall"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="120dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_call_24" />
+
+            <ImageView
+                android:id="@+id/trackuserattendance"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="90dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_calendar_today_24" />
+
+            <ImageView
+                android:id="@+id/trackuserdownload"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_arrow_downward_24" />
 
 
         </RelativeLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"

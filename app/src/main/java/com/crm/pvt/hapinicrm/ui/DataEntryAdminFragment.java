@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentDataEntryAdminBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -21,16 +22,18 @@ public class DataEntryAdminFragment extends Fragment {
     private FragmentDataEntryAdminBinding binding;
     private Boolean login = true;
     private FirebaseAuth auth;
-
+    Bundle bundle;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDataEntryAdminBinding.inflate(inflater, container, false);
+         bundle = new Bundle();
+        bundle.putString("data", "dataUser");
 
         if (login()) {
             login = false;
-            Attendancedialogue attendancedialogue = new Attendancedialogue();
+            Attendancedialogue attendancedialogue = new Attendancedialogue(getContext());
             attendancedialogue.show(getFragmentManager(), "attendance dialogue");
         }
 
@@ -55,8 +58,7 @@ public class DataEntryAdminFragment extends Fragment {
         binding.dataentrytrackuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("data", "dataUser");
+
                 Navigation.findNavController(v).navigate(R.id.showtrackdataentryusers, bundle);
 
 
@@ -75,12 +77,7 @@ public class DataEntryAdminFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp();
             }
         });
-        binding.dataentryaddtask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
         binding.dataentryaddtask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,5 +105,26 @@ public class DataEntryAdminFragment extends Fragment {
     private boolean login() {
 
         return login;
+    }
+
+    @Override
+    public void onStart() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("DATA_ENTRY")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("DATA_ENTRY")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+        super.onPause();
+
     }
 }

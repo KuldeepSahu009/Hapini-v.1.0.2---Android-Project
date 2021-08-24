@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.Shorteddataadmin">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <ImageView
+                android:layout_width="40dp"
+                android:id="@+id/shoretddataback"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_baseline_arrow_backblack"
+               />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchadmins"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dp"
+                android:hint="Search"
+                android:background="@color/white"
+                android:maxLines="1"
+                />
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shortedbyname"
+            android:text="Name"
+            android:background="@drawable/shortedbuttonback"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="12dp"
+            android:layout_margin="4dp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shortedbycity"
+            android:text="City"
+            android:background="@drawable/shortedbuttonback"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="12dp"
+            android:layout_margin="4dp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shortedbylocation"
+            android:text="Location"
+            android:background="@drawable/shortedbuttonback"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="12dp"
+            android:layout_margin="4dp"
+            android:textColor="@color/black"/>
+
+
+    </LinearLayout>
+    </HorizontalScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:id="@+id/showshorteddata"/>
+
+
+
+</LinearLayout>

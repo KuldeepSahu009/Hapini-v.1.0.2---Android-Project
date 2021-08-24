@@ -40,6 +40,26 @@
             app:destination="@id/crmAdminFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_dataEntryUserFragment"
+            app:destination="@id/dataEntryUserFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_startFragment_to_crmUserFragment"
+            app:destination="@id/crmUserFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_videoEditorUserFragment"
+            app:destination="@id/videoEditorUserFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_franchiseDashboardFragment"
+            app:destination="@id/franchiseDashboardFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/adminLoginFragment"
@@ -85,6 +105,11 @@
             app:destination="@id/videoEditorNavigation"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_adminLoginFragment_to_franchiseDashboardFragment"
+            app:destination="@id/franchiseDashboardFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/crmAdminFragment"
@@ -100,6 +125,18 @@
         <action
             android:id="@+id/action_crmAdminFragment_to_setrpofile"
             app:destination="@id/setrpofile" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_crmAdminGiveTaskFragment"
+            app:destination="@id/crmAdminGiveTaskFragment" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_crmUserVerification"
+            app:destination="@id/crmUserVerification" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_crmadmincsvfilesend"
+            app:destination="@id/crmadmincsvfilesend" />
+        <action
+            android:id="@+id/action_crmAdminFragment_to_recievecsvfileadmin"
+            app:destination="@id/recievecsvfileadmin" />
     </fragment>
     <fragment
         android:id="@+id/dataEntryAdminFragment"
@@ -146,7 +183,22 @@
         android:id="@+id/setrpofile"
         android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
         tools:layout="@layout/fragment_profile"
-        android:label="profile"/>
+        android:label="profile"
+        >
+        <action
+            android:id="@+id/movetoeditprofilefragment"
+            app:destination="@id/editprofileadmins"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/editprofileadmins"
+        android:name="com.crm.pvt.hapinicrm.ui.EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile"
+        android:label="editprofileadmin"/>
+
     <fragment
         android:id="@+id/alltrackusersfragment"
         android:name="com.crm.pvt.hapinicrm.ui.TrackUsers"
@@ -155,12 +207,16 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        />
+        >
+        <action
+            android:id="@+id/action_alltrackusersfragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/adduserdata"
         android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
-        tools:layout="@layout/fragment_add_user_form_details"
-        android:label="fragmentadddata"/>
+        android:label="fragmentadddata"
+        tools:layout="@layout/fragment_edit_profile" />
     <navigation
         android:id="@+id/masterNavigation"
         app:startDestination="@id/masterDashboardFragment">
@@ -239,13 +295,27 @@
             android:id="@+id/adminDataViewFragment"
             android:name="com.crm.pvt.hapinicrm.ui.AdminDataViewFragment"
             android:label="fragment_admin_dataview"
-            tools:layout="@layout/fragment_admin_data_view" />
-
+            tools:layout="@layout/fragment_admin_data_view">
+            <action
+                app:destination="@id/shorteddataadminfragment"
+                android:id="@+id/movetoshorteddataadminfragment"/>
+        </fragment>
+            <fragment android:id="@+id/shorteddataadminfragment"
+                tools:layout="@layout/fragment_shorteddataadmin"
+                android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"
+                android:label="shorteddataadmin"/>
         <fragment
             android:id="@+id/taskAssignFragment"
             android:name="com.crm.pvt.hapinicrm.ui.TaskAssignFragment"
             android:label="fragment_task_admin"
-            tools:layout="@layout/fragment_task_assign" />
+            tools:layout="@layout/fragment_task_assign" >
+            <action
+                android:id="@+id/action_taskAssignFragment_to_csvfilefromfranchise2"
+                app:destination="@id/csvfilefromfranchise2" />
+            <action
+                android:id="@+id/action_taskAssignFragment_to_crmadmincsvfilesend2"
+                app:destination="@id/crmadmincsvfilesend2" />
+        </fragment>
 
         <fragment
             android:id="@+id/addUserFragment"
@@ -288,7 +358,13 @@
             android:id="@+id/trackuserscardviewfragment"
             android:name="com.crm.pvt.hapinicrm.ui.TrackUsers"
             android:label="trackusercardview"
-            tools:layout="@layout/fragment_track_users" />
+            tools:layout="@layout/fragment_track_users" >
+            <action android:id="@+id/showshorteduserdatafragment"
+                app:destination="@id/showshorteduserdata"/>
+        </fragment>
+        <fragment android:id="@+id/showshorteduserdata"
+            android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"
+            tools:layout="@layout/fragment_shorteddataadmin"/>
         <fragment
             android:id="@+id/profileFragment"
             android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
@@ -314,6 +390,26 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" />
         </fragment>
+        <action
+            android:id="@+id/action_global_addFranchiseFormDetailsFragment"
+            app:destination="@id/addFranchiseFormDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_global_franchiseDataViewFragment"
+            app:destination="@id/franchiseDataViewFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <fragment
+            android:id="@+id/csvfilefromfranchise2"
+            android:name="com.crm.pvt.hapinicrm.ui.csvfilefromfranchise"
+            android:label="fragment_csvfilefromfranchise"
+            tools:layout="@layout/fragment_csvfilefromfranchise" />
+        <fragment
+            android:id="@+id/crmadmincsvfilesend2"
+            android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
+            android:label="fragment_crmadmincsvfilesend"
+            tools:layout="@layout/fragment_crmadmincsvfilesend" />
 
 
     </navigation>
@@ -351,10 +447,16 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
+
             <action
                 android:id="@+id/action_videoEditorAdminFragment_to_giveTaskVideoEditorFragment"
                 app:destination="@id/giveTaskVideoEditorFragment" />
         </fragment>
+        <fragment
+            android:id="@+id/editprofileforvideo"
+            android:name="com.crm.pvt.hapinicrm.ui.EditProfileFragment"
+            tools:layout="@layout/fragment_edit_profile"
+            android:label="editprofile"/>
         <fragment
             android:id="@+id/addUserFormDetailsFragment"
             android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
@@ -369,12 +471,19 @@
             android:id="@+id/profileFragmentVideoEditor"
             android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment"
             android:label="fragment_profile"
-            tools:layout="@layout/fragment_profile" />
+            tools:layout="@layout/fragment_profile" >
+            <action
+                android:id="@+id/videoeditortoeditprofile"
+                app:destination="@id/editprofileforvideo"/>
+        </fragment>
         <fragment
             android:id="@+id/giveTaskVideoEditorFragment"
             android:name="com.crm.pvt.hapinicrm.ui.GiveTaskVideoEditorFragment"
             android:label="fragment_give_task_video_editor"
             tools:layout="@layout/fragment_give_task_video_editor" />
+        <action
+            android:id="@+id/action_global_addtaskfragment"
+            app:destination="@id/addtaskfragment" />
     </navigation>
     <fragment
         android:id="@+id/userLoginFragment"
@@ -399,7 +508,17 @@
         android:id="@+id/crmUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.CrmUserFragment"
         android:label="fragment_crm_user"
-        tools:layout="@layout/fragment_crm_user" />
+        tools:layout="@layout/fragment_crm_user" >
+        <action
+            android:id="@+id/action_crmUserFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_crmUserFragment_to_crmUserChatFragment"
+            app:destination="@id/crmUserChatFragment" />
+        <action
+            android:id="@+id/action_crmUserFragment_to_verificationByAdmin"
+            app:destination="@id/verificationByAdmin" />
+    </fragment>
     <fragment
         android:id="@+id/dataEntryUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.DataEntryUserFragment"
@@ -424,4 +543,151 @@
         android:name="com.crm.pvt.hapinicrm.ui.GoogleSheetFragment"
         android:label="fragment_google_sheet"
         tools:layout="@layout/fragment_google_sheet" />
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.TaskListFragment"
+        android:label="fragment_task_list"
+        tools:layout="@layout/fragment_task_list" >
+        <action
+            android:id="@+id/action_taskListFragment_to_feedbackFragment"
+            app:destination="@id/feedbackFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crmAdminGiveTaskFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.CrmAdminGiveTaskFragment"
+        android:label="fragment_crm_admin_give_task"
+        tools:layout="@layout/fragment_crm_admin_give_task" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.FeedbackFragment"
+        android:label="fragment_feedback"
+        tools:layout="@layout/fragment_feedback" >
+        <argument
+            android:name="taskModel"
+            app:argType="com.crm.pvt.hapinicrm.model.TaskModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFranchiseFormDetailsFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.AddFranchiseFormDetailsFragment"
+        android:label="fragment_add_franchise_form_details"
+        tools:layout="@layout/fragment_add_franchise_form_details" />
+    <fragment
+        android:id="@+id/franchiseDataViewFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.FranchiseDataViewFragment"
+        android:label="fragment_franchise_data_view"
+        tools:layout="@layout/fragment_franchise_data_view" >
+        <action
+            android:id="@+id/movetoshortedfranchiseadminfragments"
+            app:destination="@id/movetoshortedfranchiseadminfragment"
+            />
+
+    </fragment>
+    <fragment
+        android:id="@+id/movetoshortedfranchiseadminfragment"
+        tools:layout="@layout/fragment_shorteddataadmin"
+        android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"/>
+    <fragment
+        android:id="@+id/franchiseDashboardFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.FranchiseDashboardFragment"
+        android:label="fragment_franchise_dashboard"
+        tools:layout="@layout/fragment_franchise_dashboard" >
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_franchiseUserChatFragment"
+            app:destination="@id/franchiseUserChatFragment" />
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_addAdminFormDetailsFragment2"
+            app:destination="@id/addAdminFormDetailsFragment2" />
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_adminDataViewFragment2"
+            app:destination="@id/adminDataViewFragment2" />
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_csvfilefromfranchise"
+            app:destination="@id/csvfilefromfranchise" />
+    </fragment>
+    <fragment
+        android:id="@+id/crmUserChatFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.CrmUserChatFragment"
+        android:label="fragment_crm_user_chat"
+        tools:layout="@layout/fragment_crm_user_chat" >
+        <action
+            android:id="@+id/action_crmUserChatFragment_to_chatScreenFragment"
+            app:destination="@id/chatScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatScreenFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.ChatScreenFragment"
+        android:label="fragment_chat_screen"
+        tools:layout="@layout/fragment_chat_screen" >
+        <argument
+            android:name="franchise"
+            app:argType="com.crm.pvt.hapinicrm.model.Franchise" />
+    </fragment>
+    <fragment
+        android:id="@+id/franchiseUserChatFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.FranchiseUserChatFragment"
+        android:label="fragment_franchise_user_chat"
+        tools:layout="@layout/fragment_franchise_user_chat" >
+        <action
+            android:id="@+id/action_franchiseUserChatFragment_to_franchiseChatScreenFragment"
+            app:destination="@id/franchiseChatScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/franchiseChatScreenFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.FranchiseChatScreenFragment"
+        android:label="fragment_franchise_chat_screen"
+        tools:layout="@layout/fragment_franchise_chat_screen" >
+        <argument
+            android:name="user"
+            app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAdminFormDetailsFragment2"
+        android:name="com.crm.pvt.hapinicrm.ui.AddAdminFormDetailsFragment"
+        android:label="fragment_add_admin_form_details"
+        tools:layout="@layout/fragment_add_admin_form_details" />
+    <fragment
+        android:id="@+id/adminDataViewFragment2"
+        android:name="com.crm.pvt.hapinicrm.ui.AdminDataViewFragment"
+        android:label="fragment_admin_data_view"
+        tools:layout="@layout/fragment_admin_data_view" />
+
+    <fragment
+        android:id="@+id/verificationByAdmin"
+        android:name="com.crm.pvt.hapinicrm.ui.VerificationFromAdmin"
+        tools:layout="@layout/fragment_verification_from_admin" />
+
+    <fragment
+        android:id="@+id/verificationOfUser"
+        android:name="com.crm.pvt.hapinicrm.ui.VerifyCrmUser"
+        tools:layout="@layout/fragment_verify_crm_user">
+        <action
+            android:id="@+id/action_verificationOfUser_to_crmAdminFragment"
+            app:destination="@id/crmAdminFragment"
+            app:popUpTo="@id/crmAdminFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/crmUserVerification"
+        android:name="com.crm.pvt.hapinicrm.ui.VerificationRequests"
+        tools:layout="@layout/fragment_verification_requests" >
+        <action
+            android:id="@+id/action_crmUserVerification_to_verificationOfUser"
+            app:destination="@id/verificationOfUser" />
+    </fragment>
+    <fragment
+        android:id="@+id/csvfilefromfranchise"
+        android:name="com.crm.pvt.hapinicrm.ui.csvfilefromfranchise"
+        android:label="fragment_csvfilefromfranchise"
+        tools:layout="@layout/fragment_csvfilefromfranchise" />
+    <fragment
+        android:id="@+id/crmadmincsvfilesend"
+        android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
+        android:label="fragment_crmadmincsvfilesend"
+        tools:layout="@layout/fragment_crmadmincsvfilesend" />
+    <fragment
+        android:id="@+id/recievecsvfileadmin"
+        android:name="com.crm.pvt.hapinicrm.ui.recievecsvfileadmin"
+        android:label="fragment_recievecsvfileadmin"
+        tools:layout="@layout/fragment_recievecsvfileadmin" />
+
 </navigation>

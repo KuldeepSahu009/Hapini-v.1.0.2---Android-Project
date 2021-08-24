@@ -1,6 +1,7 @@
 package com.crm.pvt.hapinicrm;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.crm.pvt.hapinicrm.model.TaskModel;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.ui.CrmUserFragment;
 import com.crm.pvt.hapinicrm.ui.MainActivity;
 import com.crm.pvt.hapinicrm.ui.UserLoginFragment;
@@ -20,19 +23,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-
 public class Splashscreen extends AppCompatActivity {
-    private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
+    public static SharedPreferences spAdminsData;
+    public static SharedPreferences spUsersData;
     private int totalCount;
     private final int SPLASH_TIME_OUT=6500;
 
-    String password;
-    String passcode;
-    String usertype;
+    private String password;
+    private String passcode;
+    private String usertype;
+
     private String TAG = "TAG";
+    public static boolean isFranchise = false;
+    public static String userLoginType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
         new Handler().postDelayed(new Runnable() {
@@ -43,12 +49,25 @@ public class Splashscreen extends AppCompatActivity {
             }
         },SPLASH_TIME_OUT);
 
+        spAdminsData = this.getSharedPreferences("infos", Context.MODE_PRIVATE);
+        spUsersData = this.getSharedPreferences("info", Context.MODE_PRIVATE);
         getdatafromsharedpreference();
         checkforuser();
-
-
-
+        checkforFranchise();
     }
+
+    private void checkforFranchise() {
+        SharedPreferences shared = getSharedPreferences("infos", Context.MODE_PRIVATE);
+        String usertype = shared.getString("type", "no data");
+        String passcode = shared.getString("passcode", "no passcode");
+        String password = shared.getString("password", "no password");
+        if (!usertype.equals("no data") && !passcode.equals("no passcode") ){
+            isFranchise = true;
+        }else if (usertype.equals("no data")){
+            Log.e(TAG, "checkforuser: "+"no user");
+        }
+    }
+
     private void getdatafromsharedpreference() {
         SharedPreferences getshared = getSharedPreferences("info", Context.MODE_PRIVATE);
         usertype = getshared.getString("type", "no data");
@@ -60,10 +79,10 @@ public class Splashscreen extends AppCompatActivity {
     private void checkforuser() {
 
 
-        if (usertype != "no data") {
+        if (!usertype.equals("no data") && !passcode.equals("no passcode") ){
 
-            markattendance();
-        }else if (usertype=="no data"){
+           // markattendance();
+        }else if (usertype.equals("no data")){
             Log.e(TAG, "checkforuser: "+"no user");
         }
     }
@@ -76,22 +95,22 @@ public class Splashscreen extends AppCompatActivity {
         hashMap.put("present", todaydate);
 
         switch (usertype) {
-            case "crmuser":
-                Log.e(TAG, "getuserinfo: "+"crm" );
-                DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
-                        .child("crm").child(passcode);
+//            case "crmuser":
+//                Log.e(TAG, "getuserinfo: "+"crm" );
+//                DatabaseReference reference3 = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
+//                        .child("crm").child(passcode);
+//
+//                DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
+//
+//                reference3.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Log.e(TAG, "onSuccess: "+"attendencedonecrm" );
+//                        userLoginType = usertype;
+//                    }
+//                });
 
-                reference3.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Log.e(TAG, "onSuccess: "+"attendencedonecrm" );
-
-
-
-                    }
-                });
-
-                break;
+//                break;
             case "videouser":
                 Log.e(TAG, "getuserinfo: "+"video" );
                 DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference("attendencev2").child("users")
@@ -101,7 +120,7 @@ public class Splashscreen extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.e(TAG, "onSuccess: "+"attendencedonevideo" );
-
+                        userLoginType = usertype;
 
                     }
                 });
@@ -115,7 +134,7 @@ public class Splashscreen extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         Log.e(TAG, "onSuccess: "+"attendencedonedata" );
 
-
+                        userLoginType = usertype;
 
                     }
                 });
