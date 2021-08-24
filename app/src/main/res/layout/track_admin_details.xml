@@ -50,7 +50,8 @@
 
             <TextView
                 android:id="@+id/trackadminemailid"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
+                android:layout_toLeftOf="@+id/trackadminprofilepic"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/trackadminname"
                 android:layout_toRightOf="@+id/adminbackemail"
@@ -63,7 +64,7 @@
                 android:id="@+id/adminbackphoneno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/adminbackemail"
+                android:layout_below="@+id/trackadminemailid"
                 android:layout_marginLeft="16dp"
                 android:text="Phone no: "
                 android:textColor="@color/black" />
@@ -72,7 +73,7 @@
                 android:id="@+id/trackadminphoneno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/adminbackemail"
+                android:layout_below="@+id/trackadminemailid"
                 android:layout_toRightOf="@+id/adminbackphoneno"
                 android:text="+91 7878787878"
                 android:textColor="@color/black"
@@ -143,6 +144,17 @@
                 android:layout_marginLeft="16dp"
                 android:text="Location: "
                 android:textColor="@color/black" />
+            <ImageView
+                android:id="@+id/trackadmincall"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_above="@+id/trackadmindownload"
+                android:layout_alignParentEnd="true"
+                android:layout_marginVertical="2dp"
+                android:layout_marginEnd="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_call_24" />
 
             <TextView
                 android:id="@+id/trackadminlocation"
@@ -155,6 +167,17 @@
                 android:text="random,location"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/trackadminattendance"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/trackadmincall"
+                android:layout_marginEnd="90dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_calendar_today_24" />
+
 
             <ImageView
                 android:id="@+id/trackadmindownload"

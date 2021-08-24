@@ -12,7 +12,7 @@ import com.crm.pvt.hapinicrm.R;
 
 public class Trackuserviewholders extends RecyclerView.ViewHolder {
     public TextView name, email, phone, whatsappno, passcode, password, location;
-    public ImageView profileimg, delete , activeStatusUser;
+    public ImageView profileimg, delete , activeStatusUser,downloaduser,attendance,calluser;
     public CardView cardView;
 
     public Trackuserviewholders(@NonNull View itemView) {
@@ -28,6 +28,10 @@ public class Trackuserviewholders extends RecyclerView.ViewHolder {
         profileimg = itemView.findViewById(R.id.trackuserprofilepic);
         delete = itemView.findViewById(R.id.trackuserdeleteprofile);
         activeStatusUser = itemView.findViewById(R.id.trackUserStatus);
+        downloaduser=itemView.findViewById(R.id.trackuserdownload);
+        attendance=itemView.findViewById(R.id.trackuserattendance);
+        calluser=itemView.findViewById(R.id.trackusercall);
+
     }
 }
 

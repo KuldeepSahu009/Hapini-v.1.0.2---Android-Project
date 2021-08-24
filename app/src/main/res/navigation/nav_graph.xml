@@ -575,7 +575,17 @@
         android:id="@+id/franchiseDataViewFragment"
         android:name="com.crm.pvt.hapinicrm.ui.FranchiseDataViewFragment"
         android:label="fragment_franchise_data_view"
-        tools:layout="@layout/fragment_franchise_data_view" />
+        tools:layout="@layout/fragment_franchise_data_view" >
+        <action
+            android:id="@+id/movetoshortedfranchiseadminfragments"
+            app:destination="@id/movetoshortedfranchiseadminfragment"
+            />
+
+    </fragment>
+    <fragment
+        android:id="@+id/movetoshortedfranchiseadminfragment"
+        tools:layout="@layout/fragment_shorteddataadmin"
+        android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"/>
     <fragment
         android:id="@+id/franchiseDashboardFragment"
         android:name="com.crm.pvt.hapinicrm.ui.FranchiseDashboardFragment"
