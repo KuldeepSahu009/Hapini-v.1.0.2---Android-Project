@@ -214,6 +214,8 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     adminList.add(adminObject);
@@ -247,6 +249,8 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     adminList.add(adminObject);
@@ -281,6 +285,8 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     adminList.add(adminObject);
@@ -368,10 +374,5 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
         });
 
     }
-
-
-
-
-
 
 }

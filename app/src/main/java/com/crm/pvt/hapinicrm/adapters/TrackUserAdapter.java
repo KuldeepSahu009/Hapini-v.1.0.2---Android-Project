@@ -7,31 +7,25 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
-import com.crm.pvt.hapinicrm.ui.CrmAdminFragment;
-import com.crm.pvt.hapinicrm.ui.TrackUserFragment;
+
 import com.crm.pvt.hapinicrm.ui.TrackUsers;
 import com.crm.pvt.hapinicrm.viewholder.Trackuserviewholders;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 
 import java.util.List;
 
 public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders> {
-    private  Context context;
-    private  List<TrackUserModel> trackUserModelList;
+    private final Context context;
+    private final List<TrackUserModel> trackUserModelList;
     private  List<String> activeUserList;
 
     public TrackUserAdapter(Context context, List<TrackUserModel> trackUserModelList , List<String> activeUserList) {
@@ -45,8 +39,6 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         this.context = context;
         this.trackUserModelList = trackUserModelList;
     }
-
-
 
     @NonNull
     @Override
@@ -67,7 +59,10 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.whatsappno.setText(tempmodel.getWhatsappno());
         holder.passcode.setText(tempmodel.getPasscode());
         holder.password.setText(tempmodel.getPassword());
+        holder.state.setText(tempmodel.getState());
+        holder.city.setText(tempmodel.getCity());
         holder.location.setText(tempmodel.getLocation());
+        holder.addedBy.setText(tempmodel.getAddedBy());
 
         if(activeUserList != null) {
             for (String passcode : activeUserList) {

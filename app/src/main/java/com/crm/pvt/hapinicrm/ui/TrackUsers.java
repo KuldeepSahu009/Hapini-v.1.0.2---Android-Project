@@ -1,6 +1,5 @@
 package com.crm.pvt.hapinicrm.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,13 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +22,7 @@ import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentTrackUsersBinding;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,8 +46,6 @@ public class TrackUsers extends Fragment {
     private String data;
     public static String userType;
     TextView searchuser;
-
-    private DatabaseReference crm,de,ve;
 
 
     @Override
@@ -196,17 +189,17 @@ public class TrackUsers extends Fragment {
     }
 
     private void getCrmData() {
-         crm = FirebaseDatabase.getInstance().getReference("usersv2");
-        Query query=crm.child("crm");
+        DatabaseReference crm = FirebaseDatabase.getInstance().getReference("usersv2");
+        Query query= crm.child("crm");
         ///
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()), (snapshot.child("email").getValue().toString()),
-                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("passcode").getValue().toString()),
-                            (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
-
+                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("state").getValue().toString()),
+                            (snapshot.child("city").getValue().toString()), (snapshot.child("locality").getValue().toString()), (snapshot.child("passcode").getValue().toString()) ,
+                            (snapshot.child("password").getValue().toString()) , (snapshot.child("addedBy").getValue().toString()) , (snapshot.child("").getValue().toString())));
                 }
                 trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
@@ -244,17 +237,17 @@ public class TrackUsers extends Fragment {
 
 
     private void getDataEntryOperatorData() {
-        de = FirebaseDatabase.getInstance().getReference("usersv2");
-        Query query=de.child("data");
+        DatabaseReference de = FirebaseDatabase.getInstance().getReference("usersv2");
+        Query query= de.child("data");
         ///
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()), (snapshot.child("email").getValue().toString()),
-                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("passcode").getValue().toString()),
-                            (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
-
+                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("state").getValue().toString()),
+                            (snapshot.child("city").getValue().toString()), (snapshot.child("locality").getValue().toString()), (snapshot.child("passcode").getValue().toString()) ,
+                            (snapshot.child("password").getValue().toString()) , (snapshot.child("addedBy").getValue().toString()) , (snapshot.child("").getValue().toString())));
                 }
                 trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
@@ -294,16 +287,17 @@ public class TrackUsers extends Fragment {
     }
 
     private void getVideoEditorData() {
-        ve = FirebaseDatabase.getInstance().getReference("usersv2");
-        Query query=ve.child("video");
+        DatabaseReference ve = FirebaseDatabase.getInstance().getReference("usersv2");
+        Query query= ve.child("video");
         ///
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()), (snapshot.child("email").getValue().toString()),
-                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("passcode").getValue().toString()),
-                            (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
+                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("state").getValue().toString()),
+                            (snapshot.child("city").getValue().toString()), (snapshot.child("locality").getValue().toString()), (snapshot.child("passcode").getValue().toString()) ,
+                            (snapshot.child("password").getValue().toString()) , (snapshot.child("addedBy").getValue().toString()) , (snapshot.child("").getValue().toString())));
 
                 }
                 trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList);

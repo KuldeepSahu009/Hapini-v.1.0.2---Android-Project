@@ -5,20 +5,24 @@ public class User {
     String email;
     String mobileNo;
     String whatsAppNo;
+    String state;
     String city;
     String locality;
     String passcode;
     String password;
+    String addedBy;
 
-    public User(String name, String email, String  mobileNo, String whatsAppNo, String city, String locality, String passcode, String password) {
+    public User(String name, String email, String  mobileNo, String whatsAppNo, String state, String city, String locality, String passcode, String password , String addedBy) {
         this.name = name;
         this.email = email;
         this.mobileNo = mobileNo;
         this.whatsAppNo = whatsAppNo;
+        this.state = state;
         this.city = city;
         this.locality = locality;
         this.passcode = passcode;
         this.password = password;
+        this.addedBy = addedBy;
     }
 
     public String getName() {
@@ -83,5 +87,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
     }
 }

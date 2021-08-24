@@ -50,6 +50,8 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
         holder.whatsappno.setText(franchise.getWhatsappno());
         holder.passcode.setText(franchise.getPasscode());
         holder.password.setText(franchise.getPassword());
+        holder.state.setText(franchise.getState());
+        holder.city.setText(franchise.getCity());
         holder.location.setText(franchise.getLocation());
 
         for(String passcode : activeUserList)
@@ -105,7 +107,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
     static class TrackFranchiseViewHolder extends RecyclerView.ViewHolder{
         ImageView profilepic,deleteAdmin , activeStatusFranchise;
 
-        TextView name, email, mobile, location,whatsappno,password,passcode;
+        TextView name, email, mobile, location,whatsappno,password,passcode , state , city;
 
         public TrackFranchiseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -113,6 +115,8 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
             name = itemView.findViewById(R.id.trackadminname);
             email = itemView.findViewById(R.id.trackadminemailid);
             mobile = itemView.findViewById(R.id.trackadminphoneno);
+            state = itemView.findViewById(R.id.trackadminstate);
+            city = itemView.findViewById(R.id.trackadmincity);
             location = itemView.findViewById(R.id.trackadminlocation);
             whatsappno = itemView.findViewById(R.id.trackadminwhatsappno);
             password = itemView.findViewById(R.id.trackadminpassword);

@@ -176,8 +176,11 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                     String whatsappno=dataSnapshot.child("whatsAppNo").getValue().toString();
                     String passcode=dataSnapshot.child("passcode").getValue().toString();
                     String password=dataSnapshot.child("password").getValue().toString();
+                    String state = dataSnapshot.child("state").getValue().toString();
+                    String city = dataSnapshot.child("city").getValue().toString();
                     String location=dataSnapshot.child("city").getValue().toString();
-                    trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,location,""));
+                    String addedBy =dataSnapshot.child("addedBy").getValue().toString();
+                    trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,state , city , location, addedBy , ""));
 
 
                     Log.e(TAG, "onDataChange: "+name+email );
@@ -253,6 +256,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     adminList.add(adminObject);
@@ -285,6 +290,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     adminList.add(adminObject);
@@ -317,6 +324,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     Log.e(TAG, "onDataChange: "+dataSnapshot.child("name").getValue().toString() );

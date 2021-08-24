@@ -1,9 +1,6 @@
 package com.crm.pvt.hapinicrm.adapters;
 
-import static com.crm.pvt.hapinicrm.ui.AdminDataViewFragment.type;
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +16,9 @@ import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.Admin;
 import com.crm.pvt.hapinicrm.ui.Datacallbacktrackuser;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.TrackAdminViewHolder> {
 
@@ -71,6 +60,8 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.whatsappno.setText(admin.getWhatsappno());
         holder.passcode.setText(admin.getPasscode());
         holder.password.setText(admin.getPassword());
+        holder.state.setText(admin.getState());
+        holder.city.setText(admin.getCity());
         holder.location.setText(admin.getLocation());
 
         if (activeUserList != null) {
@@ -117,7 +108,6 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
     @Override
     public int getItemCount() {
-
         return admins.size();
     }
 
@@ -125,7 +115,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     static class TrackAdminViewHolder extends RecyclerView.ViewHolder {
         ImageView profilepic, deleteAdmin, activeStatusAdmin;
 
-        TextView name, email, mobile, location, whatsappno, password, passcode;
+        TextView name, email, mobile, state , city, location, whatsappno, password, passcode;
 
         public TrackAdminViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,6 +123,8 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             name = itemView.findViewById(R.id.trackadminname);
             email = itemView.findViewById(R.id.trackadminemailid);
             mobile = itemView.findViewById(R.id.trackadminphoneno);
+            state = itemView.findViewById(R.id.trackadminstate);
+            city = itemView.findViewById(R.id.trackadmincity);
             location = itemView.findViewById(R.id.trackadminlocation);
             whatsappno = itemView.findViewById(R.id.trackadminwhatsappno);
             password = itemView.findViewById(R.id.trackadminpassword);

@@ -27,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AddUserFormDetailsFragment extends Fragment {
 
     private FragmentAddUserFormDetailsBinding binding;
-    User user;
     String usertypes;
     ProgressDialog progressDialog;
 
@@ -48,14 +47,16 @@ public class AddUserFormDetailsFragment extends Fragment {
             String name = binding.etName.getText().toString();
             String mobileno = binding.etMobileNumber.getText().toString();
             String whatsappno = binding.etWhatsappNumber.getText().toString();
-            String city = binding.etCity.getText().toString();
+            String state = binding.etStateName.getText().toString();
+            String city = binding.etNameCity.getText().toString();
             String location = binding.etLocality.getText().toString();
             String passcode = binding.etPasscode.getText().toString();
             String password = binding.etPassword.getText().toString();
+            String addedBy = binding.etYourName.getText().toString();
 
             if (binding.cvAddUserFormTermsAndCondition.isChecked()) {
-                if (((email.isEmpty() || name.isEmpty() || mobileno.isEmpty() || whatsappno.isEmpty() || city.isEmpty() || location.isEmpty() ||
-                        passcode.isEmpty() || password.isEmpty()))) {
+                if (((email.isEmpty() || name.isEmpty() || mobileno.isEmpty() || whatsappno.isEmpty() || state.isEmpty() || city.isEmpty() || location.isEmpty() ||
+                        passcode.isEmpty() || password.isEmpty())) || addedBy.isEmpty()) {
                     Snackbar.make(v,"All Fields are necessary",Snackbar.LENGTH_LONG).show();
 
                 } else if (passcode.length() != 6) {
@@ -65,7 +66,7 @@ public class AddUserFormDetailsFragment extends Fragment {
                     progressDialog.setTitle("Please wait");
                     progressDialog.setMessage("Creating user");
                     progressDialog.show();
-                        enterdatatofirebase(name,email,mobileno,whatsappno,city,location,passcode,password);
+                        enterdatatofirebase(name,email,mobileno,whatsappno, state,city,location,passcode,password , addedBy);
                 }
 
             } else {
@@ -96,8 +97,8 @@ public class AddUserFormDetailsFragment extends Fragment {
         }
         binding.tvAddUserFormDashboardTitle.setText(title);
     }
-    private void enterdatatofirebase(String name,String email,String phoneno,String whatsappno,String city,String location,String passcode,String password){
-        User user=new User(name,email,phoneno,whatsappno,city,location,passcode,password);
+    private void enterdatatofirebase(String name,String email,String phoneno,String whatsappno, String state ,String city,String location,String passcode,String password , String addedBy){
+        User user = new User(name,email,phoneno,whatsappno,state,city,location,passcode,password , addedBy);
 
         if (usertypes=="crm"){
 

@@ -54,7 +54,8 @@ public class AddFranchiseFormDetailsFragment extends Fragment {
             String name = binding.etName.getText().toString();
             String mobileNo = binding.etMobileNumber.getText().toString();
             String whatsAppNo = binding.etWhatsappNumber.getText().toString();
-            String city = binding.etCity.getText().toString();
+            String state = binding.etStateDetail.getText().toString();
+            String city = binding.etStateDetail.getText().toString();
             String location = binding.etLocality.getText().toString();
             String passcode = binding.etPasscode.getText().toString();
             String password = binding.etPassword.getText().toString();
@@ -70,7 +71,7 @@ public class AddFranchiseFormDetailsFragment extends Fragment {
                     progressDialog.setTitle("Please wait");
                     progressDialog.setMessage("Creating Franchise");
                     progressDialog.show();
-                    enterDataToFirebase(name,email,mobileNo,whatsAppNo,city,location,passcode,password);
+                    enterDataToFirebase(name,email,mobileNo,whatsAppNo, state,city,location,passcode,password);
                 }
             }
             else {
@@ -83,9 +84,9 @@ public class AddFranchiseFormDetailsFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp());
     }
 
-    private void enterDataToFirebase (String name, String email, String mobileNo, String whatsAppNo, String city, String location, String passcode, String password) {
+    private void enterDataToFirebase (String name, String email, String mobileNo, String whatsAppNo, String state , String city, String location, String passcode, String password) {
 
-        Franchise franchise = new Franchise( name , email , mobileNo , whatsAppNo , passcode , password , location, "");
+        Franchise franchise = new Franchise( name , email , mobileNo , whatsAppNo , passcode , password , state , city , location, "");
             DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("franchiseV2").child(passcode);
             databaseReference.setValue(franchise).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override

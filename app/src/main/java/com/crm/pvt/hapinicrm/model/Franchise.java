@@ -9,19 +9,23 @@ public class Franchise implements Serializable {
     private String whatsappno;
     private String passcode;
     private String password;
+    private String state;
+    private String city;
     private String location;
     private String imgurl;
 
 
         public Franchise() { }
 
-        public Franchise(String name, String email, String phoneno, String whatsappno, String passcode, String password, String location, String imgurl) {
+        public Franchise(String name, String email, String phoneno, String whatsappno, String passcode, String password,String state , String city, String location, String imgurl) {
             this.name = name;
             this.email = email;
             this.phoneno = phoneno;
             this.whatsappno = whatsappno;
             this.passcode = passcode;
             this.password = password;
+            this.state = state;
+            this.city = city;
             this.location = location;
             this.imgurl = imgurl;
         }
@@ -57,5 +61,13 @@ public class Franchise implements Serializable {
         public String getImgurl() {
             return imgurl;
         }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCity() {
+        return city;
+    }
 }
 

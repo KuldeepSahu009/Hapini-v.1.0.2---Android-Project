@@ -107,10 +107,7 @@ public class AdminLoginFragment extends Fragment {
                                             Toast.makeText(getContext(), "failed to login", Toast.LENGTH_LONG).show();
                                         }
                                 }
-
                             }
-
-
                         }
                     }
 

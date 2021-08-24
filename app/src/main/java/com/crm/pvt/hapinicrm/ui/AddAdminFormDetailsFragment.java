@@ -14,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAddAdminFormDetailsBinding;
 import com.crm.pvt.hapinicrm.model.Admin;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class AddAdminFormDetailsFragment extends Fragment {
 
     private final String TAG = "Add Admin";
@@ -38,7 +42,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
     String franchiseadmin;
     ProgressDialog progressDialog;
     FirebaseAuth auth;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,21 +53,22 @@ public class AddAdminFormDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setFormTitle();
+        setUpSpinner();
 
         auth = FirebaseAuth.getInstance();
-
         binding.btnAddAdminSubmit.setOnClickListener(v -> {
 
             String email = binding.etEmail.getText().toString();
             String name = binding.etName.getText().toString();
             String mobileNo = binding.etMobileNumber.getText().toString();
             String whatsAppNo = binding.etWhatsappNumber.getText().toString();
-            String city = binding.etCity.getText().toString();
+            String state = binding.spinner.getSelectedItem().toString();
+            String city = binding.etCityName.getText().toString();
             String location = binding.etLocality.getText().toString();
             String passcode = binding.etPasscode.getText().toString();
             String password = binding.etPassword.getText().toString();
             if (binding.cvAddAdminFormTermsAndCondition.isChecked()) {
-                if (email.isEmpty() || name.isEmpty() || mobileNo.isEmpty() || whatsAppNo.isEmpty() || city.isEmpty() || location.isEmpty() ||
+                if (email.isEmpty() || name.isEmpty() || mobileNo.isEmpty() || whatsAppNo.isEmpty() || state.isEmpty() || city.isEmpty() || location.isEmpty() ||
                         passcode.isEmpty() || password.isEmpty()) {
                     Snackbar.make(v, "All Fields are necessary", Snackbar.LENGTH_LONG).show();
                 } else if (passcode.length() != 6) {
@@ -75,7 +79,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
                     progressDialog.setMessage("Creating Admin");
                     progressDialog.show();
 
-                    enterDataToFirebase(name, email, mobileNo, whatsAppNo, city, location, passcode, password);
+                    enterDataToFirebase(name, email, mobileNo, whatsAppNo,state ,  city, location, passcode, password);
 
                 }
             } else {
@@ -88,12 +92,18 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp());
     }
 
-    private void enterDataToFirebase(String name, String email, String mobileNo, String whatsAppNo, String city, String location, String passcode, String password) {
+    private void setUpSpinner() {
+        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this.getContext(),
+                R.array.india_states, android.R.layout.simple_spinner_item);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinner.setAdapter(stateAdapter);
+    }
 
-        Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, location, "");
+    private void enterDataToFirebase(String name, String email, String mobileNo, String whatsAppNo,String state, String city, String location, String passcode, String password) {
 
-        DatabaseReference franchiseDbRef = FirebaseDatabase
-                .getInstance()
+        Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, state , city , location, "");
+
+        DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
                 .getReference("crm_by_franchise")
                 .child(currentFranchise.getPasscode());
 
