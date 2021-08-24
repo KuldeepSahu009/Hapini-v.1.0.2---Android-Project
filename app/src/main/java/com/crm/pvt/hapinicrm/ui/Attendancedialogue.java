@@ -90,7 +90,7 @@ public class Attendancedialogue extends AppCompatDialogFragment {
                             break;
                             case "crmuser":
                                 Log.e(TAG, "onClick: "+"crmuser" );
-                                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("attendencev2")
+                                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("attendenceV2")
                                         .child("user").child("crm").child(passcodes);
 
                                 HashMap<String, String> hashMap1 = new HashMap<>();
