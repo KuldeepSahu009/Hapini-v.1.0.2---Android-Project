@@ -1,11 +1,15 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +24,20 @@ import com.crm.pvt.hapinicrm.databinding.FragmentCrmUserBinding;
 public class CrmUserFragment extends Fragment {
 
     private FragmentCrmUserBinding binding;
+    private long startTime = 15 * 60 * 1000; // 15 MINS IDLE TIME
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCrmUserBinding.inflate(inflater, container, false);
+
+
         return binding.getRoot();
+
     }
+
+
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -45,7 +57,12 @@ public class CrmUserFragment extends Fragment {
         binding.ivCrmUserLogout.setOnClickListener(v -> {
             crmUserLogout(v);
         });
+
+
+
+
     }
+
 
     private void crmUserLogout(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -84,6 +101,7 @@ public class CrmUserFragment extends Fragment {
         super.onPause();
 
     }
+
 
     @Override
     public void onDestroy() {
