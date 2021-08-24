@@ -136,7 +136,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.downloaduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pos = position;
+                pos = holder.getAdapterPosition();
                 checkpermission();
             }
         });
