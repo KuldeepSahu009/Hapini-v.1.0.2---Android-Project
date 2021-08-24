@@ -214,6 +214,10 @@
         <action
             android:id="@+id/action_alltrackusersfragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_trackuserscardviewfragment_to_taskListFragment2"
+            app:destination="@id/taskListFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/adduserdata"
