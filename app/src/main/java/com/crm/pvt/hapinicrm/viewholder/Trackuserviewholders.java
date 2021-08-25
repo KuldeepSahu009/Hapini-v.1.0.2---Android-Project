@@ -5,16 +5,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.crm.pvt.hapinicrm.R;
 
 public class Trackuserviewholders extends RecyclerView.ViewHolder {
     public TextView name, email, phone, whatsappno, passcode, password, state , city , location , addedBy;
-    public ImageView profileimg, delete , activeStatusUser;
+    public ImageView profileimg, delete , activeStatusUser,downloaduser,attendance,calluser;
+    public CardView cardView;
 
     public Trackuserviewholders(@NonNull View itemView) {
         super(itemView);
+        cardView = itemView.findViewById(R.id.cvUser);
         name = itemView.findViewById(R.id.tvCustomerName);
         email = itemView.findViewById(R.id.trackuseremailid);
         phone = itemView.findViewById(R.id.trackuserphoneno);
@@ -28,6 +31,12 @@ public class Trackuserviewholders extends RecyclerView.ViewHolder {
         profileimg = itemView.findViewById(R.id.trackuserprofilepic);
         delete = itemView.findViewById(R.id.trackuserdeleteprofile);
         activeStatusUser = itemView.findViewById(R.id.trackUserStatus);
+        downloaduser=itemView.findViewById(R.id.trackuserdownload);
+        attendance=itemView.findViewById(R.id.trackuserattendance);
+        calluser=itemView.findViewById(R.id.trackusercall);
+
     }
 }
+
+
 

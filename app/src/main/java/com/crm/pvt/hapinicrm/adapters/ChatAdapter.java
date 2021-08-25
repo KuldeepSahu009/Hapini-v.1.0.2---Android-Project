@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.ChatsLayoutBinding;
 import com.crm.pvt.hapinicrm.model.Chat;
+import com.crm.pvt.hapinicrm.ui.CrmAdminFragment;
 
 import java.util.ArrayList;
 
@@ -37,9 +39,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         Chat chat = chats.get(position);
         String passcode = "";
 
-        if(currentUser != null) {
+        if(Splashscreen.spAdminsData != null) {
+            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null")) {
+                passcode = Splashscreen.spAdminsData.getString("passcode", "null");
+            }
+        }
+        else if(currentUser != null) {
             passcode = currentUser.getPasscode();
-        } else if(currentFranchise != null) {
+        }
+        else if(currentFranchise != null) {
             passcode = currentFranchise.getPasscode();
         }
 

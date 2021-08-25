@@ -65,7 +65,26 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot usersSnapshot: snapshot.getChildren()) {
                     TrackUserModel user = usersSnapshot.getValue(TrackUserModel.class);
+                    user.setName(user.getName()+" (User)");
                     users.add(user);
+                }
+                binding.pbFranchiseUserChat.setVisibility(View.INVISIBLE);
+                chatPreviewAdapter.setUsers(users);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("adminV2/CRM").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot usersSnapshot: snapshot.getChildren()) {
+                    TrackUserModel admin = usersSnapshot.getValue(TrackUserModel.class);
+                    admin.setName(admin.getName()+" (Admin)");
+                    users.add(admin);
                 }
                 binding.pbFranchiseUserChat.setVisibility(View.INVISIBLE);
                 chatPreviewAdapter.setUsers(users);
@@ -97,5 +116,24 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
                         .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
         super.onPause();
 
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Splashscreen.spAdminsData != null)
+            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                        .setValue("active");
     }
 }

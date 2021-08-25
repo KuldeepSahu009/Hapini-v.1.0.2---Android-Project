@@ -1,5 +1,7 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.TrackAdminAdapter;
 import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentAdminDataViewBinding;
@@ -105,84 +108,84 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
 
             }
         });
-            FirebaseDatabase.getInstance().getReference().addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+        FirebaseDatabase.getInstance().getReference().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
-                }
+            }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
-                }
+            }
 
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
-                    activeUserList.clear();
-                    if(datasnapshot.child("activeV2/admins").child(type).exists())
-                    {
-                        for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                            activeUserList.add(snapshot.getKey());
-
-                        }
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
+                activeUserList.clear();
+                if(datasnapshot.child("activeV2/admins").child(type).exists())
+                {
+                    for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                        activeUserList.add(snapshot.getKey());
 
                     }
-                    trackAdminAdapter = new TrackAdminAdapter(getContext(),adminList,activeUserList,AdminDataViewFragment.this);
-                    binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
-                    trackAdminAdapter.notifyDataSetChanged();
-                    Log.i("LOGGGG","hhhh");
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
                 }
+                trackAdminAdapter = new TrackAdminAdapter(getContext(),adminList,activeUserList,AdminDataViewFragment.this);
+                binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
+                trackAdminAdapter.notifyDataSetChanged();
+                Log.i("LOGGGG","hhhh");
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
-                }
-            });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
-            CrmAdminFragment.activeStatusReference.child("admins").child(type).addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+        CrmAdminFragment.activeStatusReference.child("admins").child(type).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot datasnapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
-                }
+            }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
-                }
+            }
 
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
-                    activeUserList.clear();
-                    if(datasnapshot.child("activeV2/admins").child(type).exists())
-                    {
-                        for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                            activeUserList.add(snapshot.getKey());
-
-                        }
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
+                activeUserList.clear();
+                if(datasnapshot.child("activeV2/admins").child(type).exists())
+                {
+                    for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                        activeUserList.add(snapshot.getKey());
 
                     }
-                    trackAdminAdapter = new TrackAdminAdapter(getContext(),adminList,activeUserList,AdminDataViewFragment.this);
-                    binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
-                    trackAdminAdapter.notifyDataSetChanged();
-                    Log.i("LOGGGG","hhhh");
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
                 }
+                trackAdminAdapter = new TrackAdminAdapter(getContext(),adminList,activeUserList,AdminDataViewFragment.this);
+                binding.trackAdminRecyclerView.setAdapter(trackAdminAdapter);
+                trackAdminAdapter.notifyDataSetChanged();
+                Log.i("LOGGGG","hhhh");
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
 
-                }
-            });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         binding.etSearchAdmin.setOnClickListener(new View.OnClickListener() {
@@ -327,24 +330,32 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     if (admin!=null){
-                    auth.signInWithEmailAndPassword(
-                            admin.getPasscode() + finalPostString,
-                            admin.getPassword()
-                    ).addOnCompleteListener(task -> {
-                        if(task.isSuccessful()) {
-                            auth.getCurrentUser().delete();
-                        }
-                        auth.signInWithEmailAndPassword(adminpasscode + "@masteradmin.com",adminpassword);
-                    });}
+                        auth.signInWithEmailAndPassword(
+                                admin.getPasscode() + finalPostString,
+                                admin.getPassword()
+                        ).addOnCompleteListener(task -> {
+                            if(task.isSuccessful()) {
+                                auth.getCurrentUser().delete();
+                            }
+                            auth.signInWithEmailAndPassword(adminpasscode + "@masteradmin.com",adminpassword);
+                        });}
 
                     if (passcode.equals(admin.getPasscode())) {
                         DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype)
                                 .child(key);
+                        if(currentFranchise != null) {
+                            DatabaseReference franchiseDbRef = FirebaseDatabase
+                                    .getInstance()
+                                    .getReference("crm_by_franchise")
+                                    .child(currentFranchise.getPasscode());
+
+                            franchiseDbRef.child(admin.getPasscode()).removeValue();
+                        }
                         reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-
-                                Toast.makeText(requireContext(), "admin deleted", Toast.LENGTH_LONG).show();
+                                // TODO This toast too keeps crashing
+                                //   Toast.makeText(requireActivity().getParent(), "admin deleted", Toast.LENGTH_LONG).show();
                                 type = usertype;
                                 adminList.clear();
                                 switch (usertype) {
@@ -373,6 +384,46 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
             }
         });
 
+    }
+
+    @Override
+    public void onStart() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+        super.onStart();
+
+    }
+
+    @Override
+    public void onPause() {
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+        super.onPause();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Splashscreen.spAdminsData != null)
+            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("franchises")
+                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                        .setValue("active");
     }
 
 }

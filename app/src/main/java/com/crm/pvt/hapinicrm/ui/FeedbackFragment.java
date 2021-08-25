@@ -1,37 +1,32 @@
 package com.crm.pvt.hapinicrm.ui;
 
-import static com.crm.pvt.hapinicrm.ui.UserLoginFragment.currentUserPasscode;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentFeedbackBinding;
-import com.crm.pvt.hapinicrm.model.FeedbackModel;
 import com.crm.pvt.hapinicrm.model.TaskModel;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
 public class FeedbackFragment extends Fragment {
 
     private FragmentFeedbackBinding binding;
-    private DatabaseReference feedbackDatabaseReference,taskDatabase;
-    String name,number,city,task;
-    private TaskModel taskModel;
+    private DatabaseReference taskDatabaseReference;
+    String taskAssignedTo,name,number,city,task;
+    String []taskProgressType = {"","Connected and Interested","Connected and Not Interested","Not Connected"};
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -43,18 +38,15 @@ public class FeedbackFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initializeSpinner();
 
-        feedbackDatabaseReference = FirebaseDatabase.getInstance()
-                .getReference("Feedback_V2")
-                .child("CRM_User")
-                .child(currentUserPasscode);
+        taskDatabaseReference = FirebaseDatabase.getInstance()
+                .getReference("Task_Assignment_V2")
+                .child("CRM_User");
 
-        taskDatabase = FirebaseDatabase.getInstance().
-                getReference("Task_Assignment_V2").
-                child("CRM_User").child(currentUserPasscode);
+        TaskModel taskModel = FeedbackFragmentArgs.fromBundle(getArguments()).getTaskModel();
 
-        taskModel = FeedbackFragmentArgs.fromBundle(getArguments()).getTaskModel();
-
+        taskAssignedTo = taskModel.getTaskAssignedTo();
         name = taskModel.getCustomerName();
         number = taskModel.getCustomerNumber();
         city = taskModel.getCustomerCity();
@@ -67,53 +59,42 @@ public class FeedbackFragment extends Fragment {
 
         binding.btnSubmitFeedback.setOnClickListener(v -> {
             binding.pbSubmitFeedback.setVisibility(View.VISIBLE);
-            String feedback = Objects.requireNonNull(binding.etFeedback.getText()).toString();
-            if(feedback.isEmpty()) {
-                Snackbar.make(v,"Enter feedback first",Snackbar.LENGTH_SHORT).show();
+            int pos = binding.spTaskProgress.getSelectedItemPosition();
+            if(pos == 0 ) {
+                Snackbar.make(v,"Select Task Progress",Snackbar.LENGTH_SHORT).show();
                 binding.pbSubmitFeedback.setVisibility(View.INVISIBLE);
             } else {
-                submitFeedback(feedback);
+                String taskProgress = taskProgressType[pos];
+                String feedback = Objects.requireNonNull(binding.etFeedback.getText()).toString();
+                if(feedback.isEmpty()) {
+                    Snackbar.make(v,"Enter feedback first",Snackbar.LENGTH_SHORT).show();
+                    binding.pbSubmitFeedback.setVisibility(View.INVISIBLE);
+                } else {
+                    submitFeedback(feedback,taskProgress);
+                }
             }
         });
     }
 
-    private void submitFeedback(String feedback) {
+    private void initializeSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(),
+                R.array.Customer_Feedback, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spTaskProgress.setAdapter(adapter);
+    }
 
-        FeedbackModel feedbackModel = new FeedbackModel(name, number, city, task, feedback);
+    private void submitFeedback(String feedback,String taskProgress) {
 
-        feedbackDatabaseReference.child(number).setValue(feedbackModel).addOnCompleteListener(task -> {
+        TaskModel feedbackModel = new TaskModel(taskAssignedTo,name, number, city, task, taskProgress,feedback);
+
+        taskDatabaseReference.child(taskAssignedTo).child(number).setValue(feedbackModel).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 binding.pbSubmitFeedback.setVisibility(View.INVISIBLE);
                 Snackbar.make(requireView(),"Feedback submission completed",Snackbar.LENGTH_SHORT).show();
-                removeTaskFromTheList();
                 Navigation.findNavController(binding.getRoot()).navigateUp();
             } else {
                 binding.pbSubmitFeedback.setVisibility(View.INVISIBLE);
                 Snackbar.make(requireView(),"Something went wrong. Please try again.",Snackbar.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void removeTaskFromTheList() {
-        taskDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.i("FeedbackFragment","Searching task for removal...");
-                for(DataSnapshot taskSnapshot : snapshot.getChildren()) {
-                    TaskModel temp = Objects.requireNonNull(taskSnapshot.getValue(TaskModel.class));
-                    if(temp.getCustomerNumber().equals(taskModel.getCustomerNumber())
-                        && temp.getCustomerName().equals(taskModel.getCustomerName())) {
-                        Log.i("FeedbackFragment","taskModel found");
-                        taskSnapshot.getRef().removeValue();
-                        break;
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -137,5 +118,24 @@ public class FeedbackFragment extends Fragment {
                         .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
         super.onPause();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
     }
 }

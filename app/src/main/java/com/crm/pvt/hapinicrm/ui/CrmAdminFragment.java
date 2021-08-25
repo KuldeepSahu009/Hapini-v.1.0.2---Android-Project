@@ -14,33 +14,56 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Space;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmAdminBinding;
+import com.crm.pvt.hapinicrm.model.Admin;
+import com.crm.pvt.hapinicrm.model.Franchise;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class CrmAdminFragment extends Fragment {
     private FragmentCrmAdminBinding binding;
     private Boolean login = true;
     private FirebaseAuth auth;
+    public static Admin currentCRMAdmin;
     public static  DatabaseReference activeStatusReference = FirebaseDatabase.getInstance().getReference("activeV2");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding=FragmentCrmAdminBinding.inflate(inflater, container, false);
         Bundle bundle = getArguments();
         String attendancepasscode = bundle.getString("crmadminpasscode","");
-
         Bundle bundle1=new Bundle();
         bundle.putString("todialog",attendancepasscode);
 
+        DatabaseReference currentCRMAdminRef = FirebaseDatabase.getInstance().getReference("adminV2").child("CRM");
+        currentCRMAdminRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot usersSnapshot : snapshot.getChildren()) {
+                    if(Splashscreen.spAdminsData.getString("passcode","null").equals(usersSnapshot.getKey()))
+                       currentCRMAdmin = usersSnapshot.getValue(Admin.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                currentCRMAdmin = null;
+            }
+        });
         if (login()) {
             login = false;
-            Attendancedialogue attendancedialogue = new Attendancedialogue();
+            Attendancedialogue attendancedialogue = new Attendancedialogue(getContext());
             attendancedialogue.setArguments(bundle1);
             attendancedialogue.show(getFragmentManager(), "attendance dialogue");
+            Attendancedialogue.type="crmadmin";
         }
 
         return binding.getRoot();
@@ -50,6 +73,9 @@ public class CrmAdminFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         auth = FirebaseAuth.getInstance();
+
+        binding.cvChatCrmAdmin.setOnClickListener( v -> Navigation.findNavController(v)
+        .navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmAdminChatFragment()));
 
         binding.crmadminAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +102,7 @@ public class CrmAdminFragment extends Fragment {
             }
         });
         //
-        binding.ivBackFromCrmAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigateUp();
-            }
-        });
+
 
         binding.cvVerifyUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +118,7 @@ public class CrmAdminFragment extends Fragment {
             builder.setCancelable(true);
             builder.setPositiveButton("Yes", (dialog, which) -> {
                 auth.signOut();
+                Splashscreen.spAdminsData.edit().clear().commit();
                 Navigation.findNavController(v).navigateUp();
             });
             builder.setNegativeButton("No", (dialog, which) -> {
@@ -108,7 +130,12 @@ public class CrmAdminFragment extends Fragment {
 
         binding.cvGiveTask.setOnClickListener(v -> Navigation.findNavController(v).
                 navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmAdminGiveTaskFragment()));
-
+binding.sendcsvfiletouser.setOnClickListener(v -> {
+    Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmadmincsvfilesend());
+});
+      binding.recievecsvfileadminfromfranchise.setOnClickListener(v-> {
+          Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToRecievecsvfileadmin());
+      });
 
     }
 
@@ -136,5 +163,24 @@ public class CrmAdminFragment extends Fragment {
                         .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
         super.onPause();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
+                        .setValue("active");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
     }
 }

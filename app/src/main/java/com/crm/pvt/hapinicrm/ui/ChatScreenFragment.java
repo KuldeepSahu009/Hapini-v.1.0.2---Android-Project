@@ -17,6 +17,7 @@ import com.crm.pvt.hapinicrm.adapters.ChatAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentChatScreenBinding;
 import com.crm.pvt.hapinicrm.model.Chat;
 import com.crm.pvt.hapinicrm.model.Franchise;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +41,7 @@ public class ChatScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Franchise franchise = ChatScreenFragmentArgs.fromBundle(getArguments()).getFranchise();
+        TrackUserModel franchise = ChatScreenFragmentArgs.fromBundle(getArguments()).getFranchise();
         chatReference = FirebaseDatabase
                 .getInstance()
                 .getReference("Requests")
@@ -97,6 +98,16 @@ public class ChatScreenFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+    }
+
+    @Override
     public void onPause() {
         if(Splashscreen.spUsersData != null)
             if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
@@ -110,6 +121,9 @@ public class ChatScreenFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Splashscreen.spUsersData.edit().clear().commit();
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
     }
 }

@@ -20,16 +20,13 @@
     <string-array name="select_admin_type">
         <item>Select Admin Type</item>
         <item>CRM Admin</item>
-        <item>Data Entry Admin</item>
-        <item>Video Editor Admin</item>
         <item>Master Admin</item>
         <item>Franchise Admin</item>
     </string-array>
+
     <string-array name="select_user_type">
         <item>Select User Type</item>
         <item>CRM User</item>
-        <item>Data Entry User</item>
-        <item>Video Editor User</item>
     </string-array>
 
     <string-array name="india_states">
@@ -72,6 +69,14 @@
         <item>West Bengal</item>
     </string-array>
 
+    <string-array name="Customer_Feedback">
+        <item>Select</item>
+        <item>Connected and Interested</item>
+        <item>Connected and Not Interested</item>
+        <item>Not Connected</item>
+
+    </string-array>
+
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="add_crm_admin">ADD CRM ADMIN</string>
@@ -90,4 +95,5 @@
     <string name="submit">submit</string>
     <string name="select_image">Select Image</string>
     <string name="coming_soon">Coming Soon !!!</string>
+
 </resources>

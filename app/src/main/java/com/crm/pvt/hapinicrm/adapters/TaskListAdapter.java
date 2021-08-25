@@ -39,6 +39,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         holder.binding.tvCustomerNumber.setText(taskModel.getCustomerNumber());
         holder.binding.tvCustomerCity.setText(taskModel.getCustomerCity());
         holder.binding.tvTask.setText(taskModel.getTask());
+        holder.binding.tvTaskProgress.setText(taskModel.getTaskProgress());
         holder.binding.ivCall.setOnClickListener(v -> taskCallback.callToCustomer(taskModel));
 
     }

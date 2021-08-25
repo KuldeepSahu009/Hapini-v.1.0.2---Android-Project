@@ -25,9 +25,11 @@ import android.widget.Toast;
 import com.bumptech.glide.load.data.DataFetcher;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.adapters.TrackAdminAdapter;
+import com.crm.pvt.hapinicrm.adapters.TrackFranchiseAdapter;
 import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentShorteddataadminBinding;
 import com.crm.pvt.hapinicrm.model.Admin;
+import com.crm.pvt.hapinicrm.model.Franchise;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,6 +62,7 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
     TrackUserAdapter trackUserAdapter;
     List<TrackUserModel> trackUserModelList;
     ArrayList<Admin> adminList;
+    ArrayList<Franchise> franchiseList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +72,7 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
 
         search=fragmentShorteddataadminBinding.searchadmins;
         back=fragmentShorteddataadminBinding.shoretddataback;
+        franchiseList=new ArrayList<>();
         initializeall();
         SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
       adminpasscode=getshared.getString("passcode","no data");
@@ -125,8 +129,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
     }
 
     private void getsearchdata(String s, String usertypes) {
-        Log.e(TAG, "getsearchdata: "+usertypes );
-        Log.e(TAG, "getsearchdata: "+type );
+       // Log.e(TAG, "getsearchdata: "+usertypes );
+        //Log.e(TAG, "getsearchdata: "+type );
         switch (usertypes) {
             case "CRM":
                // Log.e(TAG, "getsearchdata: "+ s+usertypes);
@@ -155,6 +159,12 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                 getcrmusershorteddata(s,"data");
                 recyclerView.setAdapter(trackUserAdapter);
                 break;
+            case "franchise":
+                Log.e(TAG, "getsearchdata: "+s.toString()+usertypes );
+                getFranchiseSort(s);
+
+
+
 
         }
 
@@ -389,6 +399,75 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                                     Toast.makeText(getContext(), "admin deleted", Toast.LENGTH_LONG).show();
 
 
+
+                                }
+                            });
+
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
+    };
+    private void getFranchiseSort(String s) {
+        Query query = FirebaseDatabase.getInstance().getReference("franchiseV2").orderByChild(shortvariable)
+                .startAt(s).endAt(s + "\uf8ff");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                franchiseList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                    Franchise franchiseObject;
+                    franchiseObject = new Franchise(dataSnapshot.child("name").getValue().toString(),
+                            dataSnapshot.child("email").getValue().toString(),
+                            dataSnapshot.child("phoneno").getValue().toString(),
+                            dataSnapshot.child("whatsappno").getValue().toString(),
+                            dataSnapshot.child("passcode").getValue().toString(),
+                            dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
+                            dataSnapshot.child("location").getValue().toString(),
+                            dataSnapshot.child("imgurl").getValue().toString());
+                    franchiseList.add(franchiseObject);
+                }
+                TrackFranchiseAdapter trackFranchiseAdapter=new TrackFranchiseAdapter(getContext(),franchiseList,dataCallBackTackFranchise);
+                recyclerView.setAdapter(trackFranchiseAdapter);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    DataCallBackTackFranchise dataCallBackTackFranchise=new DataCallBackTackFranchise() {
+        @Override
+        public void remove(Franchise franchise) {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("franchiseV2");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String key = dataSnapshot.getKey();
+
+                        if (key.equals(franchise.getPasscode())) {
+                            DatabaseReference reference1 = reference.child(key);
+                            reference1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                    Toast.makeText(getContext(), "franchise deleted", Toast.LENGTH_LONG).show();
+                                    franchiseList.clear();
 
                                 }
                             });

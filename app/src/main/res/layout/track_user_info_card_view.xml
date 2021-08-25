@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_toStartOf="@+id/trackuserprofilepic"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
                 android:text="Satyam Kumar"
@@ -52,6 +54,7 @@
                 android:id="@+id/trackuseremailid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/trackuserprofilepic"
                 android:layout_below="@+id/tvCustomerName"
                 android:layout_toEndOf="@+id/backemail"
                 android:text="abc@gamil.com"
@@ -255,6 +258,27 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_delete_24" />
+            <ImageView
+                android:id="@+id/trackusercall"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="120dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_call_24" />
+
+            <ImageView
+                android:id="@+id/trackuserattendance"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="150dp"
+                android:layout_marginEnd="90dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:src="@drawable/ic_baseline_calendar_today_24" />
 
             <ImageView
                 android:id="@+id/trackuserdownload"

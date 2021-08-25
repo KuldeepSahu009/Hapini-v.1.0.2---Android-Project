@@ -54,9 +54,18 @@ public class TaskListFragment extends Fragment implements TaskCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        String passcode;
+
+        String userPasscode = getArguments().getString("userPasscode");
+        if(userPasscode != null && !userPasscode.isEmpty()) {
+            passcode = userPasscode;
+        }else {
+            passcode = currentUserPasscode;
+        }
         taskDatabase = FirebaseDatabase.getInstance().
                 getReference("Task_Assignment_V2").
-                child("CRM_User").child(currentUserPasscode);
+                child("CRM_User").child(passcode);
         initializeRecyclerView();
 
     }
@@ -138,6 +147,21 @@ public class TaskListFragment extends Fragment implements TaskCallback {
 
     }
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null"))
+                        .setValue("active");
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spUsersData != null)
+            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("users").child("crm")
+                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
+    }
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.crm.pvt.hapinicrm.databinding.ChatPreviewBinding;
 import com.crm.pvt.hapinicrm.model.Franchise;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.util.ChatPreviewClickCallback;
 import com.crm.pvt.hapinicrm.util.FranchiseChatPreviewClickCallback;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 public class ChatPreviewAdapter extends RecyclerView.Adapter<ChatPreviewAdapter.ViewHolder> {
 
-    ArrayList<Franchise> franchises;
+    ArrayList<TrackUserModel> franchises;
     ChatPreviewClickCallback callback;
 
     public ChatPreviewAdapter (ChatPreviewClickCallback callback) {
@@ -35,7 +36,7 @@ public class ChatPreviewAdapter extends RecyclerView.Adapter<ChatPreviewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Franchise franchise = franchises.get(position);
+        TrackUserModel franchise = franchises.get(position);
         holder.binding.tvName.setText(franchise.getName());
         holder.binding.cvChatPreview.setOnClickListener(v -> callback.navigateToChatsScreen(franchise));
     }
@@ -48,7 +49,7 @@ public class ChatPreviewAdapter extends RecyclerView.Adapter<ChatPreviewAdapter.
         return 0;
     }
 
-    public void setFranchises(ArrayList<Franchise> franchises) {
+    public void setFranchises(ArrayList<TrackUserModel> franchises) {
         this.franchises = franchises;
         notifyDataSetChanged();
     }
