@@ -15,6 +15,7 @@ import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.ChatPreviewAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmUserChatBinding;
 import com.crm.pvt.hapinicrm.model.Franchise;
+import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.util.ChatPreviewClickCallback;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,7 +48,7 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
     }
 
     @Override
-    public void navigateToChatsScreen(Franchise franchise) {
+    public void navigateToChatsScreen(TrackUserModel franchise) {
         Navigation.findNavController(requireView())
                 .navigate(CrmUserChatFragmentDirections
                         .actionCrmUserChatFragmentToChatScreenFragment(franchise));
@@ -60,16 +61,35 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
     }
 
     private void getAllFranchises() {
-        ArrayList<Franchise> franchises = new ArrayList<>();
+        ArrayList<TrackUserModel> franchises = new ArrayList<>();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.i(TAG,snapshot.getChildren().toString());
                 for (DataSnapshot franchiseSnapshot : snapshot.getChildren()) {
-                    Franchise franchise = franchiseSnapshot.getValue(Franchise.class);
+                    TrackUserModel franchise = franchiseSnapshot.getValue(TrackUserModel.class);
                     assert franchise != null;
-                    Log.i(TAG,franchise.getName());
+                    franchise.setName(franchise.getName()+" (Franchise)");
                     franchises.add(franchise);
+                }
+                binding.pbCrmUserChat.setVisibility(View.INVISIBLE);
+                adapter.setFranchises(franchises);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference("adminV2/CRM").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot franchiseSnapshot : snapshot.getChildren()) {
+                    TrackUserModel admin = franchiseSnapshot.getValue(TrackUserModel.class);
+                    assert admin != null;
+                    admin.setName(admin.getName()+" (Admin)");
+                    franchises.add(admin);
                 }
                 binding.pbCrmUserChat.setVisibility(View.INVISIBLE);
                 adapter.setFranchises(franchises);

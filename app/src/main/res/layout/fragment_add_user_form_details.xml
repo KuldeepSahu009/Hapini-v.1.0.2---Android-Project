@@ -73,7 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:weightSum="8">
+            android:weightSum="8"
+            android:gravity="center">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputName"
@@ -144,8 +145,26 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#7D7D83"
+                app:cardCornerRadius="4dp"
+                android:layout_marginTop="8dp">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputCity"
+                android:id="@+id/textInputCityDetail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -154,7 +173,7 @@
                 android:hint="City">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCity"
+                    android:id="@+id/etNameCity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text" />
@@ -211,6 +230,23 @@
                     android:layout_height="match_parent"
                     android:inputType="number"
                     android:maxLength="6" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputYourName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:hint="Your Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etYourName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

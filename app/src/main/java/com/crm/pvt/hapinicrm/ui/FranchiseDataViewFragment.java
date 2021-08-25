@@ -192,6 +192,8 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     franchiseList.add(franchiseObject);
@@ -265,6 +267,8 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     franchiseList.add(franchiseObject);

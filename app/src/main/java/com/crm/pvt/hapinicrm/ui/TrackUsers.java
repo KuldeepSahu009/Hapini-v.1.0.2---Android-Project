@@ -1,6 +1,6 @@
 package com.crm.pvt.hapinicrm.ui;
 
-import android.content.Context;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,15 +9,23 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.text.Editable;
-import android.text.TextWatcher;
+import static com.crm.pvt.hapinicrm.ui.StartFragment.selectedAdmin;
+
+import android.os.Bundle;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.Splashscreen;
@@ -25,10 +33,9 @@ import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentTrackUsersBinding;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.model.User;
+
 import com.crm.pvt.hapinicrm.util.UserClickCallback;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -82,7 +89,7 @@ public class TrackUsers extends Fragment implements UserClickCallback {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.showshorteduserdatafragment);
-                Shorteddataadmin.type=userType;
+                Shorteddataadmin.type = userType;
             }
         });
 
@@ -102,21 +109,24 @@ public class TrackUsers extends Fragment implements UserClickCallback {
         trackUserModelList = new ArrayList<>();
         activeUserList = new ArrayList<>();
         binding.rvTrackUser.setLayoutManager(new LinearLayoutManager(getContext()));
-        trackUserAdapter = new TrackUserAdapter(getContext() , trackUserModelList , activeUserList,userClickCallback);
+        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
         binding.rvTrackUser.setAdapter(trackUserAdapter);
 
         switch (data) {
             case "crmUser":
+                Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 TrackUserAdapter.usertypes="crm";
                 getCrmData();
                 break;
             case "videoUser":
+                Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 TrackUserAdapter.usertypes="video";
                 getVideoEditorData();
                 break;
             case "dataUser":
+                Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 TrackUserAdapter.usertypes="data";
                 getDataEntryOperatorData();
@@ -136,18 +146,17 @@ public class TrackUsers extends Fragment implements UserClickCallback {
             @Override
             public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
                 activeUserList.clear();
-                if(datasnapshot.child("activeV2/users").child(userType).exists())
-                {
+                if (datasnapshot.child("activeV2/users").child(userType).exists()) {
                     for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                         activeUserList.add(snapshot.getKey());
 
                     }
 
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
-                Log.i("LOGGGG","hhhh");
+                Log.i("LOGGGG", "hhhh");
             }
 
             @Override
@@ -176,18 +185,17 @@ public class TrackUsers extends Fragment implements UserClickCallback {
             @Override
             public void onChildRemoved(@NonNull DataSnapshot datasnapshot) {
                 activeUserList.clear();
-                if(datasnapshot.child("activeV2/users").child(userType).exists())
-                {
+                if (datasnapshot.child("activeV2/users").child(userType).exists()) {
                     for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                         activeUserList.add(snapshot.getKey());
 
                     }
 
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
-                Log.i("LOGGGG","hhhh");
+                Log.i("LOGGGG", "hhhh");
             }
 
             @Override
@@ -203,89 +211,81 @@ public class TrackUsers extends Fragment implements UserClickCallback {
     }
 
     private void getCrmData() {
-         crm = FirebaseDatabase.getInstance().getReference("usersv2");
-        Query query=crm.child("crm");
-        ///
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                    trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()), (snapshot.child("email").getValue().toString()),
-                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("passcode").getValue().toString()),
-                            (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
 
+        crm = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
+        crm.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    TrackUserModel user = userSnapshot.getValue(TrackUserModel.class);
+                    trackUserModelList.add(user);
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
             }
 
-                @Override
-                public void onCancelled (@NonNull DatabaseError error){
-
-                }
-
-        });
-                CrmAdminFragment.activeStatusReference.child("users").child(userType).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                            activeUserList.add(snapshot.getKey());
-
-                        }
-                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
-                        binding.rvTrackUser.setAdapter(trackUserAdapter);
-                        trackUserAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
+
+        CrmAdminFragment.activeStatusReference.child("users").child(userType).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                    activeUserList.add(snapshot.getKey());
+
+                }
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
+                binding.rvTrackUser.setAdapter(trackUserAdapter);
+                trackUserAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
 
     private void getDataEntryOperatorData() {
-        de = FirebaseDatabase.getInstance().getReference("usersv2");
-        Query query=de.child("data");
-        ///
-        query.addValueEventListener(new ValueEventListener() {
+        de = FirebaseDatabase.getInstance().getReference("usersv2").child("data");
+
+        de.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                    trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()), (snapshot.child("email").getValue().toString()),
-                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("passcode").getValue().toString()),
-                            (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
-
+                    TrackUserModel user = snapshot.getValue(TrackUserModel.class);
+                    trackUserModelList.add(user);
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
             }
-                @Override
-                public void onCancelled (@NonNull DatabaseError error){
 
-                }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
 
 
         });
 
-                CrmAdminFragment.activeStatusReference.child("users").child(userType).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                            activeUserList.add(snapshot.getKey());
+        CrmAdminFragment.activeStatusReference.child("users").child(userType).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                    activeUserList.add(snapshot.getKey());
 
-                        }
-                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
-                        binding.rvTrackUser.setAdapter(trackUserAdapter);
-                        trackUserAdapter.notifyDataSetChanged();
-                    }
-
-
+                }
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
+                binding.rvTrackUser.setAdapter(trackUserAdapter);
+                trackUserAdapter.notifyDataSetChanged();
+            }
 
 
             @Override
@@ -295,45 +295,50 @@ public class TrackUsers extends Fragment implements UserClickCallback {
         });
 
 
-
     }
 
-    private void getVideoEditorData() {
+    private void getVideoEditorData(){
+        DatabaseReference ve = FirebaseDatabase.getInstance().getReference("usersv2");
+        Query query = ve.child("video");
         ve = FirebaseDatabase.getInstance().getReference("usersv2");
-        Query query=ve.child("video");
+
         ///
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                    trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()), (snapshot.child("email").getValue().toString()),
-                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("passcode").getValue().toString()),
-                            (snapshot.child("password").getValue().toString()), (snapshot.child("city").getValue().toString()), (snapshot.child("").getValue().toString())));
 
+                    trackUserModelList.add(new TrackUserModel((snapshot.child("name").getValue().toString()), (snapshot.child("email").getValue().toString()),
+                            (snapshot.child("mobileNo").getValue().toString()), (snapshot.child("whatsAppNo").getValue().toString()), (snapshot.child("state").getValue().toString()),
+                            (snapshot.child("city").getValue().toString()), (snapshot.child("locality").getValue().toString()), (snapshot.child("passcode").getValue().toString()),
+                            (snapshot.child("password").getValue().toString()), (snapshot.child("addedBy").getValue().toString()), (snapshot.child("").getValue().toString())));
+
+
+                    TrackUserModel user = snapshot.getValue(TrackUserModel.class);
+                    trackUserModelList.add(user);
                 }
-                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();
             }
-                @Override
-                public void onCancelled (@NonNull DatabaseError error){
 
-                }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
 
         });
-                CrmAdminFragment.activeStatusReference.child("users").child(userType).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                            activeUserList.add(snapshot.getKey());
+        CrmAdminFragment.activeStatusReference.child("users").child(userType).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                    activeUserList.add(snapshot.getKey());
 
-                        }
-                        trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList,userClickCallback);
-                        binding.rvTrackUser.setAdapter(trackUserAdapter);
-                        trackUserAdapter.notifyDataSetChanged();
-                    }
-
-
+                }
+                trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
+                binding.rvTrackUser.setAdapter(trackUserAdapter);
+                trackUserAdapter.notifyDataSetChanged();
+            }
 
 
             @Override
@@ -343,16 +348,13 @@ public class TrackUsers extends Fragment implements UserClickCallback {
         });
 
 
-
     }
 
-    @Override
-    public void onStart() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null")) {
+    public void onStart () {
+        if (Splashscreen.spAdminsData != null)
+            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null")) {
                 String type;
-                switch (Splashscreen.spAdminsData.getString("type","null"))
-                {
+                switch (Splashscreen.spAdminsData.getString("type", "null")) {
                     case "crm":
                         type = "CRM";
                         CrmAdminFragment.activeStatusReference.child("admins").child(type)
@@ -381,13 +383,11 @@ public class TrackUsers extends Fragment implements UserClickCallback {
 
     }
 
-    @Override
     public void onPause() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null")) {
+        if (Splashscreen.spAdminsData != null)
+            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null")) {
                 String type;
-                switch (Splashscreen.spAdminsData.getString("type","null"))
-                {
+                switch (Splashscreen.spAdminsData.getString("type", "null")) {
                     case "crm":
                         type = "CRM";
                         CrmAdminFragment.activeStatusReference.child("admins").child(type)
@@ -416,9 +416,77 @@ public class TrackUsers extends Fragment implements UserClickCallback {
     }
 
     @Override
-    public void navigateToTaskList(String userPasscode) {
+    public void onResume () {
+        super.onResume();
+        if (Splashscreen.spAdminsData != null)
+            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null")) {
+                String type;
+                switch (Splashscreen.spAdminsData.getString("type", "null")) {
+                    case "crm":
+                        type = "CRM";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .setValue("active");
+                        break;
+                    case "data":
+                        type = "DATA_ENTRY";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .setValue("active");
+                        break;
+                    case "video":
+                        type = "VIDEO_EDITOR";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .setValue("active");
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+    }
+
+    @Override
+    public void onDestroy () {
+        if (Splashscreen.spAdminsData != null)
+            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null")) {
+                String type;
+                switch (Splashscreen.spAdminsData.getString("type", "null")) {
+                    case "crm":
+                        type = "CRM";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .removeValue();
+                        break;
+                    case "data":
+                        type = "DATA_ENTRY";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .removeValue();
+                        break;
+                    case "video":
+                        type = "VIDEO_EDITOR";
+                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
+                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                                .removeValue();
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        super.onDestroy();
+    }
+
+    @Override
+    public void navigateToTaskList (String userPasscode){
         Bundle bundle = new Bundle();
-        bundle.putString("userPasscode",userPasscode);
-        Navigation.findNavController(requireView()).navigate(R.id.action_alltrackusersfragment_to_taskListFragment,bundle);
+        bundle.putString("userPasscode", userPasscode);
+        if (selectedAdmin == 1) {
+            Navigation.findNavController(requireView()).navigate(R.id.action_alltrackusersfragment_to_taskListFragment, bundle);
+        } else if (selectedAdmin == 2) {
+            Navigation.findNavController(requireView()).navigate(R.id.action_trackuserscardviewfragment_to_taskListFragment2, bundle);
+        }
     }
 }

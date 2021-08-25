@@ -135,6 +135,9 @@
             android:id="@+id/action_crmAdminFragment_to_crmadmincsvfilesend"
             app:destination="@id/crmadmincsvfilesend" />
         <action
+            android:id="@+id/action_crmAdminFragment_to_crmAdminChatFragment"
+            app:destination="@id/crmAdminChatFragment" />
+        <action
             android:id="@+id/action_crmAdminFragment_to_recievecsvfileadmin"
             app:destination="@id/recievecsvfileadmin" />
     </fragment>
@@ -211,6 +214,10 @@
         <action
             android:id="@+id/action_alltrackusersfragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_trackuserscardviewfragment_to_taskListFragment2"
+            app:destination="@id/taskListFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/adduserdata"
@@ -620,13 +627,13 @@
         tools:layout="@layout/fragment_chat_screen" >
         <argument
             android:name="franchise"
-            app:argType="com.crm.pvt.hapinicrm.model.Franchise" />
+            app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
     </fragment>
     <fragment
         android:id="@+id/franchiseUserChatFragment"
         android:name="com.crm.pvt.hapinicrm.ui.FranchiseUserChatFragment"
         android:label="fragment_franchise_user_chat"
-        tools:layout="@layout/fragment_franchise_user_chat" >
+        tools:layout="@layout/fragment_franchise_user_chat">
         <action
             android:id="@+id/action_franchiseUserChatFragment_to_franchiseChatScreenFragment"
             app:destination="@id/franchiseChatScreenFragment" />
@@ -635,7 +642,7 @@
         android:id="@+id/franchiseChatScreenFragment"
         android:name="com.crm.pvt.hapinicrm.ui.FranchiseChatScreenFragment"
         android:label="fragment_franchise_chat_screen"
-        tools:layout="@layout/fragment_franchise_chat_screen" >
+        tools:layout="@layout/fragment_franchise_chat_screen">
         <argument
             android:name="user"
             app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
@@ -684,6 +691,24 @@
         android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
         android:label="fragment_crmadmincsvfilesend"
         tools:layout="@layout/fragment_crmadmincsvfilesend" />
+    <fragment
+        android:id="@+id/crmAdminChatFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.CrmAdminChatFragment"
+        android:label="fragment_crm_admin_chat"
+        tools:layout="@layout/fragment_crm_admin_chat" >
+        <action
+            android:id="@+id/action_crmAdminChatFragment_to_crmAdminChatScreenFragment"
+            app:destination="@id/crmAdminChatScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crmAdminChatScreenFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.CrmAdminChatScreenFragment"
+        android:label="fragment_crm_admin_chat_screen"
+        tools:layout="@layout/fragment_crm_admin_chat_screen">
+    <argument
+        android:name="user"
+        app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
+    </fragment>
     <fragment
         android:id="@+id/recievecsvfileadmin"
         android:name="com.crm.pvt.hapinicrm.ui.recievecsvfileadmin"

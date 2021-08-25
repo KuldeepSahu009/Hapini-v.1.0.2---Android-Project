@@ -1,6 +1,7 @@
 package com.crm.pvt.hapinicrm.adapters;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -85,7 +86,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TrackFranchiseAdapter.TrackFranchiseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TrackFranchiseAdapter.TrackFranchiseViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Franchise franchise=franchises.get(position);
         holder.activeStatusFranchise.setImageResource(R.drawable.red_dot);
         holder.name.setText(franchise.getName());
@@ -94,6 +95,8 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
         holder.whatsappno.setText(franchise.getWhatsappno());
         holder.passcode.setText(franchise.getPasscode());
         holder.password.setText(franchise.getPassword());
+        holder.state.setText(franchise.getState());
+        holder.city.setText(franchise.getCity());
         holder.location.setText(franchise.getLocation());
 
 
@@ -172,7 +175,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
     static class TrackFranchiseViewHolder extends RecyclerView.ViewHolder{
         ImageView profilepic,deleteAdmin , activeStatusFranchise,download, calladmin,attendance;
 
-        TextView name, email, mobile, location,whatsappno,password,passcode;
+        TextView name, email, mobile, location,whatsappno,password,passcode , state , city;
 
         public TrackFranchiseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -180,6 +183,8 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
             name = itemView.findViewById(R.id.trackadminname);
             email = itemView.findViewById(R.id.trackadminemailid);
             mobile = itemView.findViewById(R.id.trackadminphoneno);
+            state = itemView.findViewById(R.id.trackadminstate);
+            city = itemView.findViewById(R.id.trackadmincity);
             location = itemView.findViewById(R.id.trackadminlocation);
             whatsappno = itemView.findViewById(R.id.trackadminwhatsappno);
             password = itemView.findViewById(R.id.trackadminpassword);
