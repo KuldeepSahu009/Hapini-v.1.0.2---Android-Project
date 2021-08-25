@@ -3,18 +3,22 @@ package com.crm.pvt.hapinicrm.model;
 import java.io.Serializable;
 
 public class TrackUserModel implements Serializable {
-    private String name, email, phoneno, whatsappno, passcode, password, location, imgurl;
+
+    private String name, email, phoneno, whatsappno, passcode, password, state , city , location, addedBy ,imgurl;
 
     public TrackUserModel() { }
 
-    public TrackUserModel(String name, String email, String phoneno, String whatsappno, String passcode, String password, String location, String imgurl) {
+    public TrackUserModel(String name, String email, String phoneno, String whatsappno, String passcode, String password, String state , String city , String location, String addedBy , String imgurl) {
         this.name = name;
         this.email = email;
         this.phoneno = phoneno;
         this.whatsappno = whatsappno;
         this.passcode = passcode;
         this.password = password;
+        this.state = state;
+        this.city = city;
         this.location = location;
+        this.addedBy = addedBy;
         this.imgurl = imgurl;
     }
 
@@ -80,5 +84,29 @@ public class TrackUserModel implements Serializable {
 
     public String getImgurl() {
         return imgurl;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
     }
 }

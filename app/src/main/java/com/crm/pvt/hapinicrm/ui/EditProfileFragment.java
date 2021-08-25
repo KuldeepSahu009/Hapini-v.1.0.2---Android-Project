@@ -289,7 +289,7 @@ public class EditProfileFragment extends Fragment {
 
         DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype)
                 .child(passcode);
-        Admin admin1 = new Admin(name, email, admin.getPhoneno(), admin.getWhatsappno(), passcode, password, admin.getLocation(), downloaduri);
+        Admin admin1 = new Admin(name, email, admin.getPhoneno(), admin.getWhatsappno(), passcode, password, admin.getState() , admin.getCity() , admin.getLocation(), downloaduri);
         databaseReference1.setValue(admin1).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.crm.pvt.hapinicrm.R;
 
 public class Trackuserviewholders extends RecyclerView.ViewHolder {
-    public TextView name, email, phone, whatsappno, passcode, password, location;
+    public TextView name, email, phone, whatsappno, passcode, password, state , city , location , addedBy;
     public ImageView profileimg, delete , activeStatusUser,downloaduser,attendance,calluser;
     public CardView cardView;
 
@@ -24,7 +24,10 @@ public class Trackuserviewholders extends RecyclerView.ViewHolder {
         whatsappno = itemView.findViewById(R.id.trackuserwhatsappno);
         passcode = itemView.findViewById(R.id.trackuserpasscode);
         password = itemView.findViewById(R.id.trackuserpassword);
+        state = itemView.findViewById(R.id.trackuserState);
+        city = itemView.findViewById(R.id.trackuserCity);
         location = itemView.findViewById(R.id.trackuserlocation);
+        addedBy = itemView.findViewById(R.id.trackUserAddedBy);
         profileimg = itemView.findViewById(R.id.trackuserprofilepic);
         delete = itemView.findViewById(R.id.trackuserdeleteprofile);
         activeStatusUser = itemView.findViewById(R.id.trackUserStatus);
@@ -34,4 +37,6 @@ public class Trackuserviewholders extends RecyclerView.ViewHolder {
 
     }
 }
+
+
 

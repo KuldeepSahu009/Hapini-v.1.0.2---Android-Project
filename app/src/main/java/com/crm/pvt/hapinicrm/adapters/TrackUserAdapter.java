@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,10 +24,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
+
 import com.crm.pvt.hapinicrm.ui.Calendar;
+
 import com.crm.pvt.hapinicrm.ui.TrackUsers;
 import com.crm.pvt.hapinicrm.util.UserClickCallback;
 import com.crm.pvt.hapinicrm.viewholder.Trackuserviewholders;
+
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,9 +65,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders> {
+
+    private final Context context;
+    private final List<TrackUserModel> trackUserModelList;
+
     private static final String TAG ="TAG" ;
-    private  Context context;
-    private  List<TrackUserModel> trackUserModelList;
+
     private  List<String> activeUserList;
     public static String usertypes;
     private UserClickCallback userClickCallback;
@@ -100,10 +111,15 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.whatsappno.setText(tempmodel.getWhatsappno());
         holder.passcode.setText(tempmodel.getPasscode());
         holder.password.setText(tempmodel.getPassword());
+        holder.state.setText(tempmodel.getState());
+        holder.city.setText(tempmodel.getCity());
         holder.location.setText(tempmodel.getLocation());
+        holder.addedBy.setText(tempmodel.getAddedBy());
+
         holder.cardView.setOnClickListener(v -> {
             userClickCallback.navigateToTaskList(tempmodel.getPasscode());
         });
+
 
         if(activeUserList != null) {
             for (String passcode : activeUserList) {
@@ -125,17 +141,18 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
             }
         });
 
-
-        if(!tempmodel.getImgurl().equals("")){
-            Glide.with(context)
-                    .load(tempmodel.getImgurl())
-                    .placeholder(R.drawable.ic_profile_placeholder)
-                    .into(holder.profileimg);
+        if(tempmodel.getImgurl() != null) {
+            if (!tempmodel.getImgurl().equals("")) {
+                Glide.with(context)
+                        .load(tempmodel.getImgurl())
+                        .placeholder(R.drawable.ic_profile_placeholder)
+                        .into(holder.profileimg);
+            }
         }
         holder.downloaduser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pos = position;
+                pos = holder.getAdapterPosition();
                 checkpermission();
             }
         });
