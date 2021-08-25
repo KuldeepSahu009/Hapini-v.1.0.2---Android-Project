@@ -116,7 +116,6 @@ public class ChatScreenFragment extends Fragment {
 
     }
 
-    //Remove it after adding logout functionality
     @Override
     public void onDestroy() {
         super.onDestroy();
