@@ -98,7 +98,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
         holder.state.setText(franchise.getState());
         holder.city.setText(franchise.getCity());
         holder.location.setText(franchise.getLocation());
-
+        holder.addedBy.setVisibility(View.INVISIBLE);
 
         holder.attendance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,7 +175,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
     static class TrackFranchiseViewHolder extends RecyclerView.ViewHolder{
         ImageView profilepic,deleteAdmin , activeStatusFranchise,download, calladmin,attendance;
 
-        TextView name, email, mobile, location,whatsappno,password,passcode , state , city;
+        TextView name, email, mobile, location,whatsappno,password,passcode , state , city,addedBy;
 
         public TrackFranchiseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -193,6 +193,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
             deleteAdmin = itemView.findViewById(R.id.trackadmindeleteprofile);
             download = itemView.findViewById(R.id.trackadmindownload);
             calladmin = itemView.findViewById(R.id.trackadmincall);
+            addedBy = itemView.findViewById(R.id.addedById);
             attendance=itemView.findViewById(R.id.trackadminattendance);
         }}
         private void checkpermission() {

@@ -16,7 +16,6 @@ import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.ChatAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentChatScreenBinding;
 import com.crm.pvt.hapinicrm.model.Chat;
-import com.crm.pvt.hapinicrm.model.Franchise;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -117,7 +116,6 @@ public class ChatScreenFragment extends Fragment {
 
     }
 
-    //Remove it after adding logout functionality
     @Override
     public void onDestroy() {
         super.onDestroy();

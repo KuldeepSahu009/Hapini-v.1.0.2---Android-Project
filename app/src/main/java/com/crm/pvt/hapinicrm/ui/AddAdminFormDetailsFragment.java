@@ -101,7 +101,13 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
     private void enterDataToFirebase(String name, String email, String mobileNo, String whatsAppNo,String state, String city, String location, String passcode, String password) {
 
-        Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, state , city , location, "");
+        String addedBy = "";
+
+        if(currentFranchise != null ) {
+            addedBy = currentFranchise.getPasscode();
+        }
+
+        Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, state , city , location, "",addedBy);
 
         DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
                 .getReference("crm_by_franchise")
