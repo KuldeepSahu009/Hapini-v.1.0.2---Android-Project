@@ -107,6 +107,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.state.setText(admin.getState());
         holder.city.setText(admin.getCity());
         holder.location.setText(admin.getLocation());
+        holder.addedBy.setText(admin.getAddedBy());
 
         if (activeUserList != null) {
             for (String passcode : activeUserList) {
@@ -179,7 +180,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     class TrackAdminViewHolder extends RecyclerView.ViewHolder {
         ImageView profilepic, deleteAdmin, activeStatusAdmin,downloadamin,calladmin,attendance;
 
-        TextView name, email, mobile, state , city, location, whatsappno, password, passcode;
+        TextView name, email, mobile, state , city, location, whatsappno, password, passcode,addedBy;
 
         public TrackAdminViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -195,6 +196,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             passcode = itemView.findViewById(R.id.trackadminpasscode);
             profilepic = itemView.findViewById(R.id.trackadminprofilepic);
             deleteAdmin = itemView.findViewById(R.id.trackadmindeleteprofile);
+            addedBy = itemView.findViewById(R.id.addedById);
             downloadamin=itemView.findViewById(R.id.trackadmindownload);
             calladmin=itemView.findViewById(R.id.trackadmincall);
             attendance=itemView.findViewById(R.id.trackadminattendance);

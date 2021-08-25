@@ -210,17 +210,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 adminList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Admin adminObject;
-                    adminObject = new Admin(dataSnapshot.child("name").getValue().toString(),
-                            dataSnapshot.child("email").getValue().toString(),
-                            dataSnapshot.child("phoneno").getValue().toString(),
-                            dataSnapshot.child("whatsappno").getValue().toString(),
-                            dataSnapshot.child("passcode").getValue().toString(),
-                            dataSnapshot.child("password").getValue().toString(),
-                            dataSnapshot.child("state").getValue().toString(),
-                            dataSnapshot.child("city").getValue().toString(),
-                            dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                    Admin adminObject = dataSnapshot.getValue(Admin.class);
                     adminList.add(adminObject);
                 }
                 trackAdminAdapter.notifyDataSetChanged();
@@ -245,17 +235,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 adminList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Admin adminObject;
-                    adminObject = new Admin(dataSnapshot.child("name").getValue().toString(),
-                            dataSnapshot.child("email").getValue().toString(),
-                            dataSnapshot.child("phoneno").getValue().toString(),
-                            dataSnapshot.child("whatsappno").getValue().toString(),
-                            dataSnapshot.child("passcode").getValue().toString(),
-                            dataSnapshot.child("password").getValue().toString(),
-                            dataSnapshot.child("state").getValue().toString(),
-                            dataSnapshot.child("city").getValue().toString(),
-                            dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                    Admin adminObject = dataSnapshot.getValue(Admin.class);
                     adminList.add(adminObject);
                 }
                 trackAdminAdapter.notifyDataSetChanged();
@@ -280,18 +260,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 adminList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    Admin adminObject;
-                    adminObject = new Admin(dataSnapshot.child("name").getValue().toString(),
-                            dataSnapshot.child("email").getValue().toString(),
-                            dataSnapshot.child("phoneno").getValue().toString(),
-                            dataSnapshot.child("whatsappno").getValue().toString(),
-                            dataSnapshot.child("passcode").getValue().toString(),
-                            dataSnapshot.child("password").getValue().toString(),
-                            dataSnapshot.child("state").getValue().toString(),
-                            dataSnapshot.child("city").getValue().toString(),
-                            dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                    Admin adminObject = dataSnapshot.getValue(Admin.class);
                     adminList.add(adminObject);
                 }
                 trackAdminAdapter.notifyDataSetChanged();

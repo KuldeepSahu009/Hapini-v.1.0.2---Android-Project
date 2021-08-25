@@ -11,12 +11,23 @@ public class Admin {
     String city;
     String location;
     String imgurl;
+    String addedBy;
 
-    public Admin() {
+    public Admin() { }
 
-    }
-
-    public Admin(String name, String email, String phoneno, String whatsappno, String passcode, String password, String state, String city , String location, String imgurl) {
+    public Admin(
+            String name,
+            String email,
+            String phoneno,
+            String whatsappno,
+            String passcode,
+            String password,
+            String state,
+            String city,
+            String location,
+            String imgurl,
+            String addedBy
+    ) {
         this.name = name;
         this.email = email;
         this.phoneno = phoneno;
@@ -27,6 +38,15 @@ public class Admin {
         this.city = city;
         this.location = location;
         this.imgurl = imgurl;
+        this.addedBy = addedBy;
+    }
+
+    public String getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
     }
 
     public String getName() {
@@ -65,7 +85,7 @@ public class Admin {
         return state;
     }
 
-    public String getCity(){
+    public String getCity() {
         return city;
     }
 }
