@@ -269,7 +269,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("state").getValue().toString(),
                             dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                            dataSnapshot.child("imgurl").getValue().toString(),
+                            dataSnapshot.child("addedBy").getValue().toString());
                     adminList.add(adminObject);
                 }
                 trackAdminAdapter.notifyDataSetChanged();
@@ -303,7 +304,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("state").getValue().toString(),
                             dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                            dataSnapshot.child("imgurl").getValue().toString(),
+                            dataSnapshot.child("addedBy").getValue().toString());
                     adminList.add(adminObject);
                 }
                 trackAdminAdapter.notifyDataSetChanged();
@@ -337,7 +339,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("state").getValue().toString(),
                             dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                            dataSnapshot.child("imgurl").getValue().toString(),
+                            dataSnapshot.child("addedBy").getValue().toString());
                     Log.e(TAG, "onDataChange: "+dataSnapshot.child("name").getValue().toString() );
                     adminList.add(adminObject);
                 }
