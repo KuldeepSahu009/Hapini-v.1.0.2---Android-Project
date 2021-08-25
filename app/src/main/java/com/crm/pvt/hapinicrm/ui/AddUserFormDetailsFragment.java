@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
@@ -42,12 +43,14 @@ public class AddUserFormDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setFormTitle();
+        setUpStateSpinner();
+
         binding.btnAddUserSubmit.setOnClickListener(v -> {
             String email = binding.etEmail.getText().toString();
             String name = binding.etName.getText().toString();
             String mobileno = binding.etMobileNumber.getText().toString();
             String whatsappno = binding.etWhatsappNumber.getText().toString();
-            String state = binding.etStateName.getText().toString();
+            String state = binding.spinner.getSelectedItem().toString();
             String city = binding.etNameCity.getText().toString();
             String location = binding.etLocality.getText().toString();
             String passcode = binding.etPasscode.getText().toString();
@@ -76,6 +79,13 @@ public class AddUserFormDetailsFragment extends Fragment {
 
         view.findViewById(R.id.ivBackFromAddUserFormFragment).setOnClickListener(v ->
                 Navigation.findNavController(v).navigateUp());
+    }
+
+    private void setUpStateSpinner() {
+        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this.getContext(),
+                R.array.india_states, android.R.layout.simple_spinner_item);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinner.setAdapter(stateAdapter);
     }
 
     private void setFormTitle() {
