@@ -260,6 +260,15 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         Paragraph paragraphlocation = new Paragraph();
         paragraphlocation.add("Location:" + tempmodel.getLocation());
         paragraphlocation.setFontSize(20);
+        Paragraph paragraphstate= new Paragraph();
+        paragraphstate.add("State:" + tempmodel.getState());
+        paragraphstate.setFontSize(20);
+        Paragraph paragraphcity = new Paragraph();
+        paragraphcity.add("City:" + tempmodel.getCity());
+        paragraphcity.setFontSize(20);
+        Paragraph paragraphaddedby = new Paragraph();
+        paragraphaddedby.add("Addedby:" + tempmodel.getAddedBy());
+        paragraphaddedby.setFontSize(20);
         // paragraph.setFont(context.getResources().getFont(R.font.alef_bold));
         document.add(image.setHeight(250).setWidth(250).setFixedPosition(1, 330, 550));
         document.add(paragraphname.setRelativePosition(0, 10, 0, 0));
@@ -269,6 +278,9 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         document.add(paragraphpasscode.setRelativePosition(0, 0, 0, 0));
         document.add(paragraphpassword.setRelativePosition(0, 0, 0, 0));
         document.add(paragraphlocation.setRelativePosition(0, 0, 0, 0));
+        document.add(paragraphstate.setRelativePosition(0, 0, 0, 0));
+        document.add(paragraphcity.setRelativePosition(0, 0, 0, 0));
+        document.add(paragraphaddedby.setRelativePosition(0, 0, 0, 0));
         document.close();
         Toast.makeText(context, "sdone", Toast.LENGTH_LONG).show();
         progressDialog.dismiss();

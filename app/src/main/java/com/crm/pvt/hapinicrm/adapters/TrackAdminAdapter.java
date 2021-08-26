@@ -293,6 +293,15 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         Paragraph paragraphlocation=new Paragraph();
         paragraphlocation.add("Location:"+admin.getLocation());
         paragraphlocation.setFontSize(20);
+        Paragraph paragraphsatate=new Paragraph();
+        paragraphsatate.add("State:"+admin.getState());
+        paragraphsatate.setFontSize(20);
+        Paragraph paragraphcity=new Paragraph();
+        paragraphcity.add("City:"+admin.getCity());
+        paragraphcity.setFontSize(20);
+        Paragraph paragraphaddedby=new Paragraph();
+        paragraphaddedby.add("Added By:"+admin.getAddedBy());
+        paragraphaddedby.setFontSize(20);
         // paragraph.setFont(context.getResources().getFont(R.font.alef_bold));
         document.add(image.setHeight(250).setWidth(250).setFixedPosition(1,330,550));
         document.add(paragraphname.setRelativePosition(0,10,0,0));
@@ -302,6 +311,9 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         document.add(paragraphpasscode.setRelativePosition(0,0,0,0));
         document.add(paragraphpassword.setRelativePosition(0,0,0,0));
         document.add(paragraphlocation.setRelativePosition(0,0,0,0));
+        document.add(paragraphsatate.setRelativePosition(0,0,0,0));
+        document.add(paragraphcity.setRelativePosition(0,0,0,0));
+        document.add(paragraphaddedby.setRelativePosition(0,0,0,0));
         document.close();
         Toast.makeText(context,"sdone",Toast.LENGTH_LONG).show();
         progressDialog.dismiss();
