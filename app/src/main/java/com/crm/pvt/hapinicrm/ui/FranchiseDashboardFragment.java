@@ -1,5 +1,6 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +21,13 @@ public class FranchiseDashboardFragment extends Fragment {
     public static String addAdminTypes;
     private boolean attendance=false;
     private Bundle admin;
-
+    private Boolean login = true;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentFranchiseDashboardBinding.inflate(inflater,container,false);
         admin = new Bundle();
+
         if (attendance==false){
             Attendancedialogue attendancedialogue = new Attendancedialogue(getContext());
             attendancedialogue.show(getFragmentManager(), "attendance dialogue");
@@ -36,10 +38,9 @@ public class FranchiseDashboardFragment extends Fragment {
 
 
 
-
-
-
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -69,6 +70,25 @@ public class FranchiseDashboardFragment extends Fragment {
                     .findNavController(v)
                     .navigate(R.id.action_franchiseDashboardFragment_to_adminDataViewFragment2,admin);
         });
+
+        binding.franchiseadminlogout.setOnClickListener(v ->{
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Logout");
+            builder.setMessage("Are you sure you want to logout?");
+            builder.setCancelable(true);
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+
+                Splashscreen.spAdminsData.edit().clear().commit();
+                Navigation.findNavController(v).navigateUp();
+            });
+            builder.setNegativeButton("No", (dialog, which) -> {
+            });
+
+            AlertDialog attendanceDialog = builder.create();
+            attendanceDialog.show();
+        });
+
+
     }
 
     @Override

@@ -50,8 +50,7 @@ public class MasterDashboardFragment extends Fragment {
         binding.cvProfile.setOnClickListener( v ->
                 Navigation.findNavController(v).navigate(MasterDashboardFragmentDirections.actionMasterDashboardFragmentToProfileFragment())
         );
-        binding.ivBack.setOnClickListener(v ->
-                Navigation.findNavController(v).navigateUp());
+
 
         binding.cvTaskAssign.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(MasterDashboardFragmentDirections.actionMasterDashboardFragmentToTaskAssignFragment()));

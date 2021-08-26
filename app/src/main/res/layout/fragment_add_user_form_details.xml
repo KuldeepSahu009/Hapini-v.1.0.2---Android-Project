@@ -240,13 +240,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:hint="Your Name">
+                android:hint="Your Passcode">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etYourName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="text" />
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
