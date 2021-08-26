@@ -216,9 +216,19 @@ public class TrackUsers extends Fragment implements UserClickCallback {
         crm.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    TrackUserModel user = userSnapshot.getValue(TrackUserModel.class);
-                    trackUserModelList.add(user);
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String name=dataSnapshot.child("name").getValue().toString();
+                    String email=dataSnapshot.child("email").getValue().toString();
+                    String mobileno=dataSnapshot.child("mobileNo").getValue().toString();
+                    String whatsappno=dataSnapshot.child("whatsAppNo").getValue().toString();
+                    String passcode=dataSnapshot.child("passcode").getValue().toString();
+                    String password=dataSnapshot.child("password").getValue().toString();
+                    String state = dataSnapshot.child("state").getValue().toString();
+                    String city = dataSnapshot.child("city").getValue().toString();
+                    String location=dataSnapshot.child("city").getValue().toString();
+                    String addedBy =dataSnapshot.child("addedBy").getValue().toString();
+
+                    trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,state , city , location, addedBy , ""));
                 }
                 trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
