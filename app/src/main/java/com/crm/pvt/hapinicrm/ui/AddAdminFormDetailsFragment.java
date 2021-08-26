@@ -109,11 +109,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, state , city , location, "",addedBy);
 
-        DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
-                .getReference("crm_by_franchise")
-                .child(currentFranchise.getPasscode());
-
-
         if (adminType == "CRM") {
 
             final int[] count = {0};
@@ -121,6 +116,9 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
             if (currentFranchise != null) {
 
+                DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
+                        .getReference("crm_by_franchise")
+                        .child(currentFranchise.getPasscode());
                 franchiseDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -143,31 +141,36 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
             if (isAllowed[0]) {
 
-                franchiseDbRef.child(admin.getPasscode()).setValue(admin);
+                if (currentFranchise != null) {
+                    DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
+                            .getReference("crm_by_franchise")
+                            .child(currentFranchise.getPasscode());
+                    franchiseDbRef.child(admin.getPasscode()).setValue(admin);
+                } else {
+                    auth.createUserWithEmailAndPassword(passcode + "@crmadmin.com", password).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.i(TAG, "Admin created");
+                        } else {
+                            Log.i(TAG, "Something went wrong");
+                        }
+                    });
 
-                auth.createUserWithEmailAndPassword(passcode + "@crmadmin.com", password).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.i(TAG, "Admin created");
-                    } else {
-                        Log.i(TAG, "Something went wrong");
-                    }
-                });
-
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
-                databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(), "CRM Admin Successfully Entered", Toast.LENGTH_LONG).show();
-                        Navigation.findNavController(requireView()).navigateUp();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(), "CRM Admin is not Entered", Toast.LENGTH_LONG).show();
-                    }
-                });
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
+                    databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "CRM Admin Successfully Entered", Toast.LENGTH_LONG).show();
+                            Navigation.findNavController(requireView()).navigateUp();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "CRM Admin is not Entered", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         }
         if (adminType == "DATA_ENTRY") {
