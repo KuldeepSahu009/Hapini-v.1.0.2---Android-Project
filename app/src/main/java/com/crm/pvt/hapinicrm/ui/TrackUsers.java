@@ -85,12 +85,9 @@ public class TrackUsers extends Fragment implements UserClickCallback {
         Log.e(TAG, "onCreateView: " + data);
         searchuser=binding.searchuser;
 
-        searchuser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.showshorteduserdatafragment);
-                Shorteddataadmin.type = userType;
-            }
+        searchuser.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.showshorteduserdatafragment);
+            Shorteddataadmin.type = userType;
         });
 
 
