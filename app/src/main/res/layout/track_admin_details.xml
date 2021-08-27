@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     app:cardCornerRadius="4dp">
 
@@ -189,6 +190,40 @@
                 android:layout_marginStart="16dp"
                 android:text="Location with Pin Code: "
                 android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackadminlocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminbackcity"
+                android:layout_toStartOf="@+id/trackadmindownload"
+                android:layout_toEndOf="@id/adminbacklocation"
+                android:text="random,location"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/addedBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminbacklocation"
+                android:layout_marginStart="16dp"
+                android:text="Added by: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/addedById"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/trackadminlocation"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/trackadmindownload"
+                android:layout_toEndOf="@id/adminbacklocation"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="123456" />
+
             <ImageView
                 android:id="@+id/trackadmincall"
                 android:layout_width="40dp"
@@ -200,19 +235,6 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_call_24" />
-
-            <TextView
-                android:id="@+id/trackadminlocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/adminbackcity"
-                android:layout_marginBottom="10dp"
-                android:layout_toStartOf="@+id/trackadmindownload"
-                android:layout_toEndOf="@id/adminbacklocation"
-                android:text="random,location"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
 
             <ImageView
                 android:id="@+id/trackadminattendance"

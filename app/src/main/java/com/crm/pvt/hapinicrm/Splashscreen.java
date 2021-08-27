@@ -30,8 +30,8 @@ public class Splashscreen extends AppCompatActivity {
     private final int SPLASH_TIME_OUT=6500;
 
     private String password;
-    private String passcode;
-    private String usertype;
+    public static  String passcode;
+    public static  String usertype;
 
     private String TAG = "TAG";
     public static boolean isFranchise = false;

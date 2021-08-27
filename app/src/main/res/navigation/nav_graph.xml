@@ -368,6 +368,9 @@
             tools:layout="@layout/fragment_track_users" >
             <action android:id="@+id/showshorteduserdatafragment"
                 app:destination="@id/showshorteduserdata"/>
+            <action
+                android:id="@+id/action_trackuserscardviewfragment_to_taskListFragment22"
+                app:destination="@id/taskListFragment2" />
         </fragment>
         <fragment android:id="@+id/showshorteduserdata"
             android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"
@@ -417,6 +420,11 @@
             android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
             android:label="fragment_crmadmincsvfilesend"
             tools:layout="@layout/fragment_crmadmincsvfilesend" />
+        <fragment
+            android:id="@+id/taskListFragment2"
+            android:name="com.crm.pvt.hapinicrm.ui.TaskListFragment"
+            android:label="fragment_task_list"
+            tools:layout="@layout/fragment_task_list" />
 
 
     </navigation>

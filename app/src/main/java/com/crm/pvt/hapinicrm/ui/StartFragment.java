@@ -63,8 +63,8 @@ public class StartFragment extends Fragment {
 
         // for user
 
-        if(Splashscreen.userLoginType != null) {
-            switch (Splashscreen.userLoginType) {
+        if(Splashscreen.usertype != null) {
+            switch (Splashscreen.usertype) {
                 case "crmuser":
                     Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToCrmUserFragment());
                     break;

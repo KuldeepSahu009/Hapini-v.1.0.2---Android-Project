@@ -53,7 +53,7 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
     String adminpassword;
    RecyclerView recyclerView;
    ImageView back;
-   TextView shortbyname;
+   TextView shortbyname,addedby;
    TextView shortbylocation;
    TextView shortbycity;
    String shortvariable;
@@ -85,7 +85,9 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
         trackUserModelList=new ArrayList<>();
         trackUserAdapter =new TrackUserAdapter(getContext(),trackUserModelList);
         recyclerView.setAdapter(trackAdminAdapter);
-
+            if (type.equals("franchise")){
+                addedby.setVisibility(View.INVISIBLE);
+            }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +116,7 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
     private void initializeall(){
         search=fragmentShorteddataadminBinding.searchadmins;
         back=fragmentShorteddataadminBinding.shoretddataback;
+        addedby=fragmentShorteddataadminBinding.shortedbyaddedby;
         shortbyname=fragmentShorteddataadminBinding.shortedbyname;
         shortbycity=fragmentShorteddataadminBinding.shortedbycity;
         shortbylocation=fragmentShorteddataadminBinding.shortedbylocation;
@@ -122,6 +125,7 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
         shortbyname.setOnClickListener(this::onClick);
         shortbycity.setOnClickListener(this::onClick);
         shortbylocation.setOnClickListener(this::onClick);
+        addedby.setOnClickListener(this::onClick);
 
 
 
@@ -177,7 +181,9 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 trackUserModelList.clear();
+                //Log.e(TAG, "onDataChange: "+snapshot.getKey() );
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+
 
 
                     String name=dataSnapshot.child("name").getValue().toString();
@@ -231,6 +237,12 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                 shortbylocation.setBackground( getResources().getDrawable(R.drawable.selectedshortedbuttonback));
                 break;
 
+            case R.id.shortedbyaddedby:
+                shortvariable="addedBy";
+                setalldisable();
+                addedby.setTextColor(getResources().getColor(R.color.blue));
+                addedby.setBackground( getResources().getDrawable(R.drawable.selectedshortedbuttonback));
+
 
         }
 
@@ -240,10 +252,12 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
         shortbylocation.setTextColor(getResources().getColor(R.color.black));
         shortbyname.setTextColor(getResources().getColor(R.color.black));
         shortbycity.setTextColor(getResources().getColor(R.color.black));
+        addedby.setTextColor(getResources().getColor(R.color.black));
 
         shortbycity.setBackground( getResources().getDrawable(R.drawable.shortedbuttonback));
         shortbyname.setBackground( getResources().getDrawable(R.drawable.shortedbuttonback));
         shortbylocation.setBackground( getResources().getDrawable(R.drawable.shortedbuttonback));
+        addedby.setTextColor(getResources().getColor(R.color.black));
 
 
 
@@ -269,7 +283,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("state").getValue().toString(),
                             dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                            dataSnapshot.child("imgurl").getValue().toString(),
+                            dataSnapshot.child("addedBy").getValue().toString());
                     adminList.add(adminObject);
                 }
                 trackAdminAdapter.notifyDataSetChanged();
@@ -303,7 +318,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("state").getValue().toString(),
                             dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                            dataSnapshot.child("imgurl").getValue().toString(),
+                            dataSnapshot.child("addedBy").getValue().toString());
                     adminList.add(adminObject);
                 }
                 trackAdminAdapter.notifyDataSetChanged();
@@ -337,7 +353,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("state").getValue().toString(),
                             dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
-                            dataSnapshot.child("imgurl").getValue().toString());
+                            dataSnapshot.child("imgurl").getValue().toString(),
+                            dataSnapshot.child("addedBy").getValue().toString());
                     Log.e(TAG, "onDataChange: "+dataSnapshot.child("name").getValue().toString() );
                     adminList.add(adminObject);
                 }
@@ -436,6 +453,7 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                             dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
+                            //dataSnapshot.child("addedBy").getValue().toString();
                     franchiseList.add(franchiseObject);
                 }
                 TrackFranchiseAdapter trackFranchiseAdapter=new TrackFranchiseAdapter(getContext(),franchiseList,dataCallBackTackFranchise);

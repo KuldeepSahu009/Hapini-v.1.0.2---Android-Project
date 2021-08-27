@@ -98,7 +98,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
         holder.state.setText(franchise.getState());
         holder.city.setText(franchise.getCity());
         holder.location.setText(franchise.getLocation());
-
+        holder.addedBy.setVisibility(View.INVISIBLE);
 
         holder.attendance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +121,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
         });
 
 
-
+        if (activeUserList!=null){
         for(String passcode : activeUserList)
         {
             if(passcode.equals(franchise.getPasscode()))
@@ -129,7 +129,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
                 holder.activeStatusFranchise.setImageResource(R.drawable.green_dot);
                 break;
             }
-        }
+        }}
 
         holder.deleteAdmin.setOnClickListener(v -> {
 
@@ -175,7 +175,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
     static class TrackFranchiseViewHolder extends RecyclerView.ViewHolder{
         ImageView profilepic,deleteAdmin , activeStatusFranchise,download, calladmin,attendance;
 
-        TextView name, email, mobile, location,whatsappno,password,passcode , state , city;
+        TextView name, email, mobile, location,whatsappno,password,passcode , state , city,addedBy;
 
         public TrackFranchiseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -193,6 +193,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
             deleteAdmin = itemView.findViewById(R.id.trackadmindeleteprofile);
             download = itemView.findViewById(R.id.trackadmindownload);
             calladmin = itemView.findViewById(R.id.trackadmincall);
+            addedBy = itemView.findViewById(R.id.addedById);
             attendance=itemView.findViewById(R.id.trackadminattendance);
         }}
         private void checkpermission() {
@@ -278,6 +279,15 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
             Paragraph paragraphlocation = new Paragraph();
             paragraphlocation.add("Location:" + admin.getLocation());
             paragraphlocation.setFontSize(20);
+            Paragraph paragraphcity = new Paragraph();
+            paragraphcity.add("City:" + admin.getCity());
+            paragraphcity.setFontSize(20);
+            Paragraph paragraphstate = new Paragraph();
+            paragraphstate.add("State:" + admin.getState());
+            paragraphstate.setFontSize(20);
+//            Paragraph paragraphaddedby = new Paragraph();
+//            paragraphaddedby.add("Addedby:" + admin.getadd());
+//            paragraphaddedby.setFontSize(20);
             // paragraph.setFont(context.getResources().getFont(R.font.alef_bold));
             document.add(image.setHeight(250).setWidth(250).setFixedPosition(1, 330, 550));
             document.add(paragraphname.setRelativePosition(0, 10, 0, 0));
@@ -287,6 +297,9 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
             document.add(paragraphpasscode.setRelativePosition(0, 0, 0, 0));
             document.add(paragraphpassword.setRelativePosition(0, 0, 0, 0));
             document.add(paragraphlocation.setRelativePosition(0, 0, 0, 0));
+            document.add(paragraphstate.setRelativePosition(0, 0, 0, 0));
+            document.add(paragraphcity.setRelativePosition(0, 0, 0, 0));
+
             document.close();
             Toast.makeText(context, "sdone", Toast.LENGTH_LONG).show();
             progressDialog.dismiss();
