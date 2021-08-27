@@ -103,7 +103,9 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e(TAG, "onCreateView: "+type );
                 getsearchdata(s.toString(), type);
+
             }
 
             @Override
@@ -174,6 +176,9 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
 
     }
     private void getcrmusershorteddata(String searchout,String usertype){
+        if (shortvariable.equals("location")){
+            shortvariable="locality";
+        }
         Log.e(TAG, "getcrmusershorteddata: "+searchout );
         Query query=FirebaseDatabase.getInstance().getReference("usersv2").child(usertype).orderByChild(shortvariable)
                 .startAt(searchout).endAt(searchout+"\uf8ff");
@@ -194,7 +199,7 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
                     String password=dataSnapshot.child("password").getValue().toString();
                     String state = dataSnapshot.child("state").getValue().toString();
                     String city = dataSnapshot.child("city").getValue().toString();
-                    String location=dataSnapshot.child("city").getValue().toString();
+                    String location=dataSnapshot.child("locality").getValue().toString();
                     String addedBy =dataSnapshot.child("addedBy").getValue().toString();
                     trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,state , city , location, addedBy , ""));
 
@@ -257,7 +262,7 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
         shortbycity.setBackground( getResources().getDrawable(R.drawable.shortedbuttonback));
         shortbyname.setBackground( getResources().getDrawable(R.drawable.shortedbuttonback));
         shortbylocation.setBackground( getResources().getDrawable(R.drawable.shortedbuttonback));
-        addedby.setTextColor(getResources().getColor(R.color.black));
+        addedby.setBackground( getResources().getDrawable(R.drawable.shortedbuttonback));
 
 
 

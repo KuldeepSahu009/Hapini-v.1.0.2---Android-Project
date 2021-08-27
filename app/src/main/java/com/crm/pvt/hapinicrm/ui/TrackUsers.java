@@ -225,7 +225,7 @@ public class TrackUsers extends Fragment implements UserClickCallback {
                     String password=dataSnapshot.child("password").getValue().toString();
                     String state = dataSnapshot.child("state").getValue().toString();
                     String city = dataSnapshot.child("city").getValue().toString();
-                    String location=dataSnapshot.child("city").getValue().toString();
+                    String location=dataSnapshot.child("locality").getValue().toString();
                     String addedBy =dataSnapshot.child("addedBy").getValue().toString();
 
                     trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,state , city , location, addedBy , ""));
