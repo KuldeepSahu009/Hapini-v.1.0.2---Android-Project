@@ -355,12 +355,18 @@
             android:id="@+id/addUserFormDetailsFragment"
             android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
             android:label="fragment_add_user_form_details"
-            tools:layout="@layout/fragment_add_user_form_details" />
+            tools:layout="@layout/fragment_add_user_form_details">
+            <action android:id="@+id/addUserFormToTrackUsers"
+                app:destination="@id/trackUserFragment"/>
+        </fragment>
         <fragment
             android:id="@+id/addAdminFormDetailsFragment"
             android:name="com.crm.pvt.hapinicrm.ui.AddAdminFormDetailsFragment"
             android:label="fragment_add_admin_form_details"
-            tools:layout="@layout/fragment_add_admin_form_details" />
+            tools:layout="@layout/fragment_add_admin_form_details">
+            <action android:id="@+id/addAdminFormToTrackAdmins"
+                app:destination="@id/trackAdminFragment"/>
+        </fragment>
         <fragment
             android:id="@+id/trackuserscardviewfragment"
             android:name="com.crm.pvt.hapinicrm.ui.TrackUsers"
@@ -585,7 +591,10 @@
         android:id="@+id/addFranchiseFormDetailsFragment"
         android:name="com.crm.pvt.hapinicrm.ui.AddFranchiseFormDetailsFragment"
         android:label="fragment_add_franchise_form_details"
-        tools:layout="@layout/fragment_add_franchise_form_details" />
+        tools:layout="@layout/fragment_add_franchise_form_details">
+        <action android:id="@+id/addFranchiseFormToTrackFranchise"
+            app:destination="@id/franchiseDataViewFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/franchiseDataViewFragment"
         android:name="com.crm.pvt.hapinicrm.ui.FranchiseDataViewFragment"
