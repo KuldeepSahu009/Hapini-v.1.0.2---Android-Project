@@ -436,6 +436,11 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
             });
 
         }
+
+        @Override
+        public void showUsersUnderAdmin(Admin admin, String usertype) {
+
+        }
     };
     private void getFranchiseSort(String s) {
         Query query = FirebaseDatabase.getInstance().getReference("franchiseV2").orderByChild(shortvariable)
@@ -504,6 +509,11 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
 
                 }
             });
+
+        }
+
+        @Override
+        public void showAdminsUnderThisFranchise(String franchisePasscode) {
 
         }
     };

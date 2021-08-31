@@ -80,7 +80,7 @@ public class StartFragment extends Fragment {
         if(Splashscreen.isFranchise)
         {
             //After Designed Logged out button in Layput
-        //  Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToFranchiseDashboardFragment());
+          Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToFranchiseDashboardFragment());
         }
     }
 

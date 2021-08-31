@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -153,6 +154,8 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
             deleteAdminDialog.show();
         });
 
+        holder.cvFranchise.setOnClickListener(v->
+                dataCallBackTackFranchise.showAdminsUnderThisFranchise(franchises.get(position).getPasscode()));
         if (!franchise.getImgurl().isEmpty()){
             Glide.with(context)
                     .load(franchise.getImgurl())
@@ -177,6 +180,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
 
         TextView name, email, mobile, location,whatsappno,password,passcode , state , city,addedBy;
 
+        CardView cvFranchise;
         public TrackFranchiseViewHolder(@NonNull View itemView) {
             super(itemView);
             activeStatusFranchise = itemView.findViewById(R.id.trackAdminStatus);
@@ -194,6 +198,7 @@ public class TrackFranchiseAdapter extends RecyclerView.Adapter<TrackFranchiseAd
             download = itemView.findViewById(R.id.trackadmindownload);
             calladmin = itemView.findViewById(R.id.trackadmincall);
             addedBy = itemView.findViewById(R.id.addedById);
+            cvFranchise = itemView.findViewById(R.id.cvTrackAdmin);
             attendance=itemView.findViewById(R.id.trackadminattendance);
         }}
         private void checkpermission() {

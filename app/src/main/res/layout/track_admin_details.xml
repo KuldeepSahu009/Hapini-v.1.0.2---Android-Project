@@ -8,6 +8,7 @@
     app:cardCornerRadius="4dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvTrackAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -52,9 +53,9 @@
             <TextView
                 android:id="@+id/trackadminemailid"
                 android:layout_width="wrap_content"
-                android:layout_toLeftOf="@+id/trackadminprofilepic"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/trackadminname"
+                android:layout_toLeftOf="@+id/trackadminprofilepic"
                 android:layout_toEndOf="@+id/adminbackemail"
                 android:text="abc@gamil.com"
                 android:textColor="@color/black"
@@ -65,8 +66,8 @@
                 android:id="@+id/adminbackphoneno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_below="@+id/trackadminemailid"
+                android:layout_marginStart="16dp"
                 android:text="Phone no: "
                 android:textColor="@color/black" />
 
@@ -240,8 +241,8 @@
                 android:id="@+id/trackadminattendance"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/trackadmincall"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="90dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
@@ -257,8 +258,8 @@
                 android:layout_marginEnd="50dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:src="@drawable/ic_baseline_arrow_downward_24"
-                android:focusable="true" />
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_arrow_downward_24" />
 
             <ImageView
                 android:id="@+id/trackAdminStatus"
@@ -281,8 +282,8 @@
                 android:layout_marginEnd="4dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:src="@drawable/ic_baseline_delete_24"
-                android:focusable="true" />
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_delete_24" />
 
 
         </RelativeLayout>
