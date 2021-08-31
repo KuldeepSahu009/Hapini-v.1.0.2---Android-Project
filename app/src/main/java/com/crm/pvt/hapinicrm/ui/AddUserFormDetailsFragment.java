@@ -55,7 +55,7 @@ public class AddUserFormDetailsFragment extends Fragment {
             String location = binding.etLocality.getText().toString();
             String passcode = binding.etPasscode.getText().toString();
             String password = binding.etPassword.getText().toString();
-            String addedBy = binding.etYourName.getText().toString();
+            String addedBy = binding.etYourPass.getText().toString();
 
             if (binding.cvAddUserFormTermsAndCondition.isChecked()) {
                 if (((email.isEmpty() || name.isEmpty() || mobileno.isEmpty() || whatsappno.isEmpty() || state.isEmpty() || city.isEmpty() || location.isEmpty() ||

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -167,6 +168,10 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             }
         });
 
+        holder.cv.setOnClickListener(v->
+        {
+            datacallbacktrackuser.showUsersUnderAdmin(admins.get(position) , usertyepes);
+        });
 
     }
 
@@ -182,6 +187,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
         TextView name, email, mobile, state , city, location, whatsappno, password, passcode,addedBy;
 
+        CardView cv;
         public TrackAdminViewHolder(@NonNull View itemView) {
             super(itemView);
             activeStatusAdmin = itemView.findViewById(R.id.trackAdminStatus);
@@ -200,6 +206,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             downloadamin=itemView.findViewById(R.id.trackadmindownload);
             calladmin=itemView.findViewById(R.id.trackadmincall);
             attendance=itemView.findViewById(R.id.trackadminattendance);
+            cv = itemView.findViewById(R.id.cvTrackAdmin);
             downloadamin.setOnClickListener(v -> {
                 pos=getAdapterPosition();
                 checkpermission();

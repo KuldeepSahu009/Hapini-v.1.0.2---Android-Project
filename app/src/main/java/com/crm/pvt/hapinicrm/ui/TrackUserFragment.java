@@ -15,7 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
+import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentTrackUserBinding;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TrackUserFragment extends Fragment {
 
@@ -39,6 +44,7 @@ public class TrackUserFragment extends Fragment {
 
         binding.cvTrackCrmUser.setOnClickListener(v -> {
             data.putString("data", "crmUser");
+            AdminDataViewFragment.trackUserUnderThisAdminPasscode = "master";
             Navigation.findNavController(v).navigate(R.id.gotospecifictrackuser,data);
 
         });

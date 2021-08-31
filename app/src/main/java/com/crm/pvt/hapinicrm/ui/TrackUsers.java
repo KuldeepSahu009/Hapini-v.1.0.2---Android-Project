@@ -31,6 +31,7 @@ import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.TrackUserAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentTrackUsersBinding;
+import com.crm.pvt.hapinicrm.model.Admin;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.model.User;
 
@@ -69,20 +70,6 @@ public class TrackUsers extends Fragment implements UserClickCallback {
                              Bundle savedInstanceState) {
         binding = FragmentTrackUsersBinding.inflate(inflater, container, false);
 
-        data = getArguments().getString("data");
-
-        switch (data) {
-            case "crmUser":
-                userType = "crm";
-                break;
-            case "videoUser":
-                userType = "video";
-                break;
-            case "dataUser":
-                userType = "data";
-                break;
-        }
-        Log.e(TAG, "onCreateView: " + data);
         searchuser=binding.searchuser;
 
         searchuser.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +87,23 @@ public class TrackUsers extends Fragment implements UserClickCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if(getArguments() != null)
+        data = getArguments().getString("data");
+        if(data != null) {
+
+            switch (data) {
+                case "crmUser":
+                    userType = "crm";
+                    break;
+                case "videoUser":
+                    userType = "video";
+                    break;
+                case "dataUser":
+                    userType = "data";
+                    break;
+            }
+            Log.e(TAG, "onCreateView: " + data);
+        }
         setupRecyclerView();
         userClickCallback = this;
     }
@@ -112,20 +116,20 @@ public class TrackUsers extends Fragment implements UserClickCallback {
         trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
         binding.rvTrackUser.setAdapter(trackUserAdapter);
 
-        switch (data) {
-            case "crmUser":
+        switch (userType) {
+            case "crm":
                 Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 TrackUserAdapter.usertypes="crm";
                 getCrmData();
                 break;
-            case "videoUser":
+            case "video":
                 Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 TrackUserAdapter.usertypes="video";
                 getVideoEditorData();
                 break;
-            case "dataUser":
+            case "data":
                 Toast.makeText(getContext(), "Loading Data....", Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_LONG).show();
                 TrackUserAdapter.usertypes="data";
@@ -217,18 +221,13 @@ public class TrackUsers extends Fragment implements UserClickCallback {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    String name=dataSnapshot.child("name").getValue().toString();
-                    String email=dataSnapshot.child("email").getValue().toString();
-                    String mobileno=dataSnapshot.child("mobileNo").getValue().toString();
-                    String whatsappno=dataSnapshot.child("whatsAppNo").getValue().toString();
-                    String passcode=dataSnapshot.child("passcode").getValue().toString();
-                    String password=dataSnapshot.child("password").getValue().toString();
-                    String state = dataSnapshot.child("state").getValue().toString();
-                    String city = dataSnapshot.child("city").getValue().toString();
-                    String location=dataSnapshot.child("city").getValue().toString();
-                    String addedBy =dataSnapshot.child("addedBy").getValue().toString();
-
-                    trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,state , city , location, addedBy , ""));
+                 if(dataSnapshot.child("addedBy").exists()) {
+                     if((dataSnapshot.child("addedBy").getValue().toString().equals(AdminDataViewFragment.trackUserUnderThisAdminPasscode) || AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master")))
+                     {
+                         TrackUserModel user = dataSnapshot.getValue(TrackUserModel.class);
+                         trackUserModelList.add(user);
+                     }
+                    }
                 }
                 trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
@@ -493,10 +492,11 @@ public class TrackUsers extends Fragment implements UserClickCallback {
     public void navigateToTaskList (String userPasscode){
         Bundle bundle = new Bundle();
         bundle.putString("userPasscode", userPasscode);
-        if (selectedAdmin == 1) {
-            Navigation.findNavController(requireView()).navigate(R.id.action_alltrackusersfragment_to_taskListFragment, bundle);
-        } else if (selectedAdmin == 2) {
-            Navigation.findNavController(requireView()).navigate(R.id.action_trackuserscardviewfragment_to_taskListFragment22, bundle);
-        }
+            if(AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master"))
+                Navigation.findNavController(requireView()).navigate(R.id.action_trackuserscardviewfragment_to_taskListFragment22, bundle);
+            else
+                Navigation.findNavController(requireView()).navigate(R.id.action_alltrackusersfragment_to_taskListFragment, bundle);
+
     }
+
 }

@@ -59,7 +59,7 @@
             android:id="@+id/action_startFragment_to_franchiseDashboardFragment"
             app:destination="@id/franchiseDashboardFragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/adminLoginFragment"
@@ -205,19 +205,14 @@
     <fragment
         android:id="@+id/alltrackusersfragment"
         android:name="com.crm.pvt.hapinicrm.ui.TrackUsers"
-        tools:layout="@layout/fragment_track_users"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
-        >
+        tools:layout="@layout/fragment_track_users">
         <action
             android:id="@+id/action_alltrackusersfragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
-        <action
-            android:id="@+id/action_trackuserscardviewfragment_to_taskListFragment2"
-            app:destination="@id/taskListFragment"
-            />
     </fragment>
     <fragment
         android:id="@+id/adduserdata"
@@ -306,6 +301,11 @@
             <action
                 app:destination="@id/shorteddataadminfragment"
                 android:id="@+id/movetoshorteddataadminfragment"/>
+            <action
+                android:id="@+id/action_adminDataViewFragment_to_alltrackusersfragment"
+                app:destination="@id/alltrackusersfragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" />
         </fragment>
             <fragment android:id="@+id/shorteddataadminfragment"
                 tools:layout="@layout/fragment_shorteddataadmin"
@@ -595,6 +595,11 @@
             android:id="@+id/movetoshortedfranchiseadminfragments"
             app:destination="@id/movetoshortedfranchiseadminfragment"
             />
+        <action
+            android:id="@+id/action_franchiseDataViewFragment_to_adminDataViewFragment2"
+            app:destination="@id/adminDataViewFragment2"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
 
     </fragment>
     <fragment
@@ -618,6 +623,12 @@
         <action
             android:id="@+id/action_franchiseDashboardFragment_to_csvfilefromfranchise"
             app:destination="@id/csvfilefromfranchise" />
+        <action
+            android:id="@+id/action_franchiseDashboardFragment_to_startFragment"
+            app:destination="@id/startFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/crmUserChatFragment"
@@ -664,7 +675,13 @@
         android:id="@+id/adminDataViewFragment2"
         android:name="com.crm.pvt.hapinicrm.ui.AdminDataViewFragment"
         android:label="fragment_admin_data_view"
-        tools:layout="@layout/fragment_admin_data_view" />
+        tools:layout="@layout/fragment_admin_data_view">
+        <action
+            android:id="@+id/action_adminDataViewFragment2_to_alltrackusersfragment"
+            app:destination="@id/alltrackusersfragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/verificationByAdmin"
