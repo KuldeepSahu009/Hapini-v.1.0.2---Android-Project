@@ -23,6 +23,7 @@ public class StartFragment extends Fragment {
 
     private FragmentStartBinding binding;
     private FirebaseUser user;
+    public static int selectedAdmin = -1;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -48,20 +49,22 @@ public class StartFragment extends Fragment {
         if(user != null) {
             String email = user.getEmail();
             if(email != null && email.contains("crmadmin")) {
+                selectedAdmin = 1;
                 Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToCrmAdminFragment());
             } else if(email != null && email.contains("veadmin")) {
                 Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToVideoEditorNavigation());
             } else if(email != null && email.contains("deadmin")) {
                 Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToDataEntryAdminFragment());
             } else if(email != null && email.contains("masteradmin")) {
+                selectedAdmin = 2;
                 Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToMasterNavigation());
             }
         }
 
         // for user
 
-        if(Splashscreen.userLoginType != null) {
-            switch (Splashscreen.userLoginType) {
+        if(Splashscreen.usertype != null) {
+            switch (Splashscreen.usertype) {
                 case "crmuser":
                     Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToCrmUserFragment());
                     break;

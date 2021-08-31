@@ -135,6 +135,9 @@
             android:id="@+id/action_crmAdminFragment_to_crmadmincsvfilesend"
             app:destination="@id/crmadmincsvfilesend" />
         <action
+            android:id="@+id/action_crmAdminFragment_to_crmAdminChatFragment"
+            app:destination="@id/crmAdminChatFragment" />
+        <action
             android:id="@+id/action_crmAdminFragment_to_recievecsvfileadmin"
             app:destination="@id/recievecsvfileadmin" />
     </fragment>
@@ -211,7 +214,18 @@
         <action
             android:id="@+id/action_alltrackusersfragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_trackuserscardviewfragment_to_taskListFragment2"
+            app:destination="@id/taskListFragment"
+            />
+        <action
+            android:id="@+id/showshorteduserdatafragment"
+            app:destination="@id/shorteddatafragment"/>
     </fragment>
+    <fragment
+         android:id="@+id/shorteddatafragment"
+        tools:layout="@layout/fragment_shorteddataadmin"
+        android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"/>
     <fragment
         android:id="@+id/adduserdata"
         android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
@@ -263,6 +277,9 @@
             <action
                 android:id="@+id/action_masterDashboardFragment_to_taskAssignFragment"
                 app:destination="@id/taskAssignFragment" />
+            <action
+                android:id="@+id/action_masterDashboardFragment_to_allnotification"
+                app:destination="@id/allnotification" />
         </fragment>
         <fragment
             android:id="@+id/addAdminFragment"
@@ -361,6 +378,9 @@
             tools:layout="@layout/fragment_track_users" >
             <action android:id="@+id/showshorteduserdatafragment"
                 app:destination="@id/showshorteduserdata"/>
+            <action
+                android:id="@+id/action_trackuserscardviewfragment_to_taskListFragment22"
+                app:destination="@id/taskListFragment2" />
         </fragment>
         <fragment android:id="@+id/showshorteduserdata"
             android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"
@@ -410,6 +430,16 @@
             android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
             android:label="fragment_crmadmincsvfilesend"
             tools:layout="@layout/fragment_crmadmincsvfilesend" />
+        <fragment
+            android:id="@+id/taskListFragment2"
+            android:name="com.crm.pvt.hapinicrm.ui.TaskListFragment"
+            android:label="fragment_task_list"
+            tools:layout="@layout/fragment_task_list" />
+        <fragment
+            android:id="@+id/allnotification"
+            android:name="com.crm.pvt.hapinicrm.ui.Allnotification"
+            android:label="fragment_allnotification"
+            tools:layout="@layout/fragment_allnotification" />
 
 
     </navigation>
@@ -620,13 +650,13 @@
         tools:layout="@layout/fragment_chat_screen" >
         <argument
             android:name="franchise"
-            app:argType="com.crm.pvt.hapinicrm.model.Franchise" />
+            app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
     </fragment>
     <fragment
         android:id="@+id/franchiseUserChatFragment"
         android:name="com.crm.pvt.hapinicrm.ui.FranchiseUserChatFragment"
         android:label="fragment_franchise_user_chat"
-        tools:layout="@layout/fragment_franchise_user_chat" >
+        tools:layout="@layout/fragment_franchise_user_chat">
         <action
             android:id="@+id/action_franchiseUserChatFragment_to_franchiseChatScreenFragment"
             app:destination="@id/franchiseChatScreenFragment" />
@@ -635,7 +665,7 @@
         android:id="@+id/franchiseChatScreenFragment"
         android:name="com.crm.pvt.hapinicrm.ui.FranchiseChatScreenFragment"
         android:label="fragment_franchise_chat_screen"
-        tools:layout="@layout/fragment_franchise_chat_screen" >
+        tools:layout="@layout/fragment_franchise_chat_screen">
         <argument
             android:name="user"
             app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
@@ -649,7 +679,16 @@
         android:id="@+id/adminDataViewFragment2"
         android:name="com.crm.pvt.hapinicrm.ui.AdminDataViewFragment"
         android:label="fragment_admin_data_view"
-        tools:layout="@layout/fragment_admin_data_view" />
+        tools:layout="@layout/fragment_admin_data_view" >
+        <action
+            android:id="@id/movetoshorteddataadminfragment"
+            app:destination="@id/shorteddataforfranchise"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/shorteddataforfranchise"
+        tools:layout="@layout/fragment_shorteddataadmin"
+        android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"/>
 
     <fragment
         android:id="@+id/verificationByAdmin"
@@ -684,6 +723,24 @@
         android:name="com.crm.pvt.hapinicrm.ui.crmadmincsvfilesend"
         android:label="fragment_crmadmincsvfilesend"
         tools:layout="@layout/fragment_crmadmincsvfilesend" />
+    <fragment
+        android:id="@+id/crmAdminChatFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.CrmAdminChatFragment"
+        android:label="fragment_crm_admin_chat"
+        tools:layout="@layout/fragment_crm_admin_chat" >
+        <action
+            android:id="@+id/action_crmAdminChatFragment_to_crmAdminChatScreenFragment"
+            app:destination="@id/crmAdminChatScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crmAdminChatScreenFragment"
+        android:name="com.crm.pvt.hapinicrm.ui.CrmAdminChatScreenFragment"
+        android:label="fragment_crm_admin_chat_screen"
+        tools:layout="@layout/fragment_crm_admin_chat_screen">
+    <argument
+        android:name="user"
+        app:argType="com.crm.pvt.hapinicrm.model.TrackUserModel" />
+    </fragment>
     <fragment
         android:id="@+id/recievecsvfileadmin"
         android:name="com.crm.pvt.hapinicrm.ui.recievecsvfileadmin"

@@ -142,7 +142,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:fontFamily="serif"
-                    android:text="Chat with Franchise Admin"
+                    android:text="Chat"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18dp"

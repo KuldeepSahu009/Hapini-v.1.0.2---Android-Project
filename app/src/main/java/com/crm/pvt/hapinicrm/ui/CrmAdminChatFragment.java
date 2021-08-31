@@ -11,9 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.Splashscreen;
+import com.crm.pvt.hapinicrm.adapters.CrmAdminChatPreviewAdapter;
 import com.crm.pvt.hapinicrm.adapters.FranchiseChatPreviewAdapter;
+import com.crm.pvt.hapinicrm.databinding.FragmentCrmAdminChatBinding;
 import com.crm.pvt.hapinicrm.databinding.FragmentFranchiseUserChatBinding;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
+import com.crm.pvt.hapinicrm.util.CrmAdminChatPreviewClickCallback;
 import com.crm.pvt.hapinicrm.util.FranchiseChatPreviewClickCallback;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,23 +26,23 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class FranchiseUserChatFragment extends Fragment implements FranchiseChatPreviewClickCallback {
+public class CrmAdminChatFragment extends Fragment implements CrmAdminChatPreviewClickCallback {
 
-    private FragmentFranchiseUserChatBinding binding;
-    private FranchiseChatPreviewAdapter chatPreviewAdapter;
+    private FragmentCrmAdminChatBinding binding;
+    private CrmAdminChatPreviewAdapter chatPreviewAdapter;
     private DatabaseReference databaseReference;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentFranchiseUserChatBinding.inflate(inflater,container,false);
+        binding = FragmentCrmAdminChatBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.pbFranchiseUserChat.setVisibility(View.VISIBLE);
+        binding.pbCrmAdminChat.setVisibility(View.VISIBLE);
         databaseReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
         initializeRecyclerView();
     }
@@ -48,13 +51,13 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
     public void navigateToChatsScreen(TrackUserModel user) {
         Navigation
                 .findNavController(requireView())
-                .navigate(FranchiseUserChatFragmentDirections
-                        .actionFranchiseUserChatFragmentToFranchiseChatScreenFragment(user));
+                .navigate(CrmAdminChatFragmentDirections
+                        .actionCrmAdminChatFragmentToCrmAdminChatScreenFragment(user));
     }
 
     private void initializeRecyclerView() {
-        chatPreviewAdapter = new FranchiseChatPreviewAdapter(this);
-        binding.rvFranchiseUserChat.setAdapter(chatPreviewAdapter);
+        chatPreviewAdapter = new CrmAdminChatPreviewAdapter(this);
+        binding.rvCrmAdminChats.setAdapter(chatPreviewAdapter);
         getAllUsers();
     }
 
@@ -68,7 +71,7 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
                     user.setName(user.getName()+" (User)");
                     users.add(user);
                 }
-                binding.pbFranchiseUserChat.setVisibility(View.INVISIBLE);
+                binding.pbCrmAdminChat.setVisibility(View.INVISIBLE);
                 chatPreviewAdapter.setUsers(users);
             }
 
@@ -78,15 +81,15 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
             }
         });
 
-        FirebaseDatabase.getInstance().getReference("adminV2/CRM").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("franchiseV2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot usersSnapshot: snapshot.getChildren()) {
-                    TrackUserModel admin = usersSnapshot.getValue(TrackUserModel.class);
-                    admin.setName(admin.getName()+" (Admin)");
-                    users.add(admin);
+                    TrackUserModel franchise = usersSnapshot.getValue(TrackUserModel.class);
+                    franchise.setName(franchise.getName()+" (Franchise)");
+                    users.add(franchise);
                 }
-                binding.pbFranchiseUserChat.setVisibility(View.INVISIBLE);
+                binding.pbCrmAdminChat.setVisibility(View.INVISIBLE);
                 chatPreviewAdapter.setUsers(users);
             }
 
@@ -97,11 +100,13 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
         });
     }
 
+
+
     @Override
     public void onStart() {
         if(Splashscreen.spAdminsData != null)
             if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
                         .child(Splashscreen.spAdminsData.getString("passcode","null"))
                         .setValue("active");
         super.onStart();
@@ -112,28 +117,28 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
     public void onPause() {
         if(Splashscreen.spAdminsData != null)
             if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
                         .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
         super.onPause();
-
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (Splashscreen.spAdminsData != null)
-            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
                         .setValue("active");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
+                CrmAdminFragment.activeStatusReference.child("admins").child("CRM")
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
     }
 }

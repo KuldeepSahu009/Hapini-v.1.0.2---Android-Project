@@ -1,37 +1,23 @@
 package com.crm.pvt.hapinicrm.ui;
-
 import android.app.ProgressDialog;
-import android.icu.text.StringSearch;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentAddtaskBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Objects;
-
-
 public class Addtask extends Fragment {
 
     private EditText passcode , taskReceived;
@@ -41,10 +27,9 @@ public class Addtask extends Fragment {
     private FirebaseDatabase dataBaseInstance;
     private String userType;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-       binding = FragmentAddtaskBinding.inflate(inflater, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment.
+        binding = FragmentAddtaskBinding.inflate(inflater, container, false);
        dataBaseInstance = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
        checkUserType();
@@ -68,11 +53,8 @@ public class Addtask extends Fragment {
            }
        });
 
-
-
        return binding.getRoot();
     }
-
     private void verifyUser() {
         String passcodes=passcode.getText().toString();
         if(passcodes.length()<6){
@@ -162,11 +144,7 @@ public class Addtask extends Fragment {
 
             }
         }
-
-
-
-     private void checkUserType()
-     {
+     private void checkUserType() {
          if(auth.getCurrentUser().getEmail().contains("veadmin"))
          {
             userType = "video";
@@ -180,7 +158,6 @@ public class Addtask extends Fragment {
             userType = "crm";
          }
      }
-
     @Override
     public void onStart() {
         if(Splashscreen.spAdminsData != null)
@@ -215,7 +192,6 @@ public class Addtask extends Fragment {
         super.onStart();
 
     }
-
     @Override
     public void onPause() {
         if(Splashscreen.spAdminsData != null)

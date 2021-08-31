@@ -14,9 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.crm.pvt.hapinicrm.Splashscreen;
+import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.databinding.FragmentAddAdminFormDetailsBinding;
 import com.crm.pvt.hapinicrm.model.Admin;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class AddAdminFormDetailsFragment extends Fragment {
 
     private final String TAG = "Add Admin";
@@ -39,7 +42,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
     String franchiseadmin;
     ProgressDialog progressDialog;
     FirebaseAuth auth;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,22 +53,22 @@ public class AddAdminFormDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setFormTitle();
+        setUpSpinner();
 
         auth = FirebaseAuth.getInstance();
-
-
         binding.btnAddAdminSubmit.setOnClickListener(v -> {
 
             String email = binding.etEmail.getText().toString();
             String name = binding.etName.getText().toString();
             String mobileNo = binding.etMobileNumber.getText().toString();
             String whatsAppNo = binding.etWhatsappNumber.getText().toString();
-            String city = binding.etCity.getText().toString();
+            String state = binding.spinner.getSelectedItem().toString();
+            String city = binding.etCityName.getText().toString();
             String location = binding.etLocality.getText().toString();
             String passcode = binding.etPasscode.getText().toString();
             String password = binding.etPassword.getText().toString();
             if (binding.cvAddAdminFormTermsAndCondition.isChecked()) {
-                if (email.isEmpty() || name.isEmpty() || mobileNo.isEmpty() || whatsAppNo.isEmpty() || city.isEmpty() || location.isEmpty() ||
+                if (email.isEmpty() || name.isEmpty() || mobileNo.isEmpty() || whatsAppNo.isEmpty() || state.isEmpty() || city.isEmpty() || location.isEmpty() ||
                         passcode.isEmpty() || password.isEmpty()) {
                     Snackbar.make(v, "All Fields are necessary", Snackbar.LENGTH_LONG).show();
                 } else if (passcode.length() != 6) {
@@ -77,7 +79,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
                     progressDialog.setMessage("Creating Admin");
                     progressDialog.show();
 
-                    enterDataToFirebase(name, email, mobileNo, whatsAppNo, city, location, passcode, password);
+                    enterDataToFirebase(name, email, mobileNo, whatsAppNo,state ,  city, location, passcode, password);
 
                 }
             } else {
@@ -90,41 +92,42 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp());
     }
 
-    private void enterDataToFirebase(String name, String email, String mobileNo, String whatsAppNo, String city, String location, String passcode, String password) {
+    private void setUpSpinner() {
+        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this.getContext(),
+                R.array.india_states, android.R.layout.simple_spinner_item);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinner.setAdapter(stateAdapter);
+    }
 
-        Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, location, "");
+    private void enterDataToFirebase(String name, String email, String mobileNo, String whatsAppNo,String state, String city, String location, String passcode, String password) {
 
-        DatabaseReference franchiseDbRef = null;
-        if(currentFranchise != null) {
-            if(!FranchiseDashboardFragment.addAdminTypes.equals(""))
-                adminType = FranchiseDashboardFragment.addAdminTypes;
-            franchiseDbRef = FirebaseDatabase.getInstance().getReference()
-                    .child("crm_by_franchise")
-                    .child(currentFranchise.getPasscode());
-            franchiseDbRef.setValue("1");
+        String addedBy = "";
+
+        if(currentFranchise != null ) {
+            addedBy = currentFranchise.getPasscode();
         }
 
+        Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, state , city , location, "",addedBy);
 
         if (adminType == "CRM") {
 
             final int[] count = {0};
-            final Admin []crmAdmin = {admin};
+            final boolean[] isAllowed = {true};
 
             if (currentFranchise != null) {
 
+                DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
+                        .getReference("crm_by_franchise")
+                        .child(currentFranchise.getPasscode());
                 franchiseDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             count[0] = (int) snapshot.getChildrenCount();
-                            if(count[0] <= 2 && crmAdmin[0] != null) {
-                                Log.i("AddAdmin",String.valueOf(count[0]));
-                                addCrmAdmin(crmAdmin[0]);
-                                crmAdmin[0] = null;
-                            } else {
-                                progressDialog.dismiss();
-                               // TODO This Toast keeps crashing need to fix this
-                              //  Toast.makeText(requireActivity().getApplicationContext(),"Max 2 crm admins can be added",Toast.LENGTH_SHORT).show();
+                            if(count[0] <= 2) {
+
+                            }else {
+                                isAllowed[0] = false;
                             }
                         }
 
@@ -136,31 +139,38 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 });
             }
 
-            else {
+            if (isAllowed[0]) {
 
-                auth.createUserWithEmailAndPassword(passcode + "@crmadmin.com", password).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.i(TAG, "Admin created");
-                    } else {
-                        Log.i(TAG, "Something went wrong");
-                    }
-                });
+                if (currentFranchise != null) {
+                    DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
+                            .getReference("crm_by_franchise")
+                            .child(currentFranchise.getPasscode());
+                    franchiseDbRef.child(admin.getPasscode()).setValue(admin);
+                } else {
+                    auth.createUserWithEmailAndPassword(passcode + "@crmadmin.com", password).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Log.i(TAG, "Admin created");
+                        } else {
+                            Log.i(TAG, "Something went wrong");
+                        }
+                    });
 
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
-                databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(), "CRM Admin Successfully Entered", Toast.LENGTH_LONG).show();
-                        Navigation.findNavController(requireView()).navigateUp();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getContext(), "CRM Admin is not Entered", Toast.LENGTH_LONG).show();
-                    }
-                });
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(passcode);
+                    databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "CRM Admin Successfully Entered", Toast.LENGTH_LONG).show();
+                            Navigation.findNavController(requireView()).navigateUp();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "CRM Admin is not Entered", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         }
         if (adminType == "DATA_ENTRY") {
@@ -239,87 +249,5 @@ public class AddAdminFormDetailsFragment extends Fragment {
         }
         binding.tvAddAdminFormDashboardTitle.setText(title);
     }
-
-    //Separate function to add crm admin when franchise adds him/her.
-    private void addCrmAdmin(Admin admin) {
-        DatabaseReference franchiseDbRef = FirebaseDatabase
-                .getInstance()
-                .getReference("crm_by_franchise")
-                .child(currentFranchise.getPasscode());
-
-        franchiseDbRef.child(admin.getPasscode()).setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.i("AddAdmin","Admin added in franchise db");
-            }
-        });
-
-        auth.createUserWithEmailAndPassword(admin.getPasscode() + "@crmadmin.com", admin.getPassword()).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Log.i(TAG, "Admin created");
-            } else {
-                Log.i(TAG, "Something went wrong");
-            }
-        });
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("adminV2").child(adminType).child(admin.getPasscode());
-        databaseReference.setValue(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                progressDialog.dismiss();
-                Toast.makeText(getContext(), "CRM Admin Successfully Entered", Toast.LENGTH_LONG).show();
-                Navigation.findNavController(requireView()).navigateUp();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(getContext(), "CRM Admin is not Entered", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    @Override
-    public void onStart() {
-            if (Splashscreen.spAdminsData != null)
-                if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
-                    CrmAdminFragment.activeStatusReference.child("franchises")
-                            .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                            .setValue("active");
-
-        super.onStart();
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (Splashscreen.spAdminsData != null)
-            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                        .setValue("active");
-    }
-
-    @Override
-    public void onPause() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
-        super.onPause();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
-
-    }
-
 
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
@@ -158,23 +159,13 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
 
             }
         });
-        binding.etSearchFranchise.addTextChangedListener(new TextWatcher() {
+        binding.etSearchFranchise.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.movetoshortedfranchiseadminfragments);
+                Shorteddataadmin.type = "franchise";
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                getsearchdata(s.toString());
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
-    }
+        });}
 
 
     void getFranchiseData() {
@@ -192,6 +183,8 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     franchiseList.add(franchiseObject);
@@ -265,6 +258,8 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
                             dataSnapshot.child("whatsappno").getValue().toString(),
                             dataSnapshot.child("passcode").getValue().toString(),
                             dataSnapshot.child("password").getValue().toString(),
+                            dataSnapshot.child("state").getValue().toString(),
+                            dataSnapshot.child("city").getValue().toString(),
                             dataSnapshot.child("location").getValue().toString(),
                             dataSnapshot.child("imgurl").getValue().toString());
                     franchiseList.add(franchiseObject);

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     app:cardCornerRadius="4dp">
 
@@ -18,7 +19,7 @@
                 android:id="@+id/trackadminname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
                 android:text="Satyam Kumar"
@@ -32,7 +33,7 @@
                 android:layout_height="90dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginVertical="4dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:src="@drawable/account"
                 app:civ_border_color="#FFD600"
                 app:civ_border_width="3dp"
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/trackadminname"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:text="Email ID: "
                 android:textColor="@color/black"
                 android:textSize="15dp" />
@@ -54,7 +55,7 @@
                 android:layout_toLeftOf="@+id/trackadminprofilepic"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/trackadminname"
-                android:layout_toRightOf="@+id/adminbackemail"
+                android:layout_toEndOf="@+id/adminbackemail"
                 android:text="abc@gamil.com"
                 android:textColor="@color/black"
                 android:textSize="12dp"
@@ -64,8 +65,8 @@
                 android:id="@+id/adminbackphoneno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_below="@+id/trackadminemailid"
-                android:layout_marginLeft="16dp"
                 android:text="Phone no: "
                 android:textColor="@color/black" />
 
@@ -73,8 +74,8 @@
                 android:id="@+id/trackadminphoneno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/trackadminemailid"
-                android:layout_toRightOf="@+id/adminbackphoneno"
+                android:layout_below="@+id/adminbackemail"
+                android:layout_toEndOf="@+id/adminbackphoneno"
                 android:text="+91 7878787878"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -84,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackphoneno"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:text="Whatsapp no: "
                 android:textColor="@color/black" />
 
@@ -93,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/adminbackphoneno"
-                android:layout_toRightOf="@+id/adminbackwhatsapp"
+                android:layout_toEndOf="@+id/adminbackwhatsapp"
                 android:text="+91 67676767676"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -103,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackwhatsapp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:text="passcode: "
                 android:textColor="@color/black" />
 
@@ -112,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackwhatsapp"
-                android:layout_toRightOf="@+id/adminbackpasscode"
+                android:layout_toEndOf="@+id/adminbackpasscode"
                 android:text="787878"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -122,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackpasscode"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:text="Password: "
                 android:textColor="@color/black" />
 
@@ -131,8 +132,53 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackpasscode"
-                android:layout_toRightOf="@+id/adminbackpassowrd"
+                android:layout_toEndOf="@+id/adminbackpassowrd"
                 android:text="87jhh78"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/adminbackstate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminbackpassowrd"
+                android:layout_marginStart="16dp"
+                android:text="State: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackadminstate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminbackpassowrd"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/trackadmindownload"
+                android:layout_toEndOf="@id/adminbackstate"
+                android:text="madhya pradesh"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/adminbackcity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminbackstate"
+                android:layout_marginStart="16dp"
+                android:text="City: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackadmincity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminbackstate"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="-1dp"
+                android:layout_marginEnd="-7dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/trackadmindownload"
+                android:layout_toEndOf="@id/adminbackcity"
+                android:text="Some place"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -140,10 +186,44 @@
                 android:id="@+id/adminbacklocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/adminbackpassowrd"
-                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/adminbackcity"
+                android:layout_marginStart="16dp"
                 android:text="Location: "
                 android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/trackadminlocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminbackcity"
+                android:layout_toStartOf="@+id/trackadmindownload"
+                android:layout_toEndOf="@id/adminbacklocation"
+                android:text="random,location"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/addedBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adminbacklocation"
+                android:layout_marginStart="16dp"
+                android:text="Added by: "
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/addedById"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/trackadminlocation"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/trackadmindownload"
+                android:layout_toEndOf="@id/adminbacklocation"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="123456" />
+
             <ImageView
                 android:id="@+id/trackadmincall"
                 android:layout_width="40dp"
@@ -156,17 +236,6 @@
                 android:clickable="true"
                 android:src="@drawable/ic_baseline_call_24" />
 
-            <TextView
-                android:id="@+id/trackadminlocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/adminbackpassowrd"
-                android:layout_marginBottom="10dp"
-                android:layout_toLeftOf="@+id/trackadmindownload"
-                android:layout_toRightOf="@id/adminbacklocation"
-                android:text="random,location"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
             <ImageView
                 android:id="@+id/trackadminattendance"
                 android:layout_width="40dp"
@@ -188,7 +257,8 @@
                 android:layout_marginEnd="50dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:src="@drawable/ic_baseline_arrow_downward_24" />
+                android:src="@drawable/ic_baseline_arrow_downward_24"
+                android:focusable="true" />
 
             <ImageView
                 android:id="@+id/trackAdminStatus"
@@ -207,11 +277,12 @@
                 android:layout_height="30dp"
                 android:layout_below="@+id/adminbackpassowrd"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="14dp"
-                android:layout_marginRight="4dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="4dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:src="@drawable/ic_baseline_delete_24" />
+                android:src="@drawable/ic_baseline_delete_24"
+                android:focusable="true" />
 
 
         </RelativeLayout>

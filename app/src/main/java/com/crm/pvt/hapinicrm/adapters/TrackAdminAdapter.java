@@ -1,5 +1,6 @@
 package com.crm.pvt.hapinicrm.adapters;
 
+import android.content.Context;
 import static com.crm.pvt.hapinicrm.ui.AdminDataViewFragment.type;
 
 import android.Manifest;
@@ -11,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.model.Admin;
 import com.crm.pvt.hapinicrm.ui.Calendar;
 import com.crm.pvt.hapinicrm.ui.Datacallbacktrackuser;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,6 +55,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -59,7 +63,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.TrackAdminViewHolder> {
 
@@ -101,7 +104,10 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.whatsappno.setText(admin.getWhatsappno());
         holder.passcode.setText(admin.getPasscode());
         holder.password.setText(admin.getPassword());
+        holder.state.setText(admin.getState());
+        holder.city.setText(admin.getCity());
         holder.location.setText(admin.getLocation());
+        holder.addedBy.setText(admin.getAddedBy());
 
         if (activeUserList != null) {
             for (String passcode : activeUserList) {
@@ -162,12 +168,11 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         });
 
 
-}
+    }
 
 
     @Override
     public int getItemCount() {
-
         return admins.size();
     }
 
@@ -175,7 +180,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     class TrackAdminViewHolder extends RecyclerView.ViewHolder {
         ImageView profilepic, deleteAdmin, activeStatusAdmin,downloadamin,calladmin,attendance;
 
-        TextView name, email, mobile, location, whatsappno, password, passcode;
+        TextView name, email, mobile, state , city, location, whatsappno, password, passcode,addedBy;
 
         public TrackAdminViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -183,12 +188,15 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             name = itemView.findViewById(R.id.trackadminname);
             email = itemView.findViewById(R.id.trackadminemailid);
             mobile = itemView.findViewById(R.id.trackadminphoneno);
+            state = itemView.findViewById(R.id.trackadminstate);
+            city = itemView.findViewById(R.id.trackadmincity);
             location = itemView.findViewById(R.id.trackadminlocation);
             whatsappno = itemView.findViewById(R.id.trackadminwhatsappno);
             password = itemView.findViewById(R.id.trackadminpassword);
             passcode = itemView.findViewById(R.id.trackadminpasscode);
             profilepic = itemView.findViewById(R.id.trackadminprofilepic);
             deleteAdmin = itemView.findViewById(R.id.trackadmindeleteprofile);
+            addedBy = itemView.findViewById(R.id.addedById);
             downloadamin=itemView.findViewById(R.id.trackadmindownload);
             calladmin=itemView.findViewById(R.id.trackadmincall);
             attendance=itemView.findViewById(R.id.trackadminattendance);
@@ -199,6 +207,8 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             });
         }
     }
+
+
     private void checkpermission(){
         Dexter.withContext(context).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE).withListener(
@@ -283,6 +293,15 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         Paragraph paragraphlocation=new Paragraph();
         paragraphlocation.add("Location:"+admin.getLocation());
         paragraphlocation.setFontSize(20);
+        Paragraph paragraphsatate=new Paragraph();
+        paragraphsatate.add("State:"+admin.getState());
+        paragraphsatate.setFontSize(20);
+        Paragraph paragraphcity=new Paragraph();
+        paragraphcity.add("City:"+admin.getCity());
+        paragraphcity.setFontSize(20);
+        Paragraph paragraphaddedby=new Paragraph();
+        paragraphaddedby.add("Added By:"+admin.getAddedBy());
+        paragraphaddedby.setFontSize(20);
         // paragraph.setFont(context.getResources().getFont(R.font.alef_bold));
         document.add(image.setHeight(250).setWidth(250).setFixedPosition(1,330,550));
         document.add(paragraphname.setRelativePosition(0,10,0,0));
@@ -292,6 +311,9 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         document.add(paragraphpasscode.setRelativePosition(0,0,0,0));
         document.add(paragraphpassword.setRelativePosition(0,0,0,0));
         document.add(paragraphlocation.setRelativePosition(0,0,0,0));
+        document.add(paragraphsatate.setRelativePosition(0,0,0,0));
+        document.add(paragraphcity.setRelativePosition(0,0,0,0));
+        document.add(paragraphaddedby.setRelativePosition(0,0,0,0));
         document.close();
         Toast.makeText(context,"sdone",Toast.LENGTH_LONG).show();
         progressDialog.dismiss();
@@ -358,7 +380,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
                     calendar1.set(year,month-1,days);
                     calendarArrayList.add(calendar1);
                 }
-               calendar.show(((FragmentActivity)context).getSupportFragmentManager(),"TAG");
+                calendar.show(((FragmentActivity)context).getSupportFragmentManager(),"TAG");
             }
 
             @Override
@@ -368,3 +390,4 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         });
     }
 }
+
