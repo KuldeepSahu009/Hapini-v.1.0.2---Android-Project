@@ -1,20 +1,27 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.google.api.client.util.DateTime;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalTime;
@@ -26,16 +33,23 @@ import java.util.HashSet;
 public class MainActivity extends AppCompatActivity {
 
     private static boolean isHandlerRunning = false;
-    private static final long DISCONNECT_TIMEOUT = 60000;
+    private static final long DISCONNECT_TIMEOUT = 7000000;
     private static Handler inactivityHandler;
     private static Runnable runnableCallback;
     private String currentTime;
     private  Date date1;
+    String Datee;
+    FirebaseDatabase database;
     private boolean isFirstTimeHandlerStarted = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("kk:mm:ss");
+        Date date1 =calendar.getTime();
+
 
         inactivityHandler = new Handler();
         runnableCallback = new Runnable() {
@@ -43,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                  //user has 1 minute inactivity
                 updateDataBase();
+                 finish();
+                Splashscreen.spUsersData.edit().clear().commit();
             }
         };
         startHandler();
@@ -100,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     this.currentTime = currentTime;
                     isFirstTimeHandlerStarted = false;
                 }
-                if (currentTime.compareTo("09:00:00") >= 0 && currentTime.compareTo("20:00:00") < 0) {
+                if (currentTime.compareTo("09:00:00") >= 0 && currentTime.compareTo("22:00:00") < 0) {
                         return true;
                 }
                 else
@@ -127,8 +143,11 @@ public class MainActivity extends AppCompatActivity {
                 String activeTime = "";
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("kk:mm:ss");
+                SimpleDateFormat simpleDateFormat1=new SimpleDateFormat("yyyy-MM-dd");
+
                 Date date1 =calendar.getTime();
                 String currentTime = simpleDateFormat.format(date1);
+                Datee=simpleDateFormat1.format(date1);
 
                 HashMap<String , String> updation = new HashMap<>();
                 updation.put("Entry_Time",this.currentTime);
@@ -152,11 +171,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 updation.put("Active_Time",activeTime);
 
-                if(Splashscreen.passcode != null)
-                FirebaseDatabase.getInstance().getReference("crm_user_active_time").child(Splashscreen.passcode)
-                .child(currentTime)
-                .setValue(updation);
+                if( Splashscreen.passcode != null)
+
+
+
+
+                database=FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("crm_user_active_time");
+                myRef.child(Splashscreen.passcode).setValue(updation);
             }
         }
     }
+
 }
