@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -68,6 +69,24 @@ public class FranchiseDashboardFragment extends Fragment {
             Navigation
                     .findNavController(v)
                     .navigate(R.id.action_franchiseDashboardFragment_to_adminDataViewFragment2,admin);
+        });
+
+        binding.franchiseadminlogout.setOnClickListener(v->
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Logout");
+            builder.setMessage("Are you sure you want to logout?");
+            builder.setCancelable(true);
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+                if(Splashscreen.spAdminsData != null)
+                Splashscreen.spAdminsData.edit().clear().commit();
+                Navigation.findNavController(v).navigate(FranchiseDashboardFragmentDirections.actionFranchiseDashboardFragmentToStartFragment());
+            });
+            builder.setNegativeButton("No", (dialog, which) -> {
+            });
+
+            AlertDialog logoutDialog = builder.create();
+            logoutDialog.show();
         });
     }
 
