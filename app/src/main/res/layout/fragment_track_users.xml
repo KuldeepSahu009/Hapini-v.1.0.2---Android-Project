@@ -22,11 +22,11 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/searchuser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginEnd="40dp"
-                    android:id="@+id/searchuser"
                     android:autofillHints="Search User"
                     android:background="@drawable/track_user_et_bk"
                     android:hint="Search user"
@@ -38,6 +38,16 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tvNoUserNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="24dp"
+        android:text="No data to show"
+        android:textSize="30sp"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTrackUser"

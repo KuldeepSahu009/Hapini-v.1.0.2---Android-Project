@@ -220,6 +220,11 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                         if(!adminObject.getAddedBy().equals("") && (adminObject.getAddedBy().equals(Splashscreen.passcode) || adminObject.getAddedBy().equals(FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode)))
                         adminList.add(adminObject);
                     }
+                    if(adminList.size() == 0) {
+                        binding.tvAdminNoData.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.tvAdminNoData.setVisibility(View.GONE);
+                    }
                     trackAdminAdapter.notifyDataSetChanged();
 
                 }

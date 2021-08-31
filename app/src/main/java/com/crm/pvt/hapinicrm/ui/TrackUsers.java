@@ -229,6 +229,11 @@ public class TrackUsers extends Fragment implements UserClickCallback {
                      }
                     }
                 }
+                if(trackUserModelList.size() == 0) {
+                    binding.tvNoUserNoData.setVisibility(View.VISIBLE);
+                } else {
+                    binding.tvNoUserNoData.setVisibility(View.GONE);
+                }
                 trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);
                 trackUserAdapter.notifyDataSetChanged();

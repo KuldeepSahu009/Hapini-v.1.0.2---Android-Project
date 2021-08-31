@@ -606,6 +606,11 @@
             android:id="@+id/movetoshortedfranchiseadminfragments"
             app:destination="@id/movetoshortedfranchiseadminfragment"
             />
+        <action
+            android:id="@+id/action_franchiseDataViewFragment_to_adminDataViewFragment2"
+            app:destination="@id/adminDataViewFragment2"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
 
     </fragment>
     <fragment
