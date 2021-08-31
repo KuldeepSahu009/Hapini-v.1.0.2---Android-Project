@@ -312,6 +312,11 @@
             <action
                 app:destination="@id/shorteddataadminfragment"
                 android:id="@+id/movetoshorteddataadminfragment"/>
+            <action
+                android:id="@+id/action_adminDataViewFragment_to_alltrackusersfragment"
+                app:destination="@id/alltrackusersfragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim" />
         </fragment>
             <fragment android:id="@+id/shorteddataadminfragment"
                 tools:layout="@layout/fragment_shorteddataadmin"
