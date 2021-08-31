@@ -1,7 +1,5 @@
 package com.crm.pvt.hapinicrm.ui;
 
-import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +32,7 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentFranchiseUserChatBinding.inflate(inflater, container, false);
+        binding = FragmentFranchiseUserChatBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 
@@ -65,11 +63,10 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot usersSnapshot : snapshot.getChildren()) {
+                for(DataSnapshot usersSnapshot: snapshot.getChildren()) {
                     TrackUserModel user = usersSnapshot.getValue(TrackUserModel.class);
-                    user.setName(user.getName() + " (User)");
+                    user.setName(user.getName()+" (User)");
                     users.add(user);
-
                 }
                 binding.pbFranchiseUserChat.setVisibility(View.INVISIBLE);
                 chatPreviewAdapter.setUsers(users);
@@ -84,13 +81,10 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
         FirebaseDatabase.getInstance().getReference("adminV2/CRM").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot usersSnapshot : snapshot.getChildren()) {
+                for(DataSnapshot usersSnapshot: snapshot.getChildren()) {
                     TrackUserModel admin = usersSnapshot.getValue(TrackUserModel.class);
-                    assert admin != null;
-                    if(admin.getAddedBy().equals(currentFranchise.getPasscode())) {
-                        admin.setName(admin.getName() + " (Admin)");
-                        users.add(admin);
-                    }
+                    admin.setName(admin.getName()+" (Admin)");
+                    users.add(admin);
                 }
                 binding.pbFranchiseUserChat.setVisibility(View.INVISIBLE);
                 chatPreviewAdapter.setUsers(users);
@@ -105,10 +99,10 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
 
     @Override
     public void onStart() {
-        if (Splashscreen.spAdminsData != null)
-            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
                 CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
+                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
                         .setValue("active");
         super.onStart();
 
@@ -116,21 +110,20 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
 
     @Override
     public void onPause() {
-        if (Splashscreen.spAdminsData != null)
-            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
                 CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode", "null")).removeValue();
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
         super.onPause();
 
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (Splashscreen.spAdminsData != null)
-            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
+        if(Splashscreen.spAdminsData != null)
+            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
                 CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode", "null")).removeValue();
+                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
 
     }
 

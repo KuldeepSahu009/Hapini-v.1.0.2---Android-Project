@@ -15,12 +15,9 @@ import com.crm.pvt.hapinicrm.adapters.CrmAdminChatPreviewAdapter;
 import com.crm.pvt.hapinicrm.adapters.FranchiseChatPreviewAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentCrmAdminChatBinding;
 import com.crm.pvt.hapinicrm.databinding.FragmentFranchiseUserChatBinding;
-import com.crm.pvt.hapinicrm.model.Admin;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.crm.pvt.hapinicrm.util.CrmAdminChatPreviewClickCallback;
 import com.crm.pvt.hapinicrm.util.FranchiseChatPreviewClickCallback;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,15 +25,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class CrmAdminChatFragment extends Fragment implements CrmAdminChatPreviewClickCallback {
 
     private FragmentCrmAdminChatBinding binding;
     private CrmAdminChatPreviewAdapter chatPreviewAdapter;
     private DatabaseReference databaseReference;
-    private String currentAdminPasscode = "";
-    final Admin[] admin = {null};
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -50,28 +44,6 @@ public class CrmAdminChatFragment extends Fragment implements CrmAdminChatPrevie
         super.onViewCreated(view, savedInstanceState);
         binding.pbCrmAdminChat.setVisibility(View.VISIBLE);
         databaseReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
-        currentAdminPasscode = Objects.requireNonNull(
-                Objects.requireNonNull(
-                        FirebaseAuth.getInstance().getCurrentUser()
-                ).getEmail()).substring(0,6);
-
-
-        DatabaseReference adminRef = FirebaseDatabase.getInstance()
-                .getReference("adminV2")
-                .child("CRM").getRef();
-        adminRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot adminSnapshot: snapshot.getChildren()) {
-                    if(Objects.equals(adminSnapshot.getKey(), currentAdminPasscode)) {
-                        admin[0] = adminSnapshot.getValue(Admin.class);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
         initializeRecyclerView();
     }
 
@@ -96,11 +68,8 @@ public class CrmAdminChatFragment extends Fragment implements CrmAdminChatPrevie
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot usersSnapshot: snapshot.getChildren()) {
                     TrackUserModel user = usersSnapshot.getValue(TrackUserModel.class);
-                    assert user != null;
-                    if(user.getAddedBy().equals(currentAdminPasscode)) {
-                        user.setName(user.getName() + " (User)");
-                        users.add(user);
-                    }
+                    user.setName(user.getName()+" (User)");
+                    users.add(user);
                 }
                 binding.pbCrmAdminChat.setVisibility(View.INVISIBLE);
                 chatPreviewAdapter.setUsers(users);
@@ -117,13 +86,8 @@ public class CrmAdminChatFragment extends Fragment implements CrmAdminChatPrevie
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot usersSnapshot: snapshot.getChildren()) {
                     TrackUserModel franchise = usersSnapshot.getValue(TrackUserModel.class);
-                    if(admin[0] != null) {
-                        assert franchise != null;
-                        if (admin[0].getAddedBy().equals(franchise.getPasscode())) {
-                            franchise.setName(franchise.getName() + " (Franchise)");
-                            users.add(franchise);
-                        }
-                    }
+                    franchise.setName(franchise.getName()+" (Franchise)");
+                    users.add(franchise);
                 }
                 binding.pbCrmAdminChat.setVisibility(View.INVISIBLE);
                 chatPreviewAdapter.setUsers(users);
