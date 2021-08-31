@@ -189,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackcity"
                 android:layout_marginStart="16dp"
-                android:text="Location: "
+                android:text="Location with Pin Code: "
                 android:textColor="@color/black" />
 
             <TextView
