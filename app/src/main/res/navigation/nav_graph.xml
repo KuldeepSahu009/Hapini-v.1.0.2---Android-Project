@@ -265,6 +265,9 @@
             <action
                 android:id="@+id/action_masterDashboardFragment_to_taskAssignFragment"
                 app:destination="@id/taskAssignFragment" />
+            <action
+                android:id="@+id/action_masterDashboardFragment_to_allnotification2"
+                app:destination="@id/allnotification2" />
         </fragment>
         <fragment
             android:id="@+id/addAdminFragment"
@@ -425,6 +428,11 @@
             android:name="com.crm.pvt.hapinicrm.ui.TaskListFragment"
             android:label="fragment_task_list"
             tools:layout="@layout/fragment_task_list" />
+        <fragment
+            android:id="@+id/allnotification2"
+            android:name="com.crm.pvt.hapinicrm.ui.Allnotification"
+            android:label="fragment_allnotification"
+            tools:layout="@layout/fragment_allnotification" />
 
 
     </navigation>
