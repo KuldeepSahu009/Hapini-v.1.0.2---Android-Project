@@ -180,7 +180,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLocality"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -188,7 +187,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:hint="Locality">
+                android:hint="Locality||Pin Code">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLocality"

@@ -124,7 +124,7 @@ public class AddUserFormDetailsFragment extends Fragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"crm usernot entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"crm user not entered",Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -135,13 +135,13 @@ public class AddUserFormDetailsFragment extends Fragment {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"dataentry user entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"data entry user entered",Toast.LENGTH_LONG).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"dataentry usernot entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"data entry user not entered",Toast.LENGTH_LONG).show();
                 }
             });
         }

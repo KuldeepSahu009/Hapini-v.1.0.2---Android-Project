@@ -220,6 +220,11 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                         if(!adminObject.getAddedBy().equals("") && (adminObject.getAddedBy().equals(Splashscreen.passcode) || adminObject.getAddedBy().equals(FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode)))
                         adminList.add(adminObject);
                     }
+                    if(adminList.size() == 0) {
+                        binding.tvAdminNoData.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.tvAdminNoData.setVisibility(View.GONE);
+                    }
                     trackAdminAdapter.notifyDataSetChanged();
 
                 }
@@ -387,7 +392,13 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
     public void showUsersUnderAdmin(Admin admin, String usertype) {
         trackUserUnderThisAdminPasscode = admin.getPasscode();
         TrackUsers.userType = "crm";
-        if(Splashscreen.spAdminsData != null && (Splashscreen.spAdminsData.getString("type","").equals("crm") || Splashscreen.spAdminsData.getString("type","").equals("franchise") || !FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode.equals("")))
+        if(
+                Splashscreen.spAdminsData != null
+                && (Splashscreen.spAdminsData.getString("type","").equals("crm")
+                || Splashscreen.spAdminsData.getString("type","").equals("franchise")
+                || !FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode.equals(""))
+        )
+
         Navigation.findNavController(getView()).navigate(AdminDataViewFragmentDirections.actionAdminDataViewFragment2ToAlltrackusersfragment());
         else
             Navigation.findNavController(getView()).navigate(R.id.action_adminDataViewFragment_to_alltrackusersfragment);

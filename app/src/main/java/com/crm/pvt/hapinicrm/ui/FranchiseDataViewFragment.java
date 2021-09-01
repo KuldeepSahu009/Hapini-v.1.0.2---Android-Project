@@ -189,6 +189,11 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
                             dataSnapshot.child("imgurl").getValue().toString());
                     franchiseList.add(franchiseObject);
                 }
+                if(franchiseList.size() == 0) {
+                    binding.tvFranchiseNoData.setVisibility(View.VISIBLE);
+                } else {
+                    binding.tvFranchiseNoData.setVisibility(View.GONE);
+                }
                 trackFranchiseAdapter.notifyDataSetChanged();
 
             }

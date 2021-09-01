@@ -82,7 +82,7 @@ public class TaskListFragment extends Fragment implements TaskCallback {
         taskDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                taskModels.clear();
+
                 for(DataSnapshot taskSnapshot : snapshot.getChildren()) {
                     TaskModel taskModel = taskSnapshot.getValue(TaskModel.class);
                     Log.i("TaskListFragment",taskModel.toString());

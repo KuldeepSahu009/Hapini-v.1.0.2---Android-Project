@@ -213,7 +213,18 @@
         <action
             android:id="@+id/action_alltrackusersfragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_trackuserscardviewfragment_to_taskListFragment2"
+            app:destination="@id/taskListFragment"
+            />
+        <action
+            android:id="@+id/showshorteduserdatafragment"
+            app:destination="@id/shorteddatafragment"/>
     </fragment>
+    <fragment
+         android:id="@+id/shorteddatafragment"
+        tools:layout="@layout/fragment_shorteddataadmin"
+        android:name="com.crm.pvt.hapinicrm.ui.Shorteddataadmin"/>
     <fragment
         android:id="@+id/adduserdata"
         android:name="com.crm.pvt.hapinicrm.ui.AddUserFormDetailsFragment"
@@ -265,6 +276,9 @@
             <action
                 android:id="@+id/action_masterDashboardFragment_to_taskAssignFragment"
                 app:destination="@id/taskAssignFragment" />
+            <action
+                android:id="@+id/action_masterDashboardFragment_to_allnotification2"
+                app:destination="@id/allnotification2" />
         </fragment>
         <fragment
             android:id="@+id/addAdminFragment"
@@ -425,7 +439,11 @@
             android:name="com.crm.pvt.hapinicrm.ui.TaskListFragment"
             android:label="fragment_task_list"
             tools:layout="@layout/fragment_task_list" />
-
+        <fragment
+            android:id="@+id/allnotification2"
+            android:name="com.crm.pvt.hapinicrm.ui.Allnotification"
+            android:label="fragment_allnotification"
+            tools:layout="@layout/fragment_allnotification" />
 
     </navigation>
     <fragment
