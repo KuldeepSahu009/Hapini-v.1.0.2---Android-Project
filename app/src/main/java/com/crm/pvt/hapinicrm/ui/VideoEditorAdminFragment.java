@@ -96,24 +96,4 @@ public class VideoEditorAdminFragment extends Fragment {
         AlertDialog attendanceDialog = builder.create();
         attendanceDialog.show();
     }
-    @Override
-    public void onStart() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("admins").child("VIDEO_EDITOR")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
-                        .setValue("active");
-        super.onStart();
-
-    }
-
-    @Override
-    public void onPause() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("admins").child("VIDEO_EDITOR")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
-        super.onPause();
-
-    }
 }

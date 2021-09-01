@@ -628,7 +628,7 @@
             app:destination="@id/startFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
-            app:popUpTo="@id/nav_graph" />
+            app:popUpTo="@id/startFragment" />
     </fragment>
     <fragment
         android:id="@+id/crmUserChatFragment"
