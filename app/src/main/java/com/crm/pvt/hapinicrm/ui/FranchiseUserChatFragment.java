@@ -90,6 +90,7 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
                             for(DataSnapshot userSP : task.getResult().getChildren()) {
                                 TrackUserModel user = userSP.getValue(TrackUserModel.class);
                                 for(TrackUserModel admin : users) {
+                                    assert user != null;
                                     if(user.getAddedBy().equals(admin.getPasscode())) {
                                         user.setName(user.getName()+" (User)");
                                         users.add(user);
