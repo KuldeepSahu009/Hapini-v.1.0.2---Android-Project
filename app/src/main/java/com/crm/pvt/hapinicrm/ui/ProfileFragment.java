@@ -67,12 +67,12 @@ public class ProfileFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.videoeditortoeditprofile);
             } else if(usertype.equals("crmuser")){
                     EditProfileFragment.user="crmuser";
-                Navigation.findNavController(v).navigate(R.id.crmusermovetoeditprofile);
+               Navigation.findNavController(v).navigate(R.id.crmusermovetoeditprofile);
             }
             else {
                 Log.e(TAG, "usertype: " + usertype);
                 EditProfileFragment.user="";
-                Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment);
+               Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment);
             }
 
         });

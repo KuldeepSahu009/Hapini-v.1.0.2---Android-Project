@@ -11,7 +11,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -204,9 +206,13 @@ public class EditProfileFragment extends Fragment {
                 } else {
                     // Handle failures
                     // ...
+                    progressDialog.dismiss();
                     Snackbar.make(thisView, "unable to upload img", Snackbar.LENGTH_LONG).show();
                 }
             });
+        }else{
+            progressDialog.dismiss();
+            Snackbar.make(thisView, "Please choose an Image", Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -296,6 +302,8 @@ public class EditProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(Void unused) {
                         progressDialog.dismiss();
+                        Navigation.findNavController(thisView).navigateUp();
+
                       
                     }
                 });
@@ -332,7 +340,16 @@ public class EditProfileFragment extends Fragment {
                 franchiseReference.setValue(franchise).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Navigation.findNavController(getView()).navigateUp();
+                        progressDialog.dismiss();
+                        NavHostFragment navHostFragment = (NavHostFragment) getFragmentManager().findFragmentById(R.id.editprofileadmins);
+                        if (navHostFragment != null) {
+
+                            NavController navController = navHostFragment.getNavController();
+                            navController.navigateUp();
+
+
+                        }
+                       // Navigation.findNavController(getView()).navigateUp();
                     }
                 });
 
