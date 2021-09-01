@@ -226,9 +226,10 @@ public class TrackUsers extends Fragment implements UserClickCallback {
                     String state = dataSnapshot.child("state").getValue().toString();
                     String city = dataSnapshot.child("city").getValue().toString();
                     String location=dataSnapshot.child("locality").getValue().toString();
+                    String imgurl=dataSnapshot.child("imgurl").getValue().toString();
                     String addedBy =dataSnapshot.child("addedBy").getValue().toString();
 
-                    trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,state , city , location, addedBy , ""));
+                    trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,state , city , location, addedBy , imgurl));
                 }
                 trackUserAdapter = new TrackUserAdapter(getContext(), trackUserModelList, activeUserList, userClickCallback);
                 binding.rvTrackUser.setAdapter(trackUserAdapter);

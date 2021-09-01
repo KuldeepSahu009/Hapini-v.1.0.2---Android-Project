@@ -69,7 +69,17 @@ public class FranchiseDashboardFragment extends Fragment {
                     .findNavController(v)
                     .navigate(R.id.action_franchiseDashboardFragment_to_adminDataViewFragment2,admin);
         });
+        binding.profileFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProfileFragment.user="";
+                Navigation
+                        .findNavController(v)
+                        .navigate(R.id.profileFragmentfracnhsie,admin);
+            }
+        });
     }
+
 
     @Override
     public void onStart() {

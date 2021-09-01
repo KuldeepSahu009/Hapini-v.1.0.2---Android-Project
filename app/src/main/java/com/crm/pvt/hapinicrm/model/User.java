@@ -11,8 +11,9 @@ public class User {
     String passcode;
     String password;
     String addedBy;
+    String imgurl;
 
-    public User(String name, String email, String  mobileNo, String whatsAppNo, String state, String city, String locality, String passcode, String password , String addedBy) {
+    public User(String name, String email, String mobileNo, String whatsAppNo, String state, String city, String locality, String passcode, String password, String addedBy, String imgurl) {
         this.name = name;
         this.email = email;
         this.mobileNo = mobileNo;
@@ -23,7 +24,21 @@ public class User {
         this.passcode = passcode;
         this.password = password;
         this.addedBy = addedBy;
+        this.imgurl = imgurl;
     }
+
+//    public User(String name, String email, String  mobileNo, String whatsAppNo, String state, String city, String locality, String passcode, String password , String addedBy) {
+//        this.name = name;
+//        this.email = email;
+//        this.mobileNo = mobileNo;
+//        this.whatsAppNo = whatsAppNo;
+//        this.state = state;
+//        this.city = city;
+//        this.locality = locality;
+//        this.passcode = passcode;
+//        this.password = password;
+//        this.addedBy = addedBy;
+//    }
 
     public String getName() {
         return name;

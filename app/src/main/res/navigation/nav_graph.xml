@@ -540,7 +540,22 @@
         <action
             android:id="@+id/action_crmUserFragment_to_verificationByAdmin"
             app:destination="@id/verificationByAdmin" />
+        <action
+            android:id="@+id/crmusertoprofilefragment"
+            app:destination="@id/profilefragmentcrmuser"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/profilefragmentcrmuser"
+        tools:layout="@layout/fragment_profile"
+        android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment">
+        <action
+            android:id="@+id/crmusermovetoeditprofile"
+            app:destination="@+id/editprofilecrmuser"/>
+    </fragment>
+    <fragment android:id="@+id/editprofilecrmuser"
+        tools:layout="@layout/fragment_edit_profile"
+        android:name="com.crm.pvt.hapinicrm.ui.EditProfileFragment"/>
     <fragment
         android:id="@+id/dataEntryUserFragment"
         android:name="com.crm.pvt.hapinicrm.ui.DataEntryUserFragment"
@@ -625,6 +640,23 @@
         <action
             android:id="@+id/action_franchiseDashboardFragment_to_csvfilefromfranchise"
             app:destination="@id/csvfilefromfranchise" />
+        <action
+            android:id="@+id/franchisetoprofilefragment"
+            app:destination="@id/profileFragment"/>
+    </fragment>
+    <fragment android:id="@+id/profileFragmentfracnhsie"
+        tools:layout="@layout/fragment_profile"
+        android:name="com.crm.pvt.hapinicrm.ui.ProfileFragment">
+        <action
+            android:id="@+id/movetoeditprofilefragment"
+            app:destination="@id/editfragmentfranchise"/>
+    </fragment>
+    <fragment
+        android:id="@+id/editfragmentfranchise"
+        tools:layout="@layout/fragment_edit_profile"
+        android:name="com.crm.pvt.hapinicrm.ui.EditProfileFragment">
+        <action android:id="@+id/movebacktoprofilefragment"
+            app:destination="@id/profileFragmentfracnhsie"/>
     </fragment>
     <fragment
         android:id="@+id/crmUserChatFragment"

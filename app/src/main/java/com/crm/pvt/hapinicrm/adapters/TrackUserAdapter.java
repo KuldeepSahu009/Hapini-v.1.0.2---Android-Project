@@ -115,6 +115,9 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         holder.city.setText(tempmodel.getCity());
         holder.location.setText(tempmodel.getLocation());
         holder.addedBy.setText(tempmodel.getAddedBy());
+        if (!tempmodel.getImgurl().equals("")){
+            Glide.with(context).load(tempmodel.getImgurl()).into(holder.profileimg);
+        }
 
         holder.cardView.setOnClickListener(v -> {
             userClickCallback.navigateToTaskList(tempmodel.getPasscode());

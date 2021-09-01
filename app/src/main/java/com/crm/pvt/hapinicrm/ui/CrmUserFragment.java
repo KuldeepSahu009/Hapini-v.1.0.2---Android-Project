@@ -59,6 +59,13 @@ public class CrmUserFragment extends Fragment {
         binding.ivCrmUserLogout.setOnClickListener(v -> {
             crmUserLogout(v);
         });
+        binding.cvprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProfileFragment.user="user";
+                Navigation.findNavController(v).navigate(R.id.crmusertoprofilefragment);
+            }
+        });
     }
 
     private void crmUserLogout(View v) {

@@ -98,6 +98,7 @@ public class CrmAdminFragment extends Fragment {
         binding.crmadminprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProfileFragment.user="";
                 Navigation.findNavController(v).navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToSetrpofile());
             }
         });

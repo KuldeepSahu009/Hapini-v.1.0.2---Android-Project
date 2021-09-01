@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment {
     private static final String TAG = "TAG";
     String usertype;
+    public static String user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,15 +56,22 @@ public class ProfileFragment extends Fragment {
         );
 
         edittext.setOnClickListener(v -> {
-            EditProfileFragment.usertype = usertype;
+           // EditProfileFragment.usertype = usertype;
             Log.e(TAG, "usertype: " + usertype);
             if (usertype.equals("master")) {
+                EditProfileFragment.user="";
                 Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_editProfileFragment);
-                EditProfileFragment.usertype = usertype;
+               // EditProfileFragment.usertype = usertype;
             } else if (usertype.equals("video")) {
+                EditProfileFragment.user="";
                 Navigation.findNavController(v).navigate(R.id.videoeditortoeditprofile);
-            } else {
+            } else if(usertype.equals("crmuser")){
+                    EditProfileFragment.user="crmuser";
+                Navigation.findNavController(v).navigate(R.id.crmusermovetoeditprofile);
+            }
+            else {
                 Log.e(TAG, "usertype: " + usertype);
+                EditProfileFragment.user="";
                 Navigation.findNavController(v).navigate(R.id.movetoeditprofilefragment);
             }
 
@@ -84,9 +92,16 @@ public class ProfileFragment extends Fragment {
 
 
     private void getprofileinfo() {
-        SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
+        String passcode;
+        if (user.equals("user")){
+        SharedPreferences getshared = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE);
         usertype = getshared.getString("type", "no data");
-        String passcode = getshared.getString("passcode", "no data");
+        passcode = getshared.getString("passcode", "no data");}
+        else{
+            SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
+            usertype = getshared.getString("type", "no data");
+            passcode = getshared.getString("passcode", "no data");
+        }
         Log.e(TAG, "getprofileinfo: " + usertype);
         switch (usertype) {
             case "crm":
@@ -104,9 +119,42 @@ public class ProfileFragment extends Fragment {
                 // Log.e(TAG, "getprofileinfo: "+"getmaster" );
                 getmasterdata();
                 break;
+            case "franchise":
+                Log.e(TAG, "getprofileinfo: "+"fracnhsie" );
+                getfranchisedata(passcode);
+                break;
+            case "crmuser":
+                getcrmuserprofile(passcode);
         }
 
 
+    }
+    private void getcrmuserprofile(String passcode){
+        Log.e(TAG, "getcrmuserprofile: "+passcode );
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm").child(passcode);
+               databaseReference .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        String email = dataSnapshot.child("email").getValue().toString();
+                        String password = dataSnapshot.child("password").getValue().toString();
+                       String imgurl = dataSnapshot.child("imgurl").getValue().toString();
+                        Log.e(TAG, "onDataChange: "+imgurl );
+                        if (!imgurl.equals("")){
+                            Glide.with(getContext()).load(imgurl).into(ivProfilePic);
+                        }
+                        tvProfilePasscode.setText(passcode);
+                        tvProfileEmail.setText(email);
+                        tvProfileName.setText(name);
+                        tvProfilePassword.setText(password);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void getmasterdata() {
@@ -116,25 +164,49 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String passcode = dataSnapshot.getKey();
-                    if (passcode.equals("123456")) {
+                    if (passcode.equals("234567")) {
                         String name = dataSnapshot.child("name").getValue().toString();
                         String email = dataSnapshot.child("email").getValue().toString();
                         String password = dataSnapshot.child("password").getValue().toString();
                         String imgurl = dataSnapshot.child("imgurl").getValue().toString();
 
-                        Log.e(TAG, "onDataChange: " + imgurl);
+                        //Log.e(TAG, "onDataChange: " + imgurl);
 
                         Glide.with(view).load(imgurl).into(ivProfilePic);
                         tvProfileName.setText(name);
                         tvProfileEmail.setText(email);
                         tvProfilePasscode.setText(passcode);
-                        EditProfileFragment.previouspasscode = passcode;
-                        EditProfileFragment.previouspassword = password;
+//                        EditProfileFragment.previouspasscode = passcode;
+//                        EditProfileFragment.previouspassword = password;
 
 
                         tvProfilePassword.setText(password);
                     }
                 }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void getfranchisedata(String passcode){
+        DatabaseReference franchiseReference;
+        franchiseReference = FirebaseDatabase.getInstance().getReference("franchiseV2").child(passcode);
+        franchiseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String password = dataSnapshot.child("password").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                String name = dataSnapshot.child("name").getValue().toString();
+                String imgurl = dataSnapshot.child("imgurl").getValue().toString();
+                tvProfilePassword.setText(password);
+                tvProfilePasscode.setText(passcode);
+                tvProfileName.setText(name);
+                tvProfileEmail.setText(email);
+                Glide.with(getContext()).load(imgurl).into(ivProfilePic);
 
             }
 
@@ -152,7 +224,7 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String key = dataSnapshot.getKey();
-                    Log.e(TAG, "onDataChange: " + key);
+                    //Log.e(TAG, "onDataChange: " + key);
                     String passcode = dataSnapshot.child("passcode").getValue().toString();
                     dataSnapshot.child("passcode").getValue().toString();
                     if (passcode.equals(passcodes)) {
@@ -168,8 +240,8 @@ public class ProfileFragment extends Fragment {
                         tvProfileName.setText(name);
                         tvProfileEmail.setText(email);
                         tvProfilePasscode.setText(passcode);
-                        EditProfileFragment.previouspasscode = passcode;
-                        EditProfileFragment.previouspassword = password;
+//                        EditProfileFragment.previouspasscode = passcode;
+//                        EditProfileFragment.previouspassword = password;
 
 
                         tvProfilePassword.setText(password);
@@ -207,8 +279,8 @@ public class ProfileFragment extends Fragment {
                         tvProfileName.setText(name);
                         tvProfileEmail.setText(email);
                         tvProfilePasscode.setText(passcode);
-                        EditProfileFragment.previouspasscode = passcode;
-                        EditProfileFragment.previouspassword = password;
+//                        EditProfileFragment.previouspasscode = passcode;
+//                        EditProfileFragment.previouspassword = password;
 
                         tvProfilePassword.setText(password);
 
@@ -248,8 +320,8 @@ public class ProfileFragment extends Fragment {
                         tvProfileName.setText(name);
                         tvProfileEmail.setText(email);
                         tvProfilePasscode.setText(passcode);
-                        EditProfileFragment.previouspasscode = passcode;
-                        EditProfileFragment.previouspassword = password;
+//                        EditProfileFragment.previouspasscode = passcode;
+//                        EditProfileFragment.previouspassword = password;
 
                         tvProfilePassword.setText(password);
 

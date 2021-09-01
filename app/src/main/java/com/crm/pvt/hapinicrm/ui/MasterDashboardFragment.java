@@ -47,11 +47,15 @@ public class MasterDashboardFragment extends Fragment {
         binding.cvTrackFranchise.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(MasterDashboardFragmentDirections.actionGlobalFranchiseDataViewFragment())
         );
-        binding.cvProfile.setOnClickListener( v ->
-                Navigation.findNavController(v).navigate(MasterDashboardFragmentDirections.actionMasterDashboardFragmentToProfileFragment())
-        );
-        binding.ivBack.setOnClickListener(v ->
-                Navigation.findNavController(v).navigateUp());
+        binding.cvProfile.setOnClickListener(new View.OnClickListener() {
+                                                 @Override
+                                                 public void onClick(View v) {
+                                                     ProfileFragment.user="";
+                                                     Navigation.findNavController(v).navigate(MasterDashboardFragmentDirections.actionMasterDashboardFragmentToProfileFragment());
+                                                 }
+                                             });
+                binding.ivBack.setOnClickListener(v ->
+                        Navigation.findNavController(v).navigateUp());
 
         binding.cvTaskAssign.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(MasterDashboardFragmentDirections.actionMasterDashboardFragmentToTaskAssignFragment()));
