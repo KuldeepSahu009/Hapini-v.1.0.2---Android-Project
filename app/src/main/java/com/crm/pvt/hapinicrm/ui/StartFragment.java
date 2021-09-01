@@ -63,8 +63,8 @@ public class StartFragment extends Fragment {
 
         // for user
 
-        if(Splashscreen.userLoginType != null) {
-            switch (Splashscreen.userLoginType) {
+        if(Splashscreen.usertype != null) {
+            switch (Splashscreen.usertype) {
                 case "crmuser":
                     Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToCrmUserFragment());
                     break;
@@ -80,7 +80,7 @@ public class StartFragment extends Fragment {
         if(Splashscreen.isFranchise)
         {
             //After Designed Logged out button in Layput
-        //  Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToFranchiseDashboardFragment());
+          Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToFranchiseDashboardFragment());
         }
     }
 

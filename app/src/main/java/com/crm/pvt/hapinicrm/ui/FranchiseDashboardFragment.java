@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -69,54 +70,23 @@ public class FranchiseDashboardFragment extends Fragment {
                     .findNavController(v)
                     .navigate(R.id.action_franchiseDashboardFragment_to_adminDataViewFragment2,admin);
         });
-        binding.profileFragment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProfileFragment.user="";
-                Navigation
-                        .findNavController(v)
-                        .navigate(R.id.profileFragmentfracnhsie,admin);
-            }
+
+        binding.franchiseadminlogout.setOnClickListener(v->
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Logout");
+            builder.setMessage("Are you sure you want to logout?");
+            builder.setCancelable(true);
+            builder.setPositiveButton("Yes", (dialog, which) -> {
+                if(Splashscreen.spAdminsData != null)
+                Splashscreen.spAdminsData.edit().clear().commit();
+                Navigation.findNavController(v).navigate(FranchiseDashboardFragmentDirections.actionFranchiseDashboardFragmentToStartFragment());
+            });
+            builder.setNegativeButton("No", (dialog, which) -> {
+            });
+
+            AlertDialog logoutDialog = builder.create();
+            logoutDialog.show();
         });
-    }
-
-
-    @Override
-    public void onStart() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
-                        .setValue("active");
-        super.onStart();
-
-    }
-
-    @Override
-    public void onPause() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
-        super.onPause();
-
-    }
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
-
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (Splashscreen.spAdminsData != null)
-            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                        .setValue("active");
     }
 }

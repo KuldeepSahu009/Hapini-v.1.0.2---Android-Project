@@ -5,4 +5,5 @@ import com.crm.pvt.hapinicrm.model.Franchise;
 
 public interface DataCallBackTackFranchise {
     void remove(Franchise franchise);
+    void showAdminsUnderThisFranchise(String franchisePasscode);
 }

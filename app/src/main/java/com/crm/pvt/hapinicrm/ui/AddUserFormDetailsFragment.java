@@ -1,8 +1,6 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,8 +24,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
 
 public class AddUserFormDetailsFragment extends Fragment {
 
@@ -59,11 +55,11 @@ public class AddUserFormDetailsFragment extends Fragment {
             String location = binding.etLocality.getText().toString();
             String passcode = binding.etPasscode.getText().toString();
             String password = binding.etPassword.getText().toString();
-            //String addedBy = binding.etYourName.getText().toString();
+            String addedBy = binding.etYourPass.getText().toString();
 
             if (binding.cvAddUserFormTermsAndCondition.isChecked()) {
                 if (((email.isEmpty() || name.isEmpty() || mobileno.isEmpty() || whatsappno.isEmpty() || state.isEmpty() || city.isEmpty() || location.isEmpty() ||
-                        passcode.isEmpty() || password.isEmpty()))) {
+                        passcode.isEmpty() || password.isEmpty())) || addedBy.isEmpty()) {
                     Snackbar.make(v,"All Fields are necessary",Snackbar.LENGTH_LONG).show();
 
                 } else if (passcode.length() != 6) {
@@ -73,9 +69,7 @@ public class AddUserFormDetailsFragment extends Fragment {
                     progressDialog.setTitle("Please wait");
                     progressDialog.setMessage("Creating user");
                     progressDialog.show();
-                    SharedPreferences prefs = getContext().getSharedPreferences("info", Context.MODE_PRIVATE);
-                   String addedby=prefs.getString("passcode","no data");
-                        enterdatatofirebase(name,email,mobileno,whatsappno, state,city,location,passcode,password,addedby);
+                        enterdatatofirebase(name,email,mobileno,whatsappno, state,city,location,passcode,password , addedBy);
                 }
 
             } else {
@@ -114,25 +108,12 @@ public class AddUserFormDetailsFragment extends Fragment {
         binding.tvAddUserFormDashboardTitle.setText(title);
     }
     private void enterdatatofirebase(String name,String email,String phoneno,String whatsappno, String state ,String city,String location,String passcode,String password , String addedBy){
-        User user = new User(name,email,phoneno,whatsappno,state,city,location,passcode,password , addedBy,"12");
-        HashMap<String,String>hashMap=new HashMap<>();
-        hashMap.put("addedBy",addedBy);
-        hashMap.put("city",city);
-        hashMap.put("email",email);
-        hashMap.put("locality",location);
-        hashMap.put("mobileNo",phoneno);
-        hashMap.put("name",name);
-        hashMap.put("passcode",passcode);
-        hashMap.put("password",password);
-        hashMap.put("state",state);
-        hashMap.put("whatsAppNo",whatsappno);
-        hashMap.put("imgurl","");
-
+        User user = new User(name,email,phoneno,whatsappno,state,city,location,passcode,password , addedBy);
 
         if (usertypes=="crm"){
 
             DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("usersv2").child(usertypes);
-            databaseReference.child(passcode).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            databaseReference.child(passcode).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
@@ -182,138 +163,5 @@ public class AddUserFormDetailsFragment extends Fragment {
             });
         }
     }
-    @Override
-    public void onStart() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null")) {
-                String type;
-                    switch (Splashscreen.spAdminsData.getString("type","null"))
-                    {
-                        case "crm":
-                            type = "CRM";
-                            CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                    .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                    .setValue("active");
-                            break;
-                        case "data":
-                            type = "DATA_ENTRY";
-                            CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                    .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                    .setValue("active");
-                            break;
-                        case "video":
-                            type = "VIDEO_EDITOR";
-                            CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                    .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                    .setValue("active");
-                            break;
-                        default:
-                            break;
-                    }
 
-            }
-
-        super.onStart();
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null")) {
-                String type;
-                switch (Splashscreen.spAdminsData.getString("type","null"))
-                {
-                    case "crm":
-                        type = "CRM";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .setValue("active");
-                        break;
-                    case "data":
-                        type = "DATA_ENTRY";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .setValue("active");
-                        break;
-                    case "video":
-                        type = "VIDEO_EDITOR";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .setValue("active");
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-    }
-
-    @Override
-    public void onPause() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null")) {
-                String type;
-                switch (Splashscreen.spAdminsData.getString("type","null"))
-                {
-                    case "crm":
-                        type = "CRM";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .removeValue();
-                        break;
-                    case "data":
-                        type = "DATA_ENTRY";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .removeValue();
-                        break;
-                    case "video":
-                        type = "VIDEO_EDITOR";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .removeValue();
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-        super.onPause();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null")) {
-                String type;
-                switch (Splashscreen.spAdminsData.getString("type","null"))
-                {
-                    case "crm":
-                        type = "CRM";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .removeValue();
-                        break;
-                    case "data":
-                        type = "DATA_ENTRY";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .removeValue();
-                        break;
-                    case "video":
-                        type = "VIDEO_EDITOR";
-                        CrmAdminFragment.activeStatusReference.child("admins").child(type)
-                                .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                                .removeValue();
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-    }
 }

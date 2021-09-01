@@ -163,25 +163,4 @@ public class DataEntryUserFragment extends Fragment {
         AlertDialog logoutDialog = builder.create();
         logoutDialog.show();
     }
-
-    @Override
-    public void onStart() {
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("data")
-                        .child(Splashscreen.spUsersData.getString("passcode","null"))
-                        .setValue("active");
-        super.onStart();
-
-    }
-
-    @Override
-    public void onPause() {
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("data")
-                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
-        super.onPause();
-
-    }
 }

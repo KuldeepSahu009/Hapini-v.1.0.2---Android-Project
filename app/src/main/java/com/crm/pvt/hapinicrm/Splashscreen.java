@@ -30,8 +30,8 @@ public class Splashscreen extends AppCompatActivity {
     private final int SPLASH_TIME_OUT=6500;
 
     private String password;
-    private String passcode;
-    private String usertype;
+    public static  String passcode;
+    public static  String usertype;
 
     private String TAG = "TAG";
     public static boolean isFranchise = false;
@@ -59,10 +59,11 @@ public class Splashscreen extends AppCompatActivity {
     private void checkforFranchise() {
         SharedPreferences shared = getSharedPreferences("infos", Context.MODE_PRIVATE);
         String usertype = shared.getString("type", "no data");
-        String passcode = shared.getString("passcode", "no passcode");
+        String passcode1 = shared.getString("passcode", "no passcode");
         String password = shared.getString("password", "no password");
-        if (!usertype.equals("no data") && !passcode.equals("no passcode") ){
+        if (!usertype.equals("no data") && !passcode1.equals("no passcode") && usertype.equals("franchise")){
             isFranchise = true;
+            passcode = passcode1;
         }else if (usertype.equals("no data")){
             Log.e(TAG, "checkforuser: "+"no user");
         }
