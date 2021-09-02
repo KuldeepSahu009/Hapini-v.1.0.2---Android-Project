@@ -236,6 +236,14 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
         });
 
     }
+    public static  String  trackAdminsUnderThisFranchisePasscode = "";
+    @Override
+    public void showAdminsUnderThisFranchise(String franchisePasscode) {
+        Bundle bundle = new Bundle();
+        bundle.putString("ADMIN","crm");
+        trackAdminsUnderThisFranchisePasscode = franchisePasscode;
+        Navigation.findNavController(getView()).navigate(R.id.action_franchiseDataViewFragment_to_adminDataViewFragment2,bundle);
+    }
 
     private void getsearchdata(String s) {
        getFranchiseSort(s);

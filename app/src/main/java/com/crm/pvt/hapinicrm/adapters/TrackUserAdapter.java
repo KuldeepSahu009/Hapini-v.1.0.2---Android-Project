@@ -282,7 +282,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         document.add(paragraphcity.setRelativePosition(0, 0, 0, 0));
         document.add(paragraphaddedby.setRelativePosition(0, 0, 0, 0));
         document.close();
-        Toast.makeText(context, "sdone", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Download Complete", Toast.LENGTH_LONG).show();
         progressDialog.dismiss();
 
         openfile(file);

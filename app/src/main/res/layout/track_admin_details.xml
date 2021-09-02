@@ -8,6 +8,7 @@
     app:cardCornerRadius="4dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvTrackAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,11 +18,11 @@
 
             <TextView
                 android:id="@+id/trackadminname"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="serif"
+                android:padding="5dp"
                 android:text="Satyam Kumar"
                 android:textColor="@color/black"
                 android:textSize="25dp"
@@ -29,8 +30,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/trackadminprofilepic"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginVertical="4dp"
                 android:layout_marginEnd="10dp"
@@ -44,17 +45,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/trackadminname"
-                android:layout_marginStart="16dp"
+                android:padding="5dp"
                 android:text="Email ID: "
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/trackadminemailid"
-                android:layout_width="wrap_content"
-                android:layout_toLeftOf="@+id/trackadminprofilepic"
+                android:layout_width="251dp"
+                android:padding="5dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/trackadminname"
+                android:layout_marginRight="3dp"
+                android:layout_toLeftOf="@+id/trackadminprofilepic"
                 android:layout_toEndOf="@+id/adminbackemail"
                 android:text="abc@gamil.com"
                 android:textColor="@color/black"
@@ -65,14 +68,15 @@
                 android:id="@+id/adminbackphoneno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_below="@+id/trackadminemailid"
+                android:padding="5dp"
                 android:text="Phone no: "
                 android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/trackadminphoneno"
                 android:layout_width="wrap_content"
+                android:padding="5dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackemail"
                 android:layout_toEndOf="@+id/adminbackphoneno"
@@ -85,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackphoneno"
-                android:layout_marginStart="16dp"
+                android:padding="5dp"
                 android:text="Whatsapp no: "
                 android:textColor="@color/black" />
 
@@ -93,6 +97,7 @@
                 android:id="@+id/trackadminwhatsappno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:layout_below="@id/adminbackphoneno"
                 android:layout_toEndOf="@+id/adminbackwhatsapp"
                 android:text="+91 67676767676"
@@ -104,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackwhatsapp"
-                android:layout_marginStart="16dp"
+                android:padding="5dp"
                 android:text="passcode: "
                 android:textColor="@color/black" />
 
@@ -113,6 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackwhatsapp"
+                android:padding="5dp"
                 android:layout_toEndOf="@+id/adminbackpasscode"
                 android:text="787878"
                 android:textColor="@color/black"
@@ -123,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackpasscode"
-                android:layout_marginStart="16dp"
+                android:padding="5dp"
                 android:text="Password: "
                 android:textColor="@color/black" />
 
@@ -134,6 +140,7 @@
                 android:layout_below="@+id/adminbackpasscode"
                 android:layout_toEndOf="@+id/adminbackpassowrd"
                 android:text="87jhh78"
+                android:padding="5dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -142,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackpassowrd"
-                android:layout_marginStart="16dp"
+                android:padding="5dp"
                 android:text="State: "
                 android:textColor="@color/black" />
 
@@ -152,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackpassowrd"
                 android:layout_marginBottom="10dp"
+                android:padding="5dp"
                 android:layout_toStartOf="@+id/trackadmindownload"
                 android:layout_toEndOf="@id/adminbackstate"
                 android:text="madhya pradesh"
@@ -163,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackstate"
-                android:layout_marginStart="16dp"
+                android:padding="5dp"
                 android:text="City: "
                 android:textColor="@color/black" />
 
@@ -178,6 +186,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_toStartOf="@+id/trackadmindownload"
                 android:layout_toEndOf="@id/adminbackcity"
+                android:padding="5dp"
                 android:text="Some place"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -187,8 +196,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/adminbackcity"
-                android:layout_marginStart="16dp"
-                android:text="Location with Pin Code: "
+                android:padding="5dp"
+                android:text="Location||Pin Code: "
                 android:textColor="@color/black" />
 
             <TextView
@@ -198,6 +207,7 @@
                 android:layout_below="@+id/adminbackcity"
                 android:layout_toStartOf="@+id/trackadmindownload"
                 android:layout_toEndOf="@id/adminbacklocation"
+                android:padding="5dp"
                 android:text="random,location"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -206,8 +216,9 @@
                 android:id="@+id/addedBy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/adminbacklocation"
-                android:layout_marginStart="16dp"
+                android:layout_below="@+id/trackadminlocation"
+                android:layout_marginTop="2dp"
+                android:padding="5dp"
                 android:text="Added by: "
                 android:textColor="@color/black" />
 
@@ -216,10 +227,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/trackadminlocation"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginBottom="10dp"
-                android:layout_toStartOf="@+id/trackadmindownload"
-                android:layout_toEndOf="@id/adminbacklocation"
+                android:layout_toEndOf="@+id/addedBy"
+                android:padding="5dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:text="123456" />
@@ -240,8 +252,8 @@
                 android:id="@+id/trackadminattendance"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/trackadmincall"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="90dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
@@ -257,8 +269,8 @@
                 android:layout_marginEnd="50dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:src="@drawable/ic_baseline_arrow_downward_24"
-                android:focusable="true" />
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_arrow_downward_24" />
 
             <ImageView
                 android:id="@+id/trackAdminStatus"
@@ -266,8 +278,8 @@
                 android:layout_height="30dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="104dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginTop="165dp"
+                android:layout_marginEnd="7dp"
                 android:background="?attr/selectableItemBackground"
                 android:src="@drawable/red_dot" />
 
@@ -281,8 +293,8 @@
                 android:layout_marginEnd="4dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:src="@drawable/ic_baseline_delete_24"
-                android:focusable="true" />
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_delete_24" />
 
 
         </RelativeLayout>

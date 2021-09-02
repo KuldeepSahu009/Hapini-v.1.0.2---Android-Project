@@ -121,10 +121,9 @@ public class AdminLoginFragment extends Fragment {
                 }
                 else {
                     String postString = "";
-
                     if (selected == 1) {
                         postString = "@crmadmin.com";
-                    } else if (selected == 5) {//not
+                    } else if (selected == 5) {//not in use
                         postString = "@deadmin.com";
                     } else if (selected == 4) {//not in use
                         postString = "@veadmin.com";

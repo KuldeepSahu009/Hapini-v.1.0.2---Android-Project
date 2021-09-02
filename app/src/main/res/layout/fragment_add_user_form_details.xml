@@ -187,7 +187,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:hint="Locality and Pin Code">
+                android:hint="Locality||Pin Code">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLocality"
@@ -240,13 +240,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:hint="Your Name">
+                android:hint="Your Passcode">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etYourName"
+                    android:id="@+id/etYourPass"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="text" />
+                    android:inputType="number"
+                    android:maxLength="6"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

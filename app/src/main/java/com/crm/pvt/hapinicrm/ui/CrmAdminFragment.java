@@ -48,6 +48,7 @@ public class CrmAdminFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot usersSnapshot : snapshot.getChildren()) {
+                    if(Splashscreen.spAdminsData != null)
                     if(Splashscreen.spAdminsData.getString("passcode","null").equals(usersSnapshot.getKey()))
                        currentCRMAdmin = usersSnapshot.getValue(Admin.class);
                 }
@@ -90,6 +91,8 @@ public class CrmAdminFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("data", "crmUser");
+                if(Splashscreen.spAdminsData != null)
+                AdminDataViewFragment.trackUserUnderThisAdminPasscode = Splashscreen.spAdminsData.getString("passcode","");
                 Navigation.findNavController(v).navigate(R.id.action_crmAdminFragment_to_alltrackusersfragment, bundle);
 
 

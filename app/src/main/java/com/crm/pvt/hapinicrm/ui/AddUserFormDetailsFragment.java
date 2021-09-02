@@ -66,7 +66,7 @@ public class AddUserFormDetailsFragment extends Fragment {
             String location = binding.etLocality.getText().toString();
             String passcode = binding.etPasscode.getText().toString();
             String password = binding.etPassword.getText().toString();
-            String addedBy = binding.etYourName.getText().toString();
+            String addedBy = binding.etYourPass.getText().toString();
 
             if (binding.cvAddUserFormTermsAndCondition.isChecked()) {
                 if (((email.isEmpty() || name.isEmpty() || mobileno.isEmpty() || whatsappno.isEmpty() || state.isEmpty() || city.isEmpty() || location.isEmpty() ||
@@ -148,7 +148,7 @@ public class AddUserFormDetailsFragment extends Fragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"crm usernot entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"crm user not entered",Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -159,13 +159,13 @@ public class AddUserFormDetailsFragment extends Fragment {
                 @Override
                 public void onSuccess(Void unused) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"dataentry user entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"data entry user entered",Toast.LENGTH_LONG).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(getContext(),"dataentry usernot entered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"data entry user not entered",Toast.LENGTH_LONG).show();
                 }
             });
         }

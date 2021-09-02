@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:hint="Locality and Pin Code">
+                android:hint="Locality||Pin Code">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLocality"
