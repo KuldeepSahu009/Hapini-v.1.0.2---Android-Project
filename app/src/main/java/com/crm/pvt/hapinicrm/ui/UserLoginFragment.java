@@ -107,7 +107,7 @@ public class UserLoginFragment extends Fragment {
 
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             String key = dataSnapshot.getKey();
-
+                            Log.e(TAG, "onDataChange: "+key );
                             if (key.equals(passcodes)) {
                                 String password = dataSnapshot.child("password").getValue().toString();
                                 if (password.equals(passwords)) {

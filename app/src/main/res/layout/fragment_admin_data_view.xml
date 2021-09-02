@@ -29,9 +29,9 @@
                     android:layout_marginEnd="40dp"
                     android:autofillHints="Search User"
                     android:background="@drawable/track_user_et_bk"
+                    android:drawableLeft="@drawable/ic_baseline_search_24"
                     android:hint="Search Admin"
                     android:inputType="text"
-                    android:drawableLeft="@drawable/ic_baseline_search_24"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="8dp" />
             </LinearLayout>
@@ -39,6 +39,16 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/tvAdminNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="24dp"
+        android:text="No data to show"
+        android:textSize="30sp"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/trackAdminRecyclerView"

@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewMasterEditDetails">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/llMasterEditDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,14 +85,14 @@
             android:weightSum="8">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:src="@drawable/account"
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/editprofileimg"
+                android:layout_width="195dp"
+                android:layout_height="195dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/account"
                 app:civ_border_color="@color/yellow"
-                app:civ_border_width="1dp"
-                app:civ_border_overlay="true"/>
+                app:civ_border_overlay="true"
+                app:civ_border_width="1dp" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -105,6 +105,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etProfileName"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPersonName" />
@@ -122,6 +123,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etProfileEmail"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textEmailAddress" />
@@ -132,6 +134,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:hint="Passcode">
@@ -149,6 +152,7 @@
                 android:id="@+id/textInputPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
@@ -174,6 +178,7 @@
                 <CheckBox
                     android:id="@+id/cvMasterDetailsTermsAndCondition"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1" />
@@ -182,6 +187,7 @@
                     android:id="@+id/tvMasterDetailsTermsAndCondition"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_weight="6"
                     android:paddingStart="8dp"
                     android:text="@string/textviewtermsandconditon"
@@ -191,7 +197,9 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnMasterDetailsChange"
                 android:layout_width="200dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editprofileimg"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
@@ -200,7 +208,7 @@
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/yellow" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </ScrollView>
 

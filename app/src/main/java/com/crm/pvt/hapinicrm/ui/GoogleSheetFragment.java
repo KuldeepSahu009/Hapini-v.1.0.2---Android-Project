@@ -38,25 +38,4 @@ public class GoogleSheetFragment extends Fragment {
         wvGoogleSheets.getSettings().setJavaScriptEnabled(true);
         wvGoogleSheets.loadUrl("https://docs.google.com/spreadsheets/d/1jM0EnmyCYlSO9YRLHk-gJetdtC54DEJpPKGU_LK42Vc/edit#gid=0");
     }
-
-    @Override
-    public void onStart() {
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("data")
-                        .child(Splashscreen.spUsersData.getString("passcode","null"))
-                        .setValue("active");
-        super.onStart();
-
-    }
-
-    @Override
-    public void onPause() {
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("data")
-                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
-        super.onPause();
-
-    }
 }

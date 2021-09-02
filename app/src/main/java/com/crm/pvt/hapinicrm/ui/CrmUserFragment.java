@@ -59,6 +59,13 @@ public class CrmUserFragment extends Fragment {
         binding.ivCrmUserLogout.setOnClickListener(v -> {
             crmUserLogout(v);
         });
+        binding.cvprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProfileFragment.user="user";
+                Navigation.findNavController(v).navigate(R.id.crmusertoprofilefragment);
+            }
+        });
     }
 
     private void crmUserLogout(View v) {
@@ -76,47 +83,4 @@ public class CrmUserFragment extends Fragment {
         AlertDialog logoutDialog = builder.create();
         logoutDialog.show();
     }
-
-
-    @Override
-    public void onStart() {
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("crm")
-                        .child(Splashscreen.spUsersData.getString("passcode","null"))
-                        .setValue("active");
-        super.onStart();
-
-    }
-
-    @Override
-    public void onPause() {
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("crm")
-                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
-        super.onPause();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("crm")
-                        .child(Splashscreen.spUsersData.getString("passcode","null")).removeValue();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(Splashscreen.spUsersData != null)
-            if(!Splashscreen.spUsersData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("users").child("crm")
-                        .child(Splashscreen.spUsersData.getString("passcode","null"))
-                        .setValue("active");
-    }
-
-
 }

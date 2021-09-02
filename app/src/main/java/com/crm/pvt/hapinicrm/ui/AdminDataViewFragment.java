@@ -220,6 +220,11 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
                         if(!adminObject.getAddedBy().equals("") && (adminObject.getAddedBy().equals(Splashscreen.passcode) || adminObject.getAddedBy().equals(FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode)))
                         adminList.add(adminObject);
                     }
+                    if(adminList.size() == 0) {
+                        binding.tvAdminNoData.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.tvAdminNoData.setVisibility(View.GONE);
+                    }
                     trackAdminAdapter.notifyDataSetChanged();
 
                 }
@@ -387,50 +392,15 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
     public void showUsersUnderAdmin(Admin admin, String usertype) {
         trackUserUnderThisAdminPasscode = admin.getPasscode();
         TrackUsers.userType = "crm";
-        if(Splashscreen.spAdminsData != null && (Splashscreen.spAdminsData.getString("type","").equals("crm") || Splashscreen.spAdminsData.getString("type","").equals("franchise") || !FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode.equals("")))
+        if(
+                Splashscreen.spAdminsData != null
+                && (Splashscreen.spAdminsData.getString("type","").equals("crm")
+                || Splashscreen.spAdminsData.getString("type","").equals("franchise")
+                || !FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode.equals(""))
+        )
+
         Navigation.findNavController(getView()).navigate(AdminDataViewFragmentDirections.actionAdminDataViewFragment2ToAlltrackusersfragment());
         else
             Navigation.findNavController(getView()).navigate(R.id.action_adminDataViewFragment_to_alltrackusersfragment);
     }
-
-    @Override
-    public void onStart() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null"))
-                        .setValue("active");
-        super.onStart();
-
-    }
-
-    @Override
-    public void onPause() {
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
-        super.onPause();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(Splashscreen.spAdminsData != null)
-            if(!Splashscreen.spAdminsData.getString("passcode","null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode","null")).removeValue();
-
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (Splashscreen.spAdminsData != null)
-            if (!Splashscreen.spAdminsData.getString("passcode", "null").equals("null"))
-                CrmAdminFragment.activeStatusReference.child("franchises")
-                        .child(Splashscreen.spAdminsData.getString("passcode", "null"))
-                        .setValue("active");
-    }
-
 }
