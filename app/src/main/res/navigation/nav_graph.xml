@@ -554,6 +554,9 @@
         <action
             android:id="@+id/crmusertoprofilefragment"
             app:destination="@id/profilefragmentcrmuser"/>
+        <action
+            android:id="@+id/crmtostartfragment"
+            app:destination="@id/startFragment"/>
     </fragment>
     <fragment
         android:id="@+id/profilefragmentcrmuser"
@@ -730,6 +733,9 @@
             app:destination="@id/alltrackusersfragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/movetoshorteddataadminfragment"
+            app:destination="@id/shorteddatafragment"/>
     </fragment>
 
     <fragment

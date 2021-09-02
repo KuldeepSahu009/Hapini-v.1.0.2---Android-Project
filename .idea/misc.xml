@@ -89,7 +89,9 @@
         <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_dashboard.xml" value="0.136" />
         <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_data_view.xml" value="0.1118659420289855" />
         <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_shorteddataadmin.xml" value="0.38176197836166925" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_admin_details.xml" value="0.13677536231884058" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_admin.xml" value="0.6" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_admin_details.xml" value="0.536" />
+        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_user_info_card_view.xml" value="0.2" />
       </map>
     </option>
   </component>

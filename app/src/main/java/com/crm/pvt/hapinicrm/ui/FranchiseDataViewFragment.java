@@ -247,6 +247,7 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
         Bundle bundle = new Bundle();
         bundle.putString("ADMIN","crm");
         trackAdminsUnderThisFranchisePasscode = franchisePasscode;
+
         Navigation.findNavController(getView()).navigate(R.id.action_franchiseDataViewFragment_to_adminDataViewFragment2,bundle);
     }
 
