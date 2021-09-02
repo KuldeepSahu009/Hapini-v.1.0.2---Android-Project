@@ -1,6 +1,9 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +17,14 @@ import androidx.navigation.Navigation;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentFranchiseDashboardBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class FranchiseDashboardFragment extends Fragment {
 
     private FragmentFranchiseDashboardBinding binding;
     public static String addAdminTypes;
     private boolean attendance=false;
+    private static final String TAG = "TAG";
     private Bundle admin;
 
     @Override
@@ -86,9 +91,18 @@ public class FranchiseDashboardFragment extends Fragment {
             builder.setMessage("Are you sure you want to logout?");
             builder.setCancelable(true);
             builder.setPositiveButton("Yes", (dialog, which) -> {
-                if(Splashscreen.spAdminsData != null)
-                Splashscreen.spAdminsData.edit().clear().commit();
-                Navigation.findNavController(v).navigate(FranchiseDashboardFragmentDirections.actionFranchiseDashboardFragmentToStartFragment());
+               // if(Splashscreen.spAdminsData != null)
+                    Log.e(TAG, "onViewCreated: "+"yes");
+                FirebaseAuth.getInstance().signOut();
+
+                //Splashscreen.spAdminsData.edit().clear().commit();
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE).edit();
+                editor.putString("passcode", "no data");
+                editor.putString("password", "no data");
+                editor.putString("type", "no data");
+                editor.apply();
+                Splashscreen.isFranchise=false;
+                Navigation.findNavController(getView()).navigate(FranchiseDashboardFragmentDirections.actionFranchiseDashboardFragmentToStartFragment());
             });
             builder.setNegativeButton("No", (dialog, which) -> {
             });

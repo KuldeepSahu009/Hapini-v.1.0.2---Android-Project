@@ -75,7 +75,8 @@ public class CrmUserFragment extends Fragment {
         builder.setCancelable(true);
         builder.setPositiveButton("Yes", (dialog, which) -> {
             Splashscreen.spUsersData.edit().clear().commit();
-            Navigation.findNavController(v).navigateUp();
+            Splashscreen.usertype=null;
+            Navigation.findNavController(v).navigate(R.id.crmtostartfragment);
         });
         builder.setNegativeButton("No", (dialog, which) -> {
         });

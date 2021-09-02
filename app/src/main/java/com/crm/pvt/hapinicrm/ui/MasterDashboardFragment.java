@@ -22,6 +22,7 @@ public class MasterDashboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentMasterDashboardBinding.inflate(inflater,container,false);
+       // FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode="master";
         return binding.getRoot();
     }
 
