@@ -77,7 +77,7 @@ public class StartFragment extends Fragment {
             }
         }
 
-        if(Splashscreen.isFranchise)
+        if(Splashscreen.spAdminsData.getString("type","").equals("franchise"))
         {
             //After Designed Logged out button in Layput
           Navigation.findNavController(view).navigate(StartFragmentDirections.actionStartFragmentToFranchiseDashboardFragment());

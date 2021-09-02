@@ -106,18 +106,18 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         String addedBy = "";
 
-        if(Splashscreen.isFranchise) {
-            addedBy = Splashscreen.passcode;
+        if(Splashscreen.spAdminsData.getString("type","").equals("franchise")) {
+            addedBy = !Splashscreen.spAdminsData.getString("passcode","").equals("") ? Splashscreen.spAdminsData.getString("passcode","") : "master";
         }
         Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, state , city , location, "",addedBy);
 
         if (adminType == "CRM") {
 
-            if (Splashscreen.isFranchise) {
+            if (Splashscreen.spAdminsData.getString("type","").equals("franchise")) {
 
                 DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
                         .getReference("crm_by_franchise")
-                        .child(Splashscreen.passcode);
+                        .child(addedBy);
                 franchiseDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -246,7 +246,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
         if (isAllowed[0]) {
             DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
                     .getReference("crm_by_franchise")
-                    .child(Splashscreen.passcode);
+                    .child(Splashscreen.spAdminsData.getString("passcode",""));
             franchiseDbRef.child(admin.getPasscode()).setValue(admin);
             Toast.makeText(getContext() , "CRM Admin Added",Toast.LENGTH_SHORT).show();
         } else {
