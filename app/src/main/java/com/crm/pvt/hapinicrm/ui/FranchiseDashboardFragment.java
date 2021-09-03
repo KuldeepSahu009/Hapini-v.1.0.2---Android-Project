@@ -1,5 +1,7 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,7 +19,13 @@ import androidx.navigation.Navigation;
 import com.crm.pvt.hapinicrm.R;
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentFranchiseDashboardBinding;
+import com.crm.pvt.hapinicrm.model.Franchise;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FranchiseDashboardFragment extends Fragment {
 
@@ -50,6 +58,7 @@ public class FranchiseDashboardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initializeCurrentFranchise();
         binding.cvFranchiseChats.setOnClickListener(v -> Navigation
                 .findNavController(v)
                 .navigate(FranchiseDashboardFragmentDirections
@@ -109,6 +118,32 @@ public class FranchiseDashboardFragment extends Fragment {
 
             AlertDialog logoutDialog = builder.create();
             logoutDialog.show();
+        });
+    }
+
+    private void initializeCurrentFranchise() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("franchiseV2");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+
+                    if (!Splashscreen.spAdminsData.getString("passcode", "").equals("")) {
+                        if (key.equals(Splashscreen.spAdminsData.getString("passcode", ""))) {
+                            String password = dataSnapshot.child("password").getValue().toString();
+                            if (password.equals(password)) {
+                                currentFranchise = dataSnapshot.getValue(Franchise.class);
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 }
