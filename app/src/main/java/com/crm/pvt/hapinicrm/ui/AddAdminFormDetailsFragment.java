@@ -3,6 +3,8 @@ package com.crm.pvt.hapinicrm.ui;
 import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -109,6 +111,9 @@ public class AddAdminFormDetailsFragment extends Fragment {
         if(Splashscreen.isFranchise) {
             addedBy = Splashscreen.passcode;
         }
+        SharedPreferences prefs = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE);
+        String passcodes=prefs.getString("passcode","no data");
+        addedBy=passcodes;
         Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, state , city , location, "",addedBy);
 
         if (adminType == "CRM") {

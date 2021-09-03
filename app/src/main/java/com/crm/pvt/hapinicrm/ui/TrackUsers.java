@@ -224,7 +224,18 @@ public class TrackUsers extends Fragment implements UserClickCallback {
                  if(dataSnapshot.child("addedBy").exists()) {
                      if((dataSnapshot.child("addedBy").getValue().toString().equals(AdminDataViewFragment.trackUserUnderThisAdminPasscode) || AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master")))
                      {
-                         TrackUserModel user = dataSnapshot.getValue(TrackUserModel.class);
+                        String addedby=dataSnapshot.child("addedBy").getValue().toString();
+                         String city=dataSnapshot.child("city").getValue().toString();
+                         String email=dataSnapshot.child("email").getValue().toString();
+                         String imgurl=dataSnapshot.child("imgurl").getValue().toString();
+                         String locality=dataSnapshot.child("locality").getValue().toString();
+                         String mobileNo=dataSnapshot.child("mobileNo").getValue().toString();
+                         String name=dataSnapshot.child("name").getValue().toString();
+                         String passcode=dataSnapshot.child("passcode").getValue().toString();
+                         String password=dataSnapshot.child("password").getValue().toString();
+                         String state=dataSnapshot.child("state").getValue().toString();
+                         String whatsappno=dataSnapshot.child("whatsAppNo").getValue().toString();
+                         TrackUserModel user = new TrackUserModel(name,email,mobileNo,whatsappno,passcode,password,state,city,locality,addedby,imgurl);
                          trackUserModelList.add(user);
                      }
                     }
