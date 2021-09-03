@@ -71,6 +71,7 @@ public class VerifyCrmUser extends Fragment {
         binding.verifyUser.setOnClickListener(v -> {
             isExitingFrag =true;
             FirebaseDatabase.getInstance().getReference().child("Verification Of Documents From Master V2").child(name).removeValue();
+            FirebaseStorage.getInstance().getReference().child("Verification Of Documents From Master V2").child(name).delete();
             Toast.makeText(getContext(), name + " is Verified", Toast.LENGTH_SHORT).show();
             Navigation.findNavController(view).navigate(VerifyCrmUserDirections.actionVerificationOfUserToCrmAdminFragment());
         });
