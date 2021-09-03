@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class CrmUserFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.crmusertoprofilefragment);
             }
         });
+
     }
 
     private void crmUserLogout(View v) {
@@ -83,5 +85,12 @@ public class CrmUserFragment extends Fragment {
 
         AlertDialog logoutDialog = builder.create();
         logoutDialog.show();
+    }
+
+    @Override
+    public void onStop() {//To prevent user from being logged in even when not working
+        Splashscreen.spUsersData.edit().clear().commit();
+        Splashscreen.usertype=null;
+        super.onStop();
     }
 }
