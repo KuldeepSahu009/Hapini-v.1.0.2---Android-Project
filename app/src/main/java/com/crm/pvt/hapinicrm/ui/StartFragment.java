@@ -1,5 +1,6 @@
 package com.crm.pvt.hapinicrm.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.databinding.FragmentStartBinding;
+import com.crm.pvt.hapinicrm.privacy;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -36,7 +38,10 @@ public class StartFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        binding.privacytext.setOnClickListener(v->{
+            Intent intent=new Intent(getContext(), privacy.class);
+            startActivity(intent);
+        });
         binding.btnAdmin.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(StartFragmentDirections.actionStartFragmentToAdminLoginFragment())
         );
