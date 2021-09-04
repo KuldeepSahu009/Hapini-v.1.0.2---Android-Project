@@ -146,4 +146,6 @@ public class FranchiseDashboardFragment extends Fragment {
             }
         });
     }
+
+
 }
