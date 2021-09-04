@@ -106,11 +106,8 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
     private void enterDataToFirebase(String name, String email, String mobileNo, String whatsAppNo,String state, String city, String location, String passcode, String password) {
 
-        String addedBy = "";
+        String addedBy;
 
-        if(Splashscreen.isFranchise) {
-            addedBy = Splashscreen.passcode;
-        }
         SharedPreferences prefs = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE);
         String passcodes=prefs.getString("passcode","no data");
         addedBy=passcodes;
@@ -118,11 +115,12 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         if (adminType == "CRM") {
 
-            if (Splashscreen.isFranchise) {
+            if (!passcode.equals("no data")) {
 
                 DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
-                        .getReference("crm_by_franchise")
-                        .child(Splashscreen.passcode);
+                        .getReference()
+                        .child("crm_by_franchise")
+                        .child(passcodes).push();
                 franchiseDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -133,9 +131,8 @@ public class AddAdminFormDetailsFragment extends Fragment {
                             } else {
                                 isAllowed[0] = false;
                             }
-                            addCRMAdminByFranchise(admin);
                         }
-
+                        addCRMAdminByFranchise(admin);
                     }
 
                     @Override
@@ -251,7 +248,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
         if (isAllowed[0]) {
             DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
                     .getReference("crm_by_franchise")
-                    .child(Splashscreen.passcode);
+                    .child(Splashscreen.spAdminsData.getString("passcode",""));
             franchiseDbRef.child(admin.getPasscode()).setValue(admin);
             Toast.makeText(getContext() , "CRM Admin Added",Toast.LENGTH_SHORT).show();
         } else {
