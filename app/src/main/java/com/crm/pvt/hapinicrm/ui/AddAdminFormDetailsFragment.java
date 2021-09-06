@@ -2,10 +2,7 @@ package com.crm.pvt.hapinicrm.ui;
 
 import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,8 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
@@ -50,9 +45,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
     String franchiseadmin;
     ProgressDialog progressDialog;
     FirebaseAuth auth;
-    Dialog dialog;
-    ImageButton btnClose;
-    Button btnTrack;
     private final int[] count = {0};
     private  final boolean[] isAllowed = {true};
 
@@ -66,8 +58,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setFormTitle();
-        dialog = new Dialog(getContext());
-        setUpCustomDialogBox();
         setUpSpinner();
 
         auth = FirebaseAuth.getInstance();
@@ -107,19 +97,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp());
     }
 
-    private void setUpCustomDialogBox() {
-        dialog = new Dialog(dialog.getContext());
-        dialog.setContentView(R.layout.warning_custom_dialogue);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        btnClose = dialog.findViewById(R.id.btnClose);
-        btnClose.setOnClickListener(v -> dialog.dismiss());
-
-        btnTrack = dialog.findViewById(R.id.trackButton);
-        btnTrack.setOnClickListener( v -> dialog.dismiss());
-        dialog.show();
-    }
-
     private void setUpSpinner() {
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.india_states, android.R.layout.simple_spinner_item);
@@ -131,8 +108,8 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         String addedBy = "";
 
-        if(Splashscreen.spAdminsData.getString("type","").equals("franchise")) {
-            addedBy = !Splashscreen.spAdminsData.getString("passcode","").equals("") ? Splashscreen.spAdminsData.getString("passcode","") : "master";
+        if(Splashscreen.isFranchise) {
+            addedBy = Splashscreen.passcode;
         }
         SharedPreferences prefs = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE);
         String passcodes=prefs.getString("passcode","no data");
@@ -141,11 +118,11 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
         if (adminType == "CRM") {
 
-            if (Splashscreen.spAdminsData.getString("type","").equals("franchise")) {
+            if (Splashscreen.isFranchise) {
 
                 DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
                         .getReference("crm_by_franchise")
-                        .child(addedBy);
+                        .child(Splashscreen.passcode);
                 franchiseDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -274,7 +251,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
         if (isAllowed[0]) {
             DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
                     .getReference("crm_by_franchise")
-                    .child(Splashscreen.spAdminsData.getString("passcode",""));
+                    .child(Splashscreen.passcode);
             franchiseDbRef.child(admin.getPasscode()).setValue(admin);
             Toast.makeText(getContext() , "CRM Admin Added",Toast.LENGTH_SHORT).show();
         } else {

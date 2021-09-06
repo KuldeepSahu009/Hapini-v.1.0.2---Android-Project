@@ -88,7 +88,7 @@ public class TrackUsers extends Fragment implements UserClickCallback {
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if(getArguments() != null)
-        data = getArguments().getString("data");
+            data = getArguments().getString("data");
         if(data != null) {
 
             switch (data) {
@@ -221,23 +221,23 @@ public class TrackUsers extends Fragment implements UserClickCallback {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                 if(dataSnapshot.child("addedBy").exists()) {
-                     if((dataSnapshot.child("addedBy").getValue().toString().equals(AdminDataViewFragment.trackUserUnderThisAdminPasscode) || AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master")))
-                     {
-                        String addedby=dataSnapshot.child("addedBy").getValue().toString();
-                         String city=dataSnapshot.child("city").getValue().toString();
-                         String email=dataSnapshot.child("email").getValue().toString();
-                         String imgurl=dataSnapshot.child("imgurl").getValue().toString();
-                         String locality=dataSnapshot.child("locality").getValue().toString();
-                         String mobileNo=dataSnapshot.child("mobileNo").getValue().toString();
-                         String name=dataSnapshot.child("name").getValue().toString();
-                         String passcode=dataSnapshot.child("passcode").getValue().toString();
-                         String password=dataSnapshot.child("password").getValue().toString();
-                         String state=dataSnapshot.child("state").getValue().toString();
-                         String whatsappno=dataSnapshot.child("whatsAppNo").getValue().toString();
-                         TrackUserModel user = new TrackUserModel(name,email,mobileNo,whatsappno,passcode,password,state,city,locality,addedby,imgurl);
-                         trackUserModelList.add(user);
-                     }
+                    if(dataSnapshot.child("addedBy").exists()) {
+                        if((dataSnapshot.child("addedBy").getValue().toString().equals(AdminDataViewFragment.trackUserUnderThisAdminPasscode) || AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master")))
+                        {
+                            String addedby=dataSnapshot.child("addedBy").getValue().toString();
+                            String city=dataSnapshot.child("city").getValue().toString();
+                            String email=dataSnapshot.child("email").getValue().toString();
+                            String imgurl=dataSnapshot.child("imgurl").getValue().toString();
+                            String locality=dataSnapshot.child("locality").getValue().toString();
+                            String mobileNo=dataSnapshot.child("mobileNo").getValue().toString();
+                            String name=dataSnapshot.child("name").getValue().toString();
+                            String passcode=dataSnapshot.child("passcode").getValue().toString();
+                            String password=dataSnapshot.child("password").getValue().toString();
+                            String state=dataSnapshot.child("state").getValue().toString();
+                            String whatsappno=dataSnapshot.child("whatsAppNo").getValue().toString();
+                            TrackUserModel user = new TrackUserModel(name,email,mobileNo,whatsappno,passcode,password,state,city,locality,addedby,imgurl);
+                            trackUserModelList.add(user);
+                        }
                     }
                 }
                 if(trackUserModelList.size() == 0) {
@@ -508,10 +508,10 @@ public class TrackUsers extends Fragment implements UserClickCallback {
     public void navigateToTaskList (String userPasscode){
         Bundle bundle = new Bundle();
         bundle.putString("userPasscode", userPasscode);
-            if(AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master"))
-                Navigation.findNavController(requireView()).navigate(R.id.action_trackuserscardviewfragment_to_taskListFragment22, bundle);
-            else
-                Navigation.findNavController(requireView()).navigate(R.id.action_alltrackusersfragment_to_taskListFragment, bundle);
+        if(AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master"))
+            Navigation.findNavController(requireView()).navigate(R.id.action_trackuserscardviewfragment_to_taskListFragment22, bundle);
+        else
+            Navigation.findNavController(requireView()).navigate(R.id.action_alltrackusersfragment_to_taskListFragment, bundle);
 
     }
 }
