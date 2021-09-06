@@ -83,6 +83,10 @@ public class VerificationFromAdmin extends Fragment {
                 uploadToFirebase();
             }
         });
+
+        binding.backButton.setOnClickListener( v -> {
+            Navigation.findNavController(v).navigateUp();
+        });
     }
 
     private void uploadImage(String s) {

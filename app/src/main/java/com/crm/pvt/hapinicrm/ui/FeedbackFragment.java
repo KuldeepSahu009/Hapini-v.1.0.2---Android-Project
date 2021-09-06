@@ -74,6 +74,10 @@ public class FeedbackFragment extends Fragment {
                 }
             }
         });
+
+        binding.ivBackButton.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigateUp();
+        });
     }
 
     private void initializeSpinner() {

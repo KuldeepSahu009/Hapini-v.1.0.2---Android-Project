@@ -64,6 +64,10 @@ public class FranchiseChatScreenFragment extends Fragment {
             chatReference.push().setValue(chat);
             binding.etMessage.setText("");
         });
+
+        binding.ivBackButton.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigateUp();
+        });
     }
 
 

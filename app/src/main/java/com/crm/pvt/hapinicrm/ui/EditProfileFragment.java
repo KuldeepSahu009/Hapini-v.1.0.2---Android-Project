@@ -127,6 +127,7 @@ public class EditProfileFragment extends Fragment {
                 getdata(view);
             }
         });
+
     }
 
     private void initializeAllUIComponents(View view) {

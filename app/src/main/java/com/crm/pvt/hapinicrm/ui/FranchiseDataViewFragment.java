@@ -165,7 +165,8 @@ public class FranchiseDataViewFragment extends Fragment implements DataCallBackT
                 Navigation.findNavController(v).navigate(R.id.movetoshortedfranchiseadminfragments);
                 Shorteddataadmin.type = "franchise";
             }
-        });}
+        });
+    }
 
 
     void getFranchiseData() {

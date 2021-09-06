@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,6 +53,10 @@ public class CrmAdminChatScreenFragment extends Fragment {
         TrackUserModel user = CrmAdminChatScreenFragmentArgs.fromBundle(getArguments()).getUser();
 
         getCurrentAdmin();
+
+        binding.ivBackButton.setOnClickListener( v -> {
+            Navigation.findNavController(v).navigateUp();
+        });
 
         chatReference = FirebaseDatabase
                 .getInstance()
