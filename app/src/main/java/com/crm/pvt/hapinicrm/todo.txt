@@ -1,0 +1,16 @@
+1.Make function for sharing CSV file from Master->franchise admin.
+2.Download CSV file in franchise dashboard which is received from franchise.
+3.Download CSV file in crm user which is sent by crm admin(sending activity is already there).
+#for 1,2,3 refer to crmadmincsvfilesend, csvfilefromfranchise, recievecsvfileadmin.
+
+4. Extraction of data from spreadsheet box and put auto it as per fragment_crm_admin_give_task.xml,
+only leaving passcode box which should be filled manually.
+5.Once one task is assigned next data from spread sheet should be automatically loaded.
+6. Spreadsheet will be the one sent by crm admin->crm user.
+#Refer old version app code for help.
+
+7. Work on Night theme.
+8. Work on chatting too, if still not working, then add "Under Construction" dialogue box, only
+in that chat function which crash.
+9. Show total time work done in a day by user to master.
+
