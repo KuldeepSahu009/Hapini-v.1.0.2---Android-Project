@@ -48,11 +48,6 @@ public class FranchiseDashboardFragment extends Fragment {
         }
         return binding.getRoot();
 
-
-
-
-
-
     }
 
     @Override
