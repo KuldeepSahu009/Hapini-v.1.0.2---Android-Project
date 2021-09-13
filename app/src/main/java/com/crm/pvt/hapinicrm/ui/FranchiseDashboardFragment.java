@@ -77,6 +77,14 @@ public class FranchiseDashboardFragment extends Fragment {
                     .navigate(FranchiseDashboardFragmentDirections
                     .actionFranchiseDashboardFragmentToCsvfilefromfranchise());
         });
+        binding.receivecsvfromcsvfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Navigation.findNavController(getView()).navigate(
+                    FranchiseDashboardFragmentDirections.receivefranchisecsvfiledata()
+            );
+            }
+        });
 
         binding.trackadminfromfranchiseadmin.setOnClickListener(v -> {
             admin.putString("ADMIN","crm");

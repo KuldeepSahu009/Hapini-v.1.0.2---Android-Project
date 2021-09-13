@@ -43,6 +43,7 @@ public class TaskAssignFragment extends Fragment {
         admins.add("Select Admin");
         admins.add("CRM Admin");
         admins.add("CRM User");
+        admins.add("Franchise");
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>( this.getContext(), android.R.layout.simple_spinner_item, admins);
@@ -62,6 +63,9 @@ public class TaskAssignFragment extends Fragment {
                                  break;
                         case 2 : assignTaskcrmUser();
                                  break;
+                        case 3:
+                            assigntasktofranchise();
+                            break;
 
 
                 }
@@ -75,6 +79,10 @@ public class TaskAssignFragment extends Fragment {
 
     void assignTaskcrmUser (){
         Navigation.findNavController(getView()).navigate(TaskAssignFragmentDirections.actionTaskAssignFragmentToCrmadmincsvfilesend2());
+    }
+    void assigntasktofranchise(){
+        Navigation.findNavController(getView()).navigate(TaskAssignFragmentDirections.movetofranchisetask());
+
     }
 
 }
