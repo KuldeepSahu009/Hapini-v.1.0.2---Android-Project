@@ -62,7 +62,7 @@ public class csvfilefromfranchise extends Fragment {
       binding.csvfileselect.setOnClickListener(v -> {
           Intent intent=new Intent();
           intent.setAction(Intent.ACTION_GET_CONTENT);
-          intent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+          intent.setType("text/csv");
          startActivityForResult(intent,1);
 
       });
