@@ -60,6 +60,9 @@
             app:destination="@id/franchiseDashboardFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_startFragment_to_privacy"
+            app:destination="@id/privacy" />
     </fragment>
     <fragment
         android:id="@+id/adminLoginFragment"
@@ -560,6 +563,9 @@
         <action
             android:id="@+id/crmusertoprofilefragment"
             app:destination="@id/profilefragmentcrmuser"/>
+        <action
+            android:id="@+id/crmtostartfragment"
+            app:destination="@id/startFragment"/>
     </fragment>
     <fragment
         android:id="@+id/profilefragmentcrmuser"
@@ -739,6 +745,9 @@
             app:destination="@id/alltrackusersfragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/movetoshorteddataadminfragment"
+            app:destination="@id/shorteddatafragment"/>
     </fragment>
 
     <fragment
@@ -797,5 +806,10 @@
         android:name="com.crm.pvt.hapinicrm.ui.recievecsvfileadmin"
         android:label="fragment_recievecsvfileadmin"
         tools:layout="@layout/fragment_recievecsvfileadmin" />
+    <activity
+        android:id="@+id/privacy"
+        android:name="com.crm.pvt.hapinicrm.privacy"
+        android:label="activity_privacy"
+        tools:layout="@layout/activity_privacy" />
 
 </navigation>

@@ -2,10 +2,9 @@ package com.crm.pvt.hapinicrm.ui;
 
 import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,8 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.crm.pvt.hapinicrm.R;
@@ -48,9 +45,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
     String franchiseadmin;
     ProgressDialog progressDialog;
     FirebaseAuth auth;
-    Dialog dialog;
-    ImageButton btnClose;
-    Button btnTrack;
     private final int[] count = {0};
     private  final boolean[] isAllowed = {true};
 
@@ -64,8 +58,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setFormTitle();
-        dialog = new Dialog(getContext());
-        setUpCustomDialogBox();
         setUpSpinner();
 
         auth = FirebaseAuth.getInstance();
@@ -105,19 +97,6 @@ public class AddAdminFormDetailsFragment extends Fragment {
                 Navigation.findNavController(v).navigateUp());
     }
 
-    private void setUpCustomDialogBox() {
-        dialog = new Dialog(dialog.getContext());
-        dialog.setContentView(R.layout.warning_custom_dialogue);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        btnClose = dialog.findViewById(R.id.btnClose);
-        btnClose.setOnClickListener(v -> dialog.dismiss());
-
-        btnTrack = dialog.findViewById(R.id.trackButton);
-        btnTrack.setOnClickListener( v -> dialog.dismiss());
-        dialog.show();
-    }
-
     private void setUpSpinner() {
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this.getContext(),
                 R.array.india_states, android.R.layout.simple_spinner_item);
@@ -127,20 +106,21 @@ public class AddAdminFormDetailsFragment extends Fragment {
 
     private void enterDataToFirebase(String name, String email, String mobileNo, String whatsAppNo,String state, String city, String location, String passcode, String password) {
 
-        String addedBy = "";
+        String addedBy;
 
-        if(Splashscreen.isFranchise) {
-            addedBy = Splashscreen.passcode;
-        }
+        SharedPreferences prefs = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE);
+        String passcodes=prefs.getString("passcode","no data");
+        addedBy=passcodes;
         Admin admin = new Admin(name, email, mobileNo, whatsAppNo, passcode, password, state , city , location, "",addedBy);
 
         if (adminType == "CRM") {
 
-            if (Splashscreen.isFranchise) {
+            if (!passcode.equals("no data")) {
 
                 DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
-                        .getReference("crm_by_franchise")
-                        .child(Splashscreen.passcode);
+                        .getReference()
+                        .child("crm_by_franchise")
+                        .child(passcodes).push();
                 franchiseDbRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -151,9 +131,8 @@ public class AddAdminFormDetailsFragment extends Fragment {
                             } else {
                                 isAllowed[0] = false;
                             }
-                            addCRMAdminByFranchise(admin);
                         }
-
+                        addCRMAdminByFranchise(admin);
                     }
 
                     @Override
@@ -269,7 +248,7 @@ public class AddAdminFormDetailsFragment extends Fragment {
         if (isAllowed[0]) {
             DatabaseReference franchiseDbRef = FirebaseDatabase.getInstance()
                     .getReference("crm_by_franchise")
-                    .child(Splashscreen.passcode);
+                    .child(Splashscreen.spAdminsData.getString("passcode",""));
             franchiseDbRef.child(admin.getPasscode()).setValue(admin);
             Toast.makeText(getContext() , "CRM Admin Added",Toast.LENGTH_SHORT).show();
         } else {

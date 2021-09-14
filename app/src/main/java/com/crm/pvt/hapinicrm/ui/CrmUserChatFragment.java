@@ -68,25 +68,25 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
 
     private void getAllFranchises() {
         ArrayList<TrackUserModel> franchises = new ArrayList<>();
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Log.i(TAG,snapshot.getChildren().toString());
-//                for (DataSnapshot franchiseSnapshot : snapshot.getChildren()) {
-//                    TrackUserModel franchise = franchiseSnapshot.getValue(TrackUserModel.class);
-//                    assert franchise != null;
-//                    franchise.setName(franchise.getName()+" (Franchise)");
-//                    franchises.add(franchise);
-//                }
-//                binding.pbCrmUserChat.setVisibility(View.INVISIBLE);
-//                adapter.setFranchises(franchises);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i(TAG,snapshot.getChildren().toString());
+                for (DataSnapshot franchiseSnapshot : snapshot.getChildren()) {
+                    TrackUserModel franchise = franchiseSnapshot.getValue(TrackUserModel.class);
+                    assert franchise != null;
+                    franchise.setName(franchise.getName()+" (Franchise)");
+                    franchises.add(franchise);
+                }
+                binding.pbCrmUserChat.setVisibility(View.INVISIBLE);
+                adapter.setFranchises(franchises);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         if(Splashscreen.spUsersData != null)
         {
             FirebaseDatabase.getInstance().getReference("usersv2/crm")
@@ -109,16 +109,16 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot franchiseSnapshot : snapshot.getChildren()) {
                     TrackUserModel admin = franchiseSnapshot.getValue(TrackUserModel.class);
-                    assert admin != null;
-                    admin.setName(admin.getName()+" (Admin)");
-
-                    if(currentUser != null)
-                    {
-                        if(currentUser.getAddedBy().equals(admin.getPasscode())) {
-                            franchises.add(admin);
+                    if(admin!=null) {
+                        admin.setName(admin.getName() + " (Admin)");
+                        if (currentUser != null && currentUser.getAddedBy() != null) {
+                            if (currentUser.getAddedBy().equals(admin.getPasscode())) {
+                                franchises.add(admin);
+                            }
                         }
                     }
                 }
+                if(franchises.get(0).getAddedBy() != null)
                 FirebaseDatabase.getInstance().getReference("franchiseV2").child(franchises.get(0).getAddedBy())
                             .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override

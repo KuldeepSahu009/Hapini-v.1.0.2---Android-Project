@@ -65,7 +65,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewCrmUser">
@@ -86,11 +87,12 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvSeeTaskAssigned"
                 android:layout_width="300dp"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:padding="2dp"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="8dp"
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
@@ -123,11 +125,12 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvChatWithAdmin"
                 android:layout_width="300dp"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:padding="2dp"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="8dp"
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
@@ -161,11 +164,12 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvVerifyYourself"
                 android:layout_width="300dp"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:padding="2dp"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="8dp"
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout
@@ -194,14 +198,16 @@
                         android:textStyle="bold" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvprofile"
                 android:layout_width="300dp"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:padding="2dp"
                 app:cardCornerRadius="4dp"
+                app:cardElevation="8dp"
                 app:cardUseCompatPadding="true">
 
                 <RelativeLayout

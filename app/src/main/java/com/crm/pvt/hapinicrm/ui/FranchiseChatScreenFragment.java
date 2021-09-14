@@ -2,19 +2,24 @@ package com.crm.pvt.hapinicrm.ui;
 
 import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.ChatAdapter;
 import com.crm.pvt.hapinicrm.databinding.FragmentFranchiseChatScreenBinding;
 import com.crm.pvt.hapinicrm.model.Chat;
+import com.crm.pvt.hapinicrm.model.Franchise;
 import com.crm.pvt.hapinicrm.model.TrackUserModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,12 +47,12 @@ public class FranchiseChatScreenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TrackUserModel user = FranchiseChatScreenFragmentArgs.fromBundle(getArguments()).getUser();
-        chatReference = FirebaseDatabase
-                .getInstance()
-                .getReference("Requests")
-                .child("Chat_Module")
-                .child(currentFranchise.getPasscode())
-                .child(user.getPasscode());
+            chatReference = FirebaseDatabase
+                    .getInstance()
+                    .getReference("Requests")
+                    .child("Chat_Module")
+                    .child(currentFranchise.getPasscode())
+                    .child(user.getPasscode());
         initializeRecyclerViewChat();
 
         binding.tvUserName.setText(user.getName());
@@ -60,6 +65,8 @@ public class FranchiseChatScreenFragment extends Fragment {
             binding.etMessage.setText("");
         });
     }
+
+
 
     private void initializeRecyclerViewChat() {
         chatAdapter = new ChatAdapter();

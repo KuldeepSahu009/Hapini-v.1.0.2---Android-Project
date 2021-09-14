@@ -3,37 +3,44 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/drawable/custom_edittext.xml" value="0.2203125" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/chat_preview.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/chats_layout.xml" value="0.33" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/custom_dialogue_box.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_add_admin.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_add_admin_form_details.xml" value="0.20416666666666666" />
         <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_admin_data_view.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_chat_screen.xml" value="0.25" />
         <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_crm_admin.xml" value="0.20416666666666666" />
         <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_crm_user.xml" value="0.20416666666666666" />
         <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_data_entry_admin.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_feedback.xml" value="0.25" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_franchise_chat_screen.xml" value="0.1" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_franchise_dashboard.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_franchise_user_chat.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_give_task_video_editor.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_master_dashboard.xml" value="0.20416666666666666" />
-        <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_track_admin.xml" value="0.20416666666666666" />
         <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_track_user.xml" value="0.20416666666666666" />
         <entry key="..\:/Devil/Hapini Internship/New folder/HapiniAllinOne/app/src/main/res/layout/fragment_track_users.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/activity_splashscreen.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/drawable/bg_button.xml" value="0.178125" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/drawable/custom_edittext.xml" value="0.178125" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/drawable/filetextview.xml" value="0.178125" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/blank_fragment.xml" value="0.10597826086956522" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/dialogueforattendence.xml" value="0.22" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_admin.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_admin_form_details.xml" value="0.16197916666666667" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crm_admin.xml" value="0.36929460580912865" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_forgetpassword.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_forgetpassword_user.xml" value="0.3628938156359393" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_franchise_form_details.xml" value="0.12" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_user.xml" value="0.10235507246376811" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_user_form_details.xml" value="0.10235507246376811" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crm_admin.xml" value="0.22" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crmadmincsvfilesend.xml" value="0.22" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_csvfilefromfranchise.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_dashboard.xml" value="0.22" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_google_sheet.xml" value="0.14356884057971014" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_master_dashboard.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_master_dashboard.xml" value="0.10733695652173914" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_recievecsvfileadmin.xml" value="0.22" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_task_assign.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_admin.xml" value="0.1" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_user_login.xml" value="0.14356884057971014" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_admin_details.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_add_admin_form_details.xml" value="0.36421319796954316" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_add_franchise_form_details.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_add_user_form_details.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_allnotification.xml" value="0.22" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_franchise_data_view.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_master_dashboard.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_track_user.xml" value="0.16197916666666667" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/track_admin_details.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/track_user_info_card_view.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project101/app/src/main/res/layout/fragment_admin_data_view.xml" value="0.11005434782608696" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project101/app/src/main/res/layout/fragment_forgetpassword.xml" value="0.22" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project101/app/src/main/res/layout/fragment_forgetpassword_user.xml" value="0.12" />
@@ -41,6 +48,8 @@
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project101/app/src/main/res/layout/fragment_task_list.xml" value="0.11005434782608696" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project101/app/src/main/res/layout/fragment_track_admin.xml" value="0.11005434782608696" />
         <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project101/app/src/main/res/layout/task_list_layout.xml" value="0.11005434782608696" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-ProjectP/app/src/main/res/layout/activity_privacy.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-ProjectP/app/src/main/res/layout/fragment_start.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/drawable/filetextview.xml" value="0.1398148148148148" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/activity_main.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/activity_splashscreen.xml" value="0.15364583333333334" />
@@ -61,22 +70,7 @@
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crm_user.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crm_user_chat.xml" value="0.13854166666666667" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crmadmincsvfilesend.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_admin_details.xml" value="0.1" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_add_admin_form_details.xml" value="0.36421319796954316" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_add_franchise_form_details.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_add_user_form_details.xml" value="0.16197916666666667" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_allnotification.xml" value="0.22" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_franchise_data_view.xml" value="0.16197916666666667" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_master_dashboard.xml" value="0.1" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/fragment_track_user.xml" value="0.16197916666666667" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/track_admin_details.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Asus/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project1/app/src/main/res/layout/track_user_info_card_view.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_data_entry_user.xml" value="0.15364583333333334" />
-        <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_chat_screen.xml" value="0.12" />
-        <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_dashboard.xml" value="0.22" />
-        <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_data_view.xml" value="0.13645833333333332" />
-        <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_user_chat.xml" value="0.13854166666666667" />
-        <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_give_task_video_editor.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_google_sheet.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_master_dashboard.xml" value="0.15364583333333334" />
         <entry key="..\:/Users/Paramjeet saini/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_admin.xml" value="0.15364583333333334" />
@@ -98,45 +92,11 @@
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_user_form_details.xml" value="0.25" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_admin_data_view.xml" value="0.22870370370370371" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_admin_login.xml" value="0.25025641025641027" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_edit_profile.xml" value="0.21944444444444444" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_dashboard.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_data_view.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_give_task_video_editor.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_start.xml" value="0.1" />
+        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_shorteddataadmin.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_task_assign.xml" value="0.225" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_user.xml" value="0.21944444444444444" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_users.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_video_editor_admin.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_admin_details.xml" value="0.22685185185185186" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_user_info_card_view.xml" value="0.25025641025641027" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/warning_custom_dialogue.xml" value="0.264" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/activity_main.xml" value="0.16530797101449277" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_admin.xml" value="0.16530797101449277" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_admin_form_details.xml" value="0.1" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_user.xml" value="0.16530797101449277" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_user_form_details.xml" value="0.16530797101449277" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_admin_data_view.xml" value="0.22282608695652173" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crm_admin.xml" value="0.20742753623188406" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crm_user.xml" value="0.20742753623188406" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_data_entry_admin.xml" value="0.15489130434782608" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_data_entry_user.xml" value="0.22282608695652173" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_edit_profile.xml" value="0.25416666666666665" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_master_dashboard.xml" value="0.15489130434782608" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_admin.xml" value="0.15489130434782608" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_users.xml" value="0.23233695652173914" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_admin_details.xml" value="0.13677536231884058" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_user_info_card_view.xml" value="0.22282608695652173" />
-        <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_user_info_card_view.xml" value="0.25025641025641027" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/calendar.xml" value="0.1431159420289855" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_add_user_form_details.xml" value="0.14130434782608695" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crm_admin.xml" value="0.10400000000000001" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_crm_user.xml" value="0.2" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_edit_profile.xml" value="0.264" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_dashboard.xml" value="0.136" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_franchise_data_view.xml" value="0.1118659420289855" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_shorteddataadmin.xml" value="0.38176197836166925" />
-        <entry key="..\:/android project/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_admin_details.xml" value="0.13677536231884058" />
       </map>
     </option>
   </component>

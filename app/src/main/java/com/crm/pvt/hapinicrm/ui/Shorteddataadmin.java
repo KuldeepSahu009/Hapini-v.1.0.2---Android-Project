@@ -41,7 +41,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Shorteddataadmin extends Fragment implements View.OnClickListener{
     FragmentShorteddataadminBinding fragmentShorteddataadminBinding;
 
@@ -52,6 +51,8 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
     RecyclerView recyclerView;
     ImageView back;
     TextView shortbyname,addedby;
+    private static String shortedpasscode;
+    private static String shortedtype;
     TextView shortbylocation;
     TextView shortbycity;
     String shortvariable;
@@ -177,7 +178,10 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
         if (shortvariable.equals("location")){
             shortvariable="locality";
         }
+        Log.e(TAG, "getcrmusershorteddata: "+AdminDataViewFragment.trackUserUnderThisAdminPasscode );
         Log.e(TAG, "getcrmusershorteddata: "+searchout );
+        if (AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master")){
+            Log.e(TAG, "getcrmusershorteddata: "+"first" );
         Query query=FirebaseDatabase.getInstance().getReference("usersv2").child(usertype).orderByChild(shortvariable)
                 .startAt(searchout).endAt(searchout+"\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
@@ -212,7 +216,48 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });}else if (!AdminDataViewFragment.trackUserUnderThisAdminPasscode.equals("master")){
+            Log.e(TAG, "getcrmusershorteddata: "+"secondd" );
+            Query query=FirebaseDatabase.getInstance().getReference("usersv2").child(usertype).orderByChild(shortvariable)
+                    .startAt(searchout).endAt(searchout+"\uf8ff");
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    trackUserModelList.clear();
+                    //Log.e(TAG, "onDataChange: "+snapshot.getKey() );
+                    for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+
+
+
+
+                        String name=dataSnapshot.child("name").getValue().toString();
+                        String email=dataSnapshot.child("email").getValue().toString();
+                        String mobileno=dataSnapshot.child("mobileNo").getValue().toString();
+                        String whatsappno=dataSnapshot.child("whatsAppNo").getValue().toString();
+                        String passcode=dataSnapshot.child("passcode").getValue().toString();
+                        String password=dataSnapshot.child("password").getValue().toString();
+                        String state = dataSnapshot.child("state").getValue().toString();
+                        String city = dataSnapshot.child("city").getValue().toString();
+                        String location=dataSnapshot.child("locality").getValue().toString();
+                        String addedBy =dataSnapshot.child("addedBy").getValue().toString();
+                        if (passcode.equals(AdminDataViewFragment.trackUserUnderThisAdminPasscode)){
+                        trackUserModelList.add(new TrackUserModel(name,email,mobileno,whatsappno,passcode,password,state , city , location, addedBy , ""));}
+
+
+                        Log.e(TAG, "onDataChange: "+name+email );
+
+                    }
+                    trackUserAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+        }
 
     }
 
@@ -268,7 +313,12 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
 
     }
     private void getcrmshortedata(String s, String usertype) {
+        Log.e(TAG, "getcrmshortedata: "+FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode );
         Log.e(TAG, "getshortedata: " + s + usertype+shortvariable);
+
+
+        if (FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode.equals("")){
+            Log.e(TAG, "getcrmshortedata: "+"first" );
         Query query = FirebaseDatabase.getInstance().getReference("adminV2").child(usertype).orderByChild(shortvariable)
                 .startAt(s).endAt(s + "\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
@@ -300,7 +350,42 @@ public class Shorteddataadmin extends Fragment implements View.OnClickListener{
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });}
+        else if (!FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode.equals("")){
+            Log.e(TAG, "getcrmshortedata: "+"second" );
+
+            Query query=FirebaseDatabase.getInstance().getReference("crm_by_franchise")
+                    .child(FranchiseDataViewFragment.trackAdminsUnderThisFranchisePasscode)
+                    .orderByChild(shortvariable).startAt(s).endAt(s + "\uf8ff");
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    adminList.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                        Admin adminObject;
+                        adminObject = new Admin(dataSnapshot.child("name").getValue().toString(),
+                                dataSnapshot.child("email").getValue().toString(),
+                                dataSnapshot.child("phoneno").getValue().toString(),
+                                dataSnapshot.child("whatsappno").getValue().toString(),
+                                dataSnapshot.child("passcode").getValue().toString(),
+                                dataSnapshot.child("password").getValue().toString(),
+                                dataSnapshot.child("state").getValue().toString(),
+                                dataSnapshot.child("city").getValue().toString(),
+                                dataSnapshot.child("location").getValue().toString(),
+                                dataSnapshot.child("imgurl").getValue().toString(),
+                                dataSnapshot.child("addedBy").getValue().toString());
+                        adminList.add(adminObject);
+                    }
+                    trackAdminAdapter.notifyDataSetChanged();
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
     }
     private void getdataentryshorteddata(String s, String usertype) {
         Log.e(TAG, "getdataentryshorteddata: " + s + usertype);
