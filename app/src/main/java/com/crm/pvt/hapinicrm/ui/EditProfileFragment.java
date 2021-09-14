@@ -63,6 +63,7 @@ public class EditProfileFragment extends Fragment {
     private CheckBox checkBox;
     public Uri ivProfilePicURI;
     private String TAG = "TAG";
+    public static String userpasscode;
     public static String user;
     public Admin admin;
     Masteradmin masteradminmodel;
@@ -94,10 +95,13 @@ public class EditProfileFragment extends Fragment {
         SharedPreferences  prefs = getContext().getSharedPreferences("infos", Context.MODE_PRIVATE);
         passcode=prefs.getString("passcode","no data");
         usertype=prefs.getString("type","no dtata");
+            Log.e(TAG, "onViewCreated: "+passcode+usertype);
         }else{
             SharedPreferences  prefs = getContext().getSharedPreferences("info", Context.MODE_PRIVATE);
             passcode=prefs.getString("passcode","no data");
             usertype=prefs.getString("type","no dtata");
+            usertype="crmuser";
+            passcode=userpasscode;
 
         }
 
@@ -302,7 +306,8 @@ public class EditProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(Void unused) {
                         progressDialog.dismiss();
-                        Navigation.findNavController(thisView).navigateUp();
+                        Toast.makeText(getContext(),"updated",Toast.LENGTH_LONG).show();
+                       // Navigation.findNavController(thisView).navigateUp();
 
                       
                     }

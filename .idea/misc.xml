@@ -44,6 +44,9 @@
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_track_users.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_video_editor_admin.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_user_info_card_view.xml" value="0.25025641025641027" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_verification_from_admin.xml" value="0.25416666666666665" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_verification_requests.xml" value="0.25416666666666665" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_verify_crm_user.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

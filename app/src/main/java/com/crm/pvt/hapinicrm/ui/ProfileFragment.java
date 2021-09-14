@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment {
     private static final String TAG = "TAG";
     String usertype;
+    public static String userpasscode;
     public static String user;
 
     @Override
@@ -96,7 +97,11 @@ public class ProfileFragment extends Fragment {
         if (user.equals("user")){
         SharedPreferences getshared = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE);
         usertype = getshared.getString("type", "no data");
-        passcode = getshared.getString("passcode", "no data");}
+        passcode = getshared.getString("passcode", "no data");
+        usertype="crmuser";
+        EditProfileFragment.userpasscode=userpasscode;
+        passcode=userpasscode;
+            Log.e(TAG, "getprofileinfo:"+usertype );}
         else{
             SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
             usertype = getshared.getString("type", "no data");

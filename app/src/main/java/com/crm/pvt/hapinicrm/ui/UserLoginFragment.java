@@ -111,6 +111,7 @@ public class UserLoginFragment extends Fragment {
                             if (key.equals(passcodes)) {
                                 String password = dataSnapshot.child("password").getValue().toString();
                                 if (password.equals(passwords)) {
+                                    ProfileFragment.userpasscode=passcodes;
 
                                     currentUser = dataSnapshot.getValue(TrackUserModel.class);
                                     SharedPreferences.Editor editor = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE).edit();
