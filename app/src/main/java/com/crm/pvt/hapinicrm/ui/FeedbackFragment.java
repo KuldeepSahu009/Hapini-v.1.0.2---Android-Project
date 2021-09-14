@@ -26,7 +26,9 @@ public class FeedbackFragment extends Fragment {
     private FragmentFeedbackBinding binding;
     private DatabaseReference taskDatabaseReference;
     String taskAssignedTo,name,number,city,task;
-    String []taskProgressType = {"","Connected and Interested","Connected and Not Interested","Not Connected"};
+    String []taskProgressType = {"","Wrong Number","Call Not Pickup",
+            "Busy","Ask to Call Again","Not Interested","Interested But Need Sometime",
+            "Interested","Network Issue"};
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
