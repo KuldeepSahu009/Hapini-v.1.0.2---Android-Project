@@ -2,13 +2,17 @@ package com.crm.pvt.hapinicrm.ui;
 
 import static com.crm.pvt.hapinicrm.ui.AdminLoginFragment.currentFranchise;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +39,9 @@ public class FranchiseDashboardFragment extends Fragment {
     private static final String TAG = "TAG";
     private Bundle admin;
 
+    Dialog dialog;
+    Button okButton;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,11 +60,15 @@ public class FranchiseDashboardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        dialog = new Dialog(getContext());
         initializeCurrentFranchise();
-        binding.cvFranchiseChats.setOnClickListener(v -> Navigation
-                .findNavController(v)
-                .navigate(FranchiseDashboardFragmentDirections
-                        .actionFranchiseDashboardFragmentToFranchiseUserChatFragment()));
+                    binding.cvFranchiseChats.setOnClickListener(v ->
+//                            Navigation
+//                            .findNavController(v)
+//                            .navigate(FranchiseDashboardFragmentDirections
+//                                    .actionFranchiseDashboardFragmentToFranchiseUserChatFragment())
+                            setUpCustomDialogBox()
+                    );
 
         binding.addadminfromfranchiseadmin.setOnClickListener(v -> {
             addAdminTypes = "CRM";
@@ -147,5 +158,14 @@ public class FranchiseDashboardFragment extends Fragment {
 
             }
         });
+    }
+    private void setUpCustomDialogBox() {
+        dialog = new Dialog(dialog.getContext());
+        dialog.setContentView(R.layout.custom_dialogue_box);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        okButton = dialog.findViewById(R.id.okButton);
+        okButton.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
     }
 }

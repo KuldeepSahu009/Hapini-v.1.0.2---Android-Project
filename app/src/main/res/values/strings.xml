@@ -71,9 +71,14 @@
 
     <string-array name="Customer_Feedback">
         <item>Select</item>
-        <item>Connected and Interested</item>
-        <item>Connected and Not Interested</item>
-        <item>Not Connected</item>
+        <item>Wrong Number</item>
+        <item>Call Not Pickup</item>
+        <item>Busy</item>
+        <item>Ask to Call Again</item>
+        <item>Not Interested</item>
+        <item>Interested But Need Sometime</item>
+        <item>Interested</item>
+        <item>Network Issue</item>
 
     </string-array>
 

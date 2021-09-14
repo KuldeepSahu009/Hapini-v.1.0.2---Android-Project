@@ -1,8 +1,11 @@
 package com.crm.pvt.hapinicrm.ui;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Space;
 
 import com.crm.pvt.hapinicrm.R;
@@ -35,6 +39,9 @@ public class CrmAdminFragment extends Fragment {
     private FirebaseAuth auth;
     public static Admin currentCRMAdmin;
     public static  DatabaseReference activeStatusReference = FirebaseDatabase.getInstance().getReference("activeV2");
+    Dialog dialog;
+    Button okButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding=FragmentCrmAdminBinding.inflate(inflater, container, false);
@@ -73,10 +80,14 @@ public class CrmAdminFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        dialog = new Dialog(getContext());
         auth = FirebaseAuth.getInstance();
 
-        binding.cvChatCrmAdmin.setOnClickListener( v -> Navigation.findNavController(v)
-        .navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmAdminChatFragment()));
+        binding.cvChatCrmAdmin.setOnClickListener( v ->
+//                Navigation.findNavController(v)
+//        .navigate(CrmAdminFragmentDirections.actionCrmAdminFragmentToCrmAdminChatFragment())
+                setUpCustomDialogBox()
+        );
 
         binding.crmadminAddUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,5 +156,14 @@ binding.sendcsvfiletouser.setOnClickListener(v -> {
 
     private boolean login() {
         return login;
+    }
+    private void setUpCustomDialogBox() {
+        dialog = new Dialog(dialog.getContext());
+        dialog.setContentView(R.layout.custom_dialogue_box);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        okButton = dialog.findViewById(R.id.okButton);
+        okButton.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
     }
 }
