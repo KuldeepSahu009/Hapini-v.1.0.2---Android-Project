@@ -110,6 +110,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
         holder.location.setText(admin.getLocation());
         holder.addedBy.setText(admin.getAddedBy());
 
+
         if (activeUserList != null) {
             for (String passcode : activeUserList) {
                 if (passcode.equals(admin.getPasscode())) {
@@ -173,6 +174,8 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             datacallbacktrackuser.showUsersUnderAdmin(admins.get(position) , usertyepes);
         });
 
+        getaddedby(holder.addedbyname,admin.getPasscode(),admin.getAddedBy());
+
     }
 
 
@@ -185,7 +188,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
     class TrackAdminViewHolder extends RecyclerView.ViewHolder {
         ImageView profilepic, deleteAdmin, activeStatusAdmin,downloadamin,calladmin,attendance;
 
-        TextView name, email, mobile, state , city, location, whatsappno, password, passcode,addedBy;
+        TextView name, email, mobile, state , city, location, whatsappno, password, passcode,addedBy,addedbyname;
 
         CardView cv;
         public TrackAdminViewHolder(@NonNull View itemView) {
@@ -207,6 +210,7 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
             calladmin=itemView.findViewById(R.id.trackadmincall);
             attendance=itemView.findViewById(R.id.trackadminattendance);
             cv = itemView.findViewById(R.id.cvTrackAdmin);
+            addedbyname=itemView.findViewById(R.id.addedByIdname);
             downloadamin.setOnClickListener(v -> {
                 pos=getAdapterPosition();
                 checkpermission();
@@ -395,6 +399,44 @@ public class TrackAdminAdapter extends RecyclerView.Adapter<TrackAdminAdapter.Tr
 
             }
         });
+    }
+    private void getaddedby(TextView textView,String passcode,String addedbypasscode){
+        if (addedbypasscode.equals("234567")){
+            FirebaseDatabase.getInstance().getReference("Masterv2").child(addedbypasscode)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String name=snapshot.child("name").getValue().toString();
+                            textView.setText("("+name+")");
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    }); }else{
+        DatabaseReference reference=    FirebaseDatabase.getInstance().getReference("franchiseV2")
+                    .child(addedbypasscode);
+            Log.e(TAG, "getaddedby: "+reference.getKey() );
+                   reference .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String name=snapshot.child("name").getValue().toString();
+                            textView.setText("("+name+")");
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+        }
+
+
+
     }
 }
 

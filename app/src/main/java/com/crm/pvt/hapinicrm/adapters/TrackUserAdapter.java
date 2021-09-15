@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -171,6 +172,7 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
                 showattendance(tempmodel.getPasscode());
             }
         });
+        getaddedbyname(holder.nameaddedby,tempmodel.getAddedBy());
     }
     @Override
     public int getItemCount() {
@@ -372,6 +374,40 @@ public class TrackUserAdapter extends RecyclerView.Adapter<Trackuserviewholders>
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:"+no));
         context.startActivity(callIntent);
+    }
+    private void getaddedbyname(TextView textView,String passcode){
+        if (passcode.equals("234567")){
+            FirebaseDatabase.getInstance().getReference("Masterv2").child(passcode)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String name=snapshot.child("name").getValue().toString();
+                            textView.setText("("+name+")");
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    }); }else{
+            FirebaseDatabase.getInstance().getReference("adminV2")
+                    .child("CRM").child(passcode)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String name=snapshot.child("name").getValue().toString();
+                            textView.setText("("+name+")");
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+        }
     }
 
 }

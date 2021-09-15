@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,6 +74,14 @@ public class CrmAdminChatScreenFragment extends Fragment {
             chatReference.push().setValue(chat);
             binding.etMessage.setText("");
         });
+
+        binding.ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
+
     }
 
     private void getCurrentAdmin() {

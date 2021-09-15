@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.crm.pvt.hapinicrm.Splashscreen;
 import com.crm.pvt.hapinicrm.adapters.ChatAdapter;
@@ -49,6 +50,12 @@ public class ChatScreenFragment extends Fragment {
                 .child(currentUserPasscode);
 
         initializeRecyclerViewChats();
+        binding.ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
         binding.tvFranchiseAdminName.setText(franchise.getName());
 
         binding.btnSendMessage.setOnClickListener(v -> {
