@@ -49,6 +49,12 @@ public class CrmUserChatFragment extends Fragment implements ChatPreviewClickCal
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.pbCrmUserChat.setVisibility(View.VISIBLE);
+        binding.ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
         databaseReference = FirebaseDatabase.getInstance().getReference("franchiseV2");
         initializeRecyclerView();
     }

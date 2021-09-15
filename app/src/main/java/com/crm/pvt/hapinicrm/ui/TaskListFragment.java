@@ -67,7 +67,12 @@ public class TaskListFragment extends Fragment implements TaskCallback {
                 getReference("Task_Assignment_V2").
                 child("CRM_User").child(passcode);
         initializeRecyclerView();
-
+        binding.ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
     }
 
     private void initializeRecyclerView() {

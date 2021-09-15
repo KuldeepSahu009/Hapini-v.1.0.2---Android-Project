@@ -31,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.opencsv.CSVReader;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -75,6 +74,13 @@ public  static Context context;
         binding.btnAssignTask.setOnClickListener(v -> {
             binding.pbTask.setVisibility(View.VISIBLE);
             giveTaskToUser();
+        });
+
+        binding.ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
         });
 
     }

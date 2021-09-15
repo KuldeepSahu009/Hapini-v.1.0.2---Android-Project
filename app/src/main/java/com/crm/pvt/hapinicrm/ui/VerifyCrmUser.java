@@ -76,6 +76,12 @@ public class VerifyCrmUser extends Fragment {
             Navigation.findNavController(view).navigate(VerifyCrmUserDirections.actionVerificationOfUserToCrmAdminFragment());
         });
 
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
     }
 
     private void setUpImages() {

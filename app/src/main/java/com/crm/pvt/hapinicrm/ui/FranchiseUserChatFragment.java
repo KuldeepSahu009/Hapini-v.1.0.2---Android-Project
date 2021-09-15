@@ -46,6 +46,12 @@ public class FranchiseUserChatFragment extends Fragment implements FranchiseChat
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.pbFranchiseUserChat.setVisibility(View.VISIBLE);
+        binding.ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
         databaseReference = FirebaseDatabase.getInstance().getReference("usersv2").child("crm");
         initializeRecyclerView();
     }
