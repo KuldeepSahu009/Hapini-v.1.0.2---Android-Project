@@ -150,7 +150,7 @@
             android:clickable="true"
             android:focusable="true"
             android:minHeight="48dp"
-            android:text="Upload Aadhar Front"
+            android:text="Upload Aadhar Back"
             android:textAllCaps="true"
             app:drawableStartCompat="@drawable/ic_edit" />
     </androidx.cardview.widget.CardView>

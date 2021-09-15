@@ -62,6 +62,7 @@ public class AdminDataViewFragment extends Fragment implements Datacallbacktrack
         SharedPreferences getshared = getActivity().getSharedPreferences("infos", Context.MODE_PRIVATE);
         adminpasscode=getshared.getString("passcode","no data");
         adminpassword=getshared.getString("password","no data");
+        Log.e(TAG, "onCreateView: "+adminpasscode+adminpasscode );
         return binding.getRoot();
     }
 

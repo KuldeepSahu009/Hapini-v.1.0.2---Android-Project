@@ -109,6 +109,15 @@
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_verify_crm_user.xml" value="0.21296296296296297" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/fragment_video_editor_admin.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Shruti/AndroidStudioProjects/Hapini-v.1.0.2---Android-Project/app/src/main/res/layout/track_user_info_card_view.xml" value="0.25025641025641027" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_crm_admin.xml" value="0.25416666666666665" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_crm_user.xml" value="0.25416666666666665" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_franchise_dashboard.xml" value="0.264" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_franchisereceivecsv.xml" value="0.12360688956433637" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_user_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_verification_from_admin.xml" value="0.12360688956433637" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_verification_requests.xml" value="0.25416666666666665" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/fragment_verify_crm_user.xml" value="0.23854166666666668" />
+        <entry key="..\:/hapiniappps/app/src/main/res/layout/verification_request_view.xml" value="0.23854166666666668" />
       </map>
     </option>
   </component>
